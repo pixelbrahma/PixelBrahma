@@ -26,6 +26,7 @@ project "PixelBrahma"
 
 	includedirs
 	{
+		"%{prj.name}/src",
 		"%{prj.name}/ThirdParty/spdlog/include"
 	}
 

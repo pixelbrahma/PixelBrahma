@@ -11,3 +11,5 @@
 #else
 	#error PixelBrahma Engine only supports Windows!
 #endif // PB_PLATFORM_WINDOWS
+
+#define BIT(x) (1 << x)

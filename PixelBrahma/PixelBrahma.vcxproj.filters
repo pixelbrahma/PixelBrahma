@@ -4,6 +4,9 @@
     <Filter Include="PixelBrahma">
       <UniqueIdentifier>{F2E5D12C-5E9B-4A22-E78F-44F953444126}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PixelBrahma\Events">
+      <UniqueIdentifier>{962DCF7C-8211-90D2-EB71-8A25D7747A54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\PixelBrahma.h" />
@@ -15,6 +18,18 @@
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\EntryPoint.h">
       <Filter>PixelBrahma</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Events\ApplicationEvent.h">
+      <Filter>PixelBrahma\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Events\Event.h">
+      <Filter>PixelBrahma\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Events\KeyEvent.h">
+      <Filter>PixelBrahma\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Events\MouseEvent.h">
+      <Filter>PixelBrahma\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Log.h">
       <Filter>PixelBrahma</Filter>
