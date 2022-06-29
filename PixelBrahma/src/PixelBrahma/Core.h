@@ -1,5 +1,7 @@
 #pragma once
 
+// Dll import or export macros
+
 #ifdef PB_PLATFORM_WINDOWS
 	#ifdef PB_BUILD_DLL
 		#define PIXELBRAHMA_API __declspec(dllexport)

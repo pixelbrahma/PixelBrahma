@@ -1,0 +1,3 @@
+[submodule "PixelBrahma/ThirdParty/spdlog"]
+	path = PixelBrahma/ThirdParty/spdlog
+	url = https://github.com/gabime/spdlog
