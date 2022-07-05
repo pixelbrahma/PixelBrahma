@@ -34,6 +34,7 @@
     <ClInclude Include="src\PixelBrahma\Log.h">
       <Filter>PixelBrahma</Filter>
     </ClInclude>
+    <ClInclude Include="src\pbpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\PixelBrahma\Application.cpp">
@@ -42,5 +43,6 @@
     <ClCompile Include="src\PixelBrahma\Log.cpp">
       <Filter>PixelBrahma</Filter>
     </ClCompile>
+    <ClCompile Include="src\pbpch.cpp" />
   </ItemGroup>
 </Project>

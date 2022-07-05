@@ -18,6 +18,9 @@ project "PixelBrahma"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "pbpch.h"
+	pchsource "PixelBrahma/src/pbpch.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",
