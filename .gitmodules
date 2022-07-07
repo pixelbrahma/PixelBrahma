@@ -3,4 +3,4 @@
 	url = https://github.com/gabime/spdlog
 [submodule "PixelBrahma/ThirdParty/GLFW"]
 	path = PixelBrahma/ThirdParty/GLFW
-	url = https://github.com/pixelbrahma/glfw.git
+	url = https://github.com/pixelbrahma/glfw
