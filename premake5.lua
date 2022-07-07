@@ -10,6 +10,11 @@ workspace "PixelBrahma"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDir = {}
+IncludeDir["GLFW"] = "PixelBrahma/ThirdParty/GLFW/include"
+
+include "PixelBrahma/ThirdParty/GLFW"
+
 project "PixelBrahma"
 	location "PixelBrahma"
 	kind "SharedLib"
@@ -30,7 +35,14 @@ project "PixelBrahma"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/ThirdParty/spdlog/include"
+		"%{prj.name}/ThirdParty/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
