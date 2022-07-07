@@ -39,10 +39,12 @@ namespace PixelBrahma
 		EventCategoryMouseButton      = BIT(4)
 	};
 
+// Event class type macro
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; }\
                   virtual EventType GetEventType() const override { return GetStaticType(); }\
                   virtual const char* GetName() const override { return #type; }
 
+// Event class category macro
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
 	// Event class
@@ -51,9 +53,14 @@ namespace PixelBrahma
 		friend class EventDispatcher;
 
 	public:
+
+		// Virtual event properties getter functions
+
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
 		virtual int GetCategoryFlags() const = 0;
+
+		// Virtual to string function for logging
 		virtual std::string ToString() const { return GetName(); }
 
 		// Check if an event is in the given category
@@ -95,7 +102,7 @@ namespace PixelBrahma
 		Event& m_Event;
 	};
 
-	// Operator overloading
+	// Operator overloading for logging
 	inline std::ostream& operator<<(std::ostream& os, const Event& e)
 	{
 		return os << e.ToString();

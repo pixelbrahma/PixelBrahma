@@ -8,8 +8,11 @@ namespace PixelBrahma
 	class PIXELBRAHMA_API KeyEvent : public Event
 	{
 	public:
+
+		// Keycode getter function
 		inline int GetKeyCode() const { return m_KeyCode; }
 
+		// Event class descriptions
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 
 	protected:
@@ -24,8 +27,10 @@ namespace PixelBrahma
 	public:
 		KeyPressedEvent(int keycode, int repeatcount) : KeyEvent(keycode), m_RepeatCount(repeatcount) {}
 
+		// Repeat count getter function
 		inline int GetRepeatCount() { return m_RepeatCount; }
 
+		// Override to string function for logging
 		std::string ToString() const override
 		{
 			std::stringstream ss;
@@ -33,6 +38,7 @@ namespace PixelBrahma
 			return ss.str();
 		}
 
+		// Event class descriptions
 		EVENT_CLASS_TYPE(KeyPressed)
 
 	private:
@@ -45,6 +51,7 @@ namespace PixelBrahma
 	public:
 		KeyReleasedEvent(int keycode) : KeyEvent(keycode) {}
 
+		// Override to string function for logging
 		std::string ToString() const override
 		{
 			std::stringstream ss;
@@ -52,6 +59,7 @@ namespace PixelBrahma
 			return ss.str();
 		}
 
+		// Event class descriptions
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 }

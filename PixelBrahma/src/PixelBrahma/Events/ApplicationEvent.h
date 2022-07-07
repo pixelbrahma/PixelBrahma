@@ -10,9 +10,12 @@ namespace PixelBrahma
 	public:
 		WindowResizeEvent(unsigned int width, unsigned int height) : m_Width(width), m_Height(height) {}
 
+		// Window size getter functions
+
 		inline unsigned int GetWidth() const { return m_Width; }
 		inline unsigned int GetHeight() const { return m_Height; }
 
+		// Override to string function for logging
 		std::string ToString() const override
 		{
 			std::stringstream ss;
@@ -20,6 +23,7 @@ namespace PixelBrahma
 			return ss.str();
 		}
 
+		// Event class descriptions
 		EVENT_CLASS_TYPE(WindowResize)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 
@@ -33,6 +37,7 @@ namespace PixelBrahma
 	public:
 		WindowCloseEvent() {}
 
+		// Event class descriptions
 		EVENT_CLASS_TYPE(WindowClose)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
@@ -43,6 +48,7 @@ namespace PixelBrahma
 	public:
 		AppTickEvent() {}
 		
+		// Event class descriptions
 		EVENT_CLASS_TYPE(AppTick)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
@@ -53,6 +59,7 @@ namespace PixelBrahma
 	public:
 		AppUpdateEvent() {}
 
+		// Event class descriptions
 		EVENT_CLASS_TYPE(AppUpdate)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
@@ -63,6 +70,7 @@ namespace PixelBrahma
 	public:
 		AppRenderEvent() {}
 
+		// Event class descriptions
 		EVENT_CLASS_TYPE(AppRender)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};

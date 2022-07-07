@@ -12,4 +12,5 @@
 	#error PixelBrahma Engine only supports Windows!
 #endif // PB_PLATFORM_WINDOWS
 
+// Bit shift macro
 #define BIT(x) (1 << x)

@@ -10,9 +10,12 @@ namespace PixelBrahma
 	public:
 		MouseMovedEvent(float x, float y) : m_MouseX(x), m_MouseY(y) {}
 
+		// Mouse position getter functions
+
 		inline float GetX() { return m_MouseX; }
 		inline float GetY() { return m_MouseY; }
 
+		// Override to string function for logging
 		std::string ToString() const override
 		{
 			std::stringstream ss;
@@ -20,6 +23,7 @@ namespace PixelBrahma
 			return ss.str();
 		}
 
+		// Event class descriptions
 		EVENT_CLASS_TYPE(MouseMoved)
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
@@ -33,9 +37,12 @@ namespace PixelBrahma
 	public:
 		MouseScrolledEvent(float xOffset, float yOffset) : m_XOffset(xOffset), m_YOffset(yOffset) {}
 
+		// Scroll offset getter functions
+
 		inline float GetXOffset() const { return m_XOffset; }
 		inline float GetYOffset() const { return m_YOffset; }
 
+		// Override to string function for logging
 		std::string ToString() const override
 		{
 			std::stringstream ss;
@@ -43,6 +50,7 @@ namespace PixelBrahma
 			return ss.str();
 		}
 
+		// Event class descriptions
 		EVENT_CLASS_TYPE(MouseScrolled)
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
@@ -54,8 +62,11 @@ namespace PixelBrahma
 	class PIXELBRAHMA_API MouseButtonEvent : public Event
 	{
 	public:
+
+		// Mouse button getter function
 		inline int GetMouseButton() const { return m_Button; }
 
+		// Event class descriptions
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
 	protected:
@@ -70,6 +81,7 @@ namespace PixelBrahma
 	public:
 		MouseButtonPressedEvent(int button) : MouseButtonEvent(button) {}
 
+		// Override to string function for logging
 		std::string ToString() const override
 		{
 			std::stringstream ss;
@@ -77,6 +89,7 @@ namespace PixelBrahma
 			return ss.str();
 		}
 
+		// Event class descriptions
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
@@ -86,6 +99,7 @@ namespace PixelBrahma
 	public:
 		MouseButtonReleasedEvent(int button) : MouseButtonEvent(button) {}
 
+		// Override to string function for logging
 		std::string ToString() const override
 		{
 			std::stringstream ss;
@@ -93,6 +107,7 @@ namespace PixelBrahma
 			return ss.str();
 		}
 
+		// Event class descriptions
 		EVENT_CLASS_TYPE(MouseButtonReleased)
 	};
 }
