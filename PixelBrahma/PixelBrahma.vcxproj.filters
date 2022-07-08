@@ -7,6 +7,9 @@
     <Filter Include="PixelBrahma\Events">
       <UniqueIdentifier>{962DCF7C-8211-90D2-EB71-8A25D7747A54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PixelBrahma\Layers">
+      <UniqueIdentifier>{7118B28B-5DFC-72E1-C65C-6D34B25F5D63}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
     </Filter>
@@ -38,10 +41,10 @@
       <Filter>PixelBrahma\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Layers\Layer.h">
-      <Filter>PixelBrahma</Filter>
+      <Filter>PixelBrahma\Layers</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Layers\LayerStack.h">
-      <Filter>PixelBrahma</Filter>
+      <Filter>PixelBrahma\Layers</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Log.h">
       <Filter>PixelBrahma</Filter>
@@ -59,10 +62,10 @@
       <Filter>PixelBrahma</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Layers\Layer.cpp">
-      <Filter>PixelBrahma</Filter>
+      <Filter>PixelBrahma\Layers</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Layers\LayerStack.cpp">
-      <Filter>PixelBrahma</Filter>
+      <Filter>PixelBrahma\Layers</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Log.cpp">
       <Filter>PixelBrahma</Filter>

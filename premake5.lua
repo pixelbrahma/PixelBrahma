@@ -12,8 +12,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["GLFW"] = "PixelBrahma/ThirdParty/GLFW/include"
+IncludeDir["Glad"] = "PixelBrahma/ThirdParty/Glad/include"
 
 include "PixelBrahma/ThirdParty/GLFW"
+include "PixelBrahma/ThirdParty/Glad"
 
 project "PixelBrahma"
 	location "PixelBrahma"
@@ -36,12 +38,14 @@ project "PixelBrahma"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/ThirdParty/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	links
 	{
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -53,7 +57,9 @@ project "PixelBrahma"
 		defines
 		{
 			"PB_PLATFORM_WINDOWS",
-			"PB_BUILD_DLL"
+			"PB_BUILD_DLL",
+			"PB_ENABLE_ASSERTS",
+			"GLFW_INCLUDE_NONE",
 		}
 
 		postbuildcommands

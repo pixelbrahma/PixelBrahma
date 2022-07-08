@@ -5,6 +5,8 @@
 #include "PixelBrahma/Events/KeyEvent.h"
 #include "PixelBrahma/Events/MouseEvent.h"
 
+#include "glad/glad.h"
+
 namespace PixelBrahma
 {
 	// GLFW initialized flag - Even if multiple windows are created, GLFW needs to be initialized only once
@@ -48,6 +50,12 @@ namespace PixelBrahma
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
+
+		// Load Glad
+
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		PB_CORE_ASSERT(status, "Failed to initialize Glad!");
+
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
