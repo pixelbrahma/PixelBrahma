@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 #include "PixelBrahma/Application.h"
+#include "PixelBrahma/Layers/Layer.h"
 #include "PixelBrahma/Log.h"
 
 // Entry Point

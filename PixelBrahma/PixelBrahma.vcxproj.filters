@@ -37,6 +37,12 @@
     <ClInclude Include="src\PixelBrahma\Events\MouseEvent.h">
       <Filter>PixelBrahma\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Layers\Layer.h">
+      <Filter>PixelBrahma</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Layers\LayerStack.h">
+      <Filter>PixelBrahma</Filter>
+    </ClInclude>
     <ClInclude Include="src\PixelBrahma\Log.h">
       <Filter>PixelBrahma</Filter>
     </ClInclude>
@@ -50,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\PixelBrahma\Application.cpp">
+      <Filter>PixelBrahma</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Layers\Layer.cpp">
+      <Filter>PixelBrahma</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Layers\LayerStack.cpp">
       <Filter>PixelBrahma</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Log.cpp">

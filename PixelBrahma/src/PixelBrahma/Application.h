@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Core.h"
-#include "Events/Event.h"
 #include "Window.h"
+#include "Layers/LayerStack.h"
+#include "Events/Event.h"
 #include "PixelBrahma/Events/ApplicationEvent.h"
 
 namespace PixelBrahma
@@ -17,8 +18,12 @@ namespace PixelBrahma
 		// Run function
 		void Run();
 
-		// Event handling function
+		// Event handling and dispatching function
 		void OnEvent(Event& e);
+
+		// Add layers functions
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* overlay);
 
 	private:
 		// Window close event function
@@ -26,6 +31,7 @@ namespace PixelBrahma
 
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
+		LayerStack m_LayerStack;
 	};
 
 	// To be defined in the client

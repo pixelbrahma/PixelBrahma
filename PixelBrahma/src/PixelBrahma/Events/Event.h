@@ -53,6 +53,7 @@ namespace PixelBrahma
 		friend class EventDispatcher;
 
 	public:
+		bool Handled = false;
 
 		// Virtual event properties getter functions
 
@@ -68,9 +69,6 @@ namespace PixelBrahma
 		{
 			return GetCategoryFlags() & category;
 		}
-
-	protected:
-		bool m_Handled = false;
 	};
 
 	// Event dispatcher class
@@ -91,7 +89,7 @@ namespace PixelBrahma
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
 				// Handle the event by calling the function
-				m_Event.m_Handled = func(*(T*)&m_Event);
+				m_Event.Handled = func(*(T*)&m_Event);
 				return true;
 			}
 

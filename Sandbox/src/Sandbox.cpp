@@ -1,10 +1,23 @@
 #include <PixelBrahma.h>
 
+// Example of layer creation
+class ExampleLayer : public PixelBrahma::Layer
+{
+public:
+	ExampleLayer() : Layer("Example") {}
+
+	// Update function override for the layer
+	void OnUpdate() override { PB_TRACE("ExampleLyer::Update"); }
+
+	// Event function override for the layer
+	void OnEvent(PixelBrahma::Event& event) override { PB_INFO("{0}", event); }
+};
+
 // Application instance class
 class Sandbox : public PixelBrahma::Application
 {
 public:
-	Sandbox() {}
+	Sandbox() { PushLayer(new ExampleLayer()); }
 	~Sandbox() {}
 };
 
