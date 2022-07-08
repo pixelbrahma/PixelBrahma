@@ -3,6 +3,7 @@
 #include "Core.h"
 #include "Events/Event.h"
 #include "Window.h"
+#include "PixelBrahma/Events/ApplicationEvent.h"
 
 namespace PixelBrahma
 {
@@ -16,7 +17,13 @@ namespace PixelBrahma
 		// Run function
 		void Run();
 
+		// Event handling function
+		void OnEvent(Event& e);
+
 	private:
+		// Window close event function
+		bool OnWindowClose(WindowCloseEvent& e);
+
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
 	};

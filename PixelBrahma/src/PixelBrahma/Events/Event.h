@@ -88,7 +88,7 @@ namespace PixelBrahma
 		bool Dispatch(EventFn<T> func)
 		{
 			// If event type matched the handler function type
-			if (m_event.GetEventType() == T::GetStaticType())
+			if (m_Event.GetEventType() == T::GetStaticType())
 			{
 				// Handle the event by calling the function
 				m_Event.m_Handled = func(*(T*)&m_Event);
