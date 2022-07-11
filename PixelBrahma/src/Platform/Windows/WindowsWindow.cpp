@@ -122,6 +122,16 @@ namespace PixelBrahma
 				}
 			});
 
+		// Key typed event
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode)
+			{
+				// Get the user pointer which points to WindowData structure type and set width and height
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				KeyTypedEvent event(keycode);
+				data.EventCallback(event);
+			});
+
 		// Mouse button event
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 			{

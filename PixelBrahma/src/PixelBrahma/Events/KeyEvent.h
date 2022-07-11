@@ -62,4 +62,22 @@ namespace PixelBrahma
 		// Event class descriptions
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
+
+	// Key typed event class
+	class PIXELBRAHMA_API KeyTypedEvent : public KeyEvent
+	{
+	public:
+		KeyTypedEvent(int keycode) : KeyEvent(keycode) {}
+
+		// Override to string function for logging
+		std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "KeyTypedEvent: " << m_KeyCode;
+			return ss.str();
+		}
+
+		// Event class descriptions
+		EVENT_CLASS_TYPE(KeyTyped)
+	};
 }

@@ -24,3 +24,6 @@
 
 // Bit shift macro
 #define BIT(x) (1 << x)
+
+// Bind event macro
+#define PB_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
