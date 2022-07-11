@@ -12,6 +12,12 @@
 	#error PixelBrahma Engine only supports Windows!
 #endif // PB_PLATFORM_WINDOWS
 
+// If debug mode enable asserts
+
+#ifdef PB_DEBUG
+	#define PB_ENABLE_ASSERTS
+#endif
+
 // Assertion macros
 
 #ifdef PB_ENABLE_ASSERTS

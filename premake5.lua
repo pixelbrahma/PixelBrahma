@@ -16,14 +16,17 @@ IncludeDir["GLFW"] = "PixelBrahma/ThirdParty/GLFW/include"
 IncludeDir["Glad"] = "PixelBrahma/ThirdParty/Glad/include"
 IncludeDir["ImGui"] = "PixelBrahma/ThirdParty/ImGui"
 
-include "PixelBrahma/ThirdParty/GLFW"
-include "PixelBrahma/ThirdParty/Glad"
-include "PixelBrahma/ThirdParty/ImGui"
+group "Dependencies"
+	include "PixelBrahma/ThirdParty/GLFW"
+	include "PixelBrahma/ThirdParty/Glad"
+	include "PixelBrahma/ThirdParty/ImGui"
+group ""
 
 project "PixelBrahma"
 	location "PixelBrahma"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -56,41 +59,40 @@ project "PixelBrahma"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
 		{
 			"PB_PLATFORM_WINDOWS",
 			"PB_BUILD_DLL",
-			"PB_ENABLE_ASSERTS",
-			"GLFW_INCLUDE_NONE",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
 	filter "configurations:Debug"
 		defines "PB_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "PB_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "PB_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -114,7 +116,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -124,15 +125,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "PB_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "PB_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "PB_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
