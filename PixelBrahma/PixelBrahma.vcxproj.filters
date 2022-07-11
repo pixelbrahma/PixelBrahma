@@ -7,11 +7,17 @@
     <Filter Include="PixelBrahma\Events">
       <UniqueIdentifier>{962DCF7C-8211-90D2-EB71-8A25D7747A54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PixelBrahma\ImGui">
+      <UniqueIdentifier>{9C887FD5-089F-7D6B-5116-098DBD6B4EF3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="PixelBrahma\Layers">
       <UniqueIdentifier>{7118B28B-5DFC-72E1-C65C-6D34B25F5D63}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\OpenGL">
+      <UniqueIdentifier>{1E7D2C1D-8A08-9AE1-9319-1DD6FF23F6E1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
@@ -40,6 +46,9 @@
     <ClInclude Include="src\PixelBrahma\Events\MouseEvent.h">
       <Filter>PixelBrahma\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\ImGui\ImGuiLayer.h">
+      <Filter>PixelBrahma\ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="src\PixelBrahma\Layers\Layer.h">
       <Filter>PixelBrahma\Layers</Filter>
     </ClInclude>
@@ -52,6 +61,9 @@
     <ClInclude Include="src\PixelBrahma\Window.h">
       <Filter>PixelBrahma</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
+      <Filter>Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
@@ -61,6 +73,9 @@
     <ClCompile Include="src\PixelBrahma\Application.cpp">
       <Filter>PixelBrahma</Filter>
     </ClCompile>
+    <ClCompile Include="src\PixelBrahma\ImGui\ImGuiLayer.cpp">
+      <Filter>PixelBrahma\ImGui</Filter>
+    </ClCompile>
     <ClCompile Include="src\PixelBrahma\Layers\Layer.cpp">
       <Filter>PixelBrahma\Layers</Filter>
     </ClCompile>
@@ -69,6 +84,9 @@
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Log.cpp">
       <Filter>PixelBrahma</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
+      <Filter>Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>

@@ -17,7 +17,11 @@ public:
 class Sandbox : public PixelBrahma::Application
 {
 public:
-	Sandbox() { PushLayer(new ExampleLayer()); }
+	Sandbox() 
+	{ 
+		PushLayer(new ExampleLayer()); 
+		PushOverlay(new PixelBrahma::ImGuiLayer());
+	}
 	~Sandbox() {}
 };
 

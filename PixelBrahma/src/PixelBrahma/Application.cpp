@@ -8,8 +8,14 @@ namespace PixelBrahma
 	// Macro for binding events
 	#define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
 
+	// Application should be a singleton
+	Application* Application::s_Instance = nullptr;
+
 	Application::Application() 
 	{ 
+		PB_CORE_ASSERT(!s_Instance, "Application already exists!");
+		s_Instance = this;
+
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 	}
@@ -20,12 +26,14 @@ namespace PixelBrahma
 	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
 
 	// Add overlay to the layer stack
 	void Application::PushOverlay(Layer* overlay)
 	{
 		m_LayerStack.PushOverlay(overlay);
+		overlay->OnAttach();
 	}
 
 	// Event callback function

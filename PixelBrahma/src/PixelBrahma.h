@@ -8,5 +8,7 @@
 #include "PixelBrahma/Layers/Layer.h"
 #include "PixelBrahma/Log.h"
 
+#include "PixelBrahma/ImGui/ImGuiLayer.h"
+
 // Entry Point
 #include "PixelBrahma/EntryPoint.h"

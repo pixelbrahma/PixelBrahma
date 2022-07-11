@@ -13,9 +13,11 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "PixelBrahma/ThirdParty/GLFW/include"
 IncludeDir["Glad"] = "PixelBrahma/ThirdParty/Glad/include"
+IncludeDir["ImGui"] = "PixelBrahma/ThirdParty/ImGui"
 
 include "PixelBrahma/ThirdParty/GLFW"
 include "PixelBrahma/ThirdParty/Glad"
+include "PixelBrahma/ThirdParty/ImGui"
 
 project "PixelBrahma"
 	location "PixelBrahma"
@@ -39,13 +41,15 @@ project "PixelBrahma"
 		"%{prj.name}/src",
 		"%{prj.name}/ThirdParty/spdlog/include",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.Glad}"
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
 	{
 		"GLFW",
 		"Glad",
+		"ImGui",
 		"opengl32.lib"
 	}
 
