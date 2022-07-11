@@ -7,7 +7,7 @@ public:
 	ExampleLayer() : Layer("Example") {}
 
 	// Update function override for the layer
-	void OnUpdate() override { PB_TRACE("ExampleLyer::Update"); }
+	void OnUpdate() override { PB_TRACE("ExampleLayer::Update"); }
 
 	// Event function override for the layer
 	void OnEvent(PixelBrahma::Event& event) override { PB_INFO("{0}", event); }
