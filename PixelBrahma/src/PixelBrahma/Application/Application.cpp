@@ -3,7 +3,7 @@
 
 #include "glad/glad.h"
 
-#include "Input.h"
+#include "PixelBrahma/Input/Input.h"
 
 namespace PixelBrahma
 {
@@ -69,10 +69,6 @@ namespace PixelBrahma
 			// Update each layer in order
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
-
-			// Get and print mouse position
-			auto [x, y] = Input::GetMousePosition();
-			PB_CORE_INFO("{0}, {1}", x, y);
 
 			// Call the update function of the window
 			m_Window->OnUpdate();

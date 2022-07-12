@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Core.h"
-#include "Window.h"
-#include "Layers/LayerStack.h"
-#include "Events/Event.h"
+#include "PixelBrahma/Core.h"
+#include "PixelBrahma/Window.h"
+#include "PixelBrahma/Layers/LayerStack.h"
+#include "PixelBrahma/Events/Event.h"
 #include "PixelBrahma/Events/ApplicationEvent.h"
 
 namespace PixelBrahma

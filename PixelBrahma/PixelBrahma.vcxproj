@@ -150,18 +150,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\PixelBrahma.h" />
-    <ClInclude Include="src\PixelBrahma\Application.h" />
+    <ClInclude Include="src\PixelBrahma\Application\Application.h" />
     <ClInclude Include="src\PixelBrahma\Core.h" />
-    <ClInclude Include="src\PixelBrahma\EntryPoint.h" />
+    <ClInclude Include="src\PixelBrahma\Application\EntryPoint.h" />
     <ClInclude Include="src\PixelBrahma\Events\ApplicationEvent.h" />
     <ClInclude Include="src\PixelBrahma\Events\Event.h" />
     <ClInclude Include="src\PixelBrahma\Events\KeyEvent.h" />
     <ClInclude Include="src\PixelBrahma\Events\MouseEvent.h" />
     <ClInclude Include="src\PixelBrahma\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\PixelBrahma\Input.h" />
+    <ClInclude Include="src\PixelBrahma\Input\Input.h" />
+    <ClInclude Include="src\PixelBrahma\Input\KeyCodes.h" />
+    <ClInclude Include="src\PixelBrahma\Input\MouseButtonCodes.h" />
     <ClInclude Include="src\PixelBrahma\Layers\Layer.h" />
     <ClInclude Include="src\PixelBrahma\Layers\LayerStack.h" />
-    <ClInclude Include="src\PixelBrahma\Log.h" />
+    <ClInclude Include="src\PixelBrahma\Log\Log.h" />
     <ClInclude Include="src\PixelBrahma\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
@@ -169,11 +171,11 @@
     <ClInclude Include="src\pbpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\PixelBrahma\Application.cpp" />
+    <ClCompile Include="src\PixelBrahma\Application\Application.cpp" />
     <ClCompile Include="src\PixelBrahma\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\PixelBrahma\Layers\Layer.cpp" />
     <ClCompile Include="src\PixelBrahma\Layers\LayerStack.cpp" />
-    <ClCompile Include="src\PixelBrahma\Log.cpp" />
+    <ClCompile Include="src\PixelBrahma\Log\Log.cpp" />
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />

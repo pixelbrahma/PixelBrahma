@@ -1,7 +1,7 @@
 #include "pbpch.h"
 #include "WindowsInput.h"
 
-#include "PixelBrahma/Application.h"
+#include "PixelBrahma/Application/Application.h"
 #include "GLFW/glfw3.h"
 
 namespace PixelBrahma

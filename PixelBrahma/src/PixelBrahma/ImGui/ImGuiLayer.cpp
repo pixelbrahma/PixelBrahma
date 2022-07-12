@@ -4,7 +4,7 @@
 #include "imgui.h"
 #include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
 
-#include "PixelBrahma/Application.h"
+#include "PixelBrahma/Application/Application.h"
 
 // Temporary
 #include "GLFW/glfw3.h"

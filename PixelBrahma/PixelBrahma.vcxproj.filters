@@ -25,13 +25,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\PixelBrahma.h" />
-    <ClInclude Include="src\PixelBrahma\Application.h">
+    <ClInclude Include="src\PixelBrahma\Application\Application.h">
       <Filter>PixelBrahma</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Core.h">
       <Filter>PixelBrahma</Filter>
     </ClInclude>
-    <ClInclude Include="src\PixelBrahma\EntryPoint.h">
+    <ClInclude Include="src\PixelBrahma\Application\EntryPoint.h">
       <Filter>PixelBrahma</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Events\ApplicationEvent.h">
@@ -55,7 +55,7 @@
     <ClInclude Include="src\PixelBrahma\Layers\LayerStack.h">
       <Filter>PixelBrahma\Layers</Filter>
     </ClInclude>
-    <ClInclude Include="src\PixelBrahma\Log.h">
+    <ClInclude Include="src\PixelBrahma\Log\Log.h">
       <Filter>PixelBrahma</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Window.h">
@@ -68,11 +68,13 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\pbpch.h" />
-    <ClInclude Include="src\PixelBrahma\Input.h" />
+    <ClInclude Include="src\PixelBrahma\Input\Input.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
+    <ClInclude Include="src\PixelBrahma\Input\KeyCodes.h" />
+    <ClInclude Include="src\PixelBrahma\Input\MouseButtonCodes.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\PixelBrahma\Application.cpp">
+    <ClCompile Include="src\PixelBrahma\Application\Application.cpp">
       <Filter>PixelBrahma</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\ImGui\ImGuiLayer.cpp">
@@ -84,7 +86,7 @@
     <ClCompile Include="src\PixelBrahma\Layers\LayerStack.cpp">
       <Filter>PixelBrahma\Layers</Filter>
     </ClCompile>
-    <ClCompile Include="src\PixelBrahma\Log.cpp">
+    <ClCompile Include="src\PixelBrahma\Log\Log.cpp">
       <Filter>PixelBrahma</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">

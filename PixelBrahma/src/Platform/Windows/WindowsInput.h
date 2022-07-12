@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PixelBrahma/Input.h"
+#include "PixelBrahma/Input/Input.h"
 
 #include <utility>
 

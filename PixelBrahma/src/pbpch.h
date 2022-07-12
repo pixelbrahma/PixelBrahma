@@ -20,7 +20,7 @@
 
 // Defined headers
 
-#include "PixelBrahma/Log.h"
+#include "PixelBrahma/Log/Log.h"
 
 #ifdef PB_PLATFORM_WINDOWS
 	#include <Windows.h>
