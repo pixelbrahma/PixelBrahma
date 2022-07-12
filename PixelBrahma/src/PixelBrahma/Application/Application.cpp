@@ -15,28 +15,26 @@ namespace PixelBrahma
 
 	Application::Application() 
 	{ 
+		// Set application instance
 		PB_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
+		// Create window and set reference and event callback
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+
+		// Create ImGui layer push it to the layer stack
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 	}
 
 	Application::~Application() {}
 
 	// Add layer to the layer stack
-	void Application::PushLayer(Layer* layer)
-	{
-		m_LayerStack.PushLayer(layer);
-		layer->OnAttach();
-	}
+	void Application::PushLayer(Layer* layer) { m_LayerStack.PushLayer(layer); }
 
 	// Add overlay to the layer stack
-	void Application::PushOverlay(Layer* overlay)
-	{
-		m_LayerStack.PushOverlay(overlay);
-		overlay->OnAttach();
-	}
+	void Application::PushOverlay(Layer* overlay) { m_LayerStack.PushOverlay(overlay); }
 
 	// Event callback function
 	void Application::OnEvent(Event& e)
@@ -69,6 +67,15 @@ namespace PixelBrahma
 			// Update each layer in order
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
+
+			// ImGui layer run functionality
+
+			m_ImGuiLayer->Begin();
+
+			for (Layer* layer : m_LayerStack)
+				layer->OnImGuiRender();
+
+			m_ImGuiLayer->End();
 
 			// Call the update function of the window
 			m_Window->OnUpdate();

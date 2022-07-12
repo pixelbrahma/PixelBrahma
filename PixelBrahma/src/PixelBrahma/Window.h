@@ -27,7 +27,7 @@ namespace PixelBrahma
 		using EventCallbackFn = std::function<void(Event&)>;
 
 		// Virtual destructor
-		virtual ~Window() {};
+		virtual ~Window() = default;
 
 		// Virtual on update function
 		virtual void OnUpdate() = 0;

@@ -29,15 +29,15 @@ namespace PixelBrahma
 }
 
 // Core log macros
-#define PB_CORE_TRACE(...) :: PixelBrahma::Log::GetCoreLogger()->trace(__VA_ARGS__)
-#define PB_CORE_INFO(...)  :: PixelBrahma::Log::GetCoreLogger()->info(__VA_ARGS__)
-#define PB_CORE_WARN(...)  :: PixelBrahma::Log::GetCoreLogger()->warn(__VA_ARGS__)
-#define PB_CORE_ERROR(...) :: PixelBrahma::Log::GetCoreLogger()->error(__VA_ARGS__)
-#define PB_CORE_FATAL(...) :: PixelBrahma::Log::GetCoreLogger()->fatal(__VA_ARGS__)
+#define PB_CORE_TRACE(...)    :: PixelBrahma::Log::GetCoreLogger()->trace(__VA_ARGS__)
+#define PB_CORE_INFO(...)     :: PixelBrahma::Log::GetCoreLogger()->info(__VA_ARGS__)
+#define PB_CORE_WARN(...)     :: PixelBrahma::Log::GetCoreLogger()->warn(__VA_ARGS__)
+#define PB_CORE_ERROR(...)    :: PixelBrahma::Log::GetCoreLogger()->error(__VA_ARGS__)
+#define PB_CORE_CRITICAL(...) :: PixelBrahma::Log::GetCoreLogger()->critical(__VA_ARGS__)
 
 // Client log macros
-#define PB_TRACE(...)      :: PixelBrahma::Log::GetClientLogger()->trace(__VA_ARGS__)
-#define PB_INFO(...)       :: PixelBrahma::Log::GetClientLogger()->info(__VA_ARGS__)
-#define PB_WARN(...)       :: PixelBrahma::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define PB_ERROR(...)      :: PixelBrahma::Log::GetClientLogger()->error(__VA_ARGS__)
-#define PB_FATAL(...)      :: PixelBrahma::Log::GetClientLogger()->fatal(__VA_ARGS__)
+#define PB_TRACE(...)         :: PixelBrahma::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define PB_INFO(...)          :: PixelBrahma::Log::GetClientLogger()->info(__VA_ARGS__)
+#define PB_WARN(...)          :: PixelBrahma::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define PB_ERROR(...)         :: PixelBrahma::Log::GetClientLogger()->error(__VA_ARGS__)
+#define PB_CRITICAL(...)      :: PixelBrahma::Log::GetClientLogger()->critical(__VA_ARGS__)

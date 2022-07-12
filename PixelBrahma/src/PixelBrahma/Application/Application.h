@@ -5,6 +5,7 @@
 #include "PixelBrahma/Layers/LayerStack.h"
 #include "PixelBrahma/Events/Event.h"
 #include "PixelBrahma/Events/ApplicationEvent.h"
+#include "PixelBrahma/ImGui/ImGuiLayer.h"
 
 namespace PixelBrahma
 {
@@ -35,6 +36,7 @@ namespace PixelBrahma
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 

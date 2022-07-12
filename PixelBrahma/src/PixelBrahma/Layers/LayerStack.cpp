@@ -3,11 +3,7 @@
 
 namespace PixelBrahma
 {
-	LayerStack::LayerStack()
-	{
-		// Set iterator pointer to the beginning of the stack
-		m_LayerInsert = m_Layers.begin();
-	}
+	LayerStack::LayerStack() {}
 
 	LayerStack::~LayerStack()
 	{
@@ -19,8 +15,10 @@ namespace PixelBrahma
 	// Add a layer to the layer stack
 	void LayerStack::PushLayer(Layer* layer)
 	{
-		// Add layer at the iterator position
-		m_LayerInsert = m_Layers.emplace(m_LayerInsert, layer);
+		// Insert layer at layer index and increment the index
+		m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer);
+		m_LayerInsertIndex++;
+		layer->OnAttach();
 	}
 
 	// Add an overlay to the layer stack
@@ -28,6 +26,7 @@ namespace PixelBrahma
 	{
 		// Add overlay add the back of the layer stack
 		m_Layers.emplace_back(overlay);
+		overlay->OnAttach();
 	}
 
 	// Remove a layer from the layer stack
@@ -39,8 +38,9 @@ namespace PixelBrahma
 		
 		if (it != m_Layers.end())
 		{
+			layer->OnDetach();
 			m_Layers.erase(it);
-			m_LayerInsert--;
+			m_LayerInsertIndex--;
 		}
 	}
 
@@ -52,6 +52,9 @@ namespace PixelBrahma
 		auto it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
 
 		if (it != m_Layers.end())
+		{
+			overlay->OnDetach();
 			m_Layers.erase(it);
+		}
 	}
 }

@@ -1,5 +1,7 @@
 #include <PixelBrahma.h>
 
+#include "ImGui/imgui.h"
+
 // Example of layer creation
 class ExampleLayer : public PixelBrahma::Layer
 {
@@ -12,6 +14,14 @@ public:
 		// If tab key is pressed, log it
 		if (PixelBrahma::Input::IsKeyPressed(PB_KEY_TAB))
 			PB_TRACE("Tab key is pressed (poll)!");
+	}
+
+	// ImGui render override
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World");
+		ImGui::End();
 	}
 
 	// Event function override for the layer
@@ -32,11 +42,7 @@ public:
 class Sandbox : public PixelBrahma::Application
 {
 public:
-	Sandbox() 
-	{ 
-		PushLayer(new ExampleLayer()); 
-		PushOverlay(new PixelBrahma::ImGuiLayer());
-	}
+	Sandbox() { PushLayer(new ExampleLayer()); }
 	~Sandbox() {}
 };
 

@@ -3,11 +3,15 @@
 // Dll import or export macros
 
 #ifdef PB_PLATFORM_WINDOWS
-	#ifdef PB_BUILD_DLL
-		#define PIXELBRAHMA_API __declspec(dllexport)
+	#if PB_DYNAMIC_LINK
+		#ifdef PB_BUILD_DLL
+			#define PIXELBRAHMA_API __declspec(dllexport)
+		#else
+			#define PIXELBRAHMA_API __declspec(dllimport)
+		#endif // PB_BUILD_DLL
 	#else
-		#define PIXELBRAHMA_API __declspec(dllimport)
-	#endif // PB_BUILD_DLL
+		#define PIXELBRAHMA_API
+	#endif
 #else
 	#error PixelBrahma Engine only supports Windows!
 #endif // PB_PLATFORM_WINDOWS
