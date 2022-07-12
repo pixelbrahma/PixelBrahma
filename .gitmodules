@@ -7,3 +7,6 @@
 [submodule "PixelBrahma/ThirdParty/ImGui"]
 	path = PixelBrahma/ThirdParty/ImGui
 	url = https://github.com/pixelbrahma/imgui.git
+[submodule "PixelBrahma/ThirdParty/glm"]
+	path = PixelBrahma/ThirdParty/glm
+	url = https://github.com/g-truc/glm.git

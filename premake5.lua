@@ -15,6 +15,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "PixelBrahma/ThirdParty/GLFW/include"
 IncludeDir["Glad"] = "PixelBrahma/ThirdParty/Glad/include"
 IncludeDir["ImGui"] = "PixelBrahma/ThirdParty/ImGui"
+IncludeDir["glm"] = "PixelBrahma/ThirdParty/glm"
 
 group "Dependencies"
 	include "PixelBrahma/ThirdParty/GLFW"
@@ -37,7 +38,9 @@ project "PixelBrahma"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/ThirdParty/glm/glm/**.hpp",
+		"%{prj.name}/ThirdParty/glm/glm/**.inl"
 	}
 
 	includedirs
@@ -46,7 +49,8 @@ project "PixelBrahma"
 		"%{prj.name}/ThirdParty/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -106,7 +110,8 @@ project "Sandbox"
 	includedirs
 	{
 		"PixelBrahma/ThirdParty/spdlog/include",
-		"PixelBrahma/src"
+		"PixelBrahma/src",
+		"%{IncludeDir.glm}"
 	}
 
 	links
