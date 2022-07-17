@@ -6,6 +6,7 @@
 #include "PixelBrahma/Events/Event.h"
 #include "PixelBrahma/Events/ApplicationEvent.h"
 #include "PixelBrahma/ImGui/ImGuiLayer.h"
+#include "PixelBrahma/Renderer/Shader.h"
 
 namespace PixelBrahma
 {
@@ -41,6 +42,7 @@ namespace PixelBrahma
 		LayerStack m_LayerStack;
 
 		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		std::unique_ptr<Shader> m_Shader;
 
 	private:
 		static Application* s_Instance;
