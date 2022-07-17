@@ -5,7 +5,7 @@
 #include "PixelBrahma/Events/KeyEvent.h"
 #include "PixelBrahma/Events/MouseEvent.h"
 
-#include "glad/glad.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace PixelBrahma
 {
@@ -46,15 +46,12 @@ namespace PixelBrahma
 			s_GLFWInitialized = true;
 		}
 
-		// Create GLFW window and set context
-
+		// Create GLFW window
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
 
-		// Load Glad
-
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		PB_CORE_ASSERT(status, "Failed to initialize Glad!");
+		// Create OpenGL context and initialize it
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
@@ -192,7 +189,7 @@ namespace PixelBrahma
 		// Poll events and swap buffers
 
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
 	}
 
 	// Set Vsync

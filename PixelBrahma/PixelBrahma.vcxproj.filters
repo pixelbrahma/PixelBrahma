@@ -1356,6 +1356,8 @@
     <ClInclude Include="src\pbpch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\PixelBrahma\Application\Application.cpp">
@@ -1385,5 +1387,6 @@
     <ClCompile Include="src\pbpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
   </ItemGroup>
 </Project>

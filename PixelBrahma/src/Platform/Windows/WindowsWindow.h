@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PixelBrahma/Window.h"
+#include "PixelBrahma/Renderer/GraphicsContext.h"
 
 #include "GLFW/glfw3.h"
 
@@ -35,6 +36,7 @@ namespace PixelBrahma
 
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		// Structure containing properties of the window
 		struct WindowData
