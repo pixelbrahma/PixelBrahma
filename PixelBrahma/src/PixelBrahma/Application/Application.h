@@ -7,6 +7,7 @@
 #include "PixelBrahma/Events/ApplicationEvent.h"
 #include "PixelBrahma/ImGui/ImGuiLayer.h"
 #include "PixelBrahma/Renderer/Shader.h"
+#include "PixelBrahma/Renderer/Buffer.h"
 
 namespace PixelBrahma
 {
@@ -41,8 +42,11 @@ namespace PixelBrahma
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
-		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		unsigned int m_VertexArray;
+
 		std::unique_ptr<Shader> m_Shader;
+		std::unique_ptr<VertexBuffer> m_VertexBuffer;
+		std::unique_ptr<IndexBuffer> m_IndexBuffer;
 
 	private:
 		static Application* s_Instance;

@@ -1,0 +1,21 @@
+#pragma once
+
+namespace PixelBrahma
+{
+	// Enumeration of graphics rendering APIs
+	enum class RendererAPI
+	{
+		None = 0,
+		OpenGL = 1
+	};
+
+	// Renderer class to manage rendering in selected graphics API
+	class Renderer
+	{
+	public:
+		inline static RendererAPI GetAPI() { return s_RenderAPI; }
+
+	private:
+		static RendererAPI s_RenderAPI;
+	};
+}
