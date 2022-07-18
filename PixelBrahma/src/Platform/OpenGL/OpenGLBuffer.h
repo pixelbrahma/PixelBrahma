@@ -13,11 +13,17 @@ namespace PixelBrahma
 
 		// Overrides of base class bind and unbind functions
 
-		virtual void Bind() const;
-		virtual void UnBind() const;
+		virtual void Bind() const override;
+		virtual void UnBind() const override;
+
+		// Overrides of base class buffer layout functions
+
+		virtual const BufferLayout& GetLayout() const override { return m_Layout; }
+		virtual void SetLayout(const BufferLayout& layout) override { m_Layout = layout; }
 
 	private:
 		uint32_t m_RendererID;
+		BufferLayout m_Layout;
 	};
 
 	// Index buffer implementation for OpenGl
@@ -29,8 +35,8 @@ namespace PixelBrahma
 
 		// Overrides of base class bind and unbind functions
 
-		virtual void Bind() const;
-		virtual void UnBind() const;
+		virtual void Bind() const override;
+		virtual void UnBind() const override;
 
 		virtual uint32_t GetCount() const { return m_Count; }
 

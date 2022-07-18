@@ -13,6 +13,35 @@ namespace PixelBrahma
 	// Application should be a singleton
 	Application* Application::s_Instance = nullptr;
 
+	// Function to convert shader data type to OpenGL base date type
+	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
+	{
+		switch (type)
+		{
+			// Float data types
+			case PixelBrahma::ShaderDataType::Float:  return GL_FLOAT;
+			case PixelBrahma::ShaderDataType::Float2: return GL_FLOAT;
+			case PixelBrahma::ShaderDataType::Float3: return GL_FLOAT;
+			case PixelBrahma::ShaderDataType::Float4: return GL_FLOAT;
+
+			// Matrix data types
+			case PixelBrahma::ShaderDataType::Mat3:   return GL_FLOAT;
+			case PixelBrahma::ShaderDataType::Mat4:   return GL_FLOAT;
+
+			// Integer data types
+			case PixelBrahma::ShaderDataType::Int:    return GL_INT;
+			case PixelBrahma::ShaderDataType::Int2:   return GL_INT;
+			case PixelBrahma::ShaderDataType::Int3:   return GL_INT;
+			case PixelBrahma::ShaderDataType::Int4:   return GL_INT;
+
+			// Boolean data types
+			case PixelBrahma::ShaderDataType::Bool:   return GL_BOOL;
+		}
+
+		PB_CORE_ASSERT(false, "Unknown shader data type!");
+		return 0;
+	}
+
 	Application::Application() 
 	{ 
 		// Set application instance
@@ -31,20 +60,44 @@ namespace PixelBrahma
 		glGenVertexArrays(1, &m_VertexArray);
 		glBindVertexArray(m_VertexArray);
 
-		// Vertex positions array
-		float vertices[3 * 3] =
+		// Vertex attributes array
+		float vertices[3 * 7] = 
 		{
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.0f,  0.5f, 0.0f
+			-0.5f, -0.5f, 0.0f,		1.0f, 0.0f, 0.0f, 1.0f,
+			 0.5f, -0.5f, 0.0f,		0.0f, 1.0f, 0.0f, 1.0f,
+			 0.0f,  0.5f, 0.0f,		0.0f, 0.0f, 1.0f, 1.0f
 		};
 
 		// Assign vertex buffer data
 		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 
-		// Vertex attribute arrray and pointer
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+		// Define vertex buffer layout and set it
+		{
+			BufferLayout layout =
+			{
+				{ ShaderDataType::Float3, "a_Position" },
+				{ ShaderDataType::Float4, "a_Color"    }
+			};
+
+			m_VertexBuffer->SetLayout(layout);
+		}
+
+		uint32_t index = 0;
+		const auto& layout = m_VertexBuffer->GetLayout();
+
+		// Set attribute pointers for element types in the buffer layout
+		for (const auto& element : layout)
+		{
+			glEnableVertexAttribArray(index);
+			glVertexAttribPointer(index,
+				element.GetComponentCount(),
+				ShaderDataTypeToOpenGLBaseType(element.Type),
+				element.Normalized ? GL_TRUE : GL_FALSE,
+				layout.GetStride(),
+				(const void*)element.Offset);
+
+			index++;
+		}
 
 		// Indices array
 		uint32_t indices[3] = { 0, 1, 2 };
@@ -57,12 +110,15 @@ namespace PixelBrahma
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec4 a_Color;
 
 			out vec3 v_Position;
+			out vec4 v_Color;
 
 			void main()
 			{
 				v_Position = a_Position;
+				v_Color = a_Color;
 				gl_Position = vec4(a_Position, 1.0);
 			}
 		)";
@@ -74,10 +130,12 @@ namespace PixelBrahma
 			layout(location = 0) out vec4 color;
 
 			in vec3 v_Position;
+			in vec4 v_Color;
 
 			void main()
 			{
 				color = vec4(v_Position * 0.5 + 0.5, 1.0);
+				color = v_Color;
 			}
 		)";
 
