@@ -13,6 +13,7 @@
 #include "PixelBrahma/Renderer/Shader.h"
 #include "PixelBrahma/Renderer/Buffer.h"
 #include "PixelBrahma/Renderer/VertexArray.h"
+#include "PixelBrahma/Renderer/Camera/OrthographicCamera.h"
 
 namespace PixelBrahma
 {
@@ -52,6 +53,8 @@ namespace PixelBrahma
 
 		std::shared_ptr<Shader> m_BlueShader;
 		std::shared_ptr<VertexArray> m_SquareVA;
+
+		OrthographicCamera m_Camera;
 
 	private:
 		static Application* s_Instance;

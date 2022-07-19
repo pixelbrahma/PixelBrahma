@@ -1,6 +1,8 @@
 #pragma once
 
 #include "RenderCommand.h"
+#include "Camera/OrthographicCamera.h"
+#include "Shader.h"
 
 namespace PixelBrahma
 {
@@ -11,12 +13,21 @@ namespace PixelBrahma
 		
 		// Static render queue commands
 
-		static void BeginScene();
+		static void BeginScene(OrthographicCamera& camera);
 		static void EndScene();
 
-		static void Submit(const std::shared_ptr<VertexArray>& vertexArray);
+		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray);
 
 		// Static API getter function
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
+
+	private:
+		// Structure containing data relevant to the scene
+		struct SceneData
+		{
+			glm::mat4 ViewProjectionMatrix;
+		};
+
+		static SceneData* m_SceneData;
 	};
 }

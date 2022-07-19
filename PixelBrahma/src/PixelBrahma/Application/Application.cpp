@@ -12,7 +12,7 @@ namespace PixelBrahma
 	// Application should be a singleton
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application() 
+	Application::Application() : m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
 	{ 
 		// Set application instance
 		PB_CORE_ASSERT(!s_Instance, "Application already exists!");
@@ -102,6 +102,8 @@ namespace PixelBrahma
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
 
+			uniform mat4 u_ViewProjection;
+
 			out vec3 v_Position;
 			out vec4 v_Color;
 
@@ -109,7 +111,7 @@ namespace PixelBrahma
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
 			}
 		)";
 
@@ -140,12 +142,14 @@ namespace PixelBrahma
 			
 			layout(location = 0) in vec3 a_Position;
 
+			uniform mat4 u_ViewProjection;
+
 			out vec3 v_Position;
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = vec4(a_Position, 1.0);	
+				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -202,21 +206,17 @@ namespace PixelBrahma
 			// Clear the color buffer
 			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 			RenderCommand::Clear();
+			
+			// Set camera transforms
+			m_Camera.SetPosition({ 0.5f, 0.5f, 0.0f });
+			m_Camera.SetRotation(45.0f);
 
 			// Start rendering the scene
-			Renderer::BeginScene();
+			Renderer::BeginScene(m_Camera);
 
-			// Bind the shader for the square
-			m_BlueShader->Bind();
-			
-			// Submit the square vertex array to the render queue
-			Renderer::Submit(m_SquareVA);
-
-			// Bind the shader for the triangle
-			m_Shader->Bind();
-			
-			// Submit the triangle vertex array to the render queue
-			Renderer::Submit(m_VertexArray);
+			// Submit objects to the render queue
+			Renderer::Submit(m_BlueShader, m_SquareVA);
+			Renderer::Submit(m_Shader, m_VertexArray);
 
 			// Stop rendering the scene
 			Renderer::EndScene();
