@@ -1,21 +1,22 @@
 #pragma once
 
+#include "RenderCommand.h"
+
 namespace PixelBrahma
 {
-	// Enumeration of graphics rendering APIs
-	enum class RendererAPI
-	{
-		None = 0,
-		OpenGL = 1
-	};
-
 	// Renderer class to manage rendering in selected graphics API
 	class Renderer
 	{
 	public:
-		inline static RendererAPI GetAPI() { return s_RenderAPI; }
+		
+		// Static render queue commands
 
-	private:
-		static RendererAPI s_RenderAPI;
+		static void BeginScene();
+		static void EndScene();
+
+		static void Submit(const std::shared_ptr<VertexArray>& vertexArray);
+
+		// Static API getter function
+		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	};
 }

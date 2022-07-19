@@ -3,6 +3,16 @@
 
 namespace PixelBrahma
 {
-	// Set graphics rendering API to OpenGL
-	RendererAPI Renderer::s_RenderAPI = RendererAPI::OpenGL;
+	// Begin scene description
+	void Renderer::BeginScene() {}
+
+	// End scene description
+	void Renderer::EndScene() {}
+
+	// Submit render commands to the render queue
+	void Renderer::Submit(const std::shared_ptr<VertexArray>& vertexArray)
+	{
+		vertexArray->Bind();
+		RenderCommand::DrawIndexed(vertexArray);
+	}
 }

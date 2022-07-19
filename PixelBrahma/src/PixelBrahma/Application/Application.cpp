@@ -1,9 +1,8 @@
 #include "pbpch.h"
 #include "Application.h"
 
-#include "glad/glad.h"
-
 #include "PixelBrahma/Input/Input.h"
+#include "PixelBrahma/Renderer/Renderer.h"
 
 namespace PixelBrahma
 {
@@ -201,18 +200,26 @@ namespace PixelBrahma
 		while (m_Running)
 		{
 			// Clear the color buffer
-			glClearColor(0.1f, 0.1f, 0.1f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
+			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+			RenderCommand::Clear();
 
-			// Bind the shaders and vertex array for the square
+			// Start rendering the scene
+			Renderer::BeginScene();
+
+			// Bind the shader for the square
 			m_BlueShader->Bind();
-			m_SquareVA->Bind();
-			glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			
+			// Submit the square vertex array to the render queue
+			Renderer::Submit(m_SquareVA);
 
-			// Bind the shaders and vertex array for the triangle
+			// Bind the shader for the triangle
 			m_Shader->Bind();
-			m_VertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			
+			// Submit the triangle vertex array to the render queue
+			Renderer::Submit(m_VertexArray);
+
+			// Stop rendering the scene
+			Renderer::EndScene();
 
 			// Update each layer in order
 			for (Layer* layer : m_LayerStack)
