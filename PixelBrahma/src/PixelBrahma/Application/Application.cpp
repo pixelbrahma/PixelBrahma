@@ -13,35 +13,6 @@ namespace PixelBrahma
 	// Application should be a singleton
 	Application* Application::s_Instance = nullptr;
 
-	// Function to convert shader data type to OpenGL base date type
-	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
-	{
-		switch (type)
-		{
-			// Float data types
-			case PixelBrahma::ShaderDataType::Float:  return GL_FLOAT;
-			case PixelBrahma::ShaderDataType::Float2: return GL_FLOAT;
-			case PixelBrahma::ShaderDataType::Float3: return GL_FLOAT;
-			case PixelBrahma::ShaderDataType::Float4: return GL_FLOAT;
-
-			// Matrix data types
-			case PixelBrahma::ShaderDataType::Mat3:   return GL_FLOAT;
-			case PixelBrahma::ShaderDataType::Mat4:   return GL_FLOAT;
-
-			// Integer data types
-			case PixelBrahma::ShaderDataType::Int:    return GL_INT;
-			case PixelBrahma::ShaderDataType::Int2:   return GL_INT;
-			case PixelBrahma::ShaderDataType::Int3:   return GL_INT;
-			case PixelBrahma::ShaderDataType::Int4:   return GL_INT;
-
-			// Boolean data types
-			case PixelBrahma::ShaderDataType::Bool:   return GL_BOOL;
-		}
-
-		PB_CORE_ASSERT(false, "Unknown shader data type!");
-		return 0;
-	}
-
 	Application::Application() 
 	{ 
 		// Set application instance
@@ -56,9 +27,8 @@ namespace PixelBrahma
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
-		// Generate and bind vertex array
-		glGenVertexArrays(1, &m_VertexArray);
-		glBindVertexArray(m_VertexArray);
+		// Create vertex array
+		m_VertexArray.reset(VertexArray::Create());
 
 		// Vertex attributes array
 		float vertices[3 * 7] = 
@@ -68,44 +38,65 @@ namespace PixelBrahma
 			 0.0f,  0.5f, 0.0f,		0.0f, 0.0f, 1.0f, 1.0f
 		};
 
-		// Assign vertex buffer data
-		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+		// Create vertex buffer
+		std::shared_ptr<VertexBuffer> vertexBuffer;
+		vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 
 		// Define vertex buffer layout and set it
+		BufferLayout layout =
 		{
-			BufferLayout layout =
-			{
-				{ ShaderDataType::Float3, "a_Position" },
-				{ ShaderDataType::Float4, "a_Color"    }
-			};
+			{ ShaderDataType::Float3, "a_Position" },
+			{ ShaderDataType::Float4, "a_Color"    }
+		};
 
-			m_VertexBuffer->SetLayout(layout);
-		}
+		vertexBuffer->SetLayout(layout);
 
-		uint32_t index = 0;
-		const auto& layout = m_VertexBuffer->GetLayout();
-
-		// Set attribute pointers for element types in the buffer layout
-		for (const auto& element : layout)
-		{
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index,
-				element.GetComponentCount(),
-				ShaderDataTypeToOpenGLBaseType(element.Type),
-				element.Normalized ? GL_TRUE : GL_FALSE,
-				layout.GetStride(),
-				(const void*)element.Offset);
-
-			index++;
-		}
+		// Add vertex buffer to the vertex array
+		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		// Indices array
 		uint32_t indices[3] = { 0, 1, 2 };
 
-		// Assign index buffer data
-		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		// Create and assign index buffer data
+		std::shared_ptr<IndexBuffer> indexBuffer;
+		indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		m_VertexArray->SetIndexBuffer(indexBuffer);
 
-		// Vertex shader source
+		// Create square vertex array
+		m_SquareVA.reset(VertexArray::Create());
+
+		// Vertices array for the square
+		float squareVertices[3 * 4] = {
+			-0.75f, -0.75f, 0.0f,
+			 0.75f, -0.75f, 0.0f,
+			 0.75f,  0.75f, 0.0f,
+			-0.75f,  0.75f, 0.0f
+		};
+
+		// Create vertex buffer for the square
+		std::shared_ptr<VertexBuffer> squareVB;
+		squareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+
+		// Set vertex buffer layout for the square
+		squareVB->SetLayout(
+			{
+				{ ShaderDataType::Float3, "a_Position" }
+			});
+
+		// Add square vertex buffer to the square vertex array
+		m_SquareVA->AddVertexBuffer(squareVB);
+
+		// Square indices
+		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
+
+		// Create and assign square index buffer
+		std::shared_ptr<IndexBuffer> squareIB;
+		squareIB.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		m_SquareVA->SetIndexBuffer(squareIB);
+
+		//// Shaders for triangle ////
+
+		// Vertex shader source for the triangle
 		std::string vertexSrc = R"(
 			#version 330 core
 			
@@ -123,7 +114,7 @@ namespace PixelBrahma
 			}
 		)";
 
-		// Fragment shader source
+		// Fragment shader source for the triangle
 		std::string fragmentSrc = R"(
 			#version 330 core
 
@@ -139,8 +130,42 @@ namespace PixelBrahma
 			}
 		)";
 
-		// Create new unique shader pointer from vertex and fragment shader sources
+		// Create new shader pointer from vertex and fragment shader sources for triangle
 		m_Shader.reset(new Shader(vertexSrc, fragmentSrc));
+
+		//// Shaders for square ////
+
+		// Vertex shader source for the square
+		std::string blueShaderVertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+
+			out vec3 v_Position;
+
+			void main()
+			{
+				v_Position = a_Position;
+				gl_Position = vec4(a_Position, 1.0);	
+			}
+		)";
+
+		// Fragment shader source for the square
+		std::string blueShaderFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			in vec3 v_Position;
+
+			void main()
+			{
+				color = vec4(0.2, 0.3, 0.8, 1.0);
+			}
+		)";
+
+		// Create new shader pointer from vertex and fragment shader sources for square
+		m_BlueShader.reset(new Shader(blueShaderVertexSrc, blueShaderFragmentSrc));
 	}
 
 	Application::~Application() {}
@@ -179,12 +204,15 @@ namespace PixelBrahma
 			glClearColor(0.1f, 0.1f, 0.1f, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			// Bind the shader
-			m_Shader->Bind();
+			// Bind the shaders and vertex array for the square
+			m_BlueShader->Bind();
+			m_SquareVA->Bind();
+			glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
-			// Draw the elements of the vertices array
-			glBindVertexArray(m_VertexArray);
-			glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+			// Bind the shaders and vertex array for the triangle
+			m_Shader->Bind();
+			m_VertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			// Update each layer in order
 			for (Layer* layer : m_LayerStack)
