@@ -34,7 +34,7 @@ namespace PixelBrahma
 	{
 		// Find layer and remove it from the layer stack
 
-		auto it = std::find(m_Layers.begin(), m_Layers.end(), layer);
+		auto it = std::find(m_Layers.begin(), m_Layers.begin() + m_LayerInsertIndex, layer);
 		
 		if (it != m_Layers.end())
 		{
@@ -49,7 +49,7 @@ namespace PixelBrahma
 	{
 		// Find overlay and remove it from the layer stack
 
-		auto it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
+		auto it = std::find(m_Layers.begin(), m_Layers.begin() + m_LayerInsertIndex, overlay);
 
 		if (it != m_Layers.end())
 		{
