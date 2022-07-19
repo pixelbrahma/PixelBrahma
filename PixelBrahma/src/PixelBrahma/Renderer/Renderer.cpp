@@ -4,12 +4,12 @@
 namespace PixelBrahma
 {
 	// Set static scene data pointer
-	Renderer::SceneData* Renderer::m_SceneData = new Renderer::SceneData;
+	Renderer::SceneData* Renderer::s_SceneData = new Renderer::SceneData;
 
 	// Begin scene description
 	void Renderer::BeginScene(OrthographicCamera& camera) 
 	{
-		m_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
+		s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
 	}
 
 	// End scene description
@@ -21,7 +21,7 @@ namespace PixelBrahma
 		// Bind shader and set uniform
 
 		shader->Bind();
-		shader->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
+		shader->UploadUniformMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
 
 		// Bind vertex array and draw object
 
