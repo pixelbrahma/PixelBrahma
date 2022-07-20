@@ -2,6 +2,8 @@
 
 #include "ImGui/imgui.h"
 
+#include "glm/gtc/matrix_transform.hpp"
+
 // Example of layer creation
 class ExampleLayer : public PixelBrahma::Layer
 {
@@ -48,10 +50,10 @@ public:
 
 		// Vertices array for the square
 		float squareVertices[3 * 4] = {
-			-0.75f, -0.75f, 0.0f,
-			 0.75f, -0.75f, 0.0f,
-			 0.75f,  0.75f, 0.0f,
-			-0.75f,  0.75f, 0.0f
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.5f,  0.5f, 0.0f,
+			-0.5f,  0.5f, 0.0f
 		};
 
 		// Create vertex buffer for the square
@@ -85,6 +87,7 @@ public:
 			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 			out vec4 v_Color;
@@ -93,7 +96,7 @@ public:
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
 			}
 		)";
 
@@ -125,13 +128,14 @@ public:
 			layout(location = 0) in vec3 a_Position;
 
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);	
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -186,8 +190,24 @@ public:
 		// Start rendering the scene
 		PixelBrahma::Renderer::BeginScene(m_Camera);
 
-		// Submit objects to the render queue
-		PixelBrahma::Renderer::Submit(m_BlueShader, m_SquareVA);
+		// Scale matrix
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+
+		// Create tile map by setting tranforms of the sqaures
+		for(int y = 0; y < 20; y++)
+			for (int x = 0; x < 20; x++)
+			{
+				// Transform position
+				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
+
+				// Translation matrix
+				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
+
+				// Submit the object for rendering 
+				PixelBrahma::Renderer::Submit(m_BlueShader, m_SquareVA, transform);
+			}
+
+		// Submit triangle object to the render queue
 		PixelBrahma::Renderer::Submit(m_Shader, m_VertexArray);
 
 		// Stop rendering the scene
