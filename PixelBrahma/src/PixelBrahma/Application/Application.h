@@ -10,15 +10,12 @@
 
 #include "PixelBrahma/ImGui/ImGuiLayer.h"
 
-#include "PixelBrahma/Renderer/Shader.h"
-#include "PixelBrahma/Renderer/Buffer.h"
-#include "PixelBrahma/Renderer/VertexArray.h"
-#include "PixelBrahma/Renderer/Camera/OrthographicCamera.h"
+#include "PixelBrahma/Core/Timestep.h"
 
 namespace PixelBrahma
 {
 	// Application class to act as base class to create application from the client
-	class PIXELBRAHMA_API Application
+	class Application
 	{
 	public:
 		Application();
@@ -43,18 +40,12 @@ namespace PixelBrahma
 		// Window close event function
 		bool OnWindowClose(WindowCloseEvent& e);
 
+	private:
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertexArray;
-
-		std::shared_ptr<Shader> m_BlueShader;
-		std::shared_ptr<VertexArray> m_SquareVA;
-
-		OrthographicCamera m_Camera;
+		float m_LastFrameTime = 0.0f;
 
 	private:
 		static Application* s_Instance;

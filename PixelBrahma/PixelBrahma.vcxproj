@@ -140,6 +140,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\PixelBrahma\Core\Timestep.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Buffer.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Camera\OrthographicCamera.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\GraphicsContext.h" />

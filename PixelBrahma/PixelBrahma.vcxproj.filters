@@ -1368,6 +1368,7 @@
     <ClInclude Include="src\PixelBrahma\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Camera\OrthographicCamera.h" />
+    <ClInclude Include="src\PixelBrahma\Core\Timestep.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\PixelBrahma\Application\Application.cpp">
