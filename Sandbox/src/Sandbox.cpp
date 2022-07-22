@@ -25,7 +25,7 @@ public:
 		};
 
 		// Create vertex buffer
-		std::shared_ptr<PixelBrahma::VertexBuffer> vertexBuffer;
+		PixelBrahma::Ref<PixelBrahma::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(PixelBrahma::VertexBuffer::Create(vertices, sizeof(vertices)));
 
 		// Define vertex buffer layout and set it
@@ -44,7 +44,7 @@ public:
 		uint32_t indices[3] = { 0, 1, 2 };
 
 		// Create and assign index buffer data
-		std::shared_ptr<PixelBrahma::IndexBuffer> indexBuffer;
+		PixelBrahma::Ref<PixelBrahma::IndexBuffer> indexBuffer;
 		indexBuffer.reset(PixelBrahma::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
@@ -52,21 +52,23 @@ public:
 		m_SquareVA.reset(PixelBrahma::VertexArray::Create());
 
 		// Vertices array for the square
-		float squareVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
+		float squareVertices[5 * 4] = {
+			// Positions            // Texture coordinates
+			-0.5f, -0.5f, 0.0f,     0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f,     1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f,     1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f,     0.0f, 1.0f
 		};
 
 		// Create vertex buffer for the square
-		std::shared_ptr<PixelBrahma::VertexBuffer> squareVB;
+		PixelBrahma::Ref<PixelBrahma::VertexBuffer> squareVB;
 		squareVB.reset(PixelBrahma::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
 		// Set vertex buffer layout for the square
 		squareVB->SetLayout(
 			{
-				{ PixelBrahma::ShaderDataType::Float3, "a_Position" }
+				{ PixelBrahma::ShaderDataType::Float3, "a_Position" },
+				{ PixelBrahma::ShaderDataType::Float2, "a_TexCoord" }
 			});
 
 		// Add square vertex buffer to the square vertex array
@@ -76,7 +78,7 @@ public:
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
 
 		// Create and assign square index buffer
-		std::shared_ptr<PixelBrahma::IndexBuffer> squareIB;
+		PixelBrahma::Ref<PixelBrahma::IndexBuffer> squareIB;
 		squareIB.reset(PixelBrahma::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
@@ -160,6 +162,51 @@ public:
 
 		// Create new shader pointer from vertex and fragment shader sources for square
 		m_FlatColorShader.reset(PixelBrahma::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+
+		// Vertex shader source for textured object
+		std::string textureShaderVertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TexCoord;
+
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
+			}
+		)";
+
+		// Fragment shader source for textured object
+		std::string textureShaderFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			in vec2 v_TexCoord;
+			
+			uniform sampler2D u_Texture;
+
+			void main()
+			{
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+
+		// Create new shader from sources for texture object shader
+		m_TextureShader.reset(PixelBrahma::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+		// Create 2D texture from asset PNG image in file path
+		m_Texture = PixelBrahma::Texture2D::Create("Assets/Textures/CheckerBoard.png");
+
+		// Bind and set shader uniforms for the textured objects
+		std::dynamic_pointer_cast<PixelBrahma::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<PixelBrahma::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	// Update function override for the layer
@@ -198,6 +245,7 @@ public:
 		// Scale matrix
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
+		// Bind and set shader uniforms for the square
 		std::dynamic_pointer_cast<PixelBrahma::OpenGLShader>(m_FlatColorShader)->Bind();
 		std::dynamic_pointer_cast<PixelBrahma::OpenGLShader>(m_FlatColorShader)->
 			UploadUniformFloat3("u_Color", m_SquareColor);
@@ -216,8 +264,12 @@ public:
 				PixelBrahma::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 			}
 
+		// Bind texture and submit to the render queue
+		m_Texture->Bind();
+		PixelBrahma::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
 		// Submit triangle object to the render queue
-		PixelBrahma::Renderer::Submit(m_Shader, m_VertexArray);
+		//PixelBrahma::Renderer::Submit(m_Shader, m_VertexArray);
 
 		// Stop rendering the scene
 		PixelBrahma::Renderer::EndScene();
@@ -237,17 +289,27 @@ public:
 	void OnEvent(PixelBrahma::Event& event) override {}
 
 	private:
-		std::shared_ptr<PixelBrahma::Shader> m_Shader;
-		std::shared_ptr<PixelBrahma::VertexArray> m_VertexArray;
 
-		std::shared_ptr<PixelBrahma::Shader> m_FlatColorShader;
-		std::shared_ptr<PixelBrahma::VertexArray> m_SquareVA;
+		// Triangle object
+		PixelBrahma::Ref<PixelBrahma::Shader> m_Shader;
+		PixelBrahma::Ref<PixelBrahma::VertexArray> m_VertexArray;
 
+		// Square object
+		PixelBrahma::Ref<PixelBrahma::Shader> m_FlatColorShader;
+		PixelBrahma::Ref<PixelBrahma::VertexArray> m_SquareVA;
+
+		// Textured object
+		PixelBrahma::Ref<PixelBrahma::Shader> m_TextureShader;
+		PixelBrahma::Ref<PixelBrahma::Texture2D> m_Texture;
+
+		// Camera object
 		PixelBrahma::OrthographicCamera m_Camera;
 
+		// Transform properties
 		glm::vec3 m_CameraPosition;
 		float m_CameraRotation = 0.0f;
 		
+		// Movement and rotation speed
 		float m_CameraMoveSpeed = 5.0f;
 		float m_CameraRotationSpeed = 108.0f;
 

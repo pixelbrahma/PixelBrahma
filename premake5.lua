@@ -16,6 +16,7 @@ IncludeDir["GLFW"] = "PixelBrahma/ThirdParty/GLFW/include"
 IncludeDir["Glad"] = "PixelBrahma/ThirdParty/Glad/include"
 IncludeDir["ImGui"] = "PixelBrahma/ThirdParty/ImGui"
 IncludeDir["glm"] = "PixelBrahma/ThirdParty/glm"
+IncludeDir["stb_image"] = "PixelBrahma/ThirdParty/stb_image"
 
 group "Dependencies"
 	include "PixelBrahma/ThirdParty/GLFW"
@@ -41,6 +42,8 @@ project "PixelBrahma"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/ThirdParty/stb_image/**.h",
+		"%{prj.name}/ThirdParty/stb_image/**.cpp",
 		"%{prj.name}/ThirdParty/glm/glm/**.hpp",
 		"%{prj.name}/ThirdParty/glm/glm/**.inl"
 	}
@@ -57,7 +60,8 @@ project "PixelBrahma"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links

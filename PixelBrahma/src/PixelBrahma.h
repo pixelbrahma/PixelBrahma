@@ -32,6 +32,7 @@
 #include "PixelBrahma/Renderer/VertexArray.h"
 #include "PixelBrahma/Renderer/Buffer.h"
 #include "PixelBrahma/Renderer/Shader.h"
+#include "PixelBrahma/Renderer/Texture.h"
 
 // Camera
 #include "PixelBrahma/Renderer/Camera/OrthographicCamera.h"
