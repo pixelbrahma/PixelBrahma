@@ -1,6 +1,8 @@
 #include "pbpch.h"
 #include "Renderer.h"
 
+#include "Platform/OpenGL/OpenGLShader.h"
+
 namespace PixelBrahma
 {
 	// Set static scene data pointer
@@ -23,8 +25,9 @@ namespace PixelBrahma
 		// Bind shader and set uniform
 
 		shader->Bind();
-		shader->UploadUniformMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
-		shader->UploadUniformMat4("u_Transform", transform);
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjection",
+			s_SceneData->ViewProjectionMatrix);
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
 
 		// Bind vertex array and draw object
 

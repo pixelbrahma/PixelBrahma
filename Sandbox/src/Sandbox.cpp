@@ -1,8 +1,11 @@
 #include <PixelBrahma.h>
 
+#include "Platform/OpenGL/OpenGLShader.h"
+
 #include "ImGui/imgui.h"
 
 #include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 // Example of layer creation
 class ExampleLayer : public PixelBrahma::Layer
@@ -117,12 +120,12 @@ public:
 		)";
 
 		// Create new shader pointer from vertex and fragment shader sources for triangle
-		m_Shader.reset(new PixelBrahma::Shader(vertexSrc, fragmentSrc));
+		m_Shader.reset(PixelBrahma::Shader::Create(vertexSrc, fragmentSrc));
 
 		//// Shaders for square ////
 
 		// Vertex shader source for the square
-		std::string blueShaderVertexSrc = R"(
+		std::string flatColorShaderVertexSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
@@ -140,21 +143,23 @@ public:
 		)";
 
 		// Fragment shader source for the square
-		std::string blueShaderFragmentSrc = R"(
+		std::string flatColorShaderFragmentSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) out vec4 color;
 
 			in vec3 v_Position;
 
+			uniform vec3 u_Color;
+
 			void main()
 			{
-				color = vec4(0.2, 0.3, 0.8, 1.0);
+				color = vec4(u_Color, 1.0);
 			}
 		)";
 
 		// Create new shader pointer from vertex and fragment shader sources for square
-		m_BlueShader.reset(new PixelBrahma::Shader(blueShaderVertexSrc, blueShaderFragmentSrc));
+		m_FlatColorShader.reset(PixelBrahma::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
 	}
 
 	// Update function override for the layer
@@ -193,6 +198,10 @@ public:
 		// Scale matrix
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
+		std::dynamic_pointer_cast<PixelBrahma::OpenGLShader>(m_FlatColorShader)->Bind();
+		std::dynamic_pointer_cast<PixelBrahma::OpenGLShader>(m_FlatColorShader)->
+			UploadUniformFloat3("u_Color", m_SquareColor);
+
 		// Create tile map by setting tranforms of the sqaures
 		for(int y = 0; y < 20; y++)
 			for (int x = 0; x < 20; x++)
@@ -204,7 +213,7 @@ public:
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
 
 				// Submit the object for rendering 
-				PixelBrahma::Renderer::Submit(m_BlueShader, m_SquareVA, transform);
+				PixelBrahma::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 			}
 
 		// Submit triangle object to the render queue
@@ -215,7 +224,14 @@ public:
 	}
 
 	// ImGui render override
-	virtual void OnImGuiRender() override {}
+	virtual void OnImGuiRender() override 
+	{
+		// Create an ImGui color picker to pick the color of the squares
+
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+		ImGui::End();
+	}
 
 	// Event function override for the layer
 	void OnEvent(PixelBrahma::Event& event) override {}
@@ -224,7 +240,7 @@ public:
 		std::shared_ptr<PixelBrahma::Shader> m_Shader;
 		std::shared_ptr<PixelBrahma::VertexArray> m_VertexArray;
 
-		std::shared_ptr<PixelBrahma::Shader> m_BlueShader;
+		std::shared_ptr<PixelBrahma::Shader> m_FlatColorShader;
 		std::shared_ptr<PixelBrahma::VertexArray> m_SquareVA;
 
 		PixelBrahma::OrthographicCamera m_Camera;
@@ -234,6 +250,8 @@ public:
 		
 		float m_CameraMoveSpeed = 5.0f;
 		float m_CameraRotationSpeed = 108.0f;
+
+		glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 };
 
 // Application instance class
