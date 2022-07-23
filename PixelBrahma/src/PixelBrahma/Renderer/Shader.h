@@ -16,6 +16,7 @@ namespace PixelBrahma
 		virtual void UnBind() const = 0;
 
 		// Create shader from source static function
+		static Shader* Create(const std::string& filepath);
 		static Shader* Create(const std::string& vertexSrc, const std::string& fragmentSrc);
 	};
 }

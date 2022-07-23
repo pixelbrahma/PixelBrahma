@@ -163,43 +163,8 @@ public:
 		// Create new shader pointer from vertex and fragment shader sources for square
 		m_FlatColorShader.reset(PixelBrahma::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
 
-		// Vertex shader source for textured object
-		std::string textureShaderVertexSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec2 a_TexCoord;
-
-			uniform mat4 u_ViewProjection;
-			uniform mat4 u_Transform;
-
-			out vec2 v_TexCoord;
-
-			void main()
-			{
-				v_TexCoord = a_TexCoord;
-				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
-			}
-		)";
-
-		// Fragment shader source for textured object
-		std::string textureShaderFragmentSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) out vec4 color;
-
-			in vec2 v_TexCoord;
-			
-			uniform sampler2D u_Texture;
-
-			void main()
-			{
-				color = texture(u_Texture, v_TexCoord);
-			}
-		)";
-
 		// Create new shader from sources for texture object shader
-		m_TextureShader.reset(PixelBrahma::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+		m_TextureShader.reset(PixelBrahma::Shader::Create("Assets/Shaders/Texture.glsl"));
 
 		// Create 2D textures from asset PNG image in file path
 		m_Texture = PixelBrahma::Texture2D::Create("Assets/Textures/CheckerBoard.png");
