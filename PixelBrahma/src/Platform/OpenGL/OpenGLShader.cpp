@@ -30,9 +30,18 @@ namespace PixelBrahma
 
 		// Compile individual shaders
 		Compile(shaderSources);
+
+		// Extract the name from filepath
+
+		auto lastSlash = filepath.find_last_of("/\\");
+		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+		auto lastDot = filepath.rfind('.');
+		auto count = lastDot == std::string::npos ? filepath.size() - lastSlash : lastDot - lastSlash;
+		m_Name = filepath.substr(lastSlash, count);
 	}
 
-	OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
+	OpenGLShader::OpenGLShader(const std::string& name, 
+		const std::string& vertexSrc, const std::string& fragmentSrc) : m_Name(name)
 	{
 		// Set each shader sources to the corresponding shader type key in the map
 		std::unordered_map<GLenum, std::string> shaderSources;
@@ -54,7 +63,7 @@ namespace PixelBrahma
 		std::string result;
 
 		// Open input binary file stream 
-		std::ifstream in(filepath, std::ios::in, std::ios::binary);
+		std::ifstream in(filepath, std::ios::in | std::ios::binary);
 
 		if (in)
 		{
@@ -112,9 +121,14 @@ namespace PixelBrahma
 	// Compile shaders function
 	void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
-		// Create program and vector to store shader ID's
+		// Create program
 		GLuint program = glCreateProgram();
-		std::vector<GLenum> glShaderIDs(shaderSources.size());
+	
+		PB_CORE_ASSERT(shaderSources.size() <= 2, "Only two shaders are supported!");
+
+		// Create an array of shader ID's
+		std::array<GLenum, 2> glShaderIDs;
+		int glShaderIDIndex = 0;
 
 		//// Shaders compilation ////
 
@@ -166,7 +180,7 @@ namespace PixelBrahma
 
 			// Attach shader to the program and add shader ID's for cleanup
 			glAttachShader(program, shader);
-			glShaderIDs.push_back(shader);
+			glShaderIDs[glShaderIDIndex++] = shader;
 		}
 
 		//// Program Linking ////

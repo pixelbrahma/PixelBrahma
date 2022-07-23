@@ -122,7 +122,7 @@ public:
 		)";
 
 		// Create new shader pointer from vertex and fragment shader sources for triangle
-		m_Shader.reset(PixelBrahma::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = PixelBrahma::Shader::Create("VertexPosColor", vertexSrc, fragmentSrc);
 
 		//// Shaders for square ////
 
@@ -161,18 +161,19 @@ public:
 		)";
 
 		// Create new shader pointer from vertex and fragment shader sources for square
-		m_FlatColorShader.reset(PixelBrahma::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+		m_FlatColorShader = PixelBrahma::Shader::Create("FlatColor", 
+			flatColorShaderVertexSrc, flatColorShaderFragmentSrc);
 
 		// Create new shader from sources for texture object shader
-		m_TextureShader.reset(PixelBrahma::Shader::Create("Assets/Shaders/Texture.glsl"));
+		auto textureShader = m_ShaderLibrary.Load("Assets/Shaders/Texture.glsl");
 
 		// Create 2D textures from asset PNG image in file path
 		m_Texture = PixelBrahma::Texture2D::Create("Assets/Textures/CheckerBoard.png");
 		m_LogoTexture = PixelBrahma::Texture2D::Create("Assets/Textures/Logo.png");
 
 		// Bind and set shader uniforms for the textured objects
-		std::dynamic_pointer_cast<PixelBrahma::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<PixelBrahma::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<PixelBrahma::OpenGLShader>(textureShader)->Bind();
+		std::dynamic_pointer_cast<PixelBrahma::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	// Update function override for the layer
@@ -230,13 +231,15 @@ public:
 				PixelBrahma::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 			}
 
+		auto textureShader = m_ShaderLibrary.Get("Texture");
+
 		// Bind texture and submit to the render queue
 		m_Texture->Bind();
-		PixelBrahma::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		PixelBrahma::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		// Bind logo and submit to the render queue
 		m_LogoTexture->Bind();
-		PixelBrahma::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		PixelBrahma::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		// Submit triangle object to the render queue
 		//PixelBrahma::Renderer::Submit(m_Shader, m_VertexArray);
@@ -260,6 +263,9 @@ public:
 
 	private:
 
+		// Shader library
+		PixelBrahma::ShaderLibrary m_ShaderLibrary;
+
 		// Triangle object
 		PixelBrahma::Ref<PixelBrahma::Shader> m_Shader;
 		PixelBrahma::Ref<PixelBrahma::VertexArray> m_VertexArray;
@@ -268,8 +274,7 @@ public:
 		PixelBrahma::Ref<PixelBrahma::Shader> m_FlatColorShader;
 		PixelBrahma::Ref<PixelBrahma::VertexArray> m_SquareVA;
 
-		// Textured object
-		PixelBrahma::Ref<PixelBrahma::Shader> m_TextureShader;
+		// Checkerboard texture
 		PixelBrahma::Ref<PixelBrahma::Texture2D> m_Texture;
 		
 		// Logo
