@@ -8,6 +8,12 @@ namespace PixelBrahma
 	// Set static scene data pointer
 	Renderer::SceneData* Renderer::s_SceneData = new Renderer::SceneData;
 
+	// Initialize renderer function
+	void Renderer::Init()
+	{
+		RenderCommand::Init();
+	}
+
 	// Begin scene description
 	void Renderer::BeginScene(OrthographicCamera& camera) 
 	{

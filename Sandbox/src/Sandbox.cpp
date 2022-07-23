@@ -201,8 +201,9 @@ public:
 		// Create new shader from sources for texture object shader
 		m_TextureShader.reset(PixelBrahma::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
 
-		// Create 2D texture from asset PNG image in file path
+		// Create 2D textures from asset PNG image in file path
 		m_Texture = PixelBrahma::Texture2D::Create("Assets/Textures/CheckerBoard.png");
+		m_LogoTexture = PixelBrahma::Texture2D::Create("Assets/Textures/Logo.png");
 
 		// Bind and set shader uniforms for the textured objects
 		std::dynamic_pointer_cast<PixelBrahma::OpenGLShader>(m_TextureShader)->Bind();
@@ -268,6 +269,10 @@ public:
 		m_Texture->Bind();
 		PixelBrahma::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
+		// Bind logo and submit to the render queue
+		m_LogoTexture->Bind();
+		PixelBrahma::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
 		// Submit triangle object to the render queue
 		//PixelBrahma::Renderer::Submit(m_Shader, m_VertexArray);
 
@@ -301,6 +306,9 @@ public:
 		// Textured object
 		PixelBrahma::Ref<PixelBrahma::Shader> m_TextureShader;
 		PixelBrahma::Ref<PixelBrahma::Texture2D> m_Texture;
+		
+		// Logo
+		PixelBrahma::Ref<PixelBrahma::Texture2D> m_LogoTexture;
 
 		// Camera object
 		PixelBrahma::OrthographicCamera m_Camera;

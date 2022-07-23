@@ -9,6 +9,12 @@ namespace PixelBrahma
 	{
 	public:
 
+		// Ststic renderer initialize function
+		inline static void Init()
+		{
+			s_RendererAPI->Init();
+		}
+
 		//// Static clear commands ////
 
 		// Set the color to clear the screen with

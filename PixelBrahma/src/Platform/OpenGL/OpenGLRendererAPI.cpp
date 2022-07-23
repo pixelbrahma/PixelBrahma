@@ -5,6 +5,14 @@
 
 namespace PixelBrahma
 {
+	// Initialize renderer function
+	void OpenGLRendererAPI::Init()
+	{
+		// Enable blending and setup blending function
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+
 	// Set the color to clear the screen with
 	void OpenGLRendererAPI::SetClearColor(const glm::vec4& color)
 	{

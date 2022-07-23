@@ -8,6 +8,9 @@ namespace PixelBrahma
 	{
 	public:
 
+		// Initialize renderer function override
+		virtual void Init() override;
+
 		// Clear functions override
 
 		virtual void SetClearColor(const glm::vec4& color) override;

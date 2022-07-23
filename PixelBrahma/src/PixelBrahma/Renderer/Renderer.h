@@ -10,6 +10,9 @@ namespace PixelBrahma
 	class Renderer
 	{
 	public:
+
+		// Static initialize function
+		static void Init();
 		
 		// Static render queue commands
 
