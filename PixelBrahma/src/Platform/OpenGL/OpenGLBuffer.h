@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PixelBrahma/Renderer/Buffer.h"
+#include "PixelBrahma/Renderer/Geometry/Buffer.h"
 
 namespace PixelBrahma
 {

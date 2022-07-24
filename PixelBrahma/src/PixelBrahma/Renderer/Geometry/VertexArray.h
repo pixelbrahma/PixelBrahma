@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 
-#include "PixelBrahma/Renderer/Buffer.h"
+#include "PixelBrahma/Renderer/Geometry/Buffer.h"
 
 namespace PixelBrahma
 {

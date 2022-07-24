@@ -29,10 +29,10 @@
 #include "PixelBrahma/Renderer/RenderCommand.h"
 
 // Render objects
-#include "PixelBrahma/Renderer/VertexArray.h"
-#include "PixelBrahma/Renderer/Buffer.h"
-#include "PixelBrahma/Renderer/Shader.h"
-#include "PixelBrahma/Renderer/Texture.h"
+#include "PixelBrahma/Renderer/Geometry/VertexArray.h"
+#include "PixelBrahma/Renderer/Geometry/Buffer.h"
+#include "PixelBrahma/Renderer/Shading/Shader.h"
+#include "PixelBrahma/Renderer/Shading/Texture.h"
 
 // Camera
 #include "PixelBrahma/Renderer/Camera/OrthographicCamera.h"

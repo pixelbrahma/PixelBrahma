@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PixelBrahma/Renderer/VertexArray.h"
+#include "PixelBrahma/Renderer/Geometry/VertexArray.h"
 
 namespace PixelBrahma
 {

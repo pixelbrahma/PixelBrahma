@@ -1,13 +1,13 @@
 #include "pbpch.h"
-#include "Texture.h"
+#include "VertexArray.h"
 
-#include "Renderer.h"
-#include "Platform/OpenGL/OpenGLTexture.h"
+#include "PixelBrahma/Renderer/Renderer.h"
+#include "Platform/OpenGL/OpenGLVertexArray.h"
 
 namespace PixelBrahma
 {
-	// Create texture 2D function
-	Ref<Texture2D> Texture2D::Create(const std::string& path)
+	// Create vertex array
+	VertexArray* VertexArray::Create()
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -16,7 +16,7 @@ namespace PixelBrahma
 				return nullptr;
 
 			case RendererAPI::API::OpenGL:
-				return std::make_shared<OpenGLTexture2D>(path);
+				return new OpenGLVertexArray();
 		}
 
 		PB_CORE_ASSERT(false, "Unknown RendererAPI!");

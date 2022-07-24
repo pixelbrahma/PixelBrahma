@@ -2,7 +2,7 @@
 
 #include "RenderCommand.h"
 #include "Camera/OrthographicCamera.h"
-#include "Shader.h"
+#include "PixelBrahma/Renderer/Shading/Shader.h"
 
 namespace PixelBrahma
 {

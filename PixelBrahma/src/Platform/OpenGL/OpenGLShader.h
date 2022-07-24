@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PixelBrahma/Renderer/Shader.h"
+#include "PixelBrahma/Renderer/Shading/Shader.h"
 #include "glm/glm.hpp"
 
 // Temporary until OpenGL is abstracted from sandbox - Used for dynamic casting right now

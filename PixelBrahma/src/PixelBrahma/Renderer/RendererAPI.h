@@ -2,7 +2,7 @@
 
 #include "glm/glm.hpp"
 
-#include "VertexArray.h"
+#include "PixelBrahma/Renderer/Geometry/VertexArray.h"
 
 namespace PixelBrahma
 {

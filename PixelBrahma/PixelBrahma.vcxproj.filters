@@ -58,6 +58,12 @@
     <Filter Include="src\PixelBrahma\Renderer\Camera">
       <UniqueIdentifier>{E78C3D79-5370-4CB9-5C73-7AF5C8D5120A}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\PixelBrahma\Renderer\Geometry">
+      <UniqueIdentifier>{8AFDF8A8-F66B-4E28-3F55-0928AB0244C4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\PixelBrahma\Renderer\Shading">
+      <UniqueIdentifier>{9C3B0D80-888C-F8C1-B1F0-E6839DA08B2B}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
     </Filter>
@@ -1365,14 +1371,17 @@
     <ClInclude Include="src\PixelBrahma\Log\Log.h">
       <Filter>src\PixelBrahma\Log</Filter>
     </ClInclude>
-    <ClInclude Include="src\PixelBrahma\Renderer\Buffer.h">
-      <Filter>src\PixelBrahma\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="src\PixelBrahma\Renderer\Camera\OrthographicCamera.h">
       <Filter>src\PixelBrahma\Renderer\Camera</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Renderer\Camera\OrthographicCameraController.h">
       <Filter>src\PixelBrahma\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Renderer\Geometry\Buffer.h">
+      <Filter>src\PixelBrahma\Renderer\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Renderer\Geometry\VertexArray.h">
+      <Filter>src\PixelBrahma\Renderer\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Renderer\GraphicsContext.h">
       <Filter>src\PixelBrahma\Renderer</Filter>
@@ -1386,14 +1395,11 @@
     <ClInclude Include="src\PixelBrahma\Renderer\RendererAPI.h">
       <Filter>src\PixelBrahma\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\PixelBrahma\Renderer\Shader.h">
-      <Filter>src\PixelBrahma\Renderer</Filter>
+    <ClInclude Include="src\PixelBrahma\Renderer\Shading\Shader.h">
+      <Filter>src\PixelBrahma\Renderer\Shading</Filter>
     </ClInclude>
-    <ClInclude Include="src\PixelBrahma\Renderer\Texture.h">
-      <Filter>src\PixelBrahma\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\PixelBrahma\Renderer\VertexArray.h">
-      <Filter>src\PixelBrahma\Renderer</Filter>
+    <ClInclude Include="src\PixelBrahma\Renderer\Shading\Texture.h">
+      <Filter>src\PixelBrahma\Renderer\Shading</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Window.h">
       <Filter>src\PixelBrahma</Filter>
@@ -1448,14 +1454,17 @@
     <ClCompile Include="src\PixelBrahma\Log\Log.cpp">
       <Filter>src\PixelBrahma\Log</Filter>
     </ClCompile>
-    <ClCompile Include="src\PixelBrahma\Renderer\Buffer.cpp">
-      <Filter>src\PixelBrahma\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="src\PixelBrahma\Renderer\Camera\OrthographicCamera.cpp">
       <Filter>src\PixelBrahma\Renderer\Camera</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Renderer\Camera\OrthographicCameraController.cpp">
       <Filter>src\PixelBrahma\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Renderer\Geometry\Buffer.cpp">
+      <Filter>src\PixelBrahma\Renderer\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Renderer\Geometry\VertexArray.cpp">
+      <Filter>src\PixelBrahma\Renderer\Geometry</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Renderer\RenderCommand.cpp">
       <Filter>src\PixelBrahma\Renderer</Filter>
@@ -1466,14 +1475,11 @@
     <ClCompile Include="src\PixelBrahma\Renderer\RendererAPI.cpp">
       <Filter>src\PixelBrahma\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\PixelBrahma\Renderer\Shader.cpp">
-      <Filter>src\PixelBrahma\Renderer</Filter>
+    <ClCompile Include="src\PixelBrahma\Renderer\Shading\Shader.cpp">
+      <Filter>src\PixelBrahma\Renderer\Shading</Filter>
     </ClCompile>
-    <ClCompile Include="src\PixelBrahma\Renderer\Texture.cpp">
-      <Filter>src\PixelBrahma\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\PixelBrahma\Renderer\VertexArray.cpp">
-      <Filter>src\PixelBrahma\Renderer</Filter>
+    <ClCompile Include="src\PixelBrahma\Renderer\Shading\Texture.cpp">
+      <Filter>src\PixelBrahma\Renderer\Shading</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>
