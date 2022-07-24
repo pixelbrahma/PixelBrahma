@@ -11,7 +11,7 @@
 class ExampleLayer : public PixelBrahma::Layer
 {
 public:
-	ExampleLayer() : Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f)
+	ExampleLayer() : Layer("Example"), m_CameraController(1280.f / 720.f)
 	{
 		// Create vertex array
 		m_VertexArray.reset(PixelBrahma::VertexArray::Create());
@@ -179,35 +179,15 @@ public:
 	// Update function override for the layer
 	void OnUpdate(PixelBrahma::Timestep timestep) override
 	{ 
-		// Movement keys
-
-		if (PixelBrahma::Input::IsKeyPressed(PB_KEY_LEFT))
-			m_CameraPosition.x -= m_CameraMoveSpeed * timestep;
-		if (PixelBrahma::Input::IsKeyPressed(PB_KEY_RIGHT))
-			m_CameraPosition.x += m_CameraMoveSpeed * timestep;
-
-		if (PixelBrahma::Input::IsKeyPressed(PB_KEY_UP))
-			m_CameraPosition.y += m_CameraMoveSpeed * timestep;
-		if (PixelBrahma::Input::IsKeyPressed(PB_KEY_DOWN))
-			m_CameraPosition.y -= m_CameraMoveSpeed * timestep;
-
-		// Rotation keys
-
-		if (PixelBrahma::Input::IsKeyPressed(PB_KEY_A))
-			m_CameraRotation += m_CameraRotationSpeed * timestep;
-		if (PixelBrahma::Input::IsKeyPressed(PB_KEY_D))
-			m_CameraRotation -= m_CameraRotationSpeed * timestep;
+		// Call camera update function
+		m_CameraController.OnUpdate(timestep);
 
 		// Clear the color buffer
 		PixelBrahma::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		PixelBrahma::RenderCommand::Clear();
 
-		// Set camera transforms
-		m_Camera.SetPosition(m_CameraPosition);
-		m_Camera.SetRotation(m_CameraRotation);
-
 		// Start rendering the scene
-		PixelBrahma::Renderer::BeginScene(m_Camera);
+		PixelBrahma::Renderer::BeginScene(m_CameraController.GetCamera());
 
 		// Scale matrix
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
@@ -259,7 +239,11 @@ public:
 	}
 
 	// Event function override for the layer
-	void OnEvent(PixelBrahma::Event& event) override {}
+	void OnEvent(PixelBrahma::Event& event) override 
+	{
+		// Call the camera event handling function
+		m_CameraController.OnEvent(event);
+	}
 
 	private:
 
@@ -280,16 +264,8 @@ public:
 		// Logo
 		PixelBrahma::Ref<PixelBrahma::Texture2D> m_LogoTexture;
 
-		// Camera object
-		PixelBrahma::OrthographicCamera m_Camera;
-
-		// Transform properties
-		glm::vec3 m_CameraPosition;
-		float m_CameraRotation = 0.0f;
-		
-		// Movement and rotation speed
-		float m_CameraMoveSpeed = 5.0f;
-		float m_CameraRotationSpeed = 108.0f;
+		// Camera controller object
+		PixelBrahma::OrthographicCameraController m_CameraController;
 
 		glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 };

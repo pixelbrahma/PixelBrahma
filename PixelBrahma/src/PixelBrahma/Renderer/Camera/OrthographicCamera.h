@@ -10,6 +10,9 @@ namespace PixelBrahma
 	public:
 		OrthographicCamera(float left, float right, float bottom, float top);
 
+		// Set camera projection
+		void SetProjection(float left, float right, float bottom, float top);
+
 		// Position getter and setter functions
 
 		const glm::vec3& GetPosition() const { return m_Position; }

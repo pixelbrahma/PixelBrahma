@@ -1371,6 +1371,9 @@
     <ClInclude Include="src\PixelBrahma\Renderer\Camera\OrthographicCamera.h">
       <Filter>src\PixelBrahma\Renderer\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Renderer\Camera\OrthographicCameraController.h">
+      <Filter>src\PixelBrahma\Renderer\Camera</Filter>
+    </ClInclude>
     <ClInclude Include="src\PixelBrahma\Renderer\GraphicsContext.h">
       <Filter>src\PixelBrahma\Renderer</Filter>
     </ClInclude>
@@ -1449,6 +1452,9 @@
       <Filter>src\PixelBrahma\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Renderer\Camera\OrthographicCamera.cpp">
+      <Filter>src\PixelBrahma\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Renderer\Camera\OrthographicCameraController.cpp">
       <Filter>src\PixelBrahma\Renderer\Camera</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Renderer\RenderCommand.cpp">
