@@ -559,7 +559,7 @@
     <ClInclude Include="src\PixelBrahma.h" />
     <ClInclude Include="src\PixelBrahma\Application\Application.h" />
     <ClInclude Include="src\PixelBrahma\Application\EntryPoint.h" />
-    <ClInclude Include="src\PixelBrahma\Core.h" />
+    <ClInclude Include="src\PixelBrahma\Core\Core.h" />
     <ClInclude Include="src\PixelBrahma\Core\Timestep.h" />
     <ClInclude Include="src\PixelBrahma\Events\ApplicationEvent.h" />
     <ClInclude Include="src\PixelBrahma\Events\Event.h" />
@@ -582,7 +582,7 @@
     <ClInclude Include="src\PixelBrahma\Renderer\RendererAPI.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Shading\Shader.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Shading\Texture.h" />
-    <ClInclude Include="src\PixelBrahma\Window.h" />
+    <ClInclude Include="src\PixelBrahma\Core\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />

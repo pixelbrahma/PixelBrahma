@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PixelBrahma/Window.h"
+#include "PixelBrahma/Core/Window.h"
 #include "PixelBrahma/Renderer/GraphicsContext.h"
 
 #include "GLFW/glfw3.h"

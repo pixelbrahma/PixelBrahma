@@ -1332,7 +1332,7 @@
     <ClInclude Include="src\PixelBrahma\Application\EntryPoint.h">
       <Filter>src\PixelBrahma\Application</Filter>
     </ClInclude>
-    <ClInclude Include="src\PixelBrahma\Core.h">
+    <ClInclude Include="src\PixelBrahma\Core\Core.h">
       <Filter>src\PixelBrahma</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Core\Timestep.h">
@@ -1401,7 +1401,7 @@
     <ClInclude Include="src\PixelBrahma\Renderer\Shading\Texture.h">
       <Filter>src\PixelBrahma\Renderer\Shading</Filter>
     </ClInclude>
-    <ClInclude Include="src\PixelBrahma\Window.h">
+    <ClInclude Include="src\PixelBrahma\Core\Window.h">
       <Filter>src\PixelBrahma</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">

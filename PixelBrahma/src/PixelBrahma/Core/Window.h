@@ -2,7 +2,7 @@
 
 #include "pbpch.h"
 
-#include "PixelBrahma/Core.h"
+#include "PixelBrahma/Core/Core.h"
 #include "PixelBrahma/Events/Event.h"
 
 namespace PixelBrahma

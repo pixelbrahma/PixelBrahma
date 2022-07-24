@@ -1,7 +1,7 @@
 #pragma once
 
 #include "pbpch.h"
-#include "PixelBrahma/Core.h"
+#include "PixelBrahma/Core/Core.h"
 
 // Events are blocking events
 // Immediately dispatched and must be dealt with immediately

@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "PixelBrahma/Core.h"
+#include "PixelBrahma/Core/Core.h"
 
 namespace PixelBrahma
 {

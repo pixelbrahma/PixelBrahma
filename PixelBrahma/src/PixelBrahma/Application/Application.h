@@ -1,7 +1,7 @@
 #pragma once
 
-#include "PixelBrahma/Core.h"
-#include "PixelBrahma/Window.h"
+#include "PixelBrahma/Core/Core.h"
+#include "PixelBrahma/Core/Window.h"
 
 #include "PixelBrahma/Layers/LayerStack.h"
 
