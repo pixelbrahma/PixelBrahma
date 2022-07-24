@@ -22,6 +22,11 @@ namespace PixelBrahma
 		OrthographicCamera& GetCamera() { return m_Camera; }
 		const OrthographicCamera& GetCamera() const { return m_Camera; }
 
+		// Zoom level setter and getter functions
+
+		float GetZoomLevel() const { return m_ZoomLevel; }
+		void SetZoomLevel(float zoomLevel) { m_ZoomLevel = zoomLevel; }
+
 	private:
 
 		// Event handler functions

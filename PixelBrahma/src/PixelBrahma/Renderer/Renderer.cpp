@@ -14,6 +14,13 @@ namespace PixelBrahma
 		RenderCommand::Init();
 	}
 
+	// Window resize event handler
+	void Renderer::OnWindowResize(uint32_t width, uint32_t height)
+	{
+		// Set viewport size to match the resized window
+		RenderCommand::SetViewport(0, 0, width, height);
+	}
+
 	// Begin scene description
 	void Renderer::BeginScene(OrthographicCamera& camera) 
 	{

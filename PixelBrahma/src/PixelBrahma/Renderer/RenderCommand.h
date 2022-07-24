@@ -15,6 +15,12 @@ namespace PixelBrahma
 			s_RendererAPI->Init();
 		}
 
+		// Set viewport size and position
+		inline static void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
+		{
+			s_RendererAPI->SetViewport(x, y, width, height);
+		}
+
 		//// Static clear commands ////
 
 		// Set the color to clear the screen with

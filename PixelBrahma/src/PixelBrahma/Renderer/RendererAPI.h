@@ -21,6 +21,9 @@ namespace PixelBrahma
 		// Virtual renderer initialize function
 		virtual void Init() = 0;
 
+		// Set viewport size and position
+		virtual void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) = 0;
+
 		// Clear functions
 
 		virtual void SetClearColor(const glm::vec4& color) = 0;

@@ -41,19 +41,20 @@ namespace PixelBrahma
 	void Application::PushOverlay(Layer* overlay) { m_LayerStack.PushOverlay(overlay); }
 
 	// Event callback function
-	void Application::OnEvent(Event& e)
+	void Application::OnEvent(Event& event)
 	{
-		// Create the event dispatcher and bind it to the OnWindowClose function based on event type
-		EventDispatcher dispatcher(e);
+		// Create the event dispatcher and bind it to the event handler functions based on event type
+		EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
 
 		// Iterate from the back of the layer stack
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
 		{
-			(*--it)->OnEvent(e);
+			(*--it)->OnEvent(event);
 
 			// If event is handled, break out of the loop and dont send the event to the lower layers
-			if (e.Handled)
+			if (event.Handled)
 				break;
 		}
 	}
@@ -70,9 +71,12 @@ namespace PixelBrahma
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
-			// Update each layer in order
-			for (Layer* layer : m_LayerStack)
-				layer->OnUpdate(timestep);
+			if (!m_Minimized)
+			{
+				// Update each layer in order
+				for (Layer* layer : m_LayerStack)
+					layer->OnUpdate(timestep);
+			}
 
 			// ImGui layer run functionality
 
@@ -88,10 +92,27 @@ namespace PixelBrahma
 		}
 	}
 
-	// Window close event function
-	bool Application::OnWindowClose(WindowCloseEvent& e)
+	// Window close event handler
+	bool Application::OnWindowClose(WindowCloseEvent& event)
 	{
 		m_Running = false;
 		return true;
+	}
+
+	// Window resize event handler
+	bool Application::OnWindowResize(WindowResizeEvent& event)
+	{
+		if (event.GetWidth() == 0 || event.GetHeight() == 0)
+		{
+			m_Minimized = true;
+			return false;
+		}
+
+		m_Minimized = false;
+		
+		// Call renderer window resize event handler
+		Renderer::OnWindowResize(event.GetWidth(), event.GetHeight());
+
+		return false;
 	}
 }
