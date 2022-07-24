@@ -11,7 +11,7 @@
 class ExampleLayer : public PixelBrahma::Layer
 {
 public:
-	ExampleLayer() : Layer("Example"), m_CameraController(1280.f / 720.f)
+	ExampleLayer() : Layer("Example"), m_CameraController(1280.f / 720.f, true)
 	{
 		// Create vertex array
 		m_VertexArray.reset(PixelBrahma::VertexArray::Create());

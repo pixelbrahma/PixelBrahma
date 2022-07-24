@@ -1333,9 +1333,12 @@
       <Filter>src\PixelBrahma\Application</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Core\Core.h">
-      <Filter>src\PixelBrahma</Filter>
+      <Filter>src\PixelBrahma\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Core\Timestep.h">
+      <Filter>src\PixelBrahma\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Core\Window.h">
       <Filter>src\PixelBrahma\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Events\ApplicationEvent.h">
@@ -1400,9 +1403,6 @@
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Renderer\Shading\Texture.h">
       <Filter>src\PixelBrahma\Renderer\Shading</Filter>
-    </ClInclude>
-    <ClInclude Include="src\PixelBrahma\Core\Window.h">
-      <Filter>src\PixelBrahma</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>

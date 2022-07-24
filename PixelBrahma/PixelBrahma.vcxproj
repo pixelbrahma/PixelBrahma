@@ -80,7 +80,9 @@
       <AdditionalIncludeDirectories>src;ThirdParty\spdlog\include;ThirdParty\GLFW\include;ThirdParty\Glad\include;ThirdParty\ImGui;ThirdParty\glm;ThirdParty\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -104,6 +106,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -128,6 +131,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -561,6 +565,7 @@
     <ClInclude Include="src\PixelBrahma\Application\EntryPoint.h" />
     <ClInclude Include="src\PixelBrahma\Core\Core.h" />
     <ClInclude Include="src\PixelBrahma\Core\Timestep.h" />
+    <ClInclude Include="src\PixelBrahma\Core\Window.h" />
     <ClInclude Include="src\PixelBrahma\Events\ApplicationEvent.h" />
     <ClInclude Include="src\PixelBrahma\Events\Event.h" />
     <ClInclude Include="src\PixelBrahma\Events\KeyEvent.h" />
@@ -582,7 +587,6 @@
     <ClInclude Include="src\PixelBrahma\Renderer\RendererAPI.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Shading\Shader.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Shading\Texture.h" />
-    <ClInclude Include="src\PixelBrahma\Core\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />

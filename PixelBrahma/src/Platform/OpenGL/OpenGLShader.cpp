@@ -93,26 +93,29 @@ namespace PixelBrahma
 		const char* typeToken = "#type";
 		size_t typeTokenLength = strlen(typeToken);
 
-		// Find type token in source
+		// Find type token in source - Start of shader type declaration line
 		size_t pos = source.find(typeToken, 0);
 
 		while (pos != std::string::npos)
 		{
-			// Find end of line 
+			// Find end of line - End of shader type declaration line
 			size_t eol = source.find_first_of("\r\n", pos);
 			PB_CORE_ASSERT(eol != std::string::npos, "Syntax error!");
 
-			// Extract shader type and assert as a supported type
+			// Extract shader type and assert as a supported type - Start of shader type name
 			size_t begin = pos + typeTokenLength + 1;
 			std::string type = source.substr(begin, eol - begin);
 			PB_CORE_ASSERT(ShaderTypeFromString(type), "Invalid shader type specified!");
 
 			// Extract shader source
+			// Start of shader code after shader type declaration line
 			size_t nextLinePos = source.find_first_not_of("\r\n", eol);
+			PB_CORE_ASSERT(nextLinePos != std::string::npos, "Syntax Error!");
+
+			// Start of next shader type declaration line
 			pos = source.find(typeToken, nextLinePos);
-			shaderSources[ShaderTypeFromString(type)] =
-				source.substr(nextLinePos, pos - (nextLinePos == std::string::npos ? source.size() - 1 :
-					nextLinePos));
+			shaderSources[ShaderTypeFromString(type)] = (pos == std::string::npos) ? 
+				source.substr(nextLinePos) : source.substr(nextLinePos, pos - nextLinePos);
 		}
 
 		return shaderSources;
@@ -223,7 +226,10 @@ namespace PixelBrahma
 
 		// Detach shaders after successful compilation
 		for (auto id : glShaderIDs)
+		{
 			glDetachShader(program, id);
+			glDeleteShader(id);
+		}
 	}
 
 	// Bind the shader and use shader program

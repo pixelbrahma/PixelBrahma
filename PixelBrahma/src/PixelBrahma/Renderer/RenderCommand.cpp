@@ -6,5 +6,5 @@
 namespace PixelBrahma
 {
 	// Set static renderer API to OpenGL renderer API
-	RendererAPI* RenderCommand::s_RendererAPI = new OpenGLRendererAPI;
+	Scope<RendererAPI> RenderCommand::s_RendererAPI = CreateScope<OpenGLRendererAPI>();
 }

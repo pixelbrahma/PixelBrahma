@@ -17,17 +17,29 @@ namespace PixelBrahma
 	// Camera update function
 	void OrthographicCameraController::OnUpdate(Timestep timestep)
 	{
-		// Translation movement
+		// Translation movement - Move along the required axis irrespective of camera rotation
 
 		if (Input::IsKeyPressed(PB_KEY_A))
-			m_CameraPosition.x -= m_CameraTranslationSpeed * timestep;
+		{
+			m_CameraPosition.x -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * timestep;
+			m_CameraPosition.y -= sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * timestep;
+		}
 		else if (Input::IsKeyPressed(PB_KEY_D))
-			m_CameraPosition.x += m_CameraTranslationSpeed * timestep;
+		{
+			m_CameraPosition.x += cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * timestep;
+			m_CameraPosition.y += sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * timestep;
+		}
 
 		if (Input::IsKeyPressed(PB_KEY_W))
-			m_CameraPosition.y += m_CameraTranslationSpeed * timestep;
+		{
+			m_CameraPosition.x += -sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * timestep;
+			m_CameraPosition.y += cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * timestep;
+		}
 		else if (Input::IsKeyPressed(PB_KEY_S))
-			m_CameraPosition.y -= m_CameraTranslationSpeed * timestep;
+		{
+			m_CameraPosition.x -= -sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * timestep;
+			m_CameraPosition.y -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * timestep;
+		}
 
 		// Rotation movement
 
@@ -37,6 +49,12 @@ namespace PixelBrahma
 				m_CameraRotation += m_CameraRotationSpeed * timestep;
 			else if (Input::IsKeyPressed(PB_KEY_E))
 				m_CameraRotation -= m_CameraRotationSpeed * timestep;
+
+			// Guard against camera flip
+			if (m_CameraRotation > 180.0f)
+				m_CameraRotation -= 360.0f;
+			else if (m_CameraRotation <= -180.0f)
+				m_CameraRotation += 360.0f;
 
 			m_Camera.SetRotation(m_CameraRotation);
 		}

@@ -9,6 +9,16 @@ namespace PixelBrahma
 	// Input manager interface
 	class PIXELBRAHMA_API Input
 	{
+
+		// Make Input class a true singleton
+
+	protected:
+		Input() = default;
+
+	public:
+		Input(const Input&) = delete;
+		Input& operator=(const Input&) = delete;
+
 	public:
 
 		// Static input state getter functions
@@ -30,6 +40,6 @@ namespace PixelBrahma
 		virtual float GetMouseYImpl() = 0;
 
 	private:
-		static Input* s_Instance;
+		static Scope<Input> s_Instance;
 	};
 }
