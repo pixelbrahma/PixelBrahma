@@ -1,5 +1,6 @@
 #include "pbpch.h"
 #include "Renderer.h"
+#include "Renderer2D.h"
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
@@ -12,6 +13,7 @@ namespace PixelBrahma
 	void Renderer::Init()
 	{
 		RenderCommand::Init();
+		Renderer2D::Init();
 	}
 
 	// Window resize event handler

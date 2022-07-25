@@ -26,6 +26,7 @@
 
 // Renderer
 #include "PixelBrahma/Renderer/Renderer.h"
+#include "PixelBrahma/Renderer/Renderer2D.h"
 #include "PixelBrahma/Renderer/RenderCommand.h"
 
 // Render objects
