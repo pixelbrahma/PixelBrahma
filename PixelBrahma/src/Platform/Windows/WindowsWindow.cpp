@@ -9,8 +9,8 @@
 
 namespace PixelBrahma
 {
-	// GLFW initialized flag - Even if multiple windows are created, GLFW needs to be initialized only once
-	static bool s_GLFWInitialized = false;
+	// GLFW initialized count - Even if multiple windows are created, GLFW needs to be initialized only once
+	static uint32_t s_GLFWWindowCount = 0;
 
 	// Callback function for GLFW errors
 	static void GLFWErrorCallback(int error, const char* description)
@@ -36,18 +36,20 @@ namespace PixelBrahma
 
 		PB_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
-		// Initialize GLFW 
+		// Initialize GLFW if no GLFW windows already exist
 
-		if (!s_GLFWInitialized)
+		if (s_GLFWWindowCount == 0)
 		{
+			PB_CORE_INFO("Initializing GLFW");
+
 			int success = glfwInit();
 			PB_CORE_ASSERT(success, "Could not initialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback);
-			s_GLFWInitialized = true;
 		}
 
 		// Create GLFW window
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		++s_GLFWWindowCount;
 
 		// Create OpenGL context and initialize it
 		m_Context = CreateScope<OpenGLContext>(m_Window);
@@ -181,7 +183,17 @@ namespace PixelBrahma
 	}
 
 	// Window shutdown function
-	void WindowsWindow::Shutdown() { glfwDestroyWindow(m_Window); }
+	void WindowsWindow::Shutdown() 
+	{ 
+		glfwDestroyWindow(m_Window); 
+
+		// If no GLFW windows are open
+		if (--s_GLFWWindowCount == 0)
+		{
+			PB_CORE_INFO("Terminating GLFW");
+			glfwTerminate();
+		}
+	}
 
 	// Window update function
 	void WindowsWindow::OnUpdate()

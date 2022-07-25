@@ -82,7 +82,6 @@ project "PixelBrahma"
 
 		defines
 		{
-			"PB_PLATFORM_WINDOWS",
 			"PB_BUILD_DLL",
 			"GLFW_INCLUDE_NONE"
 		}
@@ -133,11 +132,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		systemversion "latest"
-
-		defines
-		{
-			"PB_PLATFORM_WINDOWS"
-		}
 
 	filter "configurations:Debug"
 		defines "PB_DEBUG"
