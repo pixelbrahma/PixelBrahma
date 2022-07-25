@@ -1,4 +1,5 @@
-#include <PixelBrahma.h>
+#include "PixelBrahma.h"
+#include "PixelBrahma/Application/EntryPoint.h"
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
@@ -7,6 +8,8 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
+#include "Sandbox2D.h"
+
 // Example of layer creation
 class ExampleLayer : public PixelBrahma::Layer
 {
@@ -14,7 +17,7 @@ public:
 	ExampleLayer() : Layer("Example"), m_CameraController(1280.f / 720.f, true)
 	{
 		// Create vertex array
-		m_VertexArray.reset(PixelBrahma::VertexArray::Create());
+		m_VertexArray = PixelBrahma::VertexArray::Create();
 
 		// Vertex attributes array
 		float vertices[3 * 7] =
@@ -49,7 +52,7 @@ public:
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		// Create square vertex array
-		m_SquareVA.reset(PixelBrahma::VertexArray::Create());
+		m_SquareVA = PixelBrahma::VertexArray::Create();
 
 		// Vertices array for the square
 		float squareVertices[5 * 4] = {
@@ -274,7 +277,11 @@ public:
 class Sandbox : public PixelBrahma::Application
 {
 public:
-	Sandbox() { PushLayer(new ExampleLayer()); }
+	Sandbox() 
+	{ 
+		//PushLayer(new ExampleLayer()); 
+		PushLayer(new Sandbox2D());
+	}
 	~Sandbox() {}
 };
 

@@ -30,6 +30,6 @@ namespace PixelBrahma
 
 		// Vertex array create functions
 
-		static VertexArray* Create();
+		static Ref<VertexArray> Create();
 	};
 }

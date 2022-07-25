@@ -37,6 +37,3 @@
 // Camera
 #include "PixelBrahma/Renderer/Camera/OrthographicCamera.h"
 #include "PixelBrahma/Renderer/Camera/OrthographicCameraController.h"
-
-// Entry Point
-#include "PixelBrahma/Application/EntryPoint.h"

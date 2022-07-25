@@ -7,7 +7,7 @@
 namespace PixelBrahma
 {
 	// Create vertex array
-	VertexArray* VertexArray::Create()
+	Ref<VertexArray> VertexArray::Create()
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -16,7 +16,7 @@ namespace PixelBrahma
 				return nullptr;
 
 			case RendererAPI::API::OpenGL:
-				return new OpenGLVertexArray();
+				return CreateRef<OpenGLVertexArray>();
 		}
 
 		PB_CORE_ASSERT(false, "Unknown RendererAPI!");
