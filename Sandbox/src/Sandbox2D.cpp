@@ -4,12 +4,14 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
-#include "Platform/OpenGL/OpenGLShader.h"
-
 Sandbox2D::Sandbox2D() : Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f, true) {}
 
 // Layer on attach function
-void Sandbox2D::OnAttach() {}
+void Sandbox2D::OnAttach() 
+{ 
+	// Load texture from file path
+	m_CheckerboardTexture = PixelBrahma::Texture2D::Create("Assets/Textures/CheckerBoard.png");
+}
 
 // Layer on detach function
 void Sandbox2D::OnDetach() {}
@@ -27,8 +29,10 @@ void Sandbox2D::OnUpdate(PixelBrahma::Timestep timestep)
 	// Start rendering the 2D scene
 	PixelBrahma::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-	// Draw a quad
-	PixelBrahma::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, { 0.8f, 0.2f, 0.3f, 1.0f });
+	// Draw quads
+	PixelBrahma::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
+	PixelBrahma::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.2f, 0.3f, 0.8f, 1.0f });
+	PixelBrahma::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 10.0f, 10.0f }, m_CheckerboardTexture);
 
 	// Stop rendering the scene
 	PixelBrahma::Renderer2D::EndScene();

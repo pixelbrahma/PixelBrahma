@@ -29,6 +29,7 @@ private:
 	// Temporary tests
 	PixelBrahma::Ref<PixelBrahma::VertexArray> m_SquareVA;
 	PixelBrahma::Ref<PixelBrahma::Shader> m_FlatColorShader;
+	PixelBrahma::Ref<PixelBrahma::Texture2D> m_CheckerboardTexture;
 
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 };

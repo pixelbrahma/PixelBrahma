@@ -11,6 +11,7 @@ namespace PixelBrahma
 		// Enable blending and setup blending function
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_DEPTH_TEST);
 	}
 
 	// Set viewport size and position function
