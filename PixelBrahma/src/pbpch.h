@@ -22,6 +22,9 @@
 
 #include "PixelBrahma/Log/Log.h"
 
+// Instrumentation
+#include "PixelBrahma/Debug/Instrumentor.h"
+
 #ifdef PB_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif

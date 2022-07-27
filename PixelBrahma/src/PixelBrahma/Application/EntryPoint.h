@@ -14,18 +14,21 @@ int main(int argc, char** argv)
 
 	// Initialaize logger
 	PixelBrahma::Log::Init();
-	int a = 5;
-	PB_CORE_WARN("Core");
-	PB_INFO("Client {0}", a);
 
+	PB_PROFILE_BEGIN_SESSION("Startup", "PBProfile-Startup.json");
 	// Call create application function defined in the client
 	auto application = PixelBrahma::CreateApplication();
+	PB_PROFILE_END_SESSION();
 
+	PB_PROFILE_BEGIN_SESSION("Runtime", "PBProfile-Runtime.json");
 	// Call the application run function
 	application->Run();
+	PB_PROFILE_END_SESSION();
 
+	PB_PROFILE_BEGIN_SESSION("Shutdown", "PBProfile-Shutdown.json");
 	// Delete application instance
 	delete application;
+	PB_PROFILE_END_SESSION();
 }
 
 #endif // PB_PLATFORM_WINDOWS
