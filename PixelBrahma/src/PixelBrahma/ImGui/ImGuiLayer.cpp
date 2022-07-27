@@ -108,11 +108,12 @@ namespace PixelBrahma
 			glfwMakeContextCurrent(backup_current_context);
 		}
 	}
-
+/*
 	// ImGui show function
 	void ImGuiLayer::OnImGuiRender()
 	{
 		static bool show = true;
 		ImGui::ShowDemoWindow(&show);
 	}
+*/
 }

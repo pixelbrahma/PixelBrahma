@@ -19,7 +19,8 @@ namespace PixelBrahma
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;
-		virtual void OnImGuiRender() override;
+		
+		//virtual void OnImGuiRender() override;
 
 		// ImGui layer begin and end functions - Begin and End ImGui rendering
 

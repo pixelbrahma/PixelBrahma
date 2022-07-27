@@ -71,13 +71,21 @@ namespace PixelBrahma
 			// Set cursor position to the end of the file
 			in.seekg(0, std::ios::end);
 
-			// Resize the file to the position of the cursor(number of characters) 
-			result.resize(in.tellg());
+			// Get the size of the file to the position of the cursor(number of characters)
+			size_t size = in.tellg();
 
-			// Set the cursor position to the beginning of the file, read file stream and close the file
-			in.seekg(0, std::ios::beg);
-			in.read(&result[0], result.size());
-			in.close();
+			if (size != -1)
+			{
+				// Resize the file to the position of the cursor(number of characters) 
+				result.resize(size);
+
+				// Set the cursor position to the beginning of the file, read file stream and close the file
+				in.seekg(0, std::ios::beg);
+				in.read(&result[0], size);
+				in.close();
+			}
+			else
+				PB_CORE_ERROR("Could not read from file '{0}'", filepath);
 		}
 		else
 			PB_CORE_ERROR("Could not open file '{0}'", filepath);
