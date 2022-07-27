@@ -14,6 +14,9 @@ namespace PixelBrahma
 
 	Application::Application()
 	{ 
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Set application instance
 		PB_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
@@ -32,19 +35,39 @@ namespace PixelBrahma
 
 	Application::~Application() 
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Close the renderer and release resources
 		Renderer::Shutdown();
 	}
 
 	// Add layer to the layer stack
-	void Application::PushLayer(Layer* layer) { m_LayerStack.PushLayer(layer); }
+	void Application::PushLayer(Layer* layer) 
+	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
+		m_LayerStack.PushLayer(layer); 
+		layer->OnAttach();
+	}
 
 	// Add overlay to the layer stack
-	void Application::PushOverlay(Layer* overlay) { m_LayerStack.PushOverlay(overlay); }
+	void Application::PushOverlay(Layer* overlay) 
+	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
+		m_LayerStack.PushOverlay(overlay); 
+		overlay->OnAttach();
+	}
 
 	// Event callback function
 	void Application::OnEvent(Event& event)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Create the event dispatcher and bind it to the event handler functions based on event type
 		EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<WindowCloseEvent>(PB_BIND_EVENT_FN(Application::OnWindowClose));
@@ -64,9 +87,15 @@ namespace PixelBrahma
 	// Application run function
 	void Application::Run()
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Application run loop
 		while (m_Running)
 		{
+			// Profiling
+			PB_PROFILE_SCOPE("RunLoop");
+
 			// Timestep calculation
 
 			float time = (float)glfwGetTime();
@@ -75,19 +104,29 @@ namespace PixelBrahma
 
 			if (!m_Minimized)
 			{
-				// Update each layer in order
-				for (Layer* layer : m_LayerStack)
-					layer->OnUpdate(timestep);
+				{
+					// Profiling
+					PB_PROFILE_SCOPE("LayerStack OnUpdate");
+
+					// Update each layer in order
+					for (Layer* layer : m_LayerStack)
+						layer->OnUpdate(timestep);
+				}
+
+				// ImGui layer run functionality
+
+				m_ImGuiLayer->Begin();
+
+				{
+					// Profiling
+					PB_PROFILE_SCOPE("LayerStack OnImGuiRender");
+
+					for (Layer* layer : m_LayerStack)
+						layer->OnImGuiRender();
+				}
+
+				m_ImGuiLayer->End();
 			}
-
-			// ImGui layer run functionality
-
-			m_ImGuiLayer->Begin();
-
-			for (Layer* layer : m_LayerStack)
-				layer->OnImGuiRender();
-
-			m_ImGuiLayer->End();
 
 			// Call the update function of the window
 			m_Window->OnUpdate();
@@ -104,6 +143,9 @@ namespace PixelBrahma
 	// Window resize event handler
 	bool Application::OnWindowResize(WindowResizeEvent& event)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		if (event.GetWidth() == 0 || event.GetHeight() == 0)
 		{
 			m_Minimized = true;

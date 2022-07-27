@@ -36,11 +36,17 @@ namespace PixelBrahma
 
 	OpenGLVertexArray::OpenGLVertexArray()
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		glCreateVertexArrays(1, &m_RendererID);
 	}
 
 	OpenGLVertexArray::~OpenGLVertexArray()
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		glDeleteVertexArrays(1, &m_RendererID);
 	}
 
@@ -48,17 +54,26 @@ namespace PixelBrahma
 
 	void OpenGLVertexArray::Bind() const
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		glBindVertexArray(m_RendererID);
 	}
 
 	void OpenGLVertexArray::UnBind() const
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		glBindVertexArray(0);
 	}
 
 	// Add vertex buffer
 	void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		PB_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex buffer has no layout!");
 
 		// Bind vertex array and buffer
@@ -87,6 +102,9 @@ namespace PixelBrahma
 	// Set the Index buffer
 	void OpenGLVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Bind vertex array and index buffer
 		glBindVertexArray(m_RendererID);
 		indexBuffer->Bind();

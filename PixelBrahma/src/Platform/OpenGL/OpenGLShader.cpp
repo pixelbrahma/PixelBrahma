@@ -23,6 +23,9 @@ namespace PixelBrahma
 
 	OpenGLShader::OpenGLShader(const std::string& filepath)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Read shader source file
 		std::string source = ReadFile(filepath);
 
@@ -44,6 +47,9 @@ namespace PixelBrahma
 	OpenGLShader::OpenGLShader(const std::string& name, 
 		const std::string& vertexSrc, const std::string& fragmentSrc) : m_Name(name)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Set each shader sources to the corresponding shader type key in the map
 		std::unordered_map<GLenum, std::string> shaderSources;
 		shaderSources[GL_VERTEX_SHADER] = vertexSrc;
@@ -55,12 +61,18 @@ namespace PixelBrahma
 
 	OpenGLShader::~OpenGLShader()
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		glDeleteProgram(m_RendererID);
 	}
 
 	// Read string from shader file
 	std::string OpenGLShader::ReadFile(const std::string& filepath)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		std::string result;
 
 		// Open input binary file stream 
@@ -96,6 +108,9 @@ namespace PixelBrahma
 	// Split shader source into separate shader types and map them correspondingly
 	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& source)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		std::unordered_map<GLenum, std::string> shaderSources;
 
 		// Token marking the beginning of a shader source
@@ -133,6 +148,9 @@ namespace PixelBrahma
 	// Compile shaders function
 	void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Create program
 		GLuint program = glCreateProgram();
 	
@@ -244,12 +262,18 @@ namespace PixelBrahma
 	// Bind the shader and use shader program
 	void OpenGLShader::Bind() const
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		glUseProgram(m_RendererID);
 	}
 
 	// Unbind the shader
 	void OpenGLShader::UnBind() const
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		glUseProgram(0);
 	}
 
@@ -257,21 +281,33 @@ namespace PixelBrahma
 
 	void OpenGLShader::SetInt(const std::string& name, int value)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		UploadUniformInt(name, value);
 	}
 
 	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		UploadUniformFloat3(name, value);
 	}
 
 	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		UploadUniformFloat4(name, value);
 	}
 
 	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		UploadUniformMat4(name, value);
 	}
 

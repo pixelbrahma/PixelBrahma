@@ -15,6 +15,9 @@ namespace PixelBrahma
 	// Initialize OpenGL context
 	void OpenGLContext::Init()
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Set window context
 		glfwMakeContextCurrent(m_WindowHandle);
 
@@ -42,6 +45,9 @@ namespace PixelBrahma
 	// Swap OpenGL graphics bufffers
 	void OpenGLContext::SwapBuffers()
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		glfwSwapBuffers(m_WindowHandle);
 	}
 }

@@ -17,6 +17,9 @@ namespace PixelBrahma
 	// Camera update function
 	void OrthographicCameraController::OnUpdate(Timestep timestep)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Translation movement - Move along the required axis irrespective of camera rotation
 
 		if (Input::IsKeyPressed(PB_KEY_A))
@@ -68,6 +71,9 @@ namespace PixelBrahma
 	// Event handling function
 	void OrthographicCameraController::OnEvent(Event& event)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Dispatch the event with the event dispatcher
 		EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<MouseScrolledEvent>(PB_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
@@ -77,6 +83,9 @@ namespace PixelBrahma
 	// Mouse scrolled event handling
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& event)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Set zoom level
 		m_ZoomLevel -= event.GetYOffset() * 0.25f;
 
@@ -92,6 +101,9 @@ namespace PixelBrahma
 	// Window resize event handling
 	bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& event)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Set aspect ratio
 		m_AspectRatio = (float)event.GetWidth() / (float)event.GetHeight();
 		

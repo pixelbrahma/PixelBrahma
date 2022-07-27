@@ -18,6 +18,9 @@ namespace PixelBrahma
 	// Functionality when the layer is added to the layer stack
 	void ImGuiLayer::OnAttach()
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// ImGui context and style
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
@@ -69,6 +72,9 @@ namespace PixelBrahma
 	// Functionality when the layer is removed from the layer stack
 	void ImGuiLayer::OnDetach() 
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Clean up ImGui resources
 
 		ImGui_ImplOpenGL3_Shutdown();
@@ -79,6 +85,9 @@ namespace PixelBrahma
 	// ImGui begin function
 	void ImGuiLayer::Begin()
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// New ImGui frame
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
@@ -88,6 +97,9 @@ namespace PixelBrahma
 	// ImGui end function
 	void ImGuiLayer::End()
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Get References to ImGui i/o and application
 
 		ImGuiIO& io = ImGui::GetIO();

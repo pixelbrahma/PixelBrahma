@@ -19,7 +19,6 @@ namespace PixelBrahma
 		// Insert layer at layer index and increment the index
 		m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer);
 		m_LayerInsertIndex++;
-		layer->OnAttach();
 	}
 
 	// Add an overlay to the layer stack
@@ -27,7 +26,6 @@ namespace PixelBrahma
 	{
 		// Add overlay add the back of the layer stack
 		m_Layers.emplace_back(overlay);
-		overlay->OnAttach();
 	}
 
 	// Remove a layer from the layer stack

@@ -10,12 +10,19 @@ Sandbox2D::Sandbox2D() : Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f
 // Layer on attach function
 void Sandbox2D::OnAttach() 
 { 
+	// Profiling
+	PB_PROFILE_FUNCTION();
+
 	// Load texture from file path
 	m_CheckerboardTexture = PixelBrahma::Texture2D::Create("Assets/Textures/CheckerBoard.png");
 }
 
 // Layer on detach function
-void Sandbox2D::OnDetach() {}
+void Sandbox2D::OnDetach() 
+{
+	// Profiling
+	PB_PROFILE_FUNCTION();
+}
 
 // Layer update function
 void Sandbox2D::OnUpdate(PixelBrahma::Timestep timestep)
@@ -23,13 +30,8 @@ void Sandbox2D::OnUpdate(PixelBrahma::Timestep timestep)
 	// Sandbox update function profiling
 	PB_PROFILE_FUNCTION();
 
-	{
-		// Camera controller update function profiling
-		PB_PROFILE_SCOPE("CameraController::OnUpdate");
-
-		// Call camera update function
-		m_CameraController.OnUpdate(timestep);
-	}
+	// Call camera update function
+	m_CameraController.OnUpdate(timestep);
 
 	{
 		// Renderer preparation profiling

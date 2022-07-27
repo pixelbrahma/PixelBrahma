@@ -8,6 +8,9 @@ namespace PixelBrahma
 	// Initialize renderer function
 	void OpenGLRendererAPI::Init()
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Enable blending and setup blending function
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

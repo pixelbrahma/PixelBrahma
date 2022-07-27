@@ -11,6 +11,9 @@ namespace PixelBrahma
 	// Initialize renderer function
 	void Renderer::Init()
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		RenderCommand::Init();
 		Renderer2D::Init();
 	}

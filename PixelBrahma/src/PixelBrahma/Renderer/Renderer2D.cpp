@@ -22,6 +22,9 @@ namespace PixelBrahma
 	// Initialize function
 	void Renderer2D::Init()
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Create new renderer storage 
 		s_Data = new Renderer2DStorage();
 		
@@ -67,18 +70,28 @@ namespace PixelBrahma
 	// Shutdown function for cleanup
 	void Renderer2D::Shutdown() 
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		delete s_Data;
 	}
 
 	// Begin scene function
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		s_Data->TextureShader->Bind();
 		s_Data->TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 	}
 
 	// End Scene cleanup function
-	void Renderer2D::EndScene() {}
+	void Renderer2D::EndScene() 
+	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+	}
 
 	// Draw Quad functions
 
@@ -89,6 +102,9 @@ namespace PixelBrahma
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Bind shaders and upload uniforms
 		s_Data->TextureShader->SetFloat4("u_Color", color);
 		s_Data->WhiteTexture->Bind();
@@ -111,6 +127,9 @@ namespace PixelBrahma
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Bind the texture and upload uniforms
 		s_Data->TextureShader->SetFloat4("u_Color", glm::vec4(1.0f));
 		texture->Bind();

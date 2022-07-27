@@ -21,13 +21,28 @@ namespace PixelBrahma
 	// Create window function
 	Scope<Window> Window::Create(const WindowProps& props) { return CreateScope<WindowsWindow>(props); }
 
-	WindowsWindow::WindowsWindow(const WindowProps& props) { Init(props); }
+	WindowsWindow::WindowsWindow(const WindowProps& props) 
+	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
 
-	WindowsWindow::~WindowsWindow() { Shutdown(); }
+		Init(props); 
+	}
+
+	WindowsWindow::~WindowsWindow() 
+	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
+		Shutdown(); 
+	}
 
 	// Initialize window function
 	void WindowsWindow::Init(const WindowProps& props)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Set properties
 
 		m_Data.Title = props.Title;
@@ -40,14 +55,20 @@ namespace PixelBrahma
 
 		if (s_GLFWWindowCount == 0)
 		{
+			PB_PROFILE_SCOPE("glfwInit");
+
 			int success = glfwInit();
 			PB_CORE_ASSERT(success, "Could not initialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback);
 		}
 
-		// Create GLFW window
-		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		++s_GLFWWindowCount;
+		{
+			PB_PROFILE_SCOPE("glfwCreateWindow");
+
+			// Create GLFW window
+			m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+			++s_GLFWWindowCount;
+		}
 
 		// Create OpenGL context and initialize it
 		m_Context = GraphicsContext::Create(m_Window);
@@ -183,6 +204,9 @@ namespace PixelBrahma
 	// Window shutdown function
 	void WindowsWindow::Shutdown() 
 	{ 
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		glfwDestroyWindow(m_Window); 
 		--s_GLFWWindowCount;
 
@@ -193,6 +217,9 @@ namespace PixelBrahma
 	// Window update function
 	void WindowsWindow::OnUpdate()
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		// Poll events and swap buffers
 
 		glfwPollEvents();
@@ -202,6 +229,9 @@ namespace PixelBrahma
 	// Set Vsync
 	void WindowsWindow::SetVSync(bool enabled)
 	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
 		if (enabled)
 			glfwSwapInterval(1);
 		else
