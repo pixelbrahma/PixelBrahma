@@ -1,7 +1,7 @@
 #include "pbpch.h"
 #include "OpenGLRendererAPI.h"
 
-#include "glad/glad.h"
+#include <glad/glad.h>
 
 namespace PixelBrahma
 {
@@ -33,7 +33,7 @@ namespace PixelBrahma
 	}
 
 	// Draw call
-	void OpenGLRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
+	void OpenGLRendererAPI::DrawIndexed(const Ref<VertexArray>& vertexArray)
 	{
 		glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 

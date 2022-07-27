@@ -5,7 +5,7 @@
 namespace PixelBrahma
 {
 	// Window resize event class
-	class PIXELBRAHMA_API WindowResizeEvent : public Event
+	class WindowResizeEvent : public Event
 	{
 	public:
 		WindowResizeEvent(unsigned int width, unsigned int height) : m_Width(width), m_Height(height) {}
@@ -32,10 +32,10 @@ namespace PixelBrahma
 	};
 
 	// Window close event class
-	class PIXELBRAHMA_API WindowCloseEvent : public Event
+	class WindowCloseEvent : public Event
 	{
 	public:
-		WindowCloseEvent() {}
+		WindowCloseEvent() = default;
 
 		// Event class descriptions
 		EVENT_CLASS_TYPE(WindowClose)
@@ -43,10 +43,10 @@ namespace PixelBrahma
 	};
 
 	// Application tick event
-	class PIXELBRAHMA_API AppTickEvent : public Event
+	class AppTickEvent : public Event
 	{
 	public:
-		AppTickEvent() {}
+		AppTickEvent() = default;
 		
 		// Event class descriptions
 		EVENT_CLASS_TYPE(AppTick)
@@ -54,10 +54,10 @@ namespace PixelBrahma
 	};
 
 	// Application update event
-	class PIXELBRAHMA_API AppUpdateEvent : public Event
+	class AppUpdateEvent : public Event
 	{
 	public:
-		AppUpdateEvent() {}
+		AppUpdateEvent() = default;
 
 		// Event class descriptions
 		EVENT_CLASS_TYPE(AppUpdate)
@@ -65,10 +65,10 @@ namespace PixelBrahma
 	};
 
 	// Application render event
-	class PIXELBRAHMA_API AppRenderEvent : public Event
+	class AppRenderEvent : public Event
 	{
 	public:
-		AppRenderEvent() {}
+		AppRenderEvent() = default;
 
 		// Event class descriptions
 		EVENT_CLASS_TYPE(AppRender)

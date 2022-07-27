@@ -7,9 +7,8 @@
 namespace PixelBrahma
 {
 	// Input manager interface
-	class PIXELBRAHMA_API Input
+	class Input
 	{
-
 		// Make Input class a true singleton
 
 	protected:

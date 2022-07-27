@@ -43,6 +43,7 @@
 	#error "Unknown platform!"
 #endif // End of platform detection
 
+/*
 // Dll import or export macros
 
 #ifdef PB_PLATFORM_WINDOWS
@@ -58,6 +59,7 @@
 #else
 	#error PixelBrahma Engine only supports Windows!
 #endif // PB_PLATFORM_WINDOWS
+*/
 
 // If debug mode enable asserts
 

@@ -4,6 +4,9 @@
 
 #include <stdio.h>
 
+// Core
+#include "PixelBrahma/Core/Core.h"
+
 // Application
 #include "PixelBrahma/Application/Application.h"
 

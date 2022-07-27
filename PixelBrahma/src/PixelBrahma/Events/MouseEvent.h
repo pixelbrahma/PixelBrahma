@@ -5,7 +5,7 @@
 namespace PixelBrahma
 {
 	// Mouse moved event class
-	class PIXELBRAHMA_API MouseMovedEvent : public Event
+	class MouseMovedEvent : public Event
 	{
 	public:
 		MouseMovedEvent(float x, float y) : m_MouseX(x), m_MouseY(y) {}
@@ -32,7 +32,7 @@ namespace PixelBrahma
 	};
 
 	// Mouse scrolled event class
-	class PIXELBRAHMA_API MouseScrolledEvent : public Event
+	class MouseScrolledEvent : public Event
 	{
 	public:
 		MouseScrolledEvent(float xOffset, float yOffset) : m_XOffset(xOffset), m_YOffset(yOffset) {}
@@ -59,7 +59,7 @@ namespace PixelBrahma
 	};
 
 	// Mouse button event class
-	class PIXELBRAHMA_API MouseButtonEvent : public Event
+	class MouseButtonEvent : public Event
 	{
 	public:
 
@@ -76,7 +76,7 @@ namespace PixelBrahma
 	};
 
 	// Mouse button pressed event
-	class PIXELBRAHMA_API MouseButtonPressedEvent : public MouseButtonEvent
+	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(int button) : MouseButtonEvent(button) {}
@@ -94,7 +94,7 @@ namespace PixelBrahma
 	};
 
 	// Mouse button released event
-	class PIXELBRAHMA_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonReleasedEvent(int button) : MouseButtonEvent(button) {}

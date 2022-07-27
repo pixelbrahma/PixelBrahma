@@ -8,10 +8,10 @@
 namespace PixelBrahma
 {
 	// Wrapper class to maintain a vector of layers
-	class PIXELBRAHMA_API LayerStack
+	class LayerStack
 	{
 	public:
-		LayerStack();
+		LayerStack() = default;
 		~LayerStack();
 
 		// Functions to add layers and overlays to the layer stack

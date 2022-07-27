@@ -1,6 +1,6 @@
 #pragma once
 
-#include "glm/glm.hpp"
+#include <glm/glm.hpp>
 
 #include "PixelBrahma/Renderer/Geometry/VertexArray.h"
 
@@ -30,10 +30,13 @@ namespace PixelBrahma
 		virtual void Clear() = 0;
 
 		// Draw function
-		virtual void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) = 0;
+		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray) = 0;
 
 		// Static API getter function
 		inline static API GetAPI() { return s_API; }
+
+		// Create RendererAPI
+		static Scope<RendererAPI> Create();
 
 	private:
 		static API s_API;

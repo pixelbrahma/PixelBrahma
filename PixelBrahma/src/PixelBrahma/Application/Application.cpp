@@ -1,16 +1,14 @@
 #include "pbpch.h"
 #include "Application.h"
 
+#include "PixelBrahma/Log/Log.h"
 #include "PixelBrahma/Input/Input.h"
 #include "PixelBrahma/Renderer/Renderer.h"
 
-#include "GLFW/glfw3.h"
+#include <GLFW/glfw3.h>
 
 namespace PixelBrahma
 {
-	// Macro for binding events
-	#define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
-
 	// Application should be a singleton
 	Application* Application::s_Instance = nullptr;
 
@@ -21,8 +19,8 @@ namespace PixelBrahma
 		s_Instance = this;
 
 		// Create window and set reference and event callback
-		m_Window = std::unique_ptr<Window>(Window::Create());
-		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+		m_Window = Window::Create();
+		m_Window->SetEventCallback(PB_BIND_EVENT_FN(Application::OnEvent));
 
 		// Initialize the renderer
 		Renderer::Init();
@@ -32,7 +30,11 @@ namespace PixelBrahma
 		PushOverlay(m_ImGuiLayer);
 	}
 
-	Application::~Application() {}
+	Application::~Application() 
+	{
+		// Close the renderer and release resources
+		Renderer::Shutdown();
+	}
 
 	// Add layer to the layer stack
 	void Application::PushLayer(Layer* layer) { m_LayerStack.PushLayer(layer); }
@@ -45,8 +47,8 @@ namespace PixelBrahma
 	{
 		// Create the event dispatcher and bind it to the event handler functions based on event type
 		EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
-		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
+		dispatcher.Dispatch<WindowCloseEvent>(PB_BIND_EVENT_FN(Application::OnWindowClose));
+		dispatcher.Dispatch<WindowResizeEvent>(PB_BIND_EVENT_FN(Application::OnWindowResize));
 
 		// Iterate from the back of the layer stack
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)

@@ -1,8 +1,7 @@
 #include "pbpch.h"
 #include "Renderer.h"
-#include "Renderer2D.h"
 
-#include "Platform/OpenGL/OpenGLShader.h"
+#include "Renderer2D.h"
 
 namespace PixelBrahma
 {
@@ -14,6 +13,12 @@ namespace PixelBrahma
 	{
 		RenderCommand::Init();
 		Renderer2D::Init();
+	}
+
+	// Shutdown function
+	void Renderer::Shutdown()
+	{
+		Renderer2D::Shutdown();
 	}
 
 	// Window resize event handler
@@ -33,16 +38,15 @@ namespace PixelBrahma
 	void Renderer::EndScene() {}
 
 	// Submit render commands to the render queue
-	void Renderer::Submit(const std::shared_ptr<Shader>& shader, 
-		const std::shared_ptr<VertexArray>& vertexArray,
+	void Renderer::Submit(const Ref<Shader>& shader, 
+		const Ref<VertexArray>& vertexArray,
 		const glm::mat4& transform)
 	{
 		// Bind shader and set uniform
 
 		shader->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjection",
-			s_SceneData->ViewProjectionMatrix);
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
+		shader->SetMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
+		shader->SetMat4("u_Transform", transform);
 
 		// Bind vertex array and draw object
 

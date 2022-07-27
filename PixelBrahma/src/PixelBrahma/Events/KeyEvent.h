@@ -5,7 +5,7 @@
 namespace PixelBrahma
 {
 	// Class key event
-	class PIXELBRAHMA_API KeyEvent : public Event
+	class KeyEvent : public Event
 	{
 	public:
 
@@ -22,7 +22,7 @@ namespace PixelBrahma
 	};
 
 	// Key pressed event class
-	class PIXELBRAHMA_API KeyPressedEvent : public KeyEvent
+	class KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int keycode, int repeatcount) : KeyEvent(keycode), m_RepeatCount(repeatcount) {}
@@ -46,7 +46,7 @@ namespace PixelBrahma
 	};
 
 	// Key released event class
-	class PIXELBRAHMA_API KeyReleasedEvent : public KeyEvent
+	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(int keycode) : KeyEvent(keycode) {}
@@ -64,7 +64,7 @@ namespace PixelBrahma
 	};
 
 	// Key typed event class
-	class PIXELBRAHMA_API KeyTypedEvent : public KeyEvent
+	class KeyTypedEvent : public KeyEvent
 	{
 	public:
 		KeyTypedEvent(int keycode) : KeyEvent(keycode) {}

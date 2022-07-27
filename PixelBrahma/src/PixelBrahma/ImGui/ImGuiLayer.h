@@ -9,7 +9,7 @@
 namespace PixelBrahma
 {
 	// Class for defining an ImGui UI layer
-	class PIXELBRAHMA_API ImGuiLayer : public Layer
+	class ImGuiLayer : public Layer
 	{
 	public:
 		ImGuiLayer();

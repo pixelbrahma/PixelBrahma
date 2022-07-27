@@ -1,6 +1,7 @@
 #pragma once
 
 #include "pbpch.h"
+
 #include "PixelBrahma/Core/Core.h"
 
 // Events are blocking events
@@ -48,7 +49,7 @@ namespace PixelBrahma
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
 	// Event class
-	class PIXELBRAHMA_API Event
+	class Event
 	{
 		friend class EventDispatcher;
 

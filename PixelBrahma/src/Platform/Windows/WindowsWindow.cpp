@@ -19,7 +19,7 @@ namespace PixelBrahma
 	}
 
 	// Create window function
-	Window* Window::Create(const WindowProps& props) { return new WindowsWindow(props); }
+	Scope<Window> Window::Create(const WindowProps& props) { return CreateScope<WindowsWindow>(props); }
 
 	WindowsWindow::WindowsWindow(const WindowProps& props) { Init(props); }
 
@@ -40,8 +40,6 @@ namespace PixelBrahma
 
 		if (s_GLFWWindowCount == 0)
 		{
-			PB_CORE_INFO("Initializing GLFW");
-
 			int success = glfwInit();
 			PB_CORE_ASSERT(success, "Could not initialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback);
@@ -52,7 +50,7 @@ namespace PixelBrahma
 		++s_GLFWWindowCount;
 
 		// Create OpenGL context and initialize it
-		m_Context = CreateScope<OpenGLContext>(m_Window);
+		m_Context = GraphicsContext::Create(m_Window);
 		m_Context->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
@@ -186,13 +184,10 @@ namespace PixelBrahma
 	void WindowsWindow::Shutdown() 
 	{ 
 		glfwDestroyWindow(m_Window); 
+		--s_GLFWWindowCount;
 
 		// If no GLFW windows are open
-		if (--s_GLFWWindowCount == 0)
-		{
-			PB_CORE_INFO("Terminating GLFW");
-			glfwTerminate();
-		}
+		if (s_GLFWWindowCount == 0) { glfwTerminate(); }
 	}
 
 	// Window update function

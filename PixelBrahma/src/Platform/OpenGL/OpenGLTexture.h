@@ -2,7 +2,7 @@
 
 #include "PixelBrahma/Renderer/Shading/Texture.h"
 
-#include "glad/glad.h"
+#include <glad/glad.h>
 
 namespace PixelBrahma
 {

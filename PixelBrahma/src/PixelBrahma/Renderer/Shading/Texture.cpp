@@ -2,6 +2,7 @@
 #include "Texture.h"
 
 #include "PixelBrahma/Renderer/Renderer.h"
+
 #include "Platform/OpenGL/OpenGLTexture.h"
 
 namespace PixelBrahma

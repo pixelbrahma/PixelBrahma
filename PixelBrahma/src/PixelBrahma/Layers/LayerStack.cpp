@@ -3,8 +3,6 @@
 
 namespace PixelBrahma
 {
-	LayerStack::LayerStack() {}
-
 	LayerStack::~LayerStack()
 	{
 		// Delete all the layers in the stack

@@ -599,6 +599,7 @@
     <ClInclude Include="src\pbpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\PixelBrahma\Renderer\GraphicsContext.cpp" />
     <ClCompile Include="ThirdParty\stb_image\stbi_image.cpp" />
     <ClCompile Include="src\PixelBrahma\Application\Application.cpp" />
     <ClCompile Include="src\PixelBrahma\ImGui\ImGuiBuild.cpp" />

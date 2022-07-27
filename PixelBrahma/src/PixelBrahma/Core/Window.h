@@ -21,7 +21,7 @@ namespace PixelBrahma
 	};
 
 	// Interface representing a desktop based window - Pure virtual class
-	class PIXELBRAHMA_API Window
+	class Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;
@@ -45,6 +45,6 @@ namespace PixelBrahma
 		virtual void* GetNativeWindow() const = 0;
 
 		// Create window function - Must be implemented per platform
-		static Window* Create(const WindowProps& props = WindowProps());
+		static Scope<Window> Create(const WindowProps& props = WindowProps());
 	};
 }

@@ -7,7 +7,7 @@
 namespace PixelBrahma
 {
 	// Class to hold layer data and manage event handling
-	class PIXELBRAHMA_API Layer
+	class Layer
 	{
 	public:
 		Layer(const std::string& name = "Layer");

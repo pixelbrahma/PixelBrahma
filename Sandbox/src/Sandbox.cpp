@@ -3,10 +3,10 @@
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
-#include "ImGui/imgui.h"
+#include <ImGui/imgui.h>
 
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtc/type_ptr.hpp"
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "Sandbox2D.h"
 
@@ -28,8 +28,7 @@ public:
 		};
 
 		// Create vertex buffer
-		PixelBrahma::Ref<PixelBrahma::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(PixelBrahma::VertexBuffer::Create(vertices, sizeof(vertices)));
+		PixelBrahma::Ref<PixelBrahma::VertexBuffer> vertexBuffer = PixelBrahma::VertexBuffer::Create(vertices, sizeof(vertices));
 
 		// Define vertex buffer layout and set it
 		PixelBrahma::BufferLayout layout =
@@ -47,8 +46,8 @@ public:
 		uint32_t indices[3] = { 0, 1, 2 };
 
 		// Create and assign index buffer data
-		PixelBrahma::Ref<PixelBrahma::IndexBuffer> indexBuffer;
-		indexBuffer.reset(PixelBrahma::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		PixelBrahma::Ref<PixelBrahma::IndexBuffer> indexBuffer = 
+			PixelBrahma::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		// Create square vertex array
@@ -64,8 +63,8 @@ public:
 		};
 
 		// Create vertex buffer for the square
-		PixelBrahma::Ref<PixelBrahma::VertexBuffer> squareVB;
-		squareVB.reset(PixelBrahma::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		PixelBrahma::Ref<PixelBrahma::VertexBuffer> squareVB = 
+			PixelBrahma::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 
 		// Set vertex buffer layout for the square
 		squareVB->SetLayout(
@@ -81,8 +80,8 @@ public:
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
 
 		// Create and assign square index buffer
-		PixelBrahma::Ref<PixelBrahma::IndexBuffer> squareIB;
-		squareIB.reset(PixelBrahma::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		PixelBrahma::Ref<PixelBrahma::IndexBuffer> squareIB = 
+			PixelBrahma::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
 		//// Shaders for triangle ////
@@ -175,8 +174,8 @@ public:
 		m_LogoTexture = PixelBrahma::Texture2D::Create("Assets/Textures/Logo.png");
 
 		// Bind and set shader uniforms for the textured objects
-		std::dynamic_pointer_cast<PixelBrahma::OpenGLShader>(textureShader)->Bind();
-		std::dynamic_pointer_cast<PixelBrahma::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
+		textureShader->Bind();
+		textureShader->SetInt("u_Texture", 0);
 	}
 
 	// Update function override for the layer
@@ -196,9 +195,8 @@ public:
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
 		// Bind and set shader uniforms for the square
-		std::dynamic_pointer_cast<PixelBrahma::OpenGLShader>(m_FlatColorShader)->Bind();
-		std::dynamic_pointer_cast<PixelBrahma::OpenGLShader>(m_FlatColorShader)->
-			UploadUniformFloat3("u_Color", m_SquareColor);
+		m_FlatColorShader->Bind();
+		m_FlatColorShader->SetFloat3("u_Color", m_SquareColor);
 
 		// Create tile map by setting tranforms of the sqaures
 		for(int y = 0; y < 20; y++)

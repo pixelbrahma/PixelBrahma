@@ -1,5 +1,7 @@
 #pragma once
 
+#include "PixelBrahma/Core/Core.h"
+
 #ifdef PB_PLATFORM_WINDOWS
 
 // Function defined elsewhere that returns an engine application
