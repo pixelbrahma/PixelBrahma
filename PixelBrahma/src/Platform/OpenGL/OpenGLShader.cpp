@@ -279,12 +279,24 @@ namespace PixelBrahma
 
 	// Set uniform functions 
 
+	// Integers
+
 	void OpenGLShader::SetInt(const std::string& name, int value)
 	{
 		// Profiling
 		PB_PROFILE_FUNCTION();
 
 		UploadUniformInt(name, value);
+	}
+
+	// Floats
+
+	void OpenGLShader::SetFloat(const std::string& name, float value)
+	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
+		UploadUniformFloat(name, value);
 	}
 
 	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value)
@@ -302,6 +314,8 @@ namespace PixelBrahma
 
 		UploadUniformFloat4(name, value);
 	}
+
+	// Matrices
 
 	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
 	{
