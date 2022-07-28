@@ -12,6 +12,9 @@
 
 #include "PixelBrahma/Core/Timestep.h"
 
+// Run loop main function forward declaration to make it accessible only on the engine side
+int main(int argc, char** argv);
+
 namespace PixelBrahma
 {
 	// Application class to act as base class to create application from the client
@@ -20,9 +23,6 @@ namespace PixelBrahma
 	public:
 		Application();
 		virtual ~Application();
-
-		// Run function
-		void Run();
 
 		// Event handling and dispatching function
 		void OnEvent(Event& e);
@@ -37,6 +37,9 @@ namespace PixelBrahma
 		inline static Application& Get() { return *s_Instance; }
 
 	private:
+		// Run function
+		void Run();
+
 		// Window event functions
 
 		bool OnWindowClose(WindowCloseEvent& event);
@@ -52,6 +55,7 @@ namespace PixelBrahma
 
 	private:
 		static Application* s_Instance;
+		friend int ::main(int argc, char** argv);
 	};
 
 	// To be defined in the client

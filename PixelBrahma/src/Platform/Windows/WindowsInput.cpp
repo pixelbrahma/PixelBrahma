@@ -7,9 +7,6 @@
 
 namespace PixelBrahma
 {
-	// Input manager instance 
-	Scope<Input> Input::s_Instance = CreateScope<WindowsInput>();
-
 	// Key pressed input state implementation
 	bool WindowsInput::IsKeyPressedImpl(KeyCode key)
 	{

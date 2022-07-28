@@ -29,6 +29,9 @@ namespace PixelBrahma
 		inline static float GetMouseX() { return s_Instance->GetMouseXImpl(); }
 		inline static float GetMouseY() { return s_Instance->GetMouseYImpl(); }
 
+		// Create Input manager
+		static Scope<Input> Create();
+
 	protected:
 
 		// Virtual platform specific implementation functions

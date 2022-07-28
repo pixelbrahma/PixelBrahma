@@ -1523,5 +1523,7 @@
     <ClCompile Include="src\pbpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Input\Input.cpp" />
+    <ClCompile Include="src\PixelBrahma\Core\Window.cpp" />
   </ItemGroup>
 </Project>
