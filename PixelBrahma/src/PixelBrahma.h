@@ -22,7 +22,7 @@
 // Input
 #include "PixelBrahma/Input/Input.h"
 #include "PixelBrahma/Input/KeyCodes.h"
-#include "PixelBrahma/Input/MouseButtonCodes.h"
+#include "PixelBrahma/Input/MouseCodes.h"
 
 // ImGui
 #include "PixelBrahma/ImGui/ImGuiLayer.h"

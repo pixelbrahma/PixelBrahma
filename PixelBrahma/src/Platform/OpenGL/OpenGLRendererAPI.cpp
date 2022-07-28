@@ -5,11 +5,41 @@
 
 namespace PixelBrahma
 {
+	// OpenGL message logging function
+	void OpenGLMessageCallback(
+		unsigned source,
+		unsigned type,
+		unsigned id,
+		unsigned severity,
+		int length,
+		const char* message,
+		const void* userParam)
+	{
+		switch (severity)
+		{
+			case GL_DEBUG_SEVERITY_HIGH:         PB_CORE_CRITICAL(message);   return;
+			case GL_DEBUG_SEVERITY_MEDIUM:       PB_CORE_ERROR(message);      return;
+			case GL_DEBUG_SEVERITY_LOW:          PB_CORE_WARN(message);       return;
+			case GL_DEBUG_SEVERITY_NOTIFICATION: PB_CORE_TRACE(message);      return;
+		}
+
+		PB_CORE_ASSERT(false, "Unknown severity level!");
+	}
+
 	// Initialize renderer function
 	void OpenGLRendererAPI::Init()
 	{
 		// Profiling
 		PB_PROFILE_FUNCTION();
+
+	// Enable OpenGL message logging callback if in debug mode
+	#ifdef PB_DEBUG
+			glEnable(GL_DEBUG_OUTPUT);
+			glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+			glDebugMessageCallback(OpenGLMessageCallback, nullptr);
+
+			glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, NULL, GL_FALSE);
+	#endif
 
 		// Enable blending and setup blending function
 		glEnable(GL_BLEND);

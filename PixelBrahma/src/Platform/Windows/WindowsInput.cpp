@@ -11,22 +11,22 @@ namespace PixelBrahma
 	Scope<Input> Input::s_Instance = CreateScope<WindowsInput>();
 
 	// Key pressed input state implementation
-	bool WindowsInput::IsKeyPressedImpl(int keycode)
+	bool WindowsInput::IsKeyPressedImpl(KeyCode key)
 	{
 		// From application instance, get window and from the window, get platform specific window
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 
-		auto state = glfwGetKey(window, keycode);
+		auto state = glfwGetKey(window, static_cast<int32_t>(key));
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
 	// Mouse pressed input state implementation
-	bool WindowsInput::IsMouseButtonPressedImpl(int button)
+	bool WindowsInput::IsMouseButtonPressedImpl(MouseCode button)
 	{
 		// From application instance, get window and from the window, get platform specific window
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 
-		auto state = glfwGetMouseButton(window, button);
+		auto state = glfwGetMouseButton(window, static_cast<int32_t>(button));
 		return state == GLFW_PRESS;
 	}
 

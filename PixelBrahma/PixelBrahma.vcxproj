@@ -144,7 +144,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\PixelBrahma\Debug\Instrumentor.h" />
     <ClInclude Include="ThirdParty\glm\glm\common.hpp" />
     <ClInclude Include="ThirdParty\glm\glm\detail\_features.hpp" />
     <ClInclude Include="ThirdParty\glm\glm\detail\_fixes.hpp" />
@@ -567,6 +566,7 @@
     <ClInclude Include="src\PixelBrahma\Core\Core.h" />
     <ClInclude Include="src\PixelBrahma\Core\Timestep.h" />
     <ClInclude Include="src\PixelBrahma\Core\Window.h" />
+    <ClInclude Include="src\PixelBrahma\Debug\Instrumentor.h" />
     <ClInclude Include="src\PixelBrahma\Events\ApplicationEvent.h" />
     <ClInclude Include="src\PixelBrahma\Events\Event.h" />
     <ClInclude Include="src\PixelBrahma\Events\KeyEvent.h" />
@@ -574,7 +574,7 @@
     <ClInclude Include="src\PixelBrahma\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\PixelBrahma\Input\Input.h" />
     <ClInclude Include="src\PixelBrahma\Input\KeyCodes.h" />
-    <ClInclude Include="src\PixelBrahma\Input\MouseButtonCodes.h" />
+    <ClInclude Include="src\PixelBrahma\Input\MouseCodes.h" />
     <ClInclude Include="src\PixelBrahma\Layers\Layer.h" />
     <ClInclude Include="src\PixelBrahma\Layers\LayerStack.h" />
     <ClInclude Include="src\PixelBrahma\Log\Log.h" />
@@ -600,7 +600,6 @@
     <ClInclude Include="src\pbpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\PixelBrahma\Renderer\GraphicsContext.cpp" />
     <ClCompile Include="ThirdParty\stb_image\stbi_image.cpp" />
     <ClCompile Include="src\PixelBrahma\Application\Application.cpp" />
     <ClCompile Include="src\PixelBrahma\ImGui\ImGuiBuild.cpp" />
@@ -612,6 +611,7 @@
     <ClCompile Include="src\PixelBrahma\Renderer\Camera\OrthographicCameraController.cpp" />
     <ClCompile Include="src\PixelBrahma\Renderer\Geometry\Buffer.cpp" />
     <ClCompile Include="src\PixelBrahma\Renderer\Geometry\VertexArray.cpp" />
+    <ClCompile Include="src\PixelBrahma\Renderer\GraphicsContext.cpp" />
     <ClCompile Include="src\PixelBrahma\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\PixelBrahma\Renderer\Renderer.cpp" />
     <ClCompile Include="src\PixelBrahma\Renderer\Renderer2D.cpp" />

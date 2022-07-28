@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Event.h"
+#include "PixelBrahma/Input/Input.h"
 
 namespace PixelBrahma
 {
@@ -10,22 +11,22 @@ namespace PixelBrahma
 	public:
 
 		// Keycode getter function
-		inline int GetKeyCode() const { return m_KeyCode; }
+		inline KeyCode GetKeyCode() const { return m_KeyCode; }
 
 		// Event class descriptions
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 
 	protected:
-		KeyEvent(int keycode) : m_KeyCode(keycode) {}
+		KeyEvent(KeyCode keycode) : m_KeyCode(keycode) {}
 
-		int m_KeyCode;
+		KeyCode m_KeyCode;
 	};
 
 	// Key pressed event class
 	class KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressedEvent(int keycode, int repeatcount) : KeyEvent(keycode), m_RepeatCount(repeatcount) {}
+		KeyPressedEvent(KeyCode keycode, int repeatcount) : KeyEvent(keycode), m_RepeatCount(repeatcount) {}
 
 		// Repeat count getter function
 		inline int GetRepeatCount() { return m_RepeatCount; }
@@ -49,7 +50,7 @@ namespace PixelBrahma
 	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
-		KeyReleasedEvent(int keycode) : KeyEvent(keycode) {}
+		KeyReleasedEvent(KeyCode keycode) : KeyEvent(keycode) {}
 
 		// Override to string function for logging
 		std::string ToString() const override
@@ -67,7 +68,7 @@ namespace PixelBrahma
 	class KeyTypedEvent : public KeyEvent
 	{
 	public:
-		KeyTypedEvent(int keycode) : KeyEvent(keycode) {}
+		KeyTypedEvent(KeyCode keycode) : KeyEvent(keycode) {}
 
 		// Override to string function for logging
 		std::string ToString() const override

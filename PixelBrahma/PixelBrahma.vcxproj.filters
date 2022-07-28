@@ -37,6 +37,9 @@
     <Filter Include="src\PixelBrahma\Core">
       <UniqueIdentifier>{819B2FA4-6D2A-B96D-1649-CD6802B7C913}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\PixelBrahma\Debug">
+      <UniqueIdentifier>{BF662F2A-2BD3-EA24-F4C6-828260F20C8D}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\PixelBrahma\Events">
       <UniqueIdentifier>{4D91A673-398B-CFC5-22F8-65D60E913532}</UniqueIdentifier>
     </Filter>
@@ -1341,6 +1344,9 @@
     <ClInclude Include="src\PixelBrahma\Core\Window.h">
       <Filter>src\PixelBrahma\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Debug\Instrumentor.h">
+      <Filter>src\PixelBrahma\Debug</Filter>
+    </ClInclude>
     <ClInclude Include="src\PixelBrahma\Events\ApplicationEvent.h">
       <Filter>src\PixelBrahma\Events</Filter>
     </ClInclude>
@@ -1362,7 +1368,7 @@
     <ClInclude Include="src\PixelBrahma\Input\KeyCodes.h">
       <Filter>src\PixelBrahma\Input</Filter>
     </ClInclude>
-    <ClInclude Include="src\PixelBrahma\Input\MouseButtonCodes.h">
+    <ClInclude Include="src\PixelBrahma\Input\MouseCodes.h">
       <Filter>src\PixelBrahma\Input</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Layers\Layer.h">
@@ -1434,7 +1440,6 @@
     <ClInclude Include="src\pbpch.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\PixelBrahma\Debug\Instrumentor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ThirdParty\stb_image\stbi_image.cpp">
@@ -1469,6 +1474,9 @@
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Renderer\Geometry\VertexArray.cpp">
       <Filter>src\PixelBrahma\Renderer\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Renderer\GraphicsContext.cpp">
+      <Filter>src\PixelBrahma\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Renderer\RenderCommand.cpp">
       <Filter>src\PixelBrahma\Renderer</Filter>
@@ -1515,6 +1523,5 @@
     <ClCompile Include="src\pbpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\PixelBrahma\Renderer\GraphicsContext.cpp" />
   </ItemGroup>
 </Project>

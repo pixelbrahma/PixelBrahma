@@ -4,6 +4,8 @@
 #include "PixelBrahma/Events/ApplicationEvent.h"
 #include "PixelBrahma/Events/KeyEvent.h"
 #include "PixelBrahma/Events/MouseEvent.h"
+#include "PixelBrahma/Renderer/Renderer.h"
+#include "PixelBrahma/Input/Input.h"
 
 #include "Platform/OpenGL/OpenGLContext.h"
 
@@ -65,6 +67,11 @@ namespace PixelBrahma
 		{
 			PB_PROFILE_SCOPE("glfwCreateWindow");
 
+		#if defined(PB_DEBUG)
+					if (Renderer::GetAPI() == RendererAPI::API::OpenGL)
+						glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+		#endif
+
 			// Create GLFW window
 			m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 			++s_GLFWWindowCount;
@@ -114,7 +121,7 @@ namespace PixelBrahma
 					case GLFW_PRESS:
 					{
 						// Create a key pressed event and dispatch it
-						KeyPressedEvent event(key, 0);
+						KeyPressedEvent event(static_cast<KeyCode>(key), 0);
 						data.EventCallback(event);
 
 						break;
@@ -123,7 +130,7 @@ namespace PixelBrahma
 					case GLFW_RELEASE:
 					{
 						// Create a key released event and dispatch it
-						KeyReleasedEvent event(key);
+						KeyReleasedEvent event(static_cast<KeyCode>(key));
 						data.EventCallback(event);
 
 						break;
@@ -132,7 +139,8 @@ namespace PixelBrahma
 					case GLFW_REPEAT:
 					{
 						// Create a key pressed event and dispatch it
-						KeyPressedEvent event(key, 1);		// GLFW doesnt provide repeat count but win32 api does
+						// GLFW doesnt provide repeat count but win32 api does
+						KeyPressedEvent event(static_cast<KeyCode>(key), 1);		
 						data.EventCallback(event);
 
 						break;
@@ -146,7 +154,7 @@ namespace PixelBrahma
 				// Get the user pointer which points to WindowData structure type and set width and height
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
-				KeyTypedEvent event(keycode);
+				KeyTypedEvent event(static_cast<KeyCode>(keycode));
 				data.EventCallback(event);
 			});
 
@@ -161,7 +169,7 @@ namespace PixelBrahma
 					case GLFW_PRESS:
 					{
 						// Create a mouse button pressed event and dispatch it
-						MouseButtonPressedEvent event(button);
+						MouseButtonPressedEvent event(static_cast<MouseCode>(button));
 						data.EventCallback(event);
 
 						break;
@@ -170,7 +178,7 @@ namespace PixelBrahma
 					case GLFW_RELEASE:
 					{
 						// Create a mouse button released event and dispatch it
-						MouseButtonReleasedEvent event(button);
+						MouseButtonReleasedEvent event(static_cast<MouseCode>(button));
 						data.EventCallback(event);
 
 						break;
