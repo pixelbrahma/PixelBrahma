@@ -19,6 +19,7 @@ namespace PixelBrahma
 
 		static void BeginScene(const OrthographicCamera& camera);
 		static void EndScene();
+		static void Flush();
 
 		// Draw primitives functions
 

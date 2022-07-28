@@ -150,32 +150,42 @@ namespace PixelBrahma
 	public:
 		virtual ~VertexBuffer() {}
 
-		// Vertex buffer functions
+		// Vertex buffer bind and unbind functions
 
 		virtual void Bind() const = 0;
 		virtual void UnBind() const = 0;
+
+		// Set vertex buffer data function
+		virtual void SetData(const void* data, uint32_t size) = 0;
 
 		// Vertex buffer layout functions
 
 		virtual const BufferLayout& GetLayout() const = 0;
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 
+		// Create vertex buffer functions
+
+		static Ref<VertexBuffer> Create(uint32_t size);
 		static Ref<VertexBuffer> Create(float* vertices, uint32_t size);
 	};
 
 	//// Index Buffer ////
 
-	// Index buffer interface
+	// Index buffer interface - 32 bit Index buffer support only
 	class IndexBuffer
 	{
 	public:
 		virtual ~IndexBuffer() {}
 
+		// Index buffer bind and unbind functions
+
 		virtual void Bind() const = 0;
 		virtual void UnBind() const = 0;
 
+		// Get index buffer count function
 		virtual uint32_t GetCount() const = 0;
 
+		// Index buffer create function
 		static Ref<IndexBuffer> Create(uint32_t* indices, uint32_t count);
 	};
 }

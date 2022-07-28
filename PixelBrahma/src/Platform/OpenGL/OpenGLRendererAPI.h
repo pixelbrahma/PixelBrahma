@@ -20,6 +20,6 @@ namespace PixelBrahma
 		virtual void Clear() override;
 
 		// Draw function override
-		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray) override;
+		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t count = 0) override;
 	};
 }
