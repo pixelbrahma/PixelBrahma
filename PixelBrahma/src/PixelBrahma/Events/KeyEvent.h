@@ -11,7 +11,7 @@ namespace PixelBrahma
 	public:
 
 		// Keycode getter function
-		inline KeyCode GetKeyCode() const { return m_KeyCode; }
+		KeyCode GetKeyCode() const { return m_KeyCode; }
 
 		// Event class descriptions
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
@@ -29,7 +29,7 @@ namespace PixelBrahma
 		KeyPressedEvent(KeyCode keycode, int repeatcount) : KeyEvent(keycode), m_RepeatCount(repeatcount) {}
 
 		// Repeat count getter function
-		inline int GetRepeatCount() { return m_RepeatCount; }
+		int GetRepeatCount() { return m_RepeatCount; }
 
 		// Override to string function for logging
 		std::string ToString() const override

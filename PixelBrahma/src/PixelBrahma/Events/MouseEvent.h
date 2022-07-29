@@ -13,8 +13,8 @@ namespace PixelBrahma
 
 		// Mouse position getter functions
 
-		inline float GetX() { return m_MouseX; }
-		inline float GetY() { return m_MouseY; }
+		float GetX() { return m_MouseX; }
+		float GetY() { return m_MouseY; }
 
 		// Override to string function for logging
 		std::string ToString() const override
@@ -40,8 +40,8 @@ namespace PixelBrahma
 
 		// Scroll offset getter functions
 
-		inline float GetXOffset() const { return m_XOffset; }
-		inline float GetYOffset() const { return m_YOffset; }
+		float GetXOffset() const { return m_XOffset; }
+		float GetYOffset() const { return m_YOffset; }
 
 		// Override to string function for logging
 		std::string ToString() const override
@@ -65,7 +65,7 @@ namespace PixelBrahma
 	public:
 
 		// Mouse button getter function
-		inline MouseCode GetMouseButton() const { return m_Button; }
+		MouseCode GetMouseButton() const { return m_Button; }
 
 		// Event class descriptions
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)

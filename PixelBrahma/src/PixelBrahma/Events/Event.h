@@ -66,7 +66,7 @@ namespace PixelBrahma
 		virtual std::string ToString() const { return GetName(); }
 
 		// Check if an event is in the given category
-		inline bool IsInCategory(EventCategory category)
+		bool IsInCategory(EventCategory category)
 		{
 			return GetCategoryFlags() & category;
 		}

@@ -12,8 +12,8 @@ namespace PixelBrahma
 
 		// Window size getter functions
 
-		inline unsigned int GetWidth() const { return m_Width; }
-		inline unsigned int GetHeight() const { return m_Height; }
+		unsigned int GetWidth() const { return m_Width; }
+		unsigned int GetHeight() const { return m_Height; }
 
 		// Override to string function for logging
 		std::string ToString() const override

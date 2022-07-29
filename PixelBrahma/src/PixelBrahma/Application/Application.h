@@ -33,8 +33,8 @@ namespace PixelBrahma
 
 		// Application instance and window getter functions
 
-		inline Window& GetWindow() { return *m_Window; }
-		inline static Application& Get() { return *s_Instance; }
+		Window& GetWindow() { return *m_Window; }
+		static Application& Get() { return *s_Instance; }
 
 	private:
 		// Run function

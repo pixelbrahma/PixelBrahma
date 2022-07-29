@@ -29,7 +29,7 @@ namespace PixelBrahma
 			const glm::mat4& transform = glm::mat4(1.0f));
 
 		// Static API getter function
-		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
+		static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 
 	private:
 		// Structure containing data relevant to the scene

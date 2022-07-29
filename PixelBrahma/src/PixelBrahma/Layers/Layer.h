@@ -22,7 +22,7 @@ namespace PixelBrahma
 		virtual void OnEvent(Event& e) {}
 
 		// Get name of the layer
-		inline const std::string& GetName() const { return m_DebugName; }
+		const std::string& GetName() const { return m_DebugName; }
 
 	private:
 		std::string m_DebugName;

@@ -33,7 +33,7 @@ namespace PixelBrahma
 		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t count = 0) = 0;
 
 		// Static API getter function
-		inline static API GetAPI() { return s_API; }
+		static API GetAPI() { return s_API; }
 
 		// Create RendererAPI
 		static Scope<RendererAPI> Create();

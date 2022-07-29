@@ -10,13 +10,13 @@ namespace PixelBrahma
 	public:
 
 		// Ststic renderer initialize function
-		inline static void Init()
+		static void Init()
 		{
 			s_RendererAPI->Init();
 		}
 
 		// Set viewport size and position
-		inline static void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
+		static void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
 		{
 			s_RendererAPI->SetViewport(x, y, width, height);
 		}
@@ -24,13 +24,13 @@ namespace PixelBrahma
 		//// Static clear commands ////
 
 		// Set the color to clear the screen with
-		inline static void SetClearColor(const glm::vec4& color)
+		static void SetClearColor(const glm::vec4& color)
 		{
 			s_RendererAPI->SetClearColor(color);
 		}
 
 		// Clear the screen buffers
-		inline static void Clear()
+		static void Clear()
 		{
 			s_RendererAPI->Clear();
 		}
@@ -38,7 +38,7 @@ namespace PixelBrahma
 		//// Draw calls ///
 
 		// Draw call
-		inline static void DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t count = 0)
+		static void DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t count = 0)
 		{
 			s_RendererAPI->DrawIndexed(vertexArray, count);
 		}
