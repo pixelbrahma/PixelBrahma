@@ -76,11 +76,11 @@ namespace PixelBrahma
 		// Iterate from the back of the layer stack
 		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
 		{
-			(*it)->OnEvent(event);
-
 			// If event is handled, break out of the loop and dont send the event to the lower layers
 			if (event.Handled)
 				break;
+
+			(*it)->OnEvent(event);
 		}
 	}
 

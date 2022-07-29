@@ -79,8 +79,8 @@ namespace PixelBrahma
 				case ShaderDataType::Float4: return 4;
 
 				// Matrix data types
-				case ShaderDataType::Mat3:   return 3 * 3;
-				case ShaderDataType::Mat4:   return 4 * 4;
+				case ShaderDataType::Mat3:   return 3;	// 3 * Float 3 
+				case ShaderDataType::Mat4:   return 4;	// 4 * Float 4
 
 				// Integer data types
 				case ShaderDataType::Int:    return 1;

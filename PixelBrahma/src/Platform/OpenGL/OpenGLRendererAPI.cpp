@@ -68,7 +68,7 @@ namespace PixelBrahma
 	// Draw call
 	void OpenGLRendererAPI::DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t count)
 	{
-		uint32_t indexCount = count ? vertexArray->GetIndexBuffer()->GetCount() : count;
+		uint32_t indexCount = count ? count : vertexArray->GetIndexBuffer()->GetCount();
 
 		// OpenGL draw call
 		glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
