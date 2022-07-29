@@ -22,6 +22,9 @@ namespace PixelBrahma
 
 		// Bind texture function 
 		virtual	void Bind(uint32_t slot = 0) const = 0;
+
+		// Texture equality check operator overload
+		virtual bool operator==(const Texture& other) const = 0;
 	};
 
 	// 2D texture creation and handling interface
