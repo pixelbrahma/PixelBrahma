@@ -64,14 +64,24 @@
 // If debug mode enable asserts
 
 #ifdef PB_DEBUG
+	#if defined(PB_PLATFORM_WINDOWS)
+		#define PB_DEBUGBREAK() __debugbreak()
+	#elif defined(PB_PLATFORM_LINUX)
+		#include <signal.h>
+		#define PB_DEBUGBREAK() raise(SIGTRAP)
+	#else
+		#error "Platform doesn't support debugbreak yet!"
+	#endif
 	#define PB_ENABLE_ASSERTS
+#else
+	#define PB_DEBUGBREAK()
 #endif
 
 // Assertion macros
 
 #ifdef PB_ENABLE_ASSERTS
-	#define PB_ASSERT(x, ...) {if(!(x)) {PB_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); }}
-	#define PB_CORE_ASSERT(x, ...) {if(!(x)) {PB_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); }}
+	#define PB_ASSERT(x, ...) {if(!(x)) {PB_ERROR("Assertion Failed: {0}", __VA_ARGS__); PB_DEBUGBREAK(); }}
+	#define PB_CORE_ASSERT(x, ...) {if(!(x)) {PB_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); PB_DEBUGBREAK(); }}
 #else
 	#define PB_ASSERT(x, ...)
 	#define PB_CORE_ASSERT(x, ...)

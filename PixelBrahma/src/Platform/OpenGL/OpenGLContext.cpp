@@ -3,7 +3,6 @@
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
-#include <GL/GL.h>
 
 namespace PixelBrahma
 {
@@ -31,13 +30,13 @@ namespace PixelBrahma
 		PB_CORE_INFO(" Renderer: {0}", glGetString(GL_RENDERER));
 		PB_CORE_INFO(" Version: {0}", glGetString(GL_VERSION));
 
-		#ifdef HZ_ENABLE_ASSERTS
+		#ifdef PB_ENABLE_ASSERTS
 				int versionMajor;
 				int versionMinor;
 				glGetIntegerv(GL_MAJOR_VERSION, &versionMajor);
 				glGetIntegerv(GL_MINOR_VERSION, &versionMinor);
 
-				HZ_CORE_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5), 
+				PB_CORE_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5), 
 					"PixelBrahma engine requires at least OpenGL version 4.5!");
 		#endif
 	}

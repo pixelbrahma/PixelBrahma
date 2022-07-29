@@ -1448,11 +1448,17 @@
     <ClCompile Include="src\PixelBrahma\Application\Application.cpp">
       <Filter>src\PixelBrahma\Application</Filter>
     </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Core\Window.cpp">
+      <Filter>src\PixelBrahma\Core</Filter>
+    </ClCompile>
     <ClCompile Include="src\PixelBrahma\ImGui\ImGuiBuild.cpp">
       <Filter>src\PixelBrahma\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\ImGui\ImGuiLayer.cpp">
       <Filter>src\PixelBrahma\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Input\Input.cpp">
+      <Filter>src\PixelBrahma\Input</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Layers\Layer.cpp">
       <Filter>src\PixelBrahma\Layers</Filter>
@@ -1523,7 +1529,5 @@
     <ClCompile Include="src\pbpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\PixelBrahma\Input\Input.cpp" />
-    <ClCompile Include="src\PixelBrahma\Core\Window.cpp" />
   </ItemGroup>
 </Project>

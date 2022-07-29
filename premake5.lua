@@ -55,7 +55,8 @@ project "PixelBrahma"
 
 	defines
 	{
-		"_CRT_SECURE_NO_WARNINGS"
+		"_CRT_SECURE_NO_WARNINGS",
+		"GLFW_INCLUDE_NONE"
 	}
 
 	includedirs
@@ -79,12 +80,6 @@ project "PixelBrahma"
 
 	filter "system:windows"
 		systemversion "latest"
-
-		defines
-		{
-			"PB_BUILD_DLL",
-			"GLFW_INCLUDE_NONE"
-		}
 
 	filter "configurations:Debug"
 		defines "PB_DEBUG"
