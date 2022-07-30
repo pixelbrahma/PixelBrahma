@@ -62,6 +62,12 @@ namespace PixelBrahma
 		overlay->OnAttach();
 	}
 
+	// Close the application
+	void Application::Close()
+	{
+		m_Running = false;
+	}
+
 	// Event callback function
 	void Application::OnEvent(Event& event)
 	{

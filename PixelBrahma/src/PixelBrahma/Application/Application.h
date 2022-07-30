@@ -31,6 +31,9 @@ namespace PixelBrahma
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
 
+		// Close application function
+		void Close();
+
 		// Application instance and window getter functions
 
 		Window& GetWindow() { return *m_Window; }
