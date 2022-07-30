@@ -16,6 +16,14 @@ void Sandbox2D::OnAttach()
 
 	// Load texture from file path
 	m_CheckerboardTexture = PixelBrahma::Texture2D::Create("Assets/Textures/CheckerBoard.png");
+
+	// Set frame buffer properties
+	PixelBrahma::FramebufferSpecification framebufferSpecification;
+	framebufferSpecification.Width = 1280;
+	framebufferSpecification.Height = 720;
+
+	// Create the frambuffer
+	m_Framebuffer = PixelBrahma::Framebuffer::Create(framebufferSpecification);
 }
 
 // Layer on detach function
@@ -40,6 +48,9 @@ void Sandbox2D::OnUpdate(PixelBrahma::Timestep timestep)
 	{
 		// Renderer preparation profiling
 		PB_PROFILE_SCOPE("Renderer preparation");
+
+		// Bind the framebuffer
+		m_Framebuffer->Bind();
 
 		// Clear the color buffer
 		PixelBrahma::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
@@ -81,6 +92,9 @@ void Sandbox2D::OnUpdate(PixelBrahma::Timestep timestep)
 
 		// End the scene
 		PixelBrahma::Renderer2D::EndScene();
+
+		// Unbind the framebuffer
+		m_Framebuffer->UnBind();
 	}
 }
 
@@ -92,7 +106,7 @@ void Sandbox2D::OnImGuiRender()
 
 	// Docking - Dockspace
 
-	static bool dockingEnabled = false;
+	static bool dockingEnabled = true;
 
 	if (dockingEnabled)
 	{
@@ -172,8 +186,8 @@ void Sandbox2D::OnImGuiRender()
 
 		ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
-		uint32_t textureID = m_CheckerboardTexture->GetRendererID();
-		ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
+		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
+		ImGui::Image((void*)textureID, ImVec2{ 1280, 720 });
 		
 		ImGui::End();
 		ImGui::End();
@@ -193,7 +207,7 @@ void Sandbox2D::OnImGuiRender()
 		ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
 		uint32_t textureID = m_CheckerboardTexture->GetRendererID();
-		ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
+		ImGui::Image((void*)textureID, ImVec2{ 1280, 720 });
 
 		ImGui::End();
 	}

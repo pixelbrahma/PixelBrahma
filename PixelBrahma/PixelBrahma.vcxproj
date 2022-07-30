@@ -144,6 +144,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\PixelBrahma\Renderer\Framebuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
     <ClInclude Include="ThirdParty\glm\glm\common.hpp" />
     <ClInclude Include="ThirdParty\glm\glm\detail\_features.hpp" />
     <ClInclude Include="ThirdParty\glm\glm\detail\_fixes.hpp" />
@@ -600,6 +602,8 @@
     <ClInclude Include="src\pbpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\PixelBrahma\Renderer\Framebuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
     <ClCompile Include="ThirdParty\stb_image\stbi_image.cpp" />
     <ClCompile Include="src\PixelBrahma\Application\Application.cpp" />
     <ClCompile Include="src\PixelBrahma\Core\Window.cpp" />

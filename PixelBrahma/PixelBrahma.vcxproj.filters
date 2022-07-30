@@ -1440,6 +1440,8 @@
     <ClInclude Include="src\pbpch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Renderer\Framebuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ThirdParty\stb_image\stbi_image.cpp">
@@ -1529,5 +1531,7 @@
     <ClCompile Include="src\pbpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Renderer\Framebuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
   </ItemGroup>
 </Project>

@@ -32,6 +32,9 @@
 #include "PixelBrahma/Renderer/Renderer2D.h"
 #include "PixelBrahma/Renderer/RenderCommand.h"
 
+// Framebuffer
+#include "PixelBrahma/Renderer/Framebuffer.h"
+
 // Render objects
 #include "PixelBrahma/Renderer/Geometry/VertexArray.h"
 #include "PixelBrahma/Renderer/Geometry/Buffer.h"
