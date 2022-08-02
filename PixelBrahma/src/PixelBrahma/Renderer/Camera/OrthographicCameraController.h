@@ -14,8 +14,11 @@ namespace PixelBrahma
 	public:
 		OrthographicCameraController(float aspectRatio, bool rotation = false);
 
+		// Update and event functions 
+
 		void OnUpdate(Timestep timestep);
 		void OnEvent(Event& e);
+		void OnResize(float width, float height);
 
 		// Get camera functions
 

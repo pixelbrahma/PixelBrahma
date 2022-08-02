@@ -80,6 +80,13 @@ namespace PixelBrahma
 		dispatcher.Dispatch<WindowResizeEvent>(PB_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
 	}
 
+	// On Resizing the viewport
+	void OrthographicCameraController::OnResize(float width, float height)
+	{
+		m_AspectRatio = width / height;
+		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+	}
+
 	// Mouse scrolled event handling
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& event)
 	{
@@ -104,11 +111,8 @@ namespace PixelBrahma
 		// Profiling
 		PB_PROFILE_FUNCTION();
 
-		// Set aspect ratio
-		m_AspectRatio = (float)event.GetWidth() / (float)event.GetHeight();
-		
-		// Set camera projection
-		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+		// Set aspect ratio and camera projection
+		OnResize((float)event.GetWidth(), (float)event.GetHeight());
 
 		return false;
 	}

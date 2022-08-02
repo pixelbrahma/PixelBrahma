@@ -24,6 +24,9 @@ namespace PixelBrahma
 		virtual void Bind() = 0;
 		virtual void UnBind() = 0;
 
+		// Resize function
+		virtual void Resize(uint32_t width, uint32_t height) = 0;
+
 		// Getter functions
 
 		virtual uint32_t GetColorAttachmentRendererID() const = 0;

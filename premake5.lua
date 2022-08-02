@@ -1,6 +1,6 @@
 workspace "PixelBrahma"
 	architecture "x86_64"
-	startproject "Sandbox"
+	startproject "PBEditor"
 
 	configurations
 	{
