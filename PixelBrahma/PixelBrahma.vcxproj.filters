@@ -1386,6 +1386,9 @@
     <ClInclude Include="src\PixelBrahma\Renderer\Camera\OrthographicCameraController.h">
       <Filter>src\PixelBrahma\Renderer\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Renderer\Framebuffer.h">
+      <Filter>src\PixelBrahma\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\PixelBrahma\Renderer\Geometry\Buffer.h">
       <Filter>src\PixelBrahma\Renderer\Geometry</Filter>
     </ClInclude>
@@ -1419,6 +1422,9 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
@@ -1440,8 +1446,6 @@
     <ClInclude Include="src\pbpch.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\PixelBrahma\Renderer\Framebuffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ThirdParty\stb_image\stbi_image.cpp">
@@ -1477,6 +1481,9 @@
     <ClCompile Include="src\PixelBrahma\Renderer\Camera\OrthographicCameraController.cpp">
       <Filter>src\PixelBrahma\Renderer\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Renderer\Framebuffer.cpp">
+      <Filter>src\PixelBrahma\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\PixelBrahma\Renderer\Geometry\Buffer.cpp">
       <Filter>src\PixelBrahma\Renderer\Geometry</Filter>
     </ClCompile>
@@ -1510,6 +1517,9 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
@@ -1531,7 +1541,5 @@
     <ClCompile Include="src\pbpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\PixelBrahma\Renderer\Framebuffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
   </ItemGroup>
 </Project>

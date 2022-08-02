@@ -12,7 +12,7 @@ namespace PixelBrahma
 	// Application should be a singleton
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application()
+	Application::Application(const std::string& name)
 	{ 
 		// Profiling
 		PB_PROFILE_FUNCTION();
@@ -22,7 +22,7 @@ namespace PixelBrahma
 		s_Instance = this;
 
 		// Create window and set reference and event callback
-		m_Window = Window::Create();
+		m_Window = Window::Create(WindowProps(name));
 		m_Window->SetEventCallback(PB_BIND_EVENT_FN(Application::OnEvent));
 
 		// Initialize the renderer

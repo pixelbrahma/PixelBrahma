@@ -21,7 +21,7 @@ namespace PixelBrahma
 	class Application
 	{
 	public:
-		Application();
+		Application(const std::string& name = "PB Application");
 		virtual ~Application();
 
 		// Event handling and dispatching function

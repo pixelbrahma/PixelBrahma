@@ -14,7 +14,7 @@ PixelBrahma::OpenGLFramebuffer::~OpenGLFramebuffer()
 	glDeleteFramebuffers(1, &m_RendererID);
 }
 
-// Make the framebuffer
+// Recreate the framebuffer
 void PixelBrahma::OpenGLFramebuffer::Invalidate()
 {
 	// Create and bind the framebuffer
@@ -38,7 +38,7 @@ void PixelBrahma::OpenGLFramebuffer::Invalidate()
 	glCreateTextures(GL_TEXTURE_2D, 1, &m_DepthAttachment);
 	glBindTexture(GL_TEXTURE_2D, m_DepthAttachment);
 
-	// Set depth buffer storage mode and image
+	// Set depth buffer storage mode and image - Storage is different from image as it cannot be sampled in a shader
 	glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH24_STENCIL8, m_Specification.Width, m_Specification.Height);
 	// glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, m_Specification.Width, m_Specification.Height, 0,
 		// 	GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL);

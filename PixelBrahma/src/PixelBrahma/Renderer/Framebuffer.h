@@ -10,6 +10,7 @@ namespace PixelBrahma
 		uint32_t Width, Height;
 		uint32_t Samples = 1;
 
+		// Should or should not render to the screen
 		bool SwapChainTarget = false;
 	};
 

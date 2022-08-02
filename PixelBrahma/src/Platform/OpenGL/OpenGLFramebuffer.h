@@ -11,7 +11,7 @@ namespace PixelBrahma
 		OpenGLFramebuffer(const FramebufferSpecification& specification);
 		virtual ~OpenGLFramebuffer();
 
-		// Make the framebuffer function
+		// Recreate the framebuffer function
 		void Invalidate();
 
 		// Bind and unbind override functions

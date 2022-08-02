@@ -144,8 +144,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\PixelBrahma\Renderer\Framebuffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
     <ClInclude Include="ThirdParty\glm\glm\common.hpp" />
     <ClInclude Include="ThirdParty\glm\glm\detail\_features.hpp" />
     <ClInclude Include="ThirdParty\glm\glm\detail\_fixes.hpp" />
@@ -582,6 +580,7 @@
     <ClInclude Include="src\PixelBrahma\Log\Log.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Camera\OrthographicCamera.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Camera\OrthographicCameraController.h" />
+    <ClInclude Include="src\PixelBrahma\Renderer\Framebuffer.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Geometry\Buffer.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Geometry\VertexArray.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\GraphicsContext.h" />
@@ -593,6 +592,7 @@
     <ClInclude Include="src\PixelBrahma\Renderer\Shading\Texture.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
@@ -602,8 +602,6 @@
     <ClInclude Include="src\pbpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\PixelBrahma\Renderer\Framebuffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
     <ClCompile Include="ThirdParty\stb_image\stbi_image.cpp" />
     <ClCompile Include="src\PixelBrahma\Application\Application.cpp" />
     <ClCompile Include="src\PixelBrahma\Core\Window.cpp" />
@@ -615,6 +613,7 @@
     <ClCompile Include="src\PixelBrahma\Log\Log.cpp" />
     <ClCompile Include="src\PixelBrahma\Renderer\Camera\OrthographicCamera.cpp" />
     <ClCompile Include="src\PixelBrahma\Renderer\Camera\OrthographicCameraController.cpp" />
+    <ClCompile Include="src\PixelBrahma\Renderer\Framebuffer.cpp" />
     <ClCompile Include="src\PixelBrahma\Renderer\Geometry\Buffer.cpp" />
     <ClCompile Include="src\PixelBrahma\Renderer\Geometry\VertexArray.cpp" />
     <ClCompile Include="src\PixelBrahma\Renderer\GraphicsContext.cpp" />
@@ -626,6 +625,7 @@
     <ClCompile Include="src\PixelBrahma\Renderer\Shading\Texture.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
