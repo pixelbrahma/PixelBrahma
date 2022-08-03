@@ -72,12 +72,12 @@ namespace PixelBrahma
 		glm::mat4* cameraTransform = nullptr;
 		{
 			// Group entities with camera component
-			auto group = m_Registry.view<TransformComponent, CameraComponent>();
+			auto view = m_Registry.view<TransformComponent, CameraComponent>();
 
-			for (auto entity : group)
+			for (auto entity : view)
 			{
 				// Get the transform and camera components
-				auto& [transform, camera] = group.get<TransformComponent, CameraComponent>(entity);
+				auto& [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
 
 				// Set the main camera
 				if (camera.Primary)
@@ -109,6 +109,29 @@ namespace PixelBrahma
 
 			// End rendering
 			Renderer2D::EndScene();
+		}
+	}
+
+	// Viewport resize function
+	void Scene::OnViewportResize(uint32_t width, uint32_t height)
+	{
+		// Set viewport dimensions to new values
+
+		m_ViewportWidth = width;
+		m_ViewportHeight = height;
+
+		// Resize the non - fixed aspect ratio cameras
+
+		// Get entities with camera component
+		auto view = m_Registry.view<CameraComponent>();
+
+		for (auto entity : view)
+		{
+			// Get the cammera component
+			auto& cameraComponent = view.get<CameraComponent>(entity);
+
+			if (!cameraComponent.FixedAspectRatio)
+				cameraComponent.Camera.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
 		}
 	}
 }

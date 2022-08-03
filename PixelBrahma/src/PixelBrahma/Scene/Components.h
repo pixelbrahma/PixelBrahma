@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 
-#include "PixelBrahma/Renderer/Camera/Camera.h"
+#include "SceneCamera.h"
 
 namespace PixelBrahma
 {
@@ -43,11 +43,11 @@ namespace PixelBrahma
 	// Camera component
 	struct CameraComponent
 	{
-		Camera Camera;
+		SceneCamera Camera;
 		bool Primary = true; 
+		bool FixedAspectRatio = false;
 
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
-		CameraComponent(const glm::mat4& projection) : Camera(projection) {}
 	};
 }
