@@ -29,6 +29,7 @@
 
 // ECS
 #include "PixelBrahma/Scene/Scene.h"
+#include "PixelBrahma/Scene/Entity.h"
 #include "PixelBrahma/Scene/Components.h"
 
 // Renderer

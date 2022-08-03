@@ -119,7 +119,8 @@ project "Sandbox"
 		"PixelBrahma/ThirdParty/spdlog/include",
 		"PixelBrahma/src",
 		"PixelBrahma/ThirdParty",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.enTT}"
 	}
 
 	links

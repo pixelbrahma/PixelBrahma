@@ -6,6 +6,9 @@
 
 namespace PixelBrahma
 {
+	// Forward declaration of the entity class
+	class Entity;
+
 	// Scene management class
 	class Scene
 	{
@@ -14,15 +17,14 @@ namespace PixelBrahma
 		~Scene();
 
 		// Create a new entity function
-		entt::entity CreateEntity();
-
-		// Get registry function
-		entt::registry& GetRegistry() { return m_Registry; }
+		Entity CreateEntity(const std::string& name = std::string());
 
 		// Entity update function
 		void OnUpdate(Timestep timestep);
 
 	private:
 		entt::registry m_Registry;
+
+		friend class Entity;
 	};
 }

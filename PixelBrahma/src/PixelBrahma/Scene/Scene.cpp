@@ -3,6 +3,7 @@
 
 #include "Components.h"
 #include "PixelBrahma/Renderer/Renderer2D.h"
+#include "Entity.h"
 
 #include <glm/glm.hpp>
 
@@ -51,9 +52,17 @@ namespace PixelBrahma
 	Scene::~Scene() {}
 
 	// Create an entity function
-	entt::entity Scene::CreateEntity()
+	Entity Scene::CreateEntity(const std::string& name)
 	{
-		return m_Registry.create();
+		// Create an entity in this scene
+		Entity entity = { m_Registry.create(), this };
+		// Add a transform component to the entity
+		entity.AddComponent<TransformComponent>();
+		// Add a tag component to the entity
+		auto& tag = entity.AddComponent<TagComponent>();
+		tag.Tag = name.empty() ? "Entity" : name;
+
+		return entity;
 	}
 
 	// Update scene entities

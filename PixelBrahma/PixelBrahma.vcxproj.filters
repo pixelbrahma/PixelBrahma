@@ -67,6 +67,9 @@
     <Filter Include="src\PixelBrahma\Renderer\Shading">
       <UniqueIdentifier>{9C3B0D80-888C-F8C1-B1F0-E6839DA08B2B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\PixelBrahma\Scene">
+      <UniqueIdentifier>{66C93D2B-D235-F925-9B29-918307551B8E}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
     </Filter>
@@ -1416,6 +1419,15 @@
     <ClInclude Include="src\PixelBrahma\Renderer\Shading\Texture.h">
       <Filter>src\PixelBrahma\Renderer\Shading</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Scene\Components.h">
+      <Filter>src\PixelBrahma\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Scene\Entity.h">
+      <Filter>src\PixelBrahma\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Scene\Scene.h">
+      <Filter>src\PixelBrahma\Scene</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
@@ -1443,8 +1455,6 @@
     <ClInclude Include="src\pbpch.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\PixelBrahma\Scene\Scene.h" />
-    <ClInclude Include="src\PixelBrahma\Scene\Components.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ThirdParty\stb_image\stbi_image.cpp">
@@ -1507,6 +1517,12 @@
     <ClCompile Include="src\PixelBrahma\Renderer\Shading\Texture.cpp">
       <Filter>src\PixelBrahma\Renderer\Shading</Filter>
     </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Scene\Entity.cpp">
+      <Filter>src\PixelBrahma\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Scene\Scene.cpp">
+      <Filter>src\PixelBrahma\Scene</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
@@ -1537,6 +1553,5 @@
     <ClCompile Include="src\pbpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\PixelBrahma\Scene\Scene.cpp" />
   </ItemGroup>
 </Project>

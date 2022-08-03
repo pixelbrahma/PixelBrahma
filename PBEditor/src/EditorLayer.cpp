@@ -31,11 +31,9 @@ namespace PixelBrahma
 		m_ActiveScene = CreateRef<Scene>();
 
 		// Create square entity
-		auto square = m_ActiveScene->CreateEntity();
-
-		// Register components
-		m_ActiveScene->GetRegistry().emplace<TransformComponent>(square);
-		m_ActiveScene->GetRegistry().emplace<SpriteRendererComponent>(square, glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+		auto square = m_ActiveScene->CreateEntity("Green Square");
+		// Add a sprite renderer component to the square
+		square.AddComponent<SpriteRendererComponent>(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
 
 		m_SquareEntity = square;
 	}
@@ -52,6 +50,17 @@ namespace PixelBrahma
 	{
 		// Sandbox update function profiling
 		PB_PROFILE_FUNCTION();
+
+		// Resize
+		if (FramebufferSpecification specification = m_Framebuffer->GetSpecification();
+			m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f && // zero sized framebuffer is invalid
+			(specification.Width != m_ViewportSize.x || specification.Height != m_ViewportSize.y))
+		{
+			// Resize the framebuffer to the new viewport size
+			m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+			// Resize the camera to the new viewport size
+			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
+		}
 
 		// If the viewport panel is in focus
 		if (m_ViewportFocused)
@@ -167,7 +176,18 @@ namespace PixelBrahma
 		ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
 		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
 
-		ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
+		if (m_SquareEntity)
+		{
+			// Display Tag
+			ImGui::Separator();
+			auto& tag = m_SquareEntity.GetComponent<TagComponent>().Tag;
+			ImGui::Text("%s", tag.c_str());
+
+			// Display color picker widget
+			auto& squareColor = m_SquareEntity.GetComponent<SpriteRendererComponent>().Color;
+			ImGui::ColorEdit4("Square Color", glm::value_ptr(squareColor));
+			ImGui::Separator();
+		}
 
 		ImGui::End();
 
@@ -181,18 +201,9 @@ namespace PixelBrahma
 
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 
-		if (m_ViewportSize != *((glm::vec2*)&viewportPanelSize) && viewportPanelSize.x > 0 && viewportPanelSize.y > 0)
-		{
-			// Resize framebuffer
-			m_Framebuffer->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
+		// Set viewport size
+		m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 
-			// Set viewport size
-			m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
-
-			// Set camera projection to the new viewport size
-			m_CameraController.OnResize(viewportPanelSize.x, viewportPanelSize.y);
-		}
-		
 		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
 		ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 		ImGui::End();
