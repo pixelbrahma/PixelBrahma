@@ -85,9 +85,9 @@ namespace PixelBrahma
 	// ImGui layer event handler
 	void ImGuiLayer::OnEvent(Event& event)
 	{
-		ImGuiIO& io = ImGui::GetIO();
-		event.Handled |= event.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
-		event.Handled |= event.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
+		//ImGuiIO& io = ImGui::GetIO();
+		//event.Handled |= event.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
+		//event.Handled |= event.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
 	}
 
 	// ImGui begin function
