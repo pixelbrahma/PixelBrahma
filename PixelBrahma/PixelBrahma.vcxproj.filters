@@ -1457,6 +1457,7 @@
     </ClInclude>
     <ClInclude Include="src\PixelBrahma\Renderer\Camera\Camera.h" />
     <ClInclude Include="src\PixelBrahma\Scene\SceneCamera.h" />
+    <ClInclude Include="src\PixelBrahma\Scene\ScriptableEntity.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ThirdParty\stb_image\stbi_image.cpp">

@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="src\PixelBrahma\Renderer\Camera\Camera.h" />
     <ClInclude Include="src\PixelBrahma\Scene\SceneCamera.h" />
+    <ClInclude Include="src\PixelBrahma\Scene\ScriptableEntity.h" />
     <ClInclude Include="ThirdParty\glm\glm\common.hpp" />
     <ClInclude Include="ThirdParty\glm\glm\detail\_features.hpp" />
     <ClInclude Include="ThirdParty\glm\glm\detail\_fixes.hpp" />

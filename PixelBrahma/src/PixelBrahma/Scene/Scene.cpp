@@ -68,6 +68,30 @@ namespace PixelBrahma
 	// Update scene entities
 	void Scene::OnUpdate(Timestep timestep)
 	{
+		// Update scripts
+		{
+			// Get and set scripting components
+			m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
+			{
+				// If native scripting component instance doesnt exist, create instance and set instance entity
+				if (!nsc.Instance)
+				{
+					nsc.InstantiateFunction();
+					nsc.Instance->m_Entity = Entity(entity, this);
+
+					// If the native scripting compoennt has a create function defined, call the create function
+					if (nsc.OnCreateFunction)
+						nsc.OnCreateFunction(nsc.Instance);
+				}
+
+				// If the native scripting component has an update function defined, call the update function
+				if (nsc.OnUpdateFunction)
+					nsc.OnUpdateFunction(nsc.Instance, timestep);
+			});
+		}
+
+		// Render 2D
+
 		Camera* mainCamera = nullptr;
 		glm::mat4* cameraTransform = nullptr;
 		{

@@ -45,6 +45,38 @@ namespace PixelBrahma
 		m_SecondCamera = m_ActiveScene->CreateEntity("Clip-Space Entity");
 		auto& cc = m_SecondCamera.AddComponent<CameraComponent>();
 		cc.Primary = false;
+
+		// Camera controller class which is scriptable
+		class CameraController : public ScriptableEntity
+		{
+		public:
+			// Create function
+			void OnCreate() {}
+			// Destroy function
+			void OnDestroy() {}
+
+			// Update function
+			void OnUpdate(Timestep timestep)
+			{
+				// Get the transform component
+				auto& transform = GetComponent<TransformComponent>().Transform;
+				float speed = 5.0f;
+
+				// Key bindings
+
+				if (Input::IsKeyPressed(KeyCode::A))
+					transform[3][0] -= speed * timestep;
+				if (Input::IsKeyPressed(KeyCode::D))
+					transform[3][0] += speed * timestep;
+				if (Input::IsKeyPressed(KeyCode::W))
+					transform[3][1] += speed * timestep;
+				if (Input::IsKeyPressed(KeyCode::S))
+					transform[3][1] -= speed * timestep;
+			}
+		};
+
+		// Add camera controller script component to the camera entity
+		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 	}
 
 	// Layer on detach function

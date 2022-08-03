@@ -31,6 +31,7 @@
 #include "PixelBrahma/Scene/Scene.h"
 #include "PixelBrahma/Scene/Entity.h"
 #include "PixelBrahma/Scene/Components.h"
+#include "PixelBrahma/Scene/ScriptableEntity.h"
 
 // Renderer
 #include "PixelBrahma/Renderer/Renderer.h"
