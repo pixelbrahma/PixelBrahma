@@ -21,14 +21,16 @@ namespace PixelBrahma
 		virtual void OnDetach() override;
 		virtual void OnEvent(Event& event) override;
 
-		//virtual void OnImGuiRender() override;
-
 		// ImGui layer begin and end functions - Begin and End ImGui rendering
 
 		void Begin();
 		void End();
 
+		// Set Event blocking
+		void BlockEvents(bool block) { m_BlockEvents = block; }
+
 	private:
 		float m_Time = 0.0f;
+		bool m_BlockEvents = true;
 	};
 }

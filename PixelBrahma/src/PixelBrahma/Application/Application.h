@@ -34,6 +34,9 @@ namespace PixelBrahma
 		// Close application function
 		void Close();
 
+		// Get ImGuiLayer function
+		ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
+
 		// Application instance and window getter functions
 
 		Window& GetWindow() { return *m_Window; }

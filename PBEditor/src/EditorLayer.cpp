@@ -41,8 +41,23 @@ namespace PixelBrahma
 		// Sandbox update function profiling
 		PB_PROFILE_FUNCTION();
 
-		// Call camera update function
-		m_CameraController.OnUpdate(timestep);
+		// Resizing
+		if (FramebufferSpecification specification = m_Framebuffer->GetSpecification();
+			m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f &&
+			(specification.Width != m_ViewportSize.x || specification.Height != m_ViewportSize.y))
+		{
+			// Resize the framebuffer
+			m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+			// Change camera projection to new size
+			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
+		}
+
+		// If the viewport panel is in focus
+		if (m_ViewportFocused)
+		{
+			// Call camera update function
+			m_CameraController.OnUpdate(timestep);
+		}
 
 		// Reset statistics
 		Renderer2D::ResetStats();
@@ -189,16 +204,15 @@ namespace PixelBrahma
 		// Viewport 
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 		ImGui::Begin("Viewport");
+
+		m_ViewportFocused = ImGui::IsWindowFocused();
+		m_ViewportHovered = ImGui::IsWindowHovered();
+		Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused || !m_ViewportHovered);
+
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 
-		if (m_ViewportSize != *((glm::vec2*)&viewportPanelSize))
-		{
-			m_Framebuffer->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
-			m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
-
-			m_CameraController.OnResize(viewportPanelSize.x, viewportPanelSize.y);
-		}
-
+		m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
+		
 		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
 		ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 		ImGui::End();
