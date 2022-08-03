@@ -2,6 +2,8 @@
 
 #include <glm/glm.hpp>
 
+#include "PixelBrahma/Renderer/Camera/Camera.h"
+
 namespace PixelBrahma
 {
 	// The tag component
@@ -36,5 +38,16 @@ namespace PixelBrahma
 		SpriteRendererComponent() = default;
 		SpriteRendererComponent(const SpriteRendererComponent&) = default;
 		SpriteRendererComponent(const glm::vec4& color) : Color(color) {}
+	};
+
+	// Camera component
+	struct CameraComponent
+	{
+		Camera Camera;
+		bool Primary = true; 
+
+		CameraComponent() = default;
+		CameraComponent(const CameraComponent&) = default;
+		CameraComponent(const glm::mat4& projection) : Camera(projection) {}
 	};
 }

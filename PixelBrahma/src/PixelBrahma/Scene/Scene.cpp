@@ -68,16 +68,47 @@ namespace PixelBrahma
 	// Update scene entities
 	void Scene::OnUpdate(Timestep timestep)
 	{
-		// group objects with transform and sprite renderer components
-		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-
-		for (auto entity : group)
+		Camera* mainCamera = nullptr;
+		glm::mat4* cameraTransform = nullptr;
 		{
-			// Get the component from the entity
-			auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+			// Group entities with camera component
+			auto group = m_Registry.view<TransformComponent, CameraComponent>();
 
-			// Draw call
-			Renderer2D::DrawQuad(transform, sprite.Color);
+			for (auto entity : group)
+			{
+				// Get the transform and camera components
+				auto& [transform, camera] = group.get<TransformComponent, CameraComponent>(entity);
+
+				// Set the main camera
+				if (camera.Primary)
+				{
+					mainCamera = &camera.Camera;
+					cameraTransform = &transform.Transform;
+					break;
+				}
+			}
+		}
+
+		// Render from the main camera
+		if (mainCamera)
+		{
+			// Begin rendering
+			Renderer2D::BeginScene(mainCamera->GetProjection(), *cameraTransform);
+			
+			// Get entities with sprite renderer component
+			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+
+			for (auto entity : group)
+			{
+				// Get the transform and sprite renderer components
+				auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+
+				// Draw call
+				Renderer2D::DrawQuad(transform, sprite.Color);
+			}
+
+			// End rendering
+			Renderer2D::EndScene();
 		}
 	}
 }

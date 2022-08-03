@@ -30,7 +30,8 @@ namespace PixelBrahma
 	class Instrumentor
 	{
 	public:
-		Instrumentor() : m_CurrentSession(nullptr) {}
+		Instrumentor(const Instrumentor&) = delete;
+		Instrumentor(Instrumentor&&) = delete;
 
 		// Begin profiling session
 		void BeginSession(const std::string& name, const std::string& filepath = "results.json")
@@ -108,6 +109,11 @@ namespace PixelBrahma
 			static Instrumentor instance;
 			return instance;
 		}
+
+	private:
+		Instrumentor() : m_CurrentSession(nullptr) {}
+		~Instrumentor() { EndSession(); }
+
 
 		// Write header data of the file
 		void WriteHeader()
@@ -235,9 +241,11 @@ namespace PixelBrahma
 
 	#define PB_PROFILE_BEGIN_SESSION(name, filepath)   ::PixelBrahma::Instrumentor::Get().BeginSession(name, filepath)
 	#define PB_PROFILE_END_SESSION()                   ::PixelBrahma::Instrumentor::Get().EndSession()
-	#define PB_PROFILE_SCOPE(name) \
-		 constexpr auto fixedName =                    ::PixelBrahma::InstrumentorUtils::CleanupOutputString(name, "__cdecl ");\
-									                   ::PixelBrahma::InstrumentationTimer timer##__LINE__(fixedName.Data)
+	#define PB_PROFILE_SCOPE_LINE2(name, line) \
+		constexpr auto fixedName##line = ::PixelBrahma::InstrumentorUtils::CleanupOutputString(name, "__cdecl ");\
+		::PixelBrahma::InstrumentationTimer timer##line(fixedName##line.Data)
+	#define PB_PROFILE_SCOPE_LINE(name, line) PB_PROFILE_SCOPE_LINE2(name, line)
+	#define PB_PROFILE_SCOPE(name) PB_PROFILE_SCOPE_LINE(name, __LINE__)
 	#define PB_PROFILE_FUNCTION() PB_PROFILE_SCOPE(PB_FUNC_SIG)
 #else
 	#define PB_PROFILE_BEGIN_SESSION(name, filepath)

@@ -2,6 +2,7 @@
 
 #include "Camera/OrthographicCamera.h"
 #include "Shading/Texture.h"
+#include "Camera/Camera.h"
 
 namespace PixelBrahma
 {
@@ -17,6 +18,7 @@ namespace PixelBrahma
 
 		// Begin and end scene functions
 
+		static void BeginScene(const Camera& camera, const glm::mat4& transform);
 		static void BeginScene(const OrthographicCamera& camera);
 		static void EndScene();
 		static void Flush();

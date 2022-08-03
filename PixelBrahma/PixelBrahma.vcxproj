@@ -144,6 +144,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\PixelBrahma\Renderer\Camera\Camera.h" />
     <ClInclude Include="ThirdParty\glm\glm\common.hpp" />
     <ClInclude Include="ThirdParty\glm\glm\detail\_features.hpp" />
     <ClInclude Include="ThirdParty\glm\glm\detail\_fixes.hpp" />

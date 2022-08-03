@@ -136,14 +136,34 @@ namespace PixelBrahma
 		delete[] s_Data.QuadVertexBufferBase;
 	}
 
-	// Begin scene function
+	// Begin scene functions
+
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
 		// Profiling
 		PB_PROFILE_FUNCTION();
 
+		// Bind shader and set uniforms
 		s_Data.TextureShader->Bind();
 		s_Data.TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
+
+		s_Data.QuadIndexCount = 0;
+		s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
+
+		s_Data.TextureSlotIndex = 1;
+	}
+
+	void Renderer2D::BeginScene(const Camera& camera, const glm::mat4& transform)
+	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
+		// View projection matrix 
+		glm::mat4 viewProjection = camera.GetProjection() * glm::inverse(transform);
+
+		// Bind shader and set uniforms
+		s_Data.TextureShader->Bind();
+		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProjection);
 
 		s_Data.QuadIndexCount = 0;
 		s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
