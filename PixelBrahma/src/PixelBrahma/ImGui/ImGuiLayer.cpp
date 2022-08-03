@@ -38,7 +38,7 @@ namespace PixelBrahma
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
 		// Enable multi-viewport / platform windows
-		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
 
