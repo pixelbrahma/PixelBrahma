@@ -4,7 +4,7 @@
 
 namespace PixelBrahma
 {
-	// 2D application layer class
+	// Editor layer class
 	class EditorLayer : public Layer
 	{
 	public:

@@ -56,7 +56,8 @@ namespace PixelBrahma
 		// Set depth buffer depth attachment as the texture
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, m_DepthAttachment, 0);
 
-		PB_CORE_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, "Framebuffer is incomplete!");
+		PB_CORE_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, 
+			"Framebuffer is incomplete!");
 
 		// Unbind the frame buffer
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
