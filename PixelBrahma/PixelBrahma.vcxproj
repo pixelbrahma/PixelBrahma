@@ -597,7 +597,6 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\pbpch.h" />
   </ItemGroup>
@@ -607,7 +606,6 @@
     <ClCompile Include="src\PixelBrahma\Core\Window.cpp" />
     <ClCompile Include="src\PixelBrahma\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\PixelBrahma\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\PixelBrahma\Input\Input.cpp" />
     <ClCompile Include="src\PixelBrahma\Layers\Layer.cpp" />
     <ClCompile Include="src\PixelBrahma\Layers\LayerStack.cpp" />
     <ClCompile Include="src\PixelBrahma\Log\Log.cpp" />

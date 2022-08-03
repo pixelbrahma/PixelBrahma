@@ -1,5 +1,5 @@
 #include "pbpch.h"
-#include "WindowsInput.h"
+#include "PixelBrahma/Input/Input.h"
 
 #include "PixelBrahma/Application/Application.h"
 
@@ -8,7 +8,7 @@
 namespace PixelBrahma
 {
 	// Key pressed input state implementation
-	bool WindowsInput::IsKeyPressedImpl(KeyCode key)
+	bool Input::IsKeyPressed(KeyCode key)
 	{
 		// From application instance, get window and from the window, get platform specific window
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
@@ -18,7 +18,7 @@ namespace PixelBrahma
 	}
 
 	// Mouse pressed input state implementation
-	bool WindowsInput::IsMouseButtonPressedImpl(MouseCode button)
+	bool Input::IsMouseButtonPressed(MouseCode button)
 	{
 		// From application instance, get window and from the window, get platform specific window
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
@@ -28,7 +28,7 @@ namespace PixelBrahma
 	}
 
 	// Mouse position input implementation
-	std::pair<float, float> WindowsInput::GetMousePositionImpl()
+	std::pair<float, float> Input::GetMousePosition()
 	{
 		// From application instance, get window and from the window, get platform specific window
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
@@ -39,16 +39,16 @@ namespace PixelBrahma
 	}
 
 	// Mouse position X getter implementation
-	float WindowsInput::GetMouseXImpl()
+	float Input::GetMouseX()
 	{
-		auto [x, y] = GetMousePositionImpl();
+		auto [x, y] = GetMousePosition();
 		return x;
 	}
 
 	// Mouse position Y getter implementation
-	float WindowsInput::GetMouseYImpl()
+	float Input::GetMouseY()
 	{
-		auto [x, y] = GetMousePositionImpl();
+		auto [x, y] = GetMousePosition();
 		return y;
 	}
 }
