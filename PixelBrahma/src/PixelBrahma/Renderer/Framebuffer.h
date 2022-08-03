@@ -18,6 +18,7 @@ namespace PixelBrahma
 	class Framebuffer
 	{
 	public:
+		virtual ~Framebuffer() = default;
 
 		// Bind and unbind functions
 

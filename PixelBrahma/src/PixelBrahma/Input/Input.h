@@ -18,6 +18,8 @@ namespace PixelBrahma
 		Input(const Input&) = delete;
 		Input& operator=(const Input&) = delete;
 
+		virtual ~Input() = default;
+
 	public:
 
 		// Static input state getter functions

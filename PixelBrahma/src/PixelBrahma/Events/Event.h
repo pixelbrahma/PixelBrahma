@@ -54,6 +54,8 @@ namespace PixelBrahma
 		friend class EventDispatcher;
 
 	public:
+		virtual ~Event() = default;
+
 		bool Handled = false;
 
 		// Virtual event properties getter functions

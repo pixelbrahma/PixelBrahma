@@ -6,6 +6,7 @@ namespace PixelBrahma
 	class GraphicsContext
 	{
 	public:
+		virtual ~GraphicsContext() = default;
 
 		// Initialize context
 		virtual void Init() = 0;

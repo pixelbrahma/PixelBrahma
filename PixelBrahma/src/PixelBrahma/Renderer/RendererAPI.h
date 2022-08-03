@@ -17,6 +17,7 @@ namespace PixelBrahma
 		};
 
 	public:
+		virtual ~RendererAPI() = default;
 
 		// Virtual renderer initialize function
 		virtual void Init() = 0;
