@@ -5,6 +5,9 @@
 
 namespace PixelBrahma
 {
+	// Define maximum supported framebuffer size
+	static const uint32_t s_MaxFramebufferSize = 8192;
+
 	OpenGLFramebuffer::OpenGLFramebuffer(const FramebufferSpecification& specification) :
 		m_Specification(specification)
 	{
@@ -79,6 +82,13 @@ namespace PixelBrahma
 	// Framebuffer resize
 	void OpenGLFramebuffer::Resize(uint32_t width, uint32_t height)
 	{
+		// Check if unusable framebuffer resize value is obtained
+		if (width == 0 || height == 0 || width > s_MaxFramebufferSize || height > s_MaxFramebufferSize)
+		{
+			PB_CORE_WARN("Attempted to rezize framebuffer to {0}, {1}", width, height);
+			return;
+		}
+
 		// Set new width and height of the viewport
 
 		m_Specification.Width = width;

@@ -22,6 +22,7 @@ IncludeDir["Glad"] = "PixelBrahma/ThirdParty/Glad/include"
 IncludeDir["ImGui"] = "PixelBrahma/ThirdParty/ImGui"
 IncludeDir["glm"] = "PixelBrahma/ThirdParty/glm"
 IncludeDir["stb_image"] = "PixelBrahma/ThirdParty/stb_image"
+IncludeDir["enTT"] = "PixelBrahma/ThirdParty/enTT/Include"
 
 group "Dependencies"
 	include "PixelBrahma/ThirdParty/GLFW"
@@ -67,7 +68,8 @@ project "PixelBrahma"
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.stb_image}"
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.enTT}"
 	}
 
 	links
@@ -164,7 +166,8 @@ project "PBEditor"
 		"PixelBrahma/ThirdParty/spdlog/include",
 		"PixelBrahma/src",
 		"PixelBrahma/ThirdParty",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.enTT}"
 	}
 
 	links

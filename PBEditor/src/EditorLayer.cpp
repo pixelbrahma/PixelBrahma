@@ -26,6 +26,18 @@ namespace PixelBrahma
 
 		// Create the frambuffer
 		m_Framebuffer = Framebuffer::Create(framebufferSpecification);
+
+		// Create scene reference
+		m_ActiveScene = CreateRef<Scene>();
+
+		// Create square entity
+		auto square = m_ActiveScene->CreateEntity();
+
+		// Register components
+		m_ActiveScene->GetRegistry().emplace<TransformComponent>(square);
+		m_ActiveScene->GetRegistry().emplace<SpriteRendererComponent>(square, glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+
+		m_SquareEntity = square;
 	}
 
 	// Layer on detach function
@@ -41,17 +53,6 @@ namespace PixelBrahma
 		// Sandbox update function profiling
 		PB_PROFILE_FUNCTION();
 
-		// Resizing
-		if (FramebufferSpecification specification = m_Framebuffer->GetSpecification();
-			m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f &&
-			(specification.Width != m_ViewportSize.x || specification.Height != m_ViewportSize.y))
-		{
-			// Resize the framebuffer
-			m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-			// Change camera projection to new size
-			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
-		}
-
 		// If the viewport panel is in focus
 		if (m_ViewportFocused)
 		{
@@ -62,57 +63,26 @@ namespace PixelBrahma
 		// Reset statistics
 		Renderer2D::ResetStats();
 
-		{
-			// Renderer preparation profiling
-			PB_PROFILE_SCOPE("Renderer preparation");
 
-			// Bind the framebuffer
-			m_Framebuffer->Bind();
 
-			// Clear the color buffer
-			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
-			RenderCommand::Clear();
-		}
+		// Bind the framebuffer
+		m_Framebuffer->Bind();
 
-		{
-			static float rotation = 0.0f;
-			rotation += timestep * 50.0f;
+		// Clear the color buffer
+		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+		RenderCommand::Clear();
 
-			// Renderer drawing profiling
-			PB_PROFILE_SCOPE("Renderer Draw");
+		// Start rendering the 2D scene
+		Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-			// Start rendering the 2D scene
-			Renderer2D::BeginScene(m_CameraController.GetCamera());
+		// Update scene entities
+		m_ActiveScene->OnUpdate(timestep);
 
-			// Draw quads
-			Renderer2D::DrawRotatedQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, -45.0f, { 0.8f, 0.2f, 0.3f, 1.0f });
-			Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
-			Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, m_SquareColor);
-			Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 20.0f, 20.0f }, m_CheckerboardTexture, 10.0f);
-			Renderer2D::DrawRotatedQuad({ -2.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, rotation, m_CheckerboardTexture, 20.0f);
+		// End the scene
+		Renderer2D::EndScene();
 
-			// Stop rendering the scene
-			Renderer2D::EndScene();
-
-			// Begin another rendering scene
-			Renderer2D::BeginScene(m_CameraController.GetCamera());
-
-			// Draw quads
-			for (float y = -5.0f; y < 5.0f; y += 0.5f)
-			{
-				for (float x = -5.0f; x < 5.0f; x += 0.5f)
-				{
-					glm::vec4 color = { (x + 5.0f) / 10.0f, 0.4f, (y + 5.0f) / 10.0f, 0.7f };
-					Renderer2D::DrawQuad({ x, y }, { 0.45f, 0.45f }, color);
-				}
-			}
-
-			// End the scene
-			Renderer2D::EndScene();
-
-			// Unbind the framebuffer
-			m_Framebuffer->UnBind();
-		}
+		// Unbind the framebuffer
+		m_Framebuffer->UnBind();
 	}
 
 	// ImGui render function
@@ -211,7 +181,17 @@ namespace PixelBrahma
 
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 
-		m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
+		if (m_ViewportSize != *((glm::vec2*)&viewportPanelSize) && viewportPanelSize.x > 0 && viewportPanelSize.y > 0)
+		{
+			// Resize framebuffer
+			m_Framebuffer->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
+
+			// Set viewport size
+			m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
+
+			// Set camera projection to the new viewport size
+			m_CameraController.OnResize(viewportPanelSize.x, viewportPanelSize.y);
+		}
 		
 		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
 		ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });

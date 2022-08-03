@@ -27,6 +27,10 @@
 // ImGui
 #include "PixelBrahma/ImGui/ImGuiLayer.h"
 
+// ECS
+#include "PixelBrahma/Scene/Scene.h"
+#include "PixelBrahma/Scene/Components.h"
+
 // Renderer
 #include "PixelBrahma/Renderer/Renderer.h"
 #include "PixelBrahma/Renderer/Renderer2D.h"
