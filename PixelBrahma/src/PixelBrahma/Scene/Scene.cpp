@@ -53,7 +53,7 @@ namespace PixelBrahma
 		// Render 2D
 
 		Camera* mainCamera = nullptr;
-		glm::mat4* cameraTransform = nullptr;
+		glm::mat4 cameraTransform;
 		{
 			// Group entities with camera component
 			auto view = m_Registry.view<TransformComponent, CameraComponent>();
@@ -67,7 +67,7 @@ namespace PixelBrahma
 				if (camera.Primary)
 				{
 					mainCamera = &camera.Camera;
-					cameraTransform = &transform.Transform;
+					cameraTransform = transform.GetTransform();
 					break;
 				}
 			}
@@ -77,7 +77,7 @@ namespace PixelBrahma
 		if (mainCamera)
 		{
 			// Begin rendering
-			Renderer2D::BeginScene(*mainCamera, *cameraTransform);
+			Renderer2D::BeginScene(*mainCamera, cameraTransform);
 			
 			// Get entities with sprite renderer component
 			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
@@ -88,7 +88,7 @@ namespace PixelBrahma
 				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
 				// Draw call
-				Renderer2D::DrawQuad(transform, sprite.Color);
+				Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
 			}
 
 			// End rendering

@@ -45,7 +45,7 @@ namespace PixelBrahma
 		auto redSquare = m_ActiveScene->CreateEntity("Red Square");
 		// Add a sprite renderer component to the square and move it to the right
 		redSquare.AddComponent<SpriteRendererComponent>(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-		redSquare.GetComponent<TransformComponent>().Transform[3][0] = 2.0f;
+		redSquare.GetComponent<TransformComponent>().Translation.x = 2.0f;
 
 		// Create a camera entity and add a camera component
 		m_CameraEntity = m_ActiveScene->CreateEntity("Main Camera");
@@ -64,8 +64,8 @@ namespace PixelBrahma
 			virtual void OnCreate() override
 			{
 				// Get the transform component
-				auto& transform = GetComponent<TransformComponent>().Transform;
-				transform[3][0] = rand() % 10 - 5.0f;
+				auto& translation = GetComponent<TransformComponent>().Translation;
+				translation.x = rand() % 10 - 5.0f;
 			}
 
 			// Destroy function
@@ -75,19 +75,19 @@ namespace PixelBrahma
 			virtual void OnUpdate(Timestep timestep) override
 			{
 				// Get the transform component
-				auto& transform = GetComponent<TransformComponent>().Transform;
+				auto& translation = GetComponent<TransformComponent>().Translation;
 				float speed = 5.0f;
 
 				// Key bindings
 
 				if (Input::IsKeyPressed(Key::A))
-					transform[3][0] -= speed * timestep;
+					translation.x -= speed * timestep;
 				if (Input::IsKeyPressed(Key::D))
-					transform[3][0] += speed * timestep;
+					translation.x += speed * timestep;
 				if (Input::IsKeyPressed(Key::W))
-					transform[3][1] += speed * timestep;
+					translation.y += speed * timestep;
 				if (Input::IsKeyPressed(Key::S))
-					transform[3][1] -= speed * timestep;
+					translation.y -= speed * timestep;
 			}
 		};
 
