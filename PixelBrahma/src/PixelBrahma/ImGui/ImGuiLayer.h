@@ -29,6 +29,9 @@ namespace PixelBrahma
 		// Set Event blocking
 		void BlockEvents(bool block) { m_BlockEvents = block; }
 
+		// Set the theme to dark colors function
+		void SetDarkThemeColors();
+
 	private:
 		float m_Time = 0.0f;
 		bool m_BlockEvents = true;
