@@ -84,6 +84,9 @@ namespace PixelBrahma
 		// Add camera controller script component to the camera entities
 		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 		m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+
+		// Set the context of the scene hierarchy panel
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 	}
 
 	// Layer on detach function
@@ -209,6 +212,9 @@ namespace PixelBrahma
 
 			ImGui::EndMenuBar();
 		}
+
+		// Render the scene hierarchy panel
+		m_SceneHierarchyPanel.OnImGuiRender();
 
 		ImGui::Begin("Settings");
 
