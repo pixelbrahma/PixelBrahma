@@ -76,7 +76,7 @@ namespace PixelBrahma
 		std::string result;
 
 		// Open input binary file stream 
-		std::ifstream in(filepath, std::ios::in | std::ios::binary);
+		std::ifstream in(filepath, std::ios::in | std::ios::binary); // ifstream closes itself due to RAII
 
 		if (in)
 		{
@@ -94,7 +94,6 @@ namespace PixelBrahma
 				// Set the cursor position to the beginning of the file, read file stream and close the file
 				in.seekg(0, std::ios::beg);
 				in.read(&result[0], size);
-				in.close();
 			}
 			else
 				PB_CORE_ERROR("Could not read from file '{0}'", filepath);

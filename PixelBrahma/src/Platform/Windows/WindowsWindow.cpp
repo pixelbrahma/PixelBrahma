@@ -118,7 +118,7 @@ namespace PixelBrahma
 					case GLFW_PRESS:
 					{
 						// Create a key pressed event and dispatch it
-						KeyPressedEvent event(static_cast<KeyCode>(key), 0);
+						KeyPressedEvent event(key, 0);
 						data.EventCallback(event);
 
 						break;
@@ -127,7 +127,7 @@ namespace PixelBrahma
 					case GLFW_RELEASE:
 					{
 						// Create a key released event and dispatch it
-						KeyReleasedEvent event(static_cast<KeyCode>(key));
+						KeyReleasedEvent event(key);
 						data.EventCallback(event);
 
 						break;
@@ -137,7 +137,7 @@ namespace PixelBrahma
 					{
 						// Create a key pressed event and dispatch it
 						// GLFW doesnt provide repeat count but win32 api does
-						KeyPressedEvent event(static_cast<KeyCode>(key), 1);		
+						KeyPressedEvent event(key, 1);
 						data.EventCallback(event);
 
 						break;
@@ -151,7 +151,7 @@ namespace PixelBrahma
 				// Get the user pointer which points to WindowData structure type and set width and height
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
-				KeyTypedEvent event(static_cast<KeyCode>(keycode));
+				KeyTypedEvent event(keycode);
 				data.EventCallback(event);
 			});
 
@@ -166,7 +166,7 @@ namespace PixelBrahma
 					case GLFW_PRESS:
 					{
 						// Create a mouse button pressed event and dispatch it
-						MouseButtonPressedEvent event(static_cast<MouseCode>(button));
+						MouseButtonPressedEvent event(button);
 						data.EventCallback(event);
 
 						break;

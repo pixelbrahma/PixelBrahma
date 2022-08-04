@@ -1,7 +1,8 @@
 #pragma once
 
-#include "pbpch.h"
+#include <functional>
 
+#include "PixelBrahma/Debug/Instrumentor.h"
 #include "PixelBrahma/Core/Core.h"
 
 // Events are blocking events

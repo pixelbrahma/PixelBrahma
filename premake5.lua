@@ -1,3 +1,5 @@
+include "./vendor/premake/premake_customization/solution_items.lua"
+
 workspace "PixelBrahma"
 	architecture "x86_64"
 	startproject "PBEditor"
@@ -9,6 +11,12 @@ workspace "PixelBrahma"
 		"Dist"
 	}
 
+	solution_items
+	{
+		".editorconfig"
+	}
+
+
 	flags
 	{
 		"MultiProcessorCompile"
@@ -16,180 +24,22 @@ workspace "PixelBrahma"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
 IncludeDir = {}
-IncludeDir["GLFW"] = "PixelBrahma/ThirdParty/GLFW/include"
-IncludeDir["Glad"] = "PixelBrahma/ThirdParty/Glad/include"
-IncludeDir["ImGui"] = "PixelBrahma/ThirdParty/ImGui"
-IncludeDir["glm"] = "PixelBrahma/ThirdParty/glm"
-IncludeDir["stb_image"] = "PixelBrahma/ThirdParty/stb_image"
-IncludeDir["enTT"] = "PixelBrahma/ThirdParty/enTT/Include"
+IncludeDir["GLFW"] = "%{wks.location}/PixelBrahma/ThirdParty/GLFW/include"
+IncludeDir["Glad"] = "%{wks.location}/PixelBrahma/ThirdParty/Glad/include"
+IncludeDir["ImGui"] = "%{wks.location}/PixelBrahma/ThirdParty/ImGui"
+IncludeDir["glm"] = "%{wks.location}/PixelBrahma/ThirdParty/glm"
+IncludeDir["stb_image"] = "%{wks.location}/PixelBrahma/ThirdParty/stb_image"
+IncludeDir["enTT"] = "%{wks.location}/PixelBrahma/ThirdParty/enTT/Include"
 
 group "Dependencies"
+	include "vendor/premake"
 	include "PixelBrahma/ThirdParty/GLFW"
 	include "PixelBrahma/ThirdParty/Glad"
 	include "PixelBrahma/ThirdParty/ImGui"
-	
 group ""
 
-project "PixelBrahma"
-	location "PixelBrahma"
-	kind "StaticLib"
-	language "C++"
-	cppdialect "C++17"
-	staticruntime "on"
-
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-
-	pchheader "pbpch.h"
-	pchsource "PixelBrahma/src/pbpch.cpp"
-
-	files
-	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
-		"%{prj.name}/ThirdParty/stb_image/**.h",
-		"%{prj.name}/ThirdParty/stb_image/**.cpp",
-		"%{prj.name}/ThirdParty/glm/glm/**.hpp",
-		"%{prj.name}/ThirdParty/glm/glm/**.inl"
-	}
-
-	defines
-	{
-		"_CRT_SECURE_NO_WARNINGS",
-		"GLFW_INCLUDE_NONE"
-	}
-
-	includedirs
-	{
-		"%{prj.name}/src",
-		"%{prj.name}/ThirdParty/spdlog/include",
-		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}",
-		"%{IncludeDir.stb_image}",
-		"%{IncludeDir.enTT}"
-	}
-
-	links
-	{
-		"GLFW",
-		"Glad",
-		"ImGui",
-		"opengl32.lib"
-	}
-
-	filter "system:windows"
-		systemversion "latest"
-
-	filter "configurations:Debug"
-		defines "PB_DEBUG"
-		runtime "Debug"
-		symbols "on"
-
-	filter "configurations:Release"
-		defines "PB_RELEASE"
-		runtime "Release"
-		optimize "on"
-
-	filter "configurations:Dist"
-		defines "PB_DIST"
-		runtime "Release"
-		optimize "on"
-
-project "Sandbox"
-	location "Sandbox"
-	kind "ConsoleApp"
-	language "C++"
-	cppdialect "C++17"
-	staticruntime "on"
-
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-
-	files
-	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
-	}
-
-	includedirs
-	{
-		"PixelBrahma/ThirdParty/spdlog/include",
-		"PixelBrahma/src",
-		"PixelBrahma/ThirdParty",
-		"%{IncludeDir.glm}",
-		"%{IncludeDir.enTT}"
-	}
-
-	links
-	{
-		"PixelBrahma"
-	}
-
-	filter "system:windows"
-		systemversion "latest"
-
-	filter "configurations:Debug"
-		defines "PB_DEBUG"
-		runtime "Debug"
-		symbols "on"
-
-	filter "configurations:Release"
-		defines "PB_RELEASE"
-		runtime "Release"
-		optimize "on"
-
-	filter "configurations:Dist"
-		defines "PB_DIST"
-		runtime "Release"
-		optimize "on"
-
-project "PBEditor"
-	location "PBEditor"
-	kind "ConsoleApp"
-	language "C++"
-	cppdialect "C++17"
-	staticruntime "on"
-
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-
-	files
-	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
-	}
-
-	includedirs
-	{
-		"PixelBrahma/ThirdParty/spdlog/include",
-		"PixelBrahma/src",
-		"PixelBrahma/ThirdParty",
-		"%{IncludeDir.glm}",
-		"%{IncludeDir.enTT}"
-	}
-
-	links
-	{
-		"PixelBrahma"
-	}
-
-	filter "system:windows"
-		systemversion "latest"
-
-	filter "configurations:Debug"
-		defines "PB_DEBUG"
-		runtime "Debug"
-		symbols "on"
-
-	filter "configurations:Release"
-		defines "PB_RELEASE"
-		runtime "Release"
-		optimize "on"
-
-	filter "configurations:Dist"
-		defines "PB_DIST"
-		runtime "Release"
-		optimize "on"
+include "PixelBrahma"
+include "Sandbox"
+include "PBEditor"

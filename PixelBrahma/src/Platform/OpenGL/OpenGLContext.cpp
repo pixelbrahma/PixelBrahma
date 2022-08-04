@@ -30,15 +30,8 @@ namespace PixelBrahma
 		PB_CORE_INFO(" Renderer: {0}", glGetString(GL_RENDERER));
 		PB_CORE_INFO(" Version: {0}", glGetString(GL_VERSION));
 
-		#ifdef PB_ENABLE_ASSERTS
-				int versionMajor;
-				int versionMinor;
-				glGetIntegerv(GL_MAJOR_VERSION, &versionMajor);
-				glGetIntegerv(GL_MINOR_VERSION, &versionMinor);
-
-				PB_CORE_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5), 
-					"PixelBrahma engine requires at least OpenGL version 4.5!");
-		#endif
+		PB_CORE_ASSERT(GLVersion.major > 4 || (GLVersion.major == 4 && GLVersion.minor >= 5), 
+			"Hazel requires at least OpenGL version 4.5!");
 	}
 
 	// Swap OpenGL graphics bufffers

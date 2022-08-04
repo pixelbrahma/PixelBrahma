@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Event.h"
-#include "PixelBrahma/Input/Input.h"
+#include "PixelBrahma/Input/KeyCodes.h"
 
 namespace PixelBrahma
 {
@@ -17,7 +17,7 @@ namespace PixelBrahma
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 
 	protected:
-		KeyEvent(KeyCode keycode) : m_KeyCode(keycode) {}
+		KeyEvent(const KeyCode keycode) : m_KeyCode(keycode) {}
 
 		KeyCode m_KeyCode;
 	};
@@ -26,10 +26,11 @@ namespace PixelBrahma
 	class KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressedEvent(KeyCode keycode, int repeatcount) : KeyEvent(keycode), m_RepeatCount(repeatcount) {}
+		KeyPressedEvent(const KeyCode keycode, const uint16_t repeatcount) : KeyEvent(keycode), 
+			m_RepeatCount(repeatcount) {}
 
 		// Repeat count getter function
-		int GetRepeatCount() { return m_RepeatCount; }
+		uint16_t GetRepeatCount() { return m_RepeatCount; }
 
 		// Override to string function for logging
 		std::string ToString() const override
@@ -43,14 +44,14 @@ namespace PixelBrahma
 		EVENT_CLASS_TYPE(KeyPressed)
 
 	private:
-		int m_RepeatCount;
+		uint16_t m_RepeatCount;
 	};
 
 	// Key released event class
 	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
-		KeyReleasedEvent(KeyCode keycode) : KeyEvent(keycode) {}
+		KeyReleasedEvent(const KeyCode keycode) : KeyEvent(keycode) {}
 
 		// Override to string function for logging
 		std::string ToString() const override
@@ -68,7 +69,7 @@ namespace PixelBrahma
 	class KeyTypedEvent : public KeyEvent
 	{
 	public:
-		KeyTypedEvent(KeyCode keycode) : KeyEvent(keycode) {}
+		KeyTypedEvent(const KeyCode keycode) : KeyEvent(keycode) {}
 
 		// Override to string function for logging
 		std::string ToString() const override
