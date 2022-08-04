@@ -23,7 +23,9 @@ namespace PixelBrahma
 	private:
 
 		// Draw the entity hierarchy tree function
-		void DrawEntityNode(Entity entity);
+		void DrawEntityHierarchy(Entity entity);
+		// Draw the components of an entity
+		void DrawComponentProperties(Entity entity);
 
 	private:
 		Ref<Scene> m_Context;

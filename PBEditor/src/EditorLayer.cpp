@@ -31,18 +31,18 @@ namespace PixelBrahma
 		m_ActiveScene = CreateRef<Scene>();
 
 		// Create square entity
-		auto square = m_ActiveScene->CreateEntity("Green Square");
+		auto square = m_ActiveScene->CreateEntity("Square");
 		// Add a sprite renderer component to the square
 		square.AddComponent<SpriteRendererComponent>(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
 
 		m_SquareEntity = square;
 
 		// Create a camera entity and add a camera component
-		m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entity");
+		m_CameraEntity = m_ActiveScene->CreateEntity("Main Camera");
 		m_CameraEntity.AddComponent<CameraComponent>();
 
 		// Create the secondary camera entity and add camera component
-		m_SecondCamera = m_ActiveScene->CreateEntity("Clip-Space Entity");
+		m_SecondCamera = m_ActiveScene->CreateEntity("Alternate Camera");
 		auto& cc = m_SecondCamera.AddComponent<CameraComponent>();
 		cc.Primary = false;
 
@@ -51,7 +51,7 @@ namespace PixelBrahma
 		{
 		public:
 			// Create function
-			void OnCreate() 
+			virtual void OnCreate() override
 			{
 				// Get the transform component
 				auto& transform = GetComponent<TransformComponent>().Transform;
@@ -59,10 +59,10 @@ namespace PixelBrahma
 			}
 
 			// Destroy function
-			void OnDestroy() {}
+			virtual void OnDestroy() override {}
 
 			// Update function
-			void OnUpdate(Timestep timestep)
+			virtual void OnUpdate(Timestep timestep) override
 			{
 				// Get the transform component
 				auto& transform = GetComponent<TransformComponent>().Transform;
