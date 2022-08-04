@@ -38,6 +38,7 @@
 	#define PB_DEBUGBREAK()
 #endif
 
+/*
 // Assertion macros
 
 #ifdef PB_ENABLE_ASSERTS
@@ -47,6 +48,13 @@
 	#define PB_ASSERT(x, ...)
 	#define PB_CORE_ASSERT(x, ...)
 #endif
+*/
+
+// Expand macro
+#define PB_EXPAND_MACRO(x) x
+
+// Make to string macro
+#define PB_STRINGIFY_MACRO(x) #x
 
 // Bit shift macro
 #define BIT(x) (1 << x)
@@ -75,3 +83,9 @@ namespace PixelBrahma
 		return std::make_shared<T>(std::forward<Args>(args)...);
 	}
 }
+
+
+// Includes
+
+#include "PixelBrahma/Log/Log.h"
+#include "Assert.h"

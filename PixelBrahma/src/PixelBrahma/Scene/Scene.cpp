@@ -77,7 +77,7 @@ namespace PixelBrahma
 		if (mainCamera)
 		{
 			// Begin rendering
-			Renderer2D::BeginScene(mainCamera->GetProjection(), *cameraTransform);
+			Renderer2D::BeginScene(*mainCamera, *cameraTransform);
 			
 			// Get entities with sprite renderer component
 			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);

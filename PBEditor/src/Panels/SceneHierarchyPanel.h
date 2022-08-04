@@ -1,7 +1,6 @@
 #pragma once
 
 #include "PixelBrahma/Core/Core.h"
-#include "PixelBrahma/Log/Log.h"
 #include "PixelBrahma/Scene/Scene.h"
 #include "PixelBrahma/Scene/Entity.h"
 

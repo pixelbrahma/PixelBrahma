@@ -43,8 +43,9 @@ namespace PixelBrahma
 
 		// Create square entity
 		auto redSquare = m_ActiveScene->CreateEntity("Red Square");
-		// Add a sprite renderer component to the square
+		// Add a sprite renderer component to the square and move it to the right
 		redSquare.AddComponent<SpriteRendererComponent>(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+		redSquare.GetComponent<TransformComponent>().Transform[3][0] = 2.0f;
 
 		// Create a camera entity and add a camera component
 		m_CameraEntity = m_ActiveScene->CreateEntity("Main Camera");
@@ -133,8 +134,6 @@ namespace PixelBrahma
 
 		// Reset statistics
 		Renderer2D::ResetStats();
-
-
 
 		// Bind the framebuffer
 		m_Framebuffer->Bind();
@@ -225,7 +224,7 @@ namespace PixelBrahma
 		// Render the scene hierarchy panel
 		m_SceneHierarchyPanel.OnImGuiRender();
 
-		ImGui::Begin("Settings");
+		ImGui::Begin("Stats");
 
 		// Stats
 		auto stats = Renderer2D::GetStats();
@@ -234,37 +233,6 @@ namespace PixelBrahma
 		ImGui::Text("Quads: %d", stats.QuadCount);
 		ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
 		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
-
-		if (m_SquareEntity)
-		{
-			// Display Tag
-			ImGui::Separator();
-			auto& tag = m_SquareEntity.GetComponent<TagComponent>().Tag;
-			ImGui::Text("%s", tag.c_str());
-
-			// Display color picker widget
-			auto& squareColor = m_SquareEntity.GetComponent<SpriteRendererComponent>().Color;
-			ImGui::ColorEdit4("Square Color", glm::value_ptr(squareColor));
-			ImGui::Separator();
-		}
-
-		// Drag sliders
-		ImGui::DragFloat3("Camera Transform", glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().
-			Transform[3]));
-
-		// Checkbox to switch primary camera
-		if (ImGui::Checkbox("Camera A", &m_PrimaryCamera))
-		{
-			m_CameraEntity.GetComponent<CameraComponent>().Primary = m_PrimaryCamera;
-			m_SecondCamera.GetComponent<CameraComponent>().Primary = !m_PrimaryCamera;
-		}
-
-		{
-			auto& camera = m_SecondCamera.GetComponent<CameraComponent>().Camera;
-			float orthoSize = camera.GetOrthographicSize();
-			if (ImGui::DragFloat("Second Camera Ortho Size", &orthoSize))
-				camera.SetOrthographicSize(orthoSize);
-		}
 
 		ImGui::End();
 

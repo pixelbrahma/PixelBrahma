@@ -16,11 +16,13 @@ namespace PixelBrahma
 		SceneCamera();
 		virtual ~SceneCamera() = default;
 
-		// Set orthographic and perspective camera projection function
-		void SetOrthographic(float size, float nearClip, float farClip);
+		// Set orthographic and perspective camera projection functions
+
 		void SetPerspective(float verticalFOV, float nearClip, float farClip);
+		void SetOrthographic(float size, float nearClip, float farClip);
 
 		// Perspective camera properties getter and setter functions
+
 		float GetPerspectiveVerticalFOV() const { return m_PerspectiveFOV; }
 		void SetPerspectiveVerticalFOV(float verticalFov) { m_PerspectiveFOV = verticalFov; RecalculateProjection(); }
 		float GetPerspectiveNearClip() const { return m_PerspectiveNear; }
@@ -28,7 +30,7 @@ namespace PixelBrahma
 		float GetPerspectiveFarClip() const { return m_PerspectiveFar; }
 		void SetPerspectiveFarClip(float farClip) { m_PerspectiveFar = farClip; RecalculateProjection(); }
 
-		// Set viewpert size
+		// Set viewpert size function
 		void SetViewportSize(uint32_t width, uint32_t height);
 
 		// Orthographic camera properties getter and setter functions

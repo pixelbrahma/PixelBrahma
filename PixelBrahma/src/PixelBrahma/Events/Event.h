@@ -93,7 +93,7 @@ namespace PixelBrahma
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
 				// Handle the event by calling the function
-				m_Event.Handled = func(*(T*)&m_Event);
+				m_Event.Handled |= func(static_cast<T&>(m_Event));
 				return true;
 			}
 

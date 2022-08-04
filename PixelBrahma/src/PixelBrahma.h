@@ -6,6 +6,7 @@
 
 // Core
 #include "PixelBrahma/Core/Core.h"
+#include "PixelBrahma/Core/Assert.h"
 
 // Application
 #include "PixelBrahma/Application/Application.h"

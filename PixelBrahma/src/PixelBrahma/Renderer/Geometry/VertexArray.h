@@ -11,7 +11,7 @@ namespace PixelBrahma
 	class VertexArray
 	{
 	public:
-		virtual ~VertexArray() {}
+		virtual ~VertexArray() = default;
 
 		// Vertex array bind and unbind functions
 
