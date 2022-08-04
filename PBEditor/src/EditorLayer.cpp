@@ -51,7 +51,13 @@ namespace PixelBrahma
 		{
 		public:
 			// Create function
-			void OnCreate() {}
+			void OnCreate() 
+			{
+				// Get the transform component
+				auto& transform = GetComponent<TransformComponent>().Transform;
+				transform[3][0] = rand() % 10 - 5.0f;
+			}
+
 			// Destroy function
 			void OnDestroy() {}
 
@@ -75,8 +81,9 @@ namespace PixelBrahma
 			}
 		};
 
-		// Add camera controller script component to the camera entity
+		// Add camera controller script component to the camera entities
 		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+		m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 	}
 
 	// Layer on detach function

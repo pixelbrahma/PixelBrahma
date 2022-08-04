@@ -8,6 +8,7 @@ namespace PixelBrahma
 	class ScriptableEntity
 	{
 	public:
+		virtual ~ScriptableEntity() {}
 
 		// Get component template function
 		template<typename T>
@@ -15,6 +16,11 @@ namespace PixelBrahma
 		{
 			return m_Entity.GetComponent<T>();
 		}
+
+	protected:
+		virtual void OnCreate() {}
+		virtual void OnDestroy() {}
+		virtual void OnUpdate(Timestep timestep) {}
 
 	private:
 		Entity m_Entity;

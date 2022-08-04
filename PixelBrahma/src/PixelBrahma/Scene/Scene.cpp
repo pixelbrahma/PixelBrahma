@@ -9,45 +9,7 @@
 
 namespace PixelBrahma
 {
-	static void DoMath(const glm::mat4& transform) {}
-
-	static void OnTransformConstruct(entt::registry& registry, entt::entity entity) {}
-
-	Scene::Scene()
-	{
-#if ENTT_EXAMPLE_CODE
-
-		// Create an entity in the registry
-		entt::entity entity = m_Registry.create();
-
-		// Add a transform component to the entity
-		m_Registry.emplace<TransformComponent>(entity, glm::mat4(1.0f));
-
-		// Connect the on construction function to the defined function
-		m_Registry.on_construct<TransformComponent>().connect<&OnTransformConstruct>();
-
-		// If the entity has a transform component, get it
-		if (m_Registry.has<TransformComponent>(entity))
-			TransformComponent& transform = m_Registry.get<TransformComponent>(entity);
-
-		// Get all entities with transform components in the registry
-		auto view = m_Registry.view<TransformComponent>();
-
-		for (auto entity : view)
-		{
-			TransformComponent& transform = view.get<TransformComponent>(entity);
-		}
-
-		// Group entities with transform and mesh components
-		auto group = m_Registry.group<TransformComponent>(entt::get<MeshComponent>);
-
-		for (auto entity : group)
-		{
-			auto& [transform, mesh] = group.get<TransformComponent, MeshComponent>(entity);
-		}
-
-#endif
-	}
+	Scene::Scene() {}
 
 	Scene::~Scene() {}
 
@@ -76,17 +38,15 @@ namespace PixelBrahma
 				// If native scripting component instance doesnt exist, create instance and set instance entity
 				if (!nsc.Instance)
 				{
-					nsc.InstantiateFunction();
+					nsc.Instance = nsc.InstantiateScript();
 					nsc.Instance->m_Entity = Entity(entity, this);
 
-					// If the native scripting compoennt has a create function defined, call the create function
-					if (nsc.OnCreateFunction)
-						nsc.OnCreateFunction(nsc.Instance);
+					// Call the create function
+					nsc.Instance->OnCreate();
 				}
 
-				// If the native scripting component has an update function defined, call the update function
-				if (nsc.OnUpdateFunction)
-					nsc.OnUpdateFunction(nsc.Instance, timestep);
+				// Call the update function
+				nsc.Instance->OnUpdate(timestep);
 			});
 		}
 
@@ -101,7 +61,7 @@ namespace PixelBrahma
 			for (auto entity : view)
 			{
 				// Get the transform and camera components
-				auto& [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
+				auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
 
 				// Set the main camera
 				if (camera.Primary)
@@ -125,7 +85,7 @@ namespace PixelBrahma
 			for (auto entity : group)
 			{
 				// Get the transform and sprite renderer components
-				auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
 				// Draw call
 				Renderer2D::DrawQuad(transform, sprite.Color);
