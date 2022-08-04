@@ -16,14 +16,22 @@ namespace PixelBrahma
 		Scene();
 		~Scene();
 
-		// Create a new entity function
+		// Entity create and destroy functions
+
 		Entity CreateEntity(const std::string& name = std::string());
+		void DestroyEntity(Entity entity);
 
 		// Entity update function
 		void OnUpdate(Timestep timestep);
 
 		// Viewport resize function
 		void OnViewportResize(uint32_t width, uint32_t height);
+
+	private:
+
+		// On component added template function
+		template<typename T>
+		void OnComponentAdded(Entity entity, T& component);
 
 	private:
 		entt::registry m_Registry;

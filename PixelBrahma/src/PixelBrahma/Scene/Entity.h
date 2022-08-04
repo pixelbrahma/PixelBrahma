@@ -19,7 +19,13 @@ namespace PixelBrahma
 		T& AddComponent(Args&&... args)
 		{
 			PB_CORE_ASSERT(!HasComponent<T>(), "Entity already has component!");
-			return m_Scene->m_Registry.emplace<T>(m_EntityHandle, std::forward<Args>(args)...);
+			
+			// Add the component to the entity
+			T& component = m_Scene->m_Registry.emplace<T>(m_EntityHandle, std::forward<Args>(args)...);
+			// Call the on component added function
+			m_Scene->OnComponentAdded<T>(*this, component);
+
+			return component;
 		}
 
 		// Get component template function
@@ -47,6 +53,9 @@ namespace PixelBrahma
 
 		// Operator overload to check if an entity handle is null
 		operator bool() const { return m_EntityHandle != entt::null; }
+
+		// Cast entt::entity type to entity handle type
+		operator entt::entity() const { return m_EntityHandle; }
 
 		// Operator overloading to convert ent::entity type to uint32_t
 		operator uint32_t() const { return (uint32_t)m_EntityHandle; }

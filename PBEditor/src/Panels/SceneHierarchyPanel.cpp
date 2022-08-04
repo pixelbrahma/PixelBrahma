@@ -39,6 +39,16 @@ namespace PixelBrahma
 		if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
 			m_SelectionContext = {};
 
+		// Right-click on blank space
+		if (ImGui::BeginPopupContextWindow(0, 1, false))
+		{
+			// Create entity menu item
+			if (ImGui::MenuItem("Create Empty Entity"))
+				m_Context->CreateEntity("Empty Entity");
+
+			ImGui::EndPopup();
+		}
+
 		// End ImGui scene hierarchy panel
 		ImGui::End();
 
@@ -47,7 +57,35 @@ namespace PixelBrahma
 
 		// If entity is selected, show its components and their properties
 		if (m_SelectionContext)
+		{
+			// Display components and properties
 			DrawComponentProperties(m_SelectionContext);
+
+			// Add component menu item
+			if (ImGui::Button("Add Component"))
+				ImGui::OpenPopup("AddComponent");
+
+			// Add component popup menu
+			if (ImGui::BeginPopup("AddComponent"))
+			{
+				// Camera component
+				if (ImGui::MenuItem("Camera"))
+				{
+					m_SelectionContext.AddComponent<CameraComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+
+				// Sprite renderer component
+				if (ImGui::MenuItem("Sprite Renderer"))
+				{
+					m_SelectionContext.AddComponent<SpriteRendererComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+
+				ImGui::EndPopup();
+			}
+
+		}
 
 		// End component properties panel
 		ImGui::End();
@@ -66,6 +104,19 @@ namespace PixelBrahma
 		if (ImGui::IsItemClicked())
 			m_SelectionContext = entity;
 
+		// Mark entity for deletion after the current frame if it is deleted
+		bool entityDeleted = false;
+
+		// Delete entity popup menu
+		if (ImGui::BeginPopupContextItem())
+		{
+			// Delete entity menu item
+			if (ImGui::MenuItem("Delete Entity"))
+				entityDeleted = true;
+
+			ImGui::EndPopup();
+		}
+
 		if (opened)
 		{
 			ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow;
@@ -73,6 +124,15 @@ namespace PixelBrahma
 			if (opened)
 				ImGui::TreePop();
 			ImGui::TreePop();
+		}
+
+		// If entity is marked for deletion delete it
+		if (entityDeleted)
+		{
+			m_Context->DestroyEntity(entity);
+			// Remove selected entity
+			if (m_SelectionContext == entity)
+				m_SelectionContext = {};
 		}
 	}
 
@@ -159,11 +219,17 @@ namespace PixelBrahma
 			}
 		}
 
+		// Global tree node flags
+		const ImGuiTreeNodeFlags treeNodeFlags = ImGuiTreeNodeFlags_DefaultOpen 
+			| ImGuiTreeNodeFlags_AllowItemOverlap;
+
 		// Transform component
 		if (entity.HasComponent<TransformComponent>())
 		{
-			if (ImGui::TreeNodeEx((void*)typeid(TransformComponent).hash_code(), 
-				ImGuiTreeNodeFlags_DefaultOpen, "Transform"))
+			bool open = ImGui::TreeNodeEx((void*)typeid(TransformComponent).hash_code(), 
+				treeNodeFlags, "Transform");
+
+			if(open)
 			{
 				// Get the transform component
 				auto& transform = entity.GetComponent<TransformComponent>();
@@ -185,8 +251,7 @@ namespace PixelBrahma
 		// Camera component
 		if (entity.HasComponent<CameraComponent>())
 		{
-			if (ImGui::TreeNodeEx((void*)typeid(CameraComponent).hash_code(), 
-				ImGuiTreeNodeFlags_DefaultOpen, "Camera"))
+			if (ImGui::TreeNodeEx((void*)typeid(CameraComponent).hash_code(), treeNodeFlags, "Camera"))
 			{
 				// Get the camera component and camera reference
 
@@ -259,13 +324,40 @@ namespace PixelBrahma
 		// Sprite renderer component
 		if (entity.HasComponent<SpriteRendererComponent>())
 		{
-			if (ImGui::TreeNodeEx((void*)typeid(SpriteRendererComponent).hash_code(),
-				ImGuiTreeNodeFlags_DefaultOpen, "Sprite Renderer"))
+			ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{ 4, 4 });
+			bool open = ImGui::TreeNodeEx((void*)typeid(SpriteRendererComponent).hash_code(), 
+				treeNodeFlags, "Sprite Renderer");
+			ImGui::SameLine(ImGui::GetWindowWidth() - 25.0f);
+
+			// Remove component button
+			if (ImGui::Button("+", ImVec2{ 20, 20 }))
+			{
+				// Open remove component popup menu
+				ImGui::OpenPopup("ComponentSettings");
+			}
+			ImGui::PopStyleVar();
+
+			bool removeComponent = false;
+			if (ImGui::BeginPopup("ComponentSettings"))
+			{
+				// Remove component menu item - mark component to be removed
+				if (ImGui::MenuItem("Remove component"))
+					removeComponent = true;
+
+				ImGui::EndPopup();
+			}
+
+			// If component is open, show properties
+			if (open)
 			{
 				auto& sprite = entity.GetComponent<SpriteRendererComponent>();
 				ImGui::ColorEdit4("Color", glm::value_ptr(sprite.Color));
 				ImGui::TreePop();
 			}
+
+			// If component is marked to be deleted, remove component
+			if (removeComponent)
+				entity.RemoveComponent<SpriteRendererComponent>();
 		}
 	}
 }
