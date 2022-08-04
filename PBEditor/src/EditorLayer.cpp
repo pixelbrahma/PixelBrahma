@@ -30,12 +30,21 @@ namespace PixelBrahma
 		// Create scene reference
 		m_ActiveScene = CreateRef<Scene>();
 
-		// Create square entity
-		auto square = m_ActiveScene->CreateEntity("Square");
-		// Add a sprite renderer component to the square
-		square.AddComponent<SpriteRendererComponent>(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+		// Green square
 
-		m_SquareEntity = square;
+		// Create square entity
+		auto greenSquare = m_ActiveScene->CreateEntity("Green Square");
+		// Add a sprite renderer component to the square
+		greenSquare.AddComponent<SpriteRendererComponent>(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+
+		m_SquareEntity = greenSquare;
+
+		// Red square
+
+		// Create square entity
+		auto redSquare = m_ActiveScene->CreateEntity("Red Square");
+		// Add a sprite renderer component to the square
+		redSquare.AddComponent<SpriteRendererComponent>(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 
 		// Create a camera entity and add a camera component
 		m_CameraEntity = m_ActiveScene->CreateEntity("Main Camera");
