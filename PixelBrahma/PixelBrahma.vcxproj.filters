@@ -1338,6 +1338,9 @@
     <ClInclude Include="src\PixelBrahma\Application\EntryPoint.h">
       <Filter>src\PixelBrahma\Application</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Core\Assert.h">
+      <Filter>src\PixelBrahma\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\PixelBrahma\Core\Core.h">
       <Filter>src\PixelBrahma\Core</Filter>
     </ClInclude>
@@ -1437,6 +1440,9 @@
     <ClInclude Include="src\PixelBrahma\Scene\SceneCamera.h">
       <Filter>src\PixelBrahma\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Scene\SceneSerializer.h">
+      <Filter>src\PixelBrahma\Scene</Filter>
+    </ClInclude>
     <ClInclude Include="src\PixelBrahma\Scene\ScriptableEntity.h">
       <Filter>src\PixelBrahma\Scene</Filter>
     </ClInclude>
@@ -1467,7 +1473,6 @@
     <ClInclude Include="src\pbpch.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\PixelBrahma\Core\Assert.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ThirdParty\stb_image\stbi_image.cpp">
@@ -1537,6 +1542,9 @@
       <Filter>src\PixelBrahma\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Scene\SceneCamera.cpp">
+      <Filter>src\PixelBrahma\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Scene\SceneSerializer.cpp">
       <Filter>src\PixelBrahma\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">

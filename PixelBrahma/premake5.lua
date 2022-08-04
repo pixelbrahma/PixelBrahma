@@ -23,7 +23,8 @@ project "PixelBrahma"
 	defines
 	{
 		"_CRT_SECURE_NO_WARNINGS",
-		"GLFW_INCLUDE_NONE"
+		"GLFW_INCLUDE_NONE",
+		"YAML_CPP_STATIC_DEFINE"
 	}
 
 	includedirs
@@ -35,7 +36,8 @@ project "PixelBrahma"
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
-		"%{IncludeDir.enTT}"
+		"%{IncludeDir.enTT}",
+		"%{IncludeDir.yaml_cpp}"
 	}
 
 	links
@@ -43,6 +45,7 @@ project "PixelBrahma"
 		"GLFW",
 		"Glad",
 		"ImGui",
+		"yaml-cpp",
 		"opengl32.lib"
 	}
 

@@ -5,6 +5,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "PixelBrahma/Scene/SceneSerializer.h"
+
 namespace PixelBrahma
 {
 	EditorLayer::EditorLayer() : Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f, true),
@@ -30,6 +32,7 @@ namespace PixelBrahma
 		// Create scene reference
 		m_ActiveScene = CreateRef<Scene>();
 
+#if 0
 		// Green square
 
 		// Create square entity
@@ -94,6 +97,7 @@ namespace PixelBrahma
 		// Add camera controller script component to the camera entities
 		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 		m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+#endif
 
 		// Set the context of the scene hierarchy panel
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
@@ -218,6 +222,22 @@ namespace PixelBrahma
 				// Disabling fullscreen would allow the window to be moved to the front of other windows, 
 				// which can't ne undone at the moment without finer window depth/z control.
 				//ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+
+				// Serialize menu item
+				if (ImGui::MenuItem("Serialize"))
+				{
+					// Store serialized data into the file in the path
+					SceneSerializer serializer(m_ActiveScene);
+					serializer.Serialize("Assets/Scenes/Scene1.PixelBrahma");
+				}
+
+				// Deserialize menu item
+				if (ImGui::MenuItem("Deserialize"))
+				{
+					// Load serialized data from the file path
+					SceneSerializer serializer(m_ActiveScene);
+					serializer.Deserialize("Assets/Scenes/Scene1.PixelBrahma");
+				}
 
 				if (ImGui::MenuItem("Exit")) Application::Get().Close();
 				ImGui::EndMenu();

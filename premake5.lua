@@ -16,7 +16,6 @@ workspace "PixelBrahma"
 		".editorconfig"
 	}
 
-
 	flags
 	{
 		"MultiProcessorCompile"
@@ -32,12 +31,14 @@ IncludeDir["ImGui"] = "%{wks.location}/PixelBrahma/ThirdParty/ImGui"
 IncludeDir["glm"] = "%{wks.location}/PixelBrahma/ThirdParty/glm"
 IncludeDir["stb_image"] = "%{wks.location}/PixelBrahma/ThirdParty/stb_image"
 IncludeDir["enTT"] = "%{wks.location}/PixelBrahma/ThirdParty/enTT/Include"
+IncludeDir["yaml_cpp"] = "%{wks.location}/PixelBrahma/ThirdParty/yaml-cpp/include"
 
 group "Dependencies"
 	include "vendor/premake"
 	include "PixelBrahma/ThirdParty/GLFW"
 	include "PixelBrahma/ThirdParty/Glad"
 	include "PixelBrahma/ThirdParty/ImGui"
+	include "PixelBrahma/ThirdParty/yaml-cpp"
 group ""
 
 include "PixelBrahma"
