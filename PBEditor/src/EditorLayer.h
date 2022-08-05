@@ -1,6 +1,7 @@
 #pragma once
 
 #include <PixelBrahma.h>
+#include <PixelBrahma/Renderer/Camera/EditorCamera.h>
 
 #include "Panels/SceneHierarchyPanel.h"
 
@@ -43,6 +44,7 @@ namespace PixelBrahma
 	private:
 		OrthographicCameraController m_CameraController;
 		SceneHierarchyPanel m_SceneHierarchyPanel;
+		EditorCamera m_EditorCamera;
 
 		Entity m_SquareEntity;
 		Entity m_CameraEntity;

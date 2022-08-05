@@ -35,6 +35,9 @@ namespace PixelBrahma
 		// Create scene reference
 		m_ActiveScene = CreateRef<Scene>();
 
+		// Create editor camera
+		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
+
 #if 0
 		// Green square
 
@@ -128,6 +131,8 @@ namespace PixelBrahma
 			m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 			// Resize the camera to the new viewport size
 			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
+			// Resize the editor camera
+			m_EditorCamera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
 			// Resize the scene camera
 			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		}
@@ -139,6 +144,9 @@ namespace PixelBrahma
 			m_CameraController.OnUpdate(timestep);
 		}
 
+		// Update the editor camera
+		m_EditorCamera.OnUpdate(timestep);
+
 		// Reset statistics
 		Renderer2D::ResetStats();
 
@@ -149,8 +157,8 @@ namespace PixelBrahma
 		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		RenderCommand::Clear();
 
-		// Update scene entities
-		m_ActiveScene->OnUpdate(timestep);
+		// Update scene editor
+		m_ActiveScene->OnUpdateEditor(timestep, m_EditorCamera);
 
 		// Unbind the framebuffer
 		m_Framebuffer->UnBind();
@@ -293,11 +301,15 @@ namespace PixelBrahma
 			float windowHeight = (float)ImGui::GetWindowHeight();
 			ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
 
-			// Camera
-			auto cameraEntity = m_ActiveScene->GetPrimaryCameraEntity();
-			const auto& camera = cameraEntity.GetComponent<CameraComponent>().Camera;
-			const glm::mat4& cameraProjection = camera.GetProjection();
-			glm::mat4 cameraView = glm::inverse(cameraEntity.GetComponent<TransformComponent>().GetTransform());
+			// Runtime camera
+			//auto cameraEntity = m_ActiveScene->GetPrimaryCameraEntity();
+			//const auto& camera = cameraEntity.GetComponent<CameraComponent>().Camera;
+			//const glm::mat4& cameraProjection = camera.GetProjection();
+			//lm::mat4 cameraView = glm::inverse(cameraEntity.GetComponent<TransformComponent>().GetTransform());
+
+			// Editor camera
+			const glm::mat4& cameraProjection = m_EditorCamera.GetProjection();
+			glm::mat4 cameraView = m_EditorCamera.GetViewMatrix();
 
 			// Entity transform
 			auto& tc = selectedEntity.GetComponent<TransformComponent>();
@@ -339,6 +351,8 @@ namespace PixelBrahma
 	{
 		// Camera event handler
 		m_CameraController.OnEvent(event);
+		// Editor event handler
+		m_EditorCamera.OnEvent(event);
 
 		// Dispatch events
 		EventDispatcher dispatcher(event);

@@ -3,6 +3,7 @@
 #include <entt.hpp>
 
 #include "PixelBrahma/Core/Timestep.h"
+#include "PixelBrahma/Renderer/Camera/EditorCamera.h"
 
 namespace PixelBrahma
 {
@@ -21,8 +22,10 @@ namespace PixelBrahma
 		Entity CreateEntity(const std::string& name = std::string());
 		void DestroyEntity(Entity entity);
 
-		// Entity update function
-		void OnUpdate(Timestep timestep);
+		// Scene update functions
+
+		void OnUpdateRuntime(Timestep timestep);
+		void OnUpdateEditor(Timestep timestep, EditorCamera& camera);
 
 		// Viewport resize function
 		void OnViewportResize(uint32_t width, uint32_t height);

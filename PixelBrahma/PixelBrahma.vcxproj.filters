@@ -1488,6 +1488,7 @@
     <ClInclude Include="src\pbpch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Renderer\Camera\EditorCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ThirdParty\ImGuizmo\ImGuizmo.cpp">
@@ -1601,5 +1602,6 @@
     <ClCompile Include="src\pbpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Renderer\Camera\EditorCamera.cpp" />
   </ItemGroup>
 </Project>

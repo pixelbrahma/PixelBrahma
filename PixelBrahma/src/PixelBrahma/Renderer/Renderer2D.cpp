@@ -148,6 +148,23 @@ namespace PixelBrahma
 		s_Data.TextureShader->Bind();
 		s_Data.TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 
+		// Start batching
+		StartBatch();
+	}
+
+	void Renderer2D::BeginScene(const EditorCamera& camera)
+	{
+		// Profiling
+		PB_PROFILE_FUNCTION();
+
+		// Get camera view projection matrix
+		glm::mat4 viewProj = camera.GetViewProjection();
+
+		// Bind shader and set uniforms
+		s_Data.TextureShader->Bind();
+		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
+
+		// Start batching
 		StartBatch();
 	}
 
@@ -163,6 +180,7 @@ namespace PixelBrahma
 		s_Data.TextureShader->Bind();
 		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProjection);
 
+		// Start batching
 		StartBatch();
 	}
 

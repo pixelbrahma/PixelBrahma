@@ -33,8 +33,8 @@ namespace PixelBrahma
 		m_Registry.destroy(entity);
 	}
 
-	// Update scene entities
-	void Scene::OnUpdate(Timestep timestep)
+	// Update runtime entities
+	void Scene::OnUpdateRuntime(Timestep timestep)
 	{
 		// Update scripts
 		{
@@ -100,6 +100,28 @@ namespace PixelBrahma
 			// End rendering
 			Renderer2D::EndScene();
 		}
+	}
+
+	// Update editor
+	void Scene::OnUpdateEditor(Timestep timestep, EditorCamera& camera)
+	{
+		// Begin rendering
+		Renderer2D::BeginScene(camera);
+
+		// Get entities with sprite renderer component
+		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+
+		for (auto entity : group)
+		{
+			// Get the transform and sprite renderer components
+			auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+
+			// Draw call
+			Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
+		}
+
+		// End rendering
+		Renderer2D::EndScene();
 	}
 
 	// Viewport resize function
