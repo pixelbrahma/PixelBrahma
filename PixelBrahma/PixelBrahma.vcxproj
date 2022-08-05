@@ -144,7 +144,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\PixelBrahma\Renderer\Camera\EditorCamera.h" />
     <ClInclude Include="ThirdParty\ImGuizmo\ImGuizmo.h" />
     <ClInclude Include="ThirdParty\glm\glm\common.hpp" />
     <ClInclude Include="ThirdParty\glm\glm\detail\_features.hpp" />
@@ -583,6 +582,7 @@
     <ClInclude Include="src\PixelBrahma\Layers\LayerStack.h" />
     <ClInclude Include="src\PixelBrahma\Log\Log.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Camera\Camera.h" />
+    <ClInclude Include="src\PixelBrahma\Renderer\Camera\EditorCamera.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Camera\OrthographicCamera.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Camera\OrthographicCameraController.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Framebuffer.h" />
@@ -614,7 +614,6 @@
     <ClInclude Include="src\pbpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\PixelBrahma\Renderer\Camera\EditorCamera.cpp" />
     <ClCompile Include="ThirdParty\ImGuizmo\ImGuizmo.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -626,6 +625,7 @@
     <ClCompile Include="src\PixelBrahma\Layers\Layer.cpp" />
     <ClCompile Include="src\PixelBrahma\Layers\LayerStack.cpp" />
     <ClCompile Include="src\PixelBrahma\Log\Log.cpp" />
+    <ClCompile Include="src\PixelBrahma\Renderer\Camera\EditorCamera.cpp" />
     <ClCompile Include="src\PixelBrahma\Renderer\Camera\OrthographicCamera.cpp" />
     <ClCompile Include="src\PixelBrahma\Renderer\Camera\OrthographicCameraController.cpp" />
     <ClCompile Include="src\PixelBrahma\Renderer\Framebuffer.cpp" />
