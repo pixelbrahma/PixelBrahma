@@ -17,3 +17,6 @@
 [submodule "PixelBrahma/ThirdParty/yaml-cpp"]
 	path = PixelBrahma/ThirdParty/yaml-cpp
 	url = https://github.com/pixelbrahma/yaml-cpp.git
+[submodule "PixelBrahma/ThirdParty/ImGuizmo"]
+	path = PixelBrahma/ThirdParty/ImGuizmo
+	url = https://github.com/pixelbrahma/ImGuizmo.git

@@ -19,7 +19,8 @@ project "PBEditor"
 		"%{wks.location}/PixelBrahma/src",
 		"%{wks.location}/PixelBrahma/ThirdParty",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.enTT}"
+		"%{IncludeDir.enTT}",
+		"%{IncludeDir.ImGuizmo}"
 	}
 
 	links

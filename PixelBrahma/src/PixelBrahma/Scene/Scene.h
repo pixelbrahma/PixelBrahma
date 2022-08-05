@@ -27,6 +27,9 @@ namespace PixelBrahma
 		// Viewport resize function
 		void OnViewportResize(uint32_t width, uint32_t height);
 
+		// Get the primary camera in the scene function
+		Entity GetPrimaryCameraEntity();
+
 	private:
 
 		// On component added template function

@@ -125,6 +125,23 @@ namespace PixelBrahma
 		}
 	}
 
+	// Get the entity with camera component set as primary camera
+	Entity Scene::GetPrimaryCameraEntity()
+	{
+		// Get camera component entities
+		auto view = m_Registry.view<CameraComponent>();
+
+		for (auto entity : view)
+		{
+			const auto& camera = view.get<CameraComponent>(entity);
+
+			// Check if the camera is the primary camera and return the entity
+			if (camera.Primary)
+				return Entity{ entity, this };
+		}
+		return {};
+	}
+
 	// On component added template function to call the respective component on added type
 	template<typename T>
 	void Scene::OnComponentAdded(Entity entity, T& component)

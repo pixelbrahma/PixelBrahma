@@ -32,6 +32,7 @@ IncludeDir["glm"] = "%{wks.location}/PixelBrahma/ThirdParty/glm"
 IncludeDir["stb_image"] = "%{wks.location}/PixelBrahma/ThirdParty/stb_image"
 IncludeDir["enTT"] = "%{wks.location}/PixelBrahma/ThirdParty/enTT/Include"
 IncludeDir["yaml_cpp"] = "%{wks.location}/PixelBrahma/ThirdParty/yaml-cpp/include"
+IncludeDir["ImGuizmo"] = "%{wks.location}/PixelBrahma/ThirdParty/ImGuizmo"
 
 group "Dependencies"
 	include "vendor/premake"

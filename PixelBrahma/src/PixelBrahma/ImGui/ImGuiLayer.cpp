@@ -11,6 +11,8 @@
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
+#include <ImGuizmo.h>
+
 namespace PixelBrahma
 {
 	ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
@@ -112,6 +114,9 @@ namespace PixelBrahma
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
+
+		// New ImGuizmo frame
+		ImGuizmo::BeginFrame();
 	}
 
 	// ImGui end function

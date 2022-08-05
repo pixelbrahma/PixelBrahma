@@ -4,6 +4,9 @@
     <Filter Include="ThirdParty">
       <UniqueIdentifier>{107145F9-FC28-8746-6530-60A251072237}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThirdParty\ImGuizmo">
+      <UniqueIdentifier>{7015E757-DC76-C465-65E4-0A18D144FB24}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ThirdParty\glm">
       <UniqueIdentifier>{5F03D311-4BD1-C617-3465-373E20D2A27C}</UniqueIdentifier>
     </Filter>
@@ -84,6 +87,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ThirdParty\ImGuizmo\ImGuizmo.h">
+      <Filter>ThirdParty\ImGuizmo</Filter>
+    </ClInclude>
     <ClInclude Include="ThirdParty\glm\glm\common.hpp">
       <Filter>ThirdParty\glm\glm</Filter>
     </ClInclude>
@@ -1449,6 +1455,9 @@
     <ClInclude Include="src\PixelBrahma\Scene\ScriptableEntity.h">
       <Filter>src\PixelBrahma\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Utils\Math.h">
+      <Filter>src\PixelBrahma\Utils</Filter>
+    </ClInclude>
     <ClInclude Include="src\PixelBrahma\Utils\PlatformUtils.h">
       <Filter>src\PixelBrahma\Utils</Filter>
     </ClInclude>
@@ -1481,6 +1490,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ThirdParty\ImGuizmo\ImGuizmo.cpp">
+      <Filter>ThirdParty\ImGuizmo</Filter>
+    </ClCompile>
     <ClCompile Include="ThirdParty\stb_image\stbi_image.cpp">
       <Filter>ThirdParty\stb_image</Filter>
     </ClCompile>
@@ -1552,6 +1564,9 @@
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Scene\SceneSerializer.cpp">
       <Filter>src\PixelBrahma\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Utils\Math.cpp">
+      <Filter>src\PixelBrahma\Utils</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>

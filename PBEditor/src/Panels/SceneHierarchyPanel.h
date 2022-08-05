@@ -19,6 +19,9 @@ namespace PixelBrahma
 		// ImGui render function
 		void OnImGuiRender();
 
+		// Get the selected entity
+		Entity GetSelectedEntity() const { return m_SelectionContext; }
+
 	private:
 
 		// Draw the entity hierarchy tree function
