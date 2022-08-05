@@ -1,6 +1,7 @@
 #include "pbpch.h"
 #include "PixelBrahma/Utils/PlatformUtils.h"
 
+#include <sstream>
 #include <commdlg.h>
 #include <GLFW/glfw3.h>
 
@@ -12,7 +13,7 @@
 namespace PixelBrahma
 {
 	// Open file for loading and set owner window handle
-	std::string FileDialogues::OpenFile(const char* filter)
+	std::optional<std::string> FileDialogues::OpenFile(const char* filter)
 	{
 		OPENFILENAMEA ofn;
 		CHAR szFile[260] = { 0 };
@@ -30,11 +31,11 @@ namespace PixelBrahma
 			return ofn.lpstrFile;
 		}
 
-		return std::string();
+		return std::nullopt;
 	}
 
 	// Open file for saving and set owner window handle
-	std::string FileDialogues::SaveFile(const char* filter)
+	std::optional<std::string> FileDialogues::SaveFile(const char* filter)
 	{
 		OPENFILENAMEA ofn;
 		CHAR szFile[260] = { 0 };
@@ -46,12 +47,13 @@ namespace PixelBrahma
 		ofn.lpstrFilter = filter;
 		ofn.nFilterIndex = 1;
 		ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
+		ofn.lpstrDefExt = std::strchr(filter, '\0') + 1;
 
 		if (GetSaveFileNameA(&ofn) == TRUE)
 		{
 			return ofn.lpstrFile;
 		}
 
-		return std::string();
+		return std::nullopt;
 	}
 }

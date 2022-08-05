@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <optional>
 
 namespace PixelBrahma
 {
@@ -10,7 +11,7 @@ namespace PixelBrahma
 	public:
 
 		// Open and save file functions
-		static std::string OpenFile(const char* filter);
-		static std::string SaveFile(const char* filter);
+		static std::optional<std::string> OpenFile(const char* filter);
+		static std::optional<std::string> SaveFile(const char* filter);
 	};
 }
