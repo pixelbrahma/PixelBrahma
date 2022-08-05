@@ -6,6 +6,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "PixelBrahma/Scene/SceneSerializer.h"
+#include "PixelBrahma/Utils/PlatformUtils.h"
 
 namespace PixelBrahma
 {
@@ -223,23 +224,20 @@ namespace PixelBrahma
 				// which can't ne undone at the moment without finer window depth/z control.
 				//ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
 
-				// Serialize menu item
-				if (ImGui::MenuItem("Serialize"))
-				{
-					// Store serialized data into the file in the path
-					SceneSerializer serializer(m_ActiveScene);
-					serializer.Serialize("Assets/Scenes/Scene1.PixelBrahma");
-				}
+				// New scene menu item with shortcut set
+				if (ImGui::MenuItem("New", "Ctrl+N"))
+					NewScene();
 
-				// Deserialize menu item
-				if (ImGui::MenuItem("Deserialize"))
-				{
-					// Load serialized data from the file path
-					SceneSerializer serializer(m_ActiveScene);
-					serializer.Deserialize("Assets/Scenes/Scene1.PixelBrahma");
-				}
+				// Open scene menu item with shortcut set
+				if (ImGui::MenuItem("Open...", "Ctrl+O"))
+					OpenScene();
 
-				if (ImGui::MenuItem("Exit")) Application::Get().Close();
+				// Save scene as menu item with shortcut set
+				if (ImGui::MenuItem("Save As...", "Ctrl+Shift+S"))
+					SaveSceneAs();
+
+				// Exit menu item with shortcut set
+				if (ImGui::MenuItem("Exit"/*, "Alt+F4"*/)) Application::Get().Close();
 				ImGui::EndMenu();
 			}
 
@@ -287,6 +285,97 @@ namespace PixelBrahma
 	// Layer event handler function
 	void EditorLayer::OnEvent(Event& event)
 	{
+		// Camera event handler
 		m_CameraController.OnEvent(event);
+
+		// Dispatch events
+		EventDispatcher dispatcher(event);
+		dispatcher.Dispatch<KeyPressedEvent>(PB_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
+	}
+
+	// Handle key events
+	bool EditorLayer::OnKeyPressed(KeyPressedEvent& event)
+	{
+		// Shortcuts
+		if (event.GetRepeatCount() > 0)
+			return false;
+
+		// Get the state of control, shift and alt keys
+
+		bool control = Input::IsKeyPressed(Key::LeftControl) || Input::IsKeyPressed(Key::RightControl);
+		bool shift = Input::IsKeyPressed(Key::LeftShift) || Input::IsKeyPressed(Key::RightShift);
+		bool alt = Input::IsKeyPressed(Key::LeftAlt) || Input::IsKeyPressed(Key::RightAlt);
+
+		switch (event.GetKeyCode())
+		{
+			case Key::N:
+			{
+				if (control)
+					NewScene();
+
+				break;
+			}
+
+			case Key::O:
+			{
+				if (control)
+					OpenScene();
+
+				break;
+			}
+
+			case Key::S:
+			{
+				if (control && shift)
+					SaveSceneAs();
+			
+				//if (control && !shift)
+					//SaveScene();
+
+				break;
+			}
+
+			//case Key::F4:
+			//{
+				//if (alt)
+					//ExitScene();
+			//}
+		}
+	}
+
+	// Create new scene
+	void EditorLayer::NewScene()
+	{
+		m_ActiveScene = CreateRef<Scene>();
+		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+	}
+
+	// Load scene from file
+	void EditorLayer::OpenScene()
+	{
+		std::string filepath = FileDialogues::OpenFile("PixelBrahma Scene (*.PixelBrahma)\0*.PixelBrahma\0");
+
+		if (!filepath.empty())
+		{
+			m_ActiveScene = CreateRef<Scene>();
+			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+			m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+
+			SceneSerializer serializer(m_ActiveScene);
+			serializer.Deserialize(filepath);
+		}
+	}
+
+	// Save scene as specified
+	void EditorLayer::SaveSceneAs()
+	{
+		std::string filepath = FileDialogues::SaveFile("PixelBrahma Scene (*.PixelBrahma)\0*.PixelBrahma\0");
+
+		if (!filepath.empty())
+		{
+			SceneSerializer serializer(m_ActiveScene);
+			serializer.Serialize(filepath);
+		}
 	}
 }

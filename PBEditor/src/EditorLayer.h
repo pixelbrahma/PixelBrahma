@@ -28,6 +28,19 @@ namespace PixelBrahma
 		virtual void OnEvent(Event& event) override;
 
 	private:
+
+		// On key pressed event function
+		bool OnKeyPressed(KeyPressedEvent& event);
+
+		// Scene saving, loading and creating file menu option functions
+		
+		void NewScene();
+		void OpenScene();
+		void SaveSceneAs();
+		//void ExitScene();
+		//void SaveScene();
+
+	private:
 		OrthographicCameraController m_CameraController;
 
 		// Temporary tests

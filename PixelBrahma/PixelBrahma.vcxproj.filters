@@ -70,6 +70,9 @@
     <Filter Include="src\PixelBrahma\Scene">
       <UniqueIdentifier>{66C93D2B-D235-F925-9B29-918307551B8E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\PixelBrahma\Utils">
+      <UniqueIdentifier>{A95D6B2B-15CA-2626-DEBD-BE834AE9488E}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
     </Filter>
@@ -1446,6 +1449,9 @@
     <ClInclude Include="src\PixelBrahma\Scene\ScriptableEntity.h">
       <Filter>src\PixelBrahma\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Utils\PlatformUtils.h">
+      <Filter>src\PixelBrahma\Utils</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
@@ -1569,6 +1575,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
+      <Filter>src\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsPlatformUtils.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
