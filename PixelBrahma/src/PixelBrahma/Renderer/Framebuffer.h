@@ -4,12 +4,50 @@
 
 namespace PixelBrahma
 {
+	// Framebuffer texture format enum class
+	enum class FramebufferTextureFormat
+	{
+		None = 0,
+
+		// Color
+		RGBA8,
+
+		// Depth/stencil
+		DEPTH24STENCIL8,
+
+		// Defaults
+		Depth = DEPTH24STENCIL8
+	};
+
+	// Framebuffer texture specification structure
+	struct FramebufferTextureSpecification
+	{
+		FramebufferTextureSpecification() = default;
+		FramebufferTextureSpecification(FramebufferTextureFormat format)
+			: TextureFormat(format) {}
+
+		FramebufferTextureFormat TextureFormat = FramebufferTextureFormat::None;
+		// TODO: filtering/wrap
+	};
+
+	// Framebuffer attachment specification structure
+	struct FramebufferAttachmentSpecification
+	{
+		FramebufferAttachmentSpecification() = default;
+		FramebufferAttachmentSpecification(std::initializer_list<FramebufferTextureSpecification> attachments)
+			: Attachments(attachments) {}
+
+		std::vector<FramebufferTextureSpecification> Attachments;
+	};
+
 	// structure of framebuffer properties
 	struct FramebufferSpecification
 	{
 		uint32_t Width = 0;
 		uint32_t Height = 0;
 		uint32_t Samples = 1;
+
+		FramebufferAttachmentSpecification Attachments;
 
 		// Should or should not render to the screen
 		bool SwapChainTarget = false;
@@ -31,7 +69,7 @@ namespace PixelBrahma
 
 		// Getter functions
 
-		virtual uint32_t GetColorAttachmentRendererID() const = 0;
+		virtual uint32_t GetColorAttachmentRendererID(uint32_t index = 0) const = 0;
 		virtual const FramebufferSpecification& GetSpecification() const = 0;
 
 		// Create framebuffer function

@@ -26,6 +26,7 @@ namespace PixelBrahma
 
 		// Set frame buffer properties
 		FramebufferSpecification framebufferSpecification;
+		framebufferSpecification.Attachments = { FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::Depth };
 		framebufferSpecification.Width = 1280;
 		framebufferSpecification.Height = 720;
 
