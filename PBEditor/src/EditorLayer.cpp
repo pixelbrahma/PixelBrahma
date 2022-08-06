@@ -183,7 +183,9 @@ namespace PixelBrahma
 		if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
 		{
 			int pixelData = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
-			PB_CORE_WARN("Pixel data = {0}", pixelData);
+
+			// Get entity under the mouse
+			m_HoveredEntity = pixelData == -1 ? Entity() : Entity((entt::entity)pixelData, m_ActiveScene.get());
 		}
 
 		// Unbind the framebuffer
@@ -285,6 +287,13 @@ namespace PixelBrahma
 
 		ImGui::Begin("Stats");
 
+		std::string name = "None";
+
+		// If mouse hovering over an entity, display its tag
+		if (m_HoveredEntity)
+			name = m_HoveredEntity.GetComponent<TagComponent>().Tag;
+		ImGui::Text("Hovered Entity: %s", name.c_str());
+
 		// Stats
 		auto stats = Renderer2D::GetStats();
 		ImGui::Text("Renderer2D Stats:");
@@ -298,7 +307,13 @@ namespace PixelBrahma
 		// Viewport 
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 		ImGui::Begin("Viewport");
-		auto viewportOffset = ImGui::GetCursorPos(); // Includes tab bar
+		
+		// Get scene viewport panel bounds
+		auto viewportMinRegion = ImGui::GetWindowContentRegionMin();
+		auto viewportMaxRegion = ImGui::GetWindowContentRegionMax();
+		auto viewportOffset = ImGui::GetWindowPos();
+		m_ViewportBounds[0] = { viewportMinRegion.x + viewportOffset.x, viewportMinRegion.y + viewportOffset.y };
+		m_ViewportBounds[1] = { viewportMaxRegion.x + viewportOffset.x, viewportMaxRegion.y + viewportOffset.y };
 
 		m_ViewportFocused = ImGui::IsWindowFocused();
 		m_ViewportHovered = ImGui::IsWindowHovered();
@@ -317,16 +332,6 @@ namespace PixelBrahma
 		// Get window size
 		auto windowSize = ImGui::GetWindowSize();
 
-		// Set viewport bounds
-
-		ImVec2 minBound = ImGui::GetWindowPos();
-		minBound.x += viewportOffset.x;
-		minBound.y += viewportOffset.y;
-		ImVec2 maxBound = { minBound.x + windowSize.x, minBound.y + windowSize.y };
-
-		m_ViewportBounds[0] = { minBound.x, minBound.y };
-		m_ViewportBounds[1] = { maxBound.x, maxBound.y };
-
 		// Gizmos
 
 		// Get selected entity
@@ -337,9 +342,8 @@ namespace PixelBrahma
 			ImGuizmo::SetOrthographic(false);
 			ImGuizmo::SetDrawlist();
 
-			float windowWidth = (float)ImGui::GetWindowWidth();
-			float windowHeight = (float)ImGui::GetWindowHeight();
-			ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
+			ImGuizmo::SetRect(m_ViewportBounds[0].x, m_ViewportBounds[0].y, 
+				m_ViewportBounds[1].x - m_ViewportBounds[0].x, m_ViewportBounds[1].y - m_ViewportBounds[0].y);
 
 			// Runtime camera
 			//auto cameraEntity = m_ActiveScene->GetPrimaryCameraEntity();

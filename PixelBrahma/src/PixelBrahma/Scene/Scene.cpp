@@ -93,8 +93,8 @@ namespace PixelBrahma
 				// Get the transform and sprite renderer components
 				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
-				// Draw call
-				Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
+				// Draw the sprite
+				Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
 			}
 
 			// End rendering
@@ -116,8 +116,8 @@ namespace PixelBrahma
 			// Get the transform and sprite renderer components
 			auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
-			// Draw call
-			Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
+			// Draw the sprite
+			Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
 		}
 
 		// End rendering

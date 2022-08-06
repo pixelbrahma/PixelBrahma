@@ -4,6 +4,7 @@
 #include "Shading/Texture.h"
 #include "Camera/Camera.h"
 #include "Camera/EditorCamera.h"
+#include "PixelBrahma/Scene/Components.h"
 
 namespace PixelBrahma
 {
@@ -38,9 +39,9 @@ namespace PixelBrahma
 
 		// Draw quad from transform and color
 
-		static void DrawQuad(const glm::mat4& transform, const glm::vec4& color);
+		static void DrawQuad(const glm::mat4& transform, const glm::vec4& color, int entityID = -1);
 		static void DrawQuad(const glm::mat4& transform, const Ref<Texture2D>& texture, float tilingFactor = 1.0f,
-			const glm::vec4& tintColor = glm::vec4(1.0f));
+			const glm::vec4& tintColor = glm::vec4(1.0f), int entityID = -1);
 
 		// Draw rotated quads
 
@@ -52,6 +53,9 @@ namespace PixelBrahma
 			const Ref<Texture2D>& texture, float tilingFactor = 1.0f, const glm::vec4& tintColor = glm::vec4(1.0f));
 		static void DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, 
 			const Ref<Texture2D>& texture, float tilingFactor = 1.0f, const glm::vec4& tintColor = glm::vec4(1.0f));
+
+		// Draw sprite function
+		static void DrawSprite(const glm::mat4& transform, SpriteRendererComponent& src, int entityID);
 
 		// Stats
 		struct Statistics
