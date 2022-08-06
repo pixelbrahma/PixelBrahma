@@ -85,6 +85,19 @@ namespace PixelBrahma
 
 			return false;
 		}
+
+		// Get frame buffer texture attachment format
+		static GLenum PBFramebufferTextureFormatToGL(FramebufferTextureFormat format)
+		{
+			switch (format)
+			{
+				case FramebufferTextureFormat::RGBA8:       return GL_RGBA8;
+				case FramebufferTextureFormat::RED_INTEGER: return GL_RED_INTEGER;
+			}
+
+			PB_CORE_ASSERT(false);
+			return 0;
+		}
 	}
 
 	OpenGLFramebuffer::OpenGLFramebuffer(const FramebufferSpecification& specification) :
@@ -242,5 +255,15 @@ namespace PixelBrahma
 		glReadPixels(x, y, 1, 1, GL_RED_INTEGER, GL_INT, &pixelData);
 
 		return pixelData;
+	}
+
+	// Clear the attachment texture buffer to the value
+	void OpenGLFramebuffer::ClearAttachment(uint32_t attachmentIndex, int value)
+	{
+		PB_CORE_ASSERT(attachmentIndex < m_ColorAttachments.size());
+
+		auto& spec = m_ColorAttachmentSpecifications[attachmentIndex];
+		glClearTexImage(m_ColorAttachments[attachmentIndex], 0,
+			Utils::PBFramebufferTextureFormatToGL(spec.TextureFormat), GL_INT, &value);
 	}
 }

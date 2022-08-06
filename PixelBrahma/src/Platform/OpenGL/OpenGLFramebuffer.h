@@ -22,8 +22,11 @@ namespace PixelBrahma
 		// Resize override function
 		virtual void Resize(uint32_t width, uint32_t height) override;
 
-		// Read Pixels from attachment function
+		// Read Pixels from attachment override function
 		virtual int ReadPixel(uint32_t attachmentIndex, int x, int y) override;
+
+		// Clear attachment buffer to value override function
+		virtual void ClearAttachment(uint32_t attachmentIndex, int value) override;
 
 		// Getter functions override
 

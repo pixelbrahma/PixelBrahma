@@ -165,6 +165,9 @@ namespace PixelBrahma
 		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		RenderCommand::Clear();
 
+		// Clear the entity ID attachment to -1
+		m_Framebuffer->ClearAttachment(1, -1);
+
 		// Update scene editor
 		m_ActiveScene->OnUpdateEditor(timestep, m_EditorCamera);
 
@@ -446,23 +449,27 @@ namespace PixelBrahma
 
 			// Gizmos
 			case Key::Q:
-			{				
-				m_GizmoType = -1;
+			{			
+				if (!ImGuizmo::IsUsing())
+					m_GizmoType = -1;
 				break;
 			}
 			case Key::W:
 			{
-				m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
+				if (!ImGuizmo::IsUsing())
+					m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
 				break;
 			}
 			case Key::E:
 			{
-				m_GizmoType = ImGuizmo::OPERATION::ROTATE;
+				if (!ImGuizmo::IsUsing())
+					m_GizmoType = ImGuizmo::OPERATION::ROTATE;
 				break;
 			}
 			case Key::R:
 			{
-				m_GizmoType = ImGuizmo::OPERATION::SCALE;
+				if (!ImGuizmo::IsUsing())
+					m_GizmoType = ImGuizmo::OPERATION::SCALE;
 				break;
 			}
 		}

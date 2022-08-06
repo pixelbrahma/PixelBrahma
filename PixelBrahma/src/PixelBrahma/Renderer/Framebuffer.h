@@ -73,6 +73,9 @@ namespace PixelBrahma
 		// Read Pixels from attachment function
 		virtual int ReadPixel(uint32_t attachmentIndex, int x, int y) = 0;
 
+		// Clear attachment function
+		virtual void ClearAttachment(uint32_t attachmentIndex, int value) = 0;
+
 		// Getter functions
 
 		virtual uint32_t GetColorAttachmentRendererID(uint32_t index = 0) const = 0;
