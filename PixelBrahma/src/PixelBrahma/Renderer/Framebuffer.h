@@ -12,6 +12,9 @@ namespace PixelBrahma
 		// Color
 		RGBA8,
 
+		// Entity ID
+		RED_INTEGER,
+
 		// Depth/stencil
 		DEPTH24STENCIL8,
 
@@ -66,6 +69,9 @@ namespace PixelBrahma
 
 		// Resize function
 		virtual void Resize(uint32_t width, uint32_t height) = 0;
+
+		// Read Pixels from attachment function
+		virtual int ReadPixel(uint32_t attachmentIndex, int x, int y) = 0;
 
 		// Getter functions
 
