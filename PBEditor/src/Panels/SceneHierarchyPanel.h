@@ -19,8 +19,10 @@ namespace PixelBrahma
 		// ImGui render function
 		void OnImGuiRender();
 
-		// Get the selected entity
+		// Get and set the selected entity functions
+
 		Entity GetSelectedEntity() const { return m_SelectionContext; }
+		void SetSelectedEntity(Entity entity);
 
 	private:
 

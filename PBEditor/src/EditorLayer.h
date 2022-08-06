@@ -30,8 +30,10 @@ namespace PixelBrahma
 
 	private:
 
-		// On key pressed event function
+		// Key and mouse event functions
+
 		bool OnKeyPressed(KeyPressedEvent& event);
+		bool OnMouseButtonPressed(MouseButtonPressedEvent& event);
 
 		// Scene saving, loading and creating file menu option functions
 		

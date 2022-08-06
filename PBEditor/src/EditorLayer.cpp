@@ -401,6 +401,7 @@ namespace PixelBrahma
 		// Dispatch events
 		EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<KeyPressedEvent>(PB_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
+		dispatcher.Dispatch<MouseButtonPressedEvent>(PB_BIND_EVENT_FN(EditorLayer::OnMouseButtonPressed));
 	}
 
 	// Handle key events
@@ -477,6 +478,18 @@ namespace PixelBrahma
 				break;
 			}
 		}
+	}
+
+	// Mouse button clicked event handler callback
+	bool EditorLayer::OnMouseButtonPressed(MouseButtonPressedEvent& event)
+	{
+		if (event.GetMouseButton() == Mouse::ButtonLeft)
+		{
+			if (m_ViewportHovered && !ImGuizmo::IsOver() && !Input::IsKeyPressed(Key::LeftAlt))
+				m_SceneHierarchyPanel.SetSelectedEntity(m_HoveredEntity);
+		}
+
+		return false;
 	}
 
 	// Create new scene

@@ -76,6 +76,12 @@ namespace PixelBrahma
 		ImGui::End();
 	}
 
+	// Set the selected entity in the scene
+	void SceneHierarchyPanel::SetSelectedEntity(Entity entity)
+	{
+		m_SelectionContext = entity;
+	}
+
 	// Add entities to the hierarchy tree
 	void SceneHierarchyPanel::DrawEntityHierarchy(Entity entity)
 	{
