@@ -9,7 +9,7 @@ namespace PixelBrahma
 	class PBEditor : public Application
 	{
 	public:
-		PBEditor() : Application("PBEditor") 
+		PBEditor(ApplicationCommandLineArgs args) : Application("PBEditor", args)
 		{ 
 			PushLayer(new EditorLayer()); 
 		}
@@ -18,8 +18,8 @@ namespace PixelBrahma
 	};
 
 	// Create Editor
-	Application* CreateApplication()
+	Application* CreateApplication(ApplicationCommandLineArgs args)
 	{
-		return new PBEditor();
+		return new PBEditor(args);
 	}
 }

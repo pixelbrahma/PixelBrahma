@@ -1,4 +1,5 @@
 include "./vendor/premake/premake_customization/solution_items.lua"
+include "Dependencies.lua"
 
 workspace "PixelBrahma"
 	architecture "x86_64"
@@ -22,17 +23,6 @@ workspace "PixelBrahma"
 	}
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
-
--- Include directories relative to root folder (solution directory)
-IncludeDir = {}
-IncludeDir["GLFW"] = "%{wks.location}/PixelBrahma/ThirdParty/GLFW/include"
-IncludeDir["Glad"] = "%{wks.location}/PixelBrahma/ThirdParty/Glad/include"
-IncludeDir["ImGui"] = "%{wks.location}/PixelBrahma/ThirdParty/ImGui"
-IncludeDir["glm"] = "%{wks.location}/PixelBrahma/ThirdParty/glm"
-IncludeDir["stb_image"] = "%{wks.location}/PixelBrahma/ThirdParty/stb_image"
-IncludeDir["enTT"] = "%{wks.location}/PixelBrahma/ThirdParty/enTT/Include"
-IncludeDir["yaml_cpp"] = "%{wks.location}/PixelBrahma/ThirdParty/yaml-cpp/include"
-IncludeDir["ImGuizmo"] = "%{wks.location}/PixelBrahma/ThirdParty/ImGuizmo"
 
 group "Dependencies"
 	include "vendor/premake"

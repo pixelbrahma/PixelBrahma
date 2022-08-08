@@ -30,6 +30,10 @@ namespace PixelBrahma
 	// Set viewport size
 	void SceneCamera::SetViewportSize(uint32_t width, uint32_t height)
 	{
+		PB_CORE_ASSERT(width > 0 && height > 0);
+
+		// Calculate camera projection matrix
+
 		m_AspectRatio = (float)width / (float)height;
 		RecalculateProjection();
 	}

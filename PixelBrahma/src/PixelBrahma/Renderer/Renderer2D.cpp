@@ -3,9 +3,11 @@
 
 #include "Geometry/VertexArray.h"
 #include "Shading/Shader.h"
+#include "Shading/UniformBuffer.h"
 #include "RenderCommand.h"
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace PixelBrahma
 {
@@ -52,6 +54,16 @@ namespace PixelBrahma
 
 		// Stats
 		Renderer2D::Statistics Stats;
+
+		// Camera data structure
+		struct CameraData
+		{
+			glm::mat4 ViewProjection;
+		};
+
+		// Camera buffers
+		CameraData CameraBuffer;
+		Ref<UniformBuffer> CameraUniformBuffer;
 	};
 
 	static Renderer2DData s_Data;
@@ -117,10 +129,6 @@ namespace PixelBrahma
 
 		// Create and bind shader from file path
 		s_Data.TextureShader = Shader::Create("Assets/Shaders/Texture.glsl");
-		
-		// Bind and set uniform slot of the texture shader
-		s_Data.TextureShader->Bind();
-		s_Data.TextureShader->SetIntArray("u_Textures", samplers, s_Data.MaxTextureSlots);
 
 		// Set dummy texture to the first texture slot
 		s_Data.TextureSlots[0] = s_Data.WhiteTexture;
@@ -130,6 +138,9 @@ namespace PixelBrahma
 		s_Data.QuadVertexPositions[1] = {  0.5f, -0.5f, 0.0f, 1.0f };
 		s_Data.QuadVertexPositions[2] = {  0.5f,  0.5f, 0.0f, 1.0f };
 		s_Data.QuadVertexPositions[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
+
+		// Create uniform buffer for camera data
+		s_Data.CameraUniformBuffer = UniformBuffer::Create(sizeof(Renderer2DData::CameraData), 0);
 	}
 
 	// Shutdown function for cleanup
@@ -161,12 +172,9 @@ namespace PixelBrahma
 		// Profiling
 		PB_PROFILE_FUNCTION();
 
-		// Get camera view projection matrix
-		glm::mat4 viewProj = camera.GetViewProjection();
-
-		// Bind shader and set uniforms
-		s_Data.TextureShader->Bind();
-		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
+		// Get camera view projection matrix and push data to the camera uniform buffer
+		s_Data.CameraBuffer.ViewProjection = camera.GetViewProjection();
+		s_Data.CameraUniformBuffer->SetData(&s_Data.CameraBuffer, sizeof(Renderer2DData::CameraData));
 
 		// Start batching
 		StartBatch();
@@ -177,12 +185,9 @@ namespace PixelBrahma
 		// Profiling
 		PB_PROFILE_FUNCTION();
 
-		// View projection matrix 
-		glm::mat4 viewProjection = camera.GetProjection() * glm::inverse(transform);
-
-		// Bind shader and set uniforms
-		s_Data.TextureShader->Bind();
-		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProjection);
+		// Get camera view projection matrix and push data to the camera uniform buffer
+		s_Data.CameraBuffer.ViewProjection = camera.GetProjection() * glm::inverse(transform);
+		s_Data.CameraUniformBuffer->SetData(&s_Data.CameraBuffer, sizeof(Renderer2DData::CameraData));
 
 		// Start batching
 		StartBatch();
@@ -221,6 +226,9 @@ namespace PixelBrahma
 		// Bind all the textures in the texture slots
 		for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
 			s_Data.TextureSlots[i]->Bind(i);
+
+		// Bind the shader
+		s_Data.TextureShader->Bind();
 
 		// Draw call for batched quads
 		RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);

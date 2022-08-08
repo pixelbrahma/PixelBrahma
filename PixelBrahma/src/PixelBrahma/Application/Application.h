@@ -17,11 +17,25 @@ int main(int argc, char** argv);
 
 namespace PixelBrahma
 {
+	// Application command line arguments structure
+	struct ApplicationCommandLineArgs
+	{
+		int Count = 0;
+		char** Args = nullptr;
+
+		const char* operator[](int index) const
+		{
+			PB_CORE_ASSERT(index < Count);
+			return Args[index];
+		}
+	};
+
 	// Application class to act as base class to create application from the client
 	class Application
 	{
 	public:
-		Application(const std::string& name = "PB Application");
+		Application(const std::string& name = "PB Application", 
+			ApplicationCommandLineArgs args = ApplicationCommandLineArgs());
 		virtual ~Application();
 
 		// Event handling and dispatching function
@@ -42,6 +56,9 @@ namespace PixelBrahma
 		Window& GetWindow() { return *m_Window; }
 		static Application& Get() { return *s_Instance; }
 
+		// Application command line arguments getter function
+		ApplicationCommandLineArgs GetCommandLineArgs() const { return m_CommandLineArgs; }
+
 	private:
 		// Run function
 		void Run();
@@ -52,11 +69,16 @@ namespace PixelBrahma
 		bool OnWindowResize(WindowResizeEvent& event);
 
 	private:
-		Scope<Window> m_Window;
+		ApplicationCommandLineArgs m_CommandLineArgs;
+		
 		ImGuiLayer* m_ImGuiLayer;
+		LayerStack m_LayerStack;
+
+		Scope<Window> m_Window;
+		
 		bool m_Running = true;
 		bool m_Minimized = false;
-		LayerStack m_LayerStack;
+		
 		float m_LastFrameTime = 0.0f;
 
 	private:
@@ -65,5 +87,5 @@ namespace PixelBrahma
 	};
 
 	// To be defined in the client
-	Application* CreateApplication();
+	Application* CreateApplication(ApplicationCommandLineArgs args);
 }

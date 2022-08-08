@@ -17,7 +17,7 @@ public:
 };
 
 // Create application function that passes an application instance to the engine
-PixelBrahma::Application* PixelBrahma::CreateApplication()
+PixelBrahma::Application* PixelBrahma::CreateApplication(ApplicationCommandLineArgs args)
 {
 	return new Sandbox();
 }

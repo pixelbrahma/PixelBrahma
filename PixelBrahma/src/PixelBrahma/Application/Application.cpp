@@ -12,7 +12,8 @@ namespace PixelBrahma
 	// Application should be a singleton
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application(const std::string& name)
+	Application::Application(const std::string& name, ApplicationCommandLineArgs args)
+		: m_CommandLineArgs(args)
 	{ 
 		// Profiling
 		PB_PROFILE_FUNCTION();

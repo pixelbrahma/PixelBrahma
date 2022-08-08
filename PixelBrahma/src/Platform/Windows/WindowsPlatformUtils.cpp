@@ -12,7 +12,7 @@
 namespace PixelBrahma
 {
 	// Open file for loading and set owner window handle
-	std::optional<std::string> FileDialogues::OpenFile(const char* filter)
+	std::string FileDialogues::OpenFile(const char* filter)
 	{
 		OPENFILENAMEA ofn;
 		CHAR szFile[260] = { 0 };
@@ -35,11 +35,11 @@ namespace PixelBrahma
 			return ofn.lpstrFile;
 		}
 
-		return std::nullopt;
+		return std::string();
 	}
 
 	// Open file for saving and set owner window handle
-	std::optional<std::string> FileDialogues::SaveFile(const char* filter)
+	std::string FileDialogues::SaveFile(const char* filter)
 	{
 		OPENFILENAMEA ofn;
 		CHAR szFile[260] = { 0 };
@@ -63,6 +63,6 @@ namespace PixelBrahma
 			return ofn.lpstrFile;
 		}
 
-		return std::nullopt;
+		return std::string();
 	}
 }

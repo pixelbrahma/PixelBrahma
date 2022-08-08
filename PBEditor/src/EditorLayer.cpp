@@ -43,6 +43,16 @@ namespace PixelBrahma
 		// Create scene reference
 		m_ActiveScene = CreateRef<Scene>();
 
+		auto commandLineArgs = Application::Get().GetCommandLineArgs();
+
+		// Load file in command line arguments
+		if (commandLineArgs.Count > 1)
+		{
+			auto sceneFilePath = commandLineArgs[1];
+			SceneSerializer serializer(m_ActiveScene);
+			serializer.Deserialize(sceneFilePath);
+		}
+
 		// Create editor camera
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
 
@@ -503,30 +513,30 @@ namespace PixelBrahma
 	// Load scene from file
 	void EditorLayer::OpenScene()
 	{
-		std::optional<std::string> filepath = FileDialogues::OpenFile
+		std::string filepath = FileDialogues::OpenFile
 			("PixelBrahma Scene (*.PixelBrahma)\0*.PixelBrahma\0");
 
-		if (filepath)
+		if (!filepath.empty())
 		{
 			m_ActiveScene = CreateRef<Scene>();
 			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 			m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 
 			SceneSerializer serializer(m_ActiveScene);
-			serializer.Deserialize(*filepath);
+			serializer.Deserialize(filepath);
 		}
 	}
 
 	// Save scene as specified
 	void EditorLayer::SaveSceneAs()
 	{
-		std::optional<std::string> filepath = FileDialogues::SaveFile
+		std::string filepath = FileDialogues::SaveFile
 			("PixelBrahma Scene (*.PixelBrahma)\0*.PixelBrahma\0");
 
-		if (filepath)
+		if (!filepath.empty())
 		{
 			SceneSerializer serializer(m_ActiveScene);
-			serializer.Serialize(*filepath);
+			serializer.Serialize(filepath);
 		}
 	}
 }

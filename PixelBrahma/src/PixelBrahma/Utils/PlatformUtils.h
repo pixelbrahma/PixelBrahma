@@ -11,7 +11,8 @@ namespace PixelBrahma
 	public:
 
 		// Open and save file functions
-		static std::optional<std::string> OpenFile(const char* filter);
-		static std::optional<std::string> SaveFile(const char* filter);
+
+		static std::string OpenFile(const char* filter);
+		static std::string SaveFile(const char* filter);
 	};
 }

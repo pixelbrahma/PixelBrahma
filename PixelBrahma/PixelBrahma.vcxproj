@@ -77,11 +77,11 @@
       <PrecompiledHeaderFile>pbpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;YAML_CPP_STATIC_DEFINE;PB_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;ThirdParty\spdlog\include;ThirdParty\GLFW\include;ThirdParty\Glad\include;ThirdParty\ImGui;ThirdParty\glm;ThirdParty\stb_image;ThirdParty\enTT\Include;ThirdParty\yaml-cpp\include;ThirdParty\ImGuizmo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;ThirdParty\spdlog\include;ThirdParty\GLFW\include;ThirdParty\Glad\include;ThirdParty\ImGui;ThirdParty\glm;ThirdParty\stb_image;ThirdParty\enTT\Include;ThirdParty\yaml-cpp\include;ThirdParty\ImGuizmo;D:\Tools\Vulkan\1.2.170.0\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -90,7 +90,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;ThirdParty\VulkanSDK\Lib\shaderc_sharedd.lib;ThirdParty\VulkanSDK\Lib\spirv-cross-cored.lib;ThirdParty\VulkanSDK\Lib\spirv-cross-glsld.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -99,13 +99,13 @@
       <PrecompiledHeaderFile>pbpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;YAML_CPP_STATIC_DEFINE;PB_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;ThirdParty\spdlog\include;ThirdParty\GLFW\include;ThirdParty\Glad\include;ThirdParty\ImGui;ThirdParty\glm;ThirdParty\stb_image;ThirdParty\enTT\Include;ThirdParty\yaml-cpp\include;ThirdParty\ImGuizmo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;ThirdParty\spdlog\include;ThirdParty\GLFW\include;ThirdParty\Glad\include;ThirdParty\ImGui;ThirdParty\glm;ThirdParty\stb_image;ThirdParty\enTT\Include;ThirdParty\yaml-cpp\include;ThirdParty\ImGuizmo;D:\Tools\Vulkan\1.2.170.0\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -115,7 +115,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;D:\Tools\Vulkan\1.2.170.0\Lib\shaderc_shared.lib;D:\Tools\Vulkan\1.2.170.0\Lib\spirv-cross-core.lib;D:\Tools\Vulkan\1.2.170.0\Lib\spirv-cross-glsl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -124,13 +124,13 @@
       <PrecompiledHeaderFile>pbpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;YAML_CPP_STATIC_DEFINE;PB_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;ThirdParty\spdlog\include;ThirdParty\GLFW\include;ThirdParty\Glad\include;ThirdParty\ImGui;ThirdParty\glm;ThirdParty\stb_image;ThirdParty\enTT\Include;ThirdParty\yaml-cpp\include;ThirdParty\ImGuizmo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;ThirdParty\spdlog\include;ThirdParty\GLFW\include;ThirdParty\Glad\include;ThirdParty\ImGui;ThirdParty\glm;ThirdParty\stb_image;ThirdParty\enTT\Include;ThirdParty\yaml-cpp\include;ThirdParty\ImGuizmo;D:\Tools\Vulkan\1.2.170.0\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -140,7 +140,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;D:\Tools\Vulkan\1.2.170.0\Lib\shaderc_shared.lib;D:\Tools\Vulkan\1.2.170.0\Lib\spirv-cross-core.lib;D:\Tools\Vulkan\1.2.170.0\Lib\spirv-cross-glsl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -567,6 +567,7 @@
     <ClInclude Include="src\PixelBrahma\Core\Assert.h" />
     <ClInclude Include="src\PixelBrahma\Core\Core.h" />
     <ClInclude Include="src\PixelBrahma\Core\PlatformDetection.h" />
+    <ClInclude Include="src\PixelBrahma\Core\Timer.h" />
     <ClInclude Include="src\PixelBrahma\Core\Timestep.h" />
     <ClInclude Include="src\PixelBrahma\Core\Window.h" />
     <ClInclude Include="src\PixelBrahma\Debug\Instrumentor.h" />
@@ -595,6 +596,7 @@
     <ClInclude Include="src\PixelBrahma\Renderer\RendererAPI.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Shading\Shader.h" />
     <ClInclude Include="src\PixelBrahma\Renderer\Shading\Texture.h" />
+    <ClInclude Include="src\PixelBrahma\Renderer\Shading\UniformBuffer.h" />
     <ClInclude Include="src\PixelBrahma\Scene\Components.h" />
     <ClInclude Include="src\PixelBrahma\Scene\Entity.h" />
     <ClInclude Include="src\PixelBrahma\Scene\Scene.h" />
@@ -609,6 +611,7 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLUniformBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\pbpch.h" />
@@ -638,6 +641,7 @@
     <ClCompile Include="src\PixelBrahma\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\PixelBrahma\Renderer\Shading\Shader.cpp" />
     <ClCompile Include="src\PixelBrahma\Renderer\Shading\Texture.cpp" />
+    <ClCompile Include="src\PixelBrahma\Renderer\Shading\UniformBuffer.cpp" />
     <ClCompile Include="src\PixelBrahma\Scene\Entity.cpp" />
     <ClCompile Include="src\PixelBrahma\Scene\Scene.cpp" />
     <ClCompile Include="src\PixelBrahma\Scene\SceneCamera.cpp" />
@@ -649,6 +653,7 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLUniformBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsPlatformUtils.cpp" />

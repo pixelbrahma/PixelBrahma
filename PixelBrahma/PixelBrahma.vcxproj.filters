@@ -1356,6 +1356,9 @@
     <ClInclude Include="src\PixelBrahma\Core\PlatformDetection.h">
       <Filter>src\PixelBrahma\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Core\Timer.h">
+      <Filter>src\PixelBrahma\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\PixelBrahma\Core\Timestep.h">
       <Filter>src\PixelBrahma\Core</Filter>
     </ClInclude>
@@ -1440,6 +1443,9 @@
     <ClInclude Include="src\PixelBrahma\Renderer\Shading\Texture.h">
       <Filter>src\PixelBrahma\Renderer\Shading</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Renderer\Shading\UniformBuffer.h">
+      <Filter>src\PixelBrahma\Renderer\Shading</Filter>
+    </ClInclude>
     <ClInclude Include="src\PixelBrahma\Scene\Components.h">
       <Filter>src\PixelBrahma\Scene</Filter>
     </ClInclude>
@@ -1480,6 +1486,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLUniformBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
@@ -1559,6 +1568,9 @@
     <ClCompile Include="src\PixelBrahma\Renderer\Shading\Texture.cpp">
       <Filter>src\PixelBrahma\Renderer\Shading</Filter>
     </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Renderer\Shading\UniformBuffer.cpp">
+      <Filter>src\PixelBrahma\Renderer\Shading</Filter>
+    </ClCompile>
     <ClCompile Include="src\PixelBrahma\Scene\Entity.cpp">
       <Filter>src\PixelBrahma\Scene</Filter>
     </ClCompile>
@@ -1590,6 +1602,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLUniformBuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
