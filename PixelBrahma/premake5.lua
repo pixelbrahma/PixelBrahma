@@ -41,7 +41,8 @@ project "PixelBrahma"
 		"%{IncludeDir.enTT}",
 		"%{IncludeDir.yaml_cpp}",
 		"%{IncludeDir.ImGuizmo}",
-		"%{IncludeDir.VulkanSDK}"
+		"%{IncludeDir.VulkanSDK}",
+		"%{IncludeDir.Box2D}"
 	}
 
 	links
@@ -50,7 +51,8 @@ project "PixelBrahma"
 		"Glad",
 		"ImGui",
 		"yaml-cpp",
-		"opengl32.lib"
+		"opengl32.lib",
+		"Box2D"
 	}
 
 	filter "files:ThirdParty/ImGuizmo/**.cpp"

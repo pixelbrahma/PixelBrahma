@@ -5,6 +5,8 @@
 #include "PixelBrahma/Core/Timestep.h"
 #include "PixelBrahma/Renderer/Camera/EditorCamera.h"
 
+class b2World;
+
 namespace PixelBrahma
 {
 	// Forward declaration of the entity class
@@ -21,6 +23,11 @@ namespace PixelBrahma
 
 		Entity CreateEntity(const std::string& name = std::string());
 		void DestroyEntity(Entity entity);
+
+		// Scene runtime start and stop functions
+
+		void OnRuntimeStart();
+		void OnRuntimeStop();
 
 		// Scene update functions
 
@@ -41,8 +48,11 @@ namespace PixelBrahma
 
 	private:
 		entt::registry m_Registry;
+
 		uint32_t m_ViewportWidth = 0;
 		uint32_t m_ViewportHeight = 0;
+
+		b2World* m_PhysicsWorld = nullptr;
 
 		friend class Entity;
 		friend class SceneHierarchyPanel;

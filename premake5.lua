@@ -30,6 +30,7 @@ group "Dependencies"
 	include "PixelBrahma/ThirdParty/Glad"
 	include "PixelBrahma/ThirdParty/ImGui"
 	include "PixelBrahma/ThirdParty/yaml-cpp"
+	include "PixelBrahma/ThirdParty/Box2D"
 group ""
 
 include "PixelBrahma"
