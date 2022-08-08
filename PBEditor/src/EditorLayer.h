@@ -42,13 +42,19 @@ namespace PixelBrahma
 		void OpenScene();
 		void OpenScene(const std::filesystem::path& path);
 		void SaveSceneAs();
+		void SaveScene();
 		//void ExitScene();
-		//void SaveScene();
+
+		// Scene serialize function
+		void SerializeScene(Ref<Scene> scene, const std::filesystem::path& path);
 
 		// Scene play and stop functions
 
 		void OnScenePlay();
 		void OnSceneStop();
+
+		// Duplicate entity handler function
+		void OnDuplicateEntity();
 
 		// UI Panel functions
 		void UI_Toolbar();
@@ -70,6 +76,9 @@ namespace PixelBrahma
 		Ref<Framebuffer> m_Framebuffer;
 		Ref<Texture2D> m_CheckerboardTexture;
 		Ref<Scene> m_ActiveScene;
+		Ref<Scene> m_EditorScene;
+
+		std::filesystem::path m_EditorScenePath;
 
 		bool m_PrimaryCamera = true;
 		bool m_ViewportFocused = false;

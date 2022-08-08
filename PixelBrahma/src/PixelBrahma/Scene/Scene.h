@@ -20,6 +20,9 @@ namespace PixelBrahma
 		Scene();
 		~Scene();
 
+		// Copy of the editing scene
+		static Ref<Scene> Copy(Ref<Scene> other);
+
 		// Entity create and destroy functions
 
 		Entity CreateEntity(const std::string& name = std::string());
@@ -38,6 +41,9 @@ namespace PixelBrahma
 
 		// Viewport resize function
 		void OnViewportResize(uint32_t width, uint32_t height);
+
+		// Duplicate an entity function
+		void DuplicateEntity(Entity entity);
 
 		// Get the primary camera in the scene function
 		Entity GetPrimaryCameraEntity();

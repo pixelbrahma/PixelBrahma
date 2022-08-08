@@ -38,9 +38,11 @@ namespace PixelBrahma
 	{
 		// Begin ImGui scene hierarchy panel 
 		ImGui::Begin("Scene Hierarchy");
-
-		// Get each entity in the scene registry
-		m_Context->m_Registry.each([&](auto entityID)
+		
+		if (m_Context)
+		{
+			// Get each entity in the scene registry
+			m_Context->m_Registry.each([&](auto entityID)
 			{
 				// Create an engine entity instance of it
 				Entity entity(entityID, m_Context.get());
@@ -48,18 +50,19 @@ namespace PixelBrahma
 				DrawEntityHierarchy(entity);
 			});
 
-		// Deselect object if clicked elsewhere
-		if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
-			m_SelectionContext = {};
+			// Deselect object if clicked elsewhere
+			if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
+				m_SelectionContext = {};
 
-		// Right-click on blank space
-		if (ImGui::BeginPopupContextWindow(0, 1, false))
-		{
-			// Create entity menu item
-			if (ImGui::MenuItem("Create Empty Entity"))
-				m_Context->CreateEntity("Empty Entity");
+			// Right-click on blank space
+			if (ImGui::BeginPopupContextWindow(0, 1, false))
+			{
+				// Create entity menu item
+				if (ImGui::MenuItem("Create Empty Entity"))
+					m_Context->CreateEntity("Empty Entity");
 
-			ImGui::EndPopup();
+				ImGui::EndPopup();
+			}
 		}
 
 		// End ImGui scene hierarchy panel
@@ -484,7 +487,7 @@ namespace PixelBrahma
 		DrawComponent<BoxCollider2DComponent>("Box Collider 2D", entity, [](auto& component)
 		{
 			ImGui::DragFloat2("Offset", glm::value_ptr(component.Offset));
-			ImGui::DragFloat2("Size", glm::value_ptr(component.Offset));
+			ImGui::DragFloat2("Size", glm::value_ptr(component.Size));
 			ImGui::DragFloat("Density", &component.Density, 0.01f, 0.0f, 1.0f);
 			ImGui::DragFloat("Friction", &component.Friction, 0.01f, 0.0f, 1.0f);
 			ImGui::DragFloat("Restitution", &component.Restitution, 0.01f, 0.0f, 1.0f);

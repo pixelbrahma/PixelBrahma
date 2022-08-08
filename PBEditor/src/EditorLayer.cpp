@@ -128,9 +128,6 @@ namespace PixelBrahma
 		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 		m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 #endif
-
-		// Set the context of the scene hierarchy panel
-		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 	}
 
 	// Layer on detach function
@@ -513,13 +510,19 @@ namespace PixelBrahma
 
 			case Key::S:
 			{
-				if (control && shift)
-					SaveSceneAs();
-			
-				//if (control && !shift)
-					//SaveScene();
+				if (control)
+					if (shift)
+						SaveSceneAs();
+					else
+						SaveScene();
 
 				break;
+			}
+
+			case Key::D:
+			{
+				if (control)
+					OnDuplicateEntity();
 			}
 
 			//case Key::F4:
@@ -574,11 +577,16 @@ namespace PixelBrahma
 		m_ActiveScene = CreateRef<Scene>();
 		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+
+		m_EditorScenePath = std::filesystem::path();
 	}
 
 	// Load scene from file
 	void EditorLayer::OpenScene()
 	{
+		if (m_SceneState != SceneState::Edit)
+			OnSceneStop();
+
 		std::string filepath = FileDialogues::OpenFile
 			("PixelBrahma Scene (*.PixelBrahma)\0*.PixelBrahma\0");
 
@@ -601,10 +609,22 @@ namespace PixelBrahma
 
 		if (serializer.Deserialize(path.string()))
 		{
-			m_ActiveScene = newScene;
-			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-			m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+			m_EditorScene = newScene;
+			m_EditorScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+			m_SceneHierarchyPanel.SetContext(m_EditorScene);
+
+			m_ActiveScene = m_EditorScene;
+			m_EditorScenePath = path;
 		}
+	}
+
+	// Save the scene
+	void EditorLayer::SaveScene()
+	{
+		if (!m_EditorScenePath.empty())
+			SerializeScene(m_ActiveScene, m_EditorScenePath);
+		else
+			SaveSceneAs();
 	}
 
 	// Save scene as specified
@@ -615,16 +635,26 @@ namespace PixelBrahma
 
 		if (!filepath.empty())
 		{
-			SceneSerializer serializer(m_ActiveScene);
-			serializer.Serialize(filepath);
+			SerializeScene(m_ActiveScene, filepath);
+			m_EditorScenePath = filepath;
 		}
+	}
+
+	// Serialize the scene
+	void EditorLayer::SerializeScene(Ref<Scene> scene, const std::filesystem::path& path)
+	{
+		SceneSerializer serializer(scene);
+		serializer.Serialize(path.string());
 	}
 
 	// Scene play function
 	void EditorLayer::OnScenePlay()
 	{
 		m_SceneState = SceneState::Play;
+		m_ActiveScene = Scene::Copy(m_EditorScene);
 		m_ActiveScene->OnRuntimeStart();
+
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 	}
 
 	// Scene stop function
@@ -632,5 +662,20 @@ namespace PixelBrahma
 	{
 		m_SceneState = SceneState::Edit;
 		m_ActiveScene->OnRuntimeStop();
+		m_ActiveScene = m_EditorScene;
+
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+	}
+
+	// Duplicate entity
+	void EditorLayer::OnDuplicateEntity()
+	{
+		if (m_SceneState != SceneState::Edit)
+			return;
+
+		Entity selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity();
+
+		if (selectedEntity)
+			m_EditorScene->DuplicateEntity(selectedEntity);
 	}
 }

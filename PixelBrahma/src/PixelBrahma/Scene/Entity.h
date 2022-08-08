@@ -30,6 +30,15 @@ namespace PixelBrahma
 			return component;
 		}
 
+		// Component add or replace function
+		template<typename T, typename... Args>
+		T& AddOrReplaceComponent(Args&&... args)
+		{
+			T& component = m_Scene->m_Registry.emplace_or_replace<T>(m_EntityHandle, std::forward<Args>(args)...);
+			m_Scene->OnComponentAdded<T>(*this, component);
+			return component;
+		}
+
 		// Get component template function
 		template<typename T>
 		T& GetComponent()
@@ -64,6 +73,9 @@ namespace PixelBrahma
 
 		// Get UUID function
 		UUID GetUUID() { return GetComponent<IDComponent>().ID; }
+
+		// Get entity name function
+		const std::string& GetName() { return GetComponent<TagComponent>().Tag; }
 
 		// Operator overloading to check equality of entities
 		bool operator==(const Entity& other) const
