@@ -152,8 +152,10 @@ namespace PixelBrahma
 	// Serialize an entity and its components
 	static void SerializeEntity(YAML::Emitter& out, Entity entity)
 	{
+		PB_CORE_ASSERT(entity.HasComponent<IDComponent>());
+
 		out << YAML::BeginMap; // Entity
-		out << YAML::Key << "Entity" << YAML::Value << "12837192831273"; // TODO: Entity ID goes here
+		out << YAML::Key << "Entity" << YAML::Value << entity.GetUUID();
 
 		// Tag component
 		if (entity.HasComponent<TagComponent>())
@@ -302,12 +304,13 @@ namespace PixelBrahma
 		PB_CORE_TRACE("Deserializing scene '{0}'", sceneName);
 
 		auto entities = data["Entities"];
+
 		if (entities)
 		{
 			for (auto entity : entities)
 			{
 				// Entity
-				uint64_t uuid = entity["Entity"].as<uint64_t>(); // TODO
+				uint64_t uuid = entity["Entity"].as<uint64_t>();
 
 				// Tag component
 				std::string name;
@@ -317,7 +320,7 @@ namespace PixelBrahma
 
 				PB_CORE_TRACE("Deserialized entity with ID = {0}, name = {1}", uuid, name);
 
-				Entity deserializedEntity = m_Scene->CreateEntity(name);
+				Entity deserializedEntity = m_Scene->CreateEntityWithUUID(uuid, name);
 
 				// Transform component
 				auto transformComponent = entity["TransformComponent"];

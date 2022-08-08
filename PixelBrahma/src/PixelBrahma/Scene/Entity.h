@@ -1,6 +1,8 @@
 #pragma once
 
+#include "PixelBrahma/Core/UUID.h"
 #include "Scene.h"
+#include "Components.h"
 
 #include <entt.hpp>
 
@@ -59,6 +61,9 @@ namespace PixelBrahma
 
 		// Operator overloading to convert ent::entity type to uint32_t
 		operator uint32_t() const { return (uint32_t)m_EntityHandle; }
+
+		// Get UUID function
+		UUID GetUUID() { return GetComponent<IDComponent>().ID; }
 
 		// Operator overloading to check equality of entities
 		bool operator==(const Entity& other) const

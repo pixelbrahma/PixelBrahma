@@ -4,6 +4,7 @@
 #include "Components.h"
 #include "PixelBrahma/Renderer/Renderer2D.h"
 #include "Entity.h"
+#include "ScriptableEntity.h"
 
 #include <glm/glm.hpp>
 
@@ -37,8 +38,16 @@ namespace PixelBrahma
 	// Create an entity function
 	Entity Scene::CreateEntity(const std::string& name)
 	{
+		return CreateEntityWithUUID(UUID(), name);
+	}
+
+	// Create entity with UUID
+	Entity Scene::CreateEntityWithUUID(UUID uuid, const std::string& name)
+	{
 		// Create an entity in this scene
 		Entity entity = { m_Registry.create(), this };
+		// Add the uuid component
+		entity.AddComponent<IDComponent>(uuid);
 		// Add a transform component to the entity
 		entity.AddComponent<TransformComponent>();
 		// Add a tag component to the entity
@@ -274,16 +283,18 @@ namespace PixelBrahma
 	template<typename T>
 	void Scene::OnComponentAdded(Entity entity, T& component)
 	{
-		static_assert(false);
+		//static_assert(false);
 	}
 
-	// Transform component on added 
+	// UUID component added
 	template<>
-	void Scene::OnComponentAdded<TransformComponent>(Entity entity, TransformComponent& component)
-	{
-	}
+	void Scene::OnComponentAdded<IDComponent>(Entity entity, IDComponent& component) {}
 
-	// Camera component on added 
+	// Transform component added 
+	template<>
+	void Scene::OnComponentAdded<TransformComponent>(Entity entity, TransformComponent& component) {}
+
+	// Camera component added 
 	template<>
 	void Scene::OnComponentAdded<CameraComponent>(Entity entity, CameraComponent& component)
 	{
@@ -292,33 +303,23 @@ namespace PixelBrahma
 			component.Camera.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
 	}
 
-	// Sprite renderer component on added 
+	// Sprite renderer component added 
 	template<>
-	void Scene::OnComponentAdded<SpriteRendererComponent>(Entity entity, SpriteRendererComponent& component)
-	{
-	}
+	void Scene::OnComponentAdded<SpriteRendererComponent>(Entity entity, SpriteRendererComponent& component) {}
 
-	// Tag component on added 
+	// Tag component added 
 	template<>
-	void Scene::OnComponentAdded<TagComponent>(Entity entity, TagComponent& component)
-	{
-	}
+	void Scene::OnComponentAdded<TagComponent>(Entity entity, TagComponent& component) {}
 
-	// Native script component on added 
+	// Native script component added 
 	template<>
-	void Scene::OnComponentAdded<NativeScriptComponent>(Entity entity, NativeScriptComponent& component)
-	{
-	}
+	void Scene::OnComponentAdded<NativeScriptComponent>(Entity entity, NativeScriptComponent& component) {}
 
 	// Rigid body component added
 	template<>
-	void Scene::OnComponentAdded<Rigidbody2DComponent>(Entity entity, Rigidbody2DComponent& component)
-	{
-	}
+	void Scene::OnComponentAdded<Rigidbody2DComponent>(Entity entity, Rigidbody2DComponent& component) {}
 
 	// Box collider component added
 	template<>
-	void Scene::OnComponentAdded<BoxCollider2DComponent>(Entity entity, BoxCollider2DComponent& component)
-	{
-	}
+	void Scene::OnComponentAdded<BoxCollider2DComponent>(Entity entity, BoxCollider2DComponent& component) {}
 }

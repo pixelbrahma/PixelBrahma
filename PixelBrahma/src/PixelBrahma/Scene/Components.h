@@ -6,13 +6,22 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 
+#include "PixelBrahma/Core/UUID.h"
 #include "SceneCamera.h"
-#include "ScriptableEntity.h"
 #include "PixelBrahma/Renderer/Shading/Texture.h"
 
 namespace PixelBrahma
 {
-	// The tag component
+	// UUID component
+	struct IDComponent
+	{
+		UUID ID;
+
+		IDComponent() = default;
+		IDComponent(const IDComponent&) = default;
+	};
+
+	// Tag component
 	struct TagComponent
 	{
 		std::string Tag;
@@ -22,7 +31,7 @@ namespace PixelBrahma
 		TagComponent(const std::string& tag) : Tag(tag) {}
 	};
 
-	// The transform component
+	// Transform component
 	struct TransformComponent
 	{
 		glm::vec3 Translation = { 0.0f, 0.0f, 0.0f };
@@ -68,6 +77,9 @@ namespace PixelBrahma
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
 	};
+
+	// Forward declaration
+	class ScriptableEntity;
 
 	// Native scripting component
 	struct NativeScriptComponent
