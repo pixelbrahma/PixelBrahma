@@ -159,9 +159,9 @@ namespace PixelBrahma
 		// Profiling
 		PB_PROFILE_FUNCTION();
 
-		// Bind shader and set uniforms
-		s_Data.TextureShader->Bind();
-		s_Data.TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
+		// Get camera view projection matrix and push data to the camera uniform buffer
+		s_Data.CameraBuffer.ViewProjection = camera.GetViewProjectionMatrix();
+		s_Data.CameraUniformBuffer->SetData(&s_Data.CameraBuffer, sizeof(Renderer2DData::CameraData));
 
 		// Start batching
 		StartBatch();
@@ -411,7 +411,10 @@ namespace PixelBrahma
 	// Draw sprite function for drawing a sprite
 	void Renderer2D::DrawSprite(const glm::mat4& transform, SpriteRendererComponent& src, int entityID)
 	{
-		DrawQuad(transform, src.Color, entityID);
+		if (src.Texture)
+			DrawQuad(transform, src.Texture, src.TilingFactor, src.Color, entityID);
+		else
+			DrawQuad(transform, src.Color, entityID);
 	}
 
 	// Reset stats

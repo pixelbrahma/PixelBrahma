@@ -12,6 +12,9 @@
 
 namespace PixelBrahma
 {
+	// Assets directory path
+	extern const std::filesystem::path g_AssetPath;
+
 	EditorLayer::EditorLayer() : Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f, true),
 		m_SquareColor({ 0.2f, 0.3f, 0.8f, 1.0f }) {}
 
@@ -344,6 +347,17 @@ namespace PixelBrahma
 		// Get window size
 		auto windowSize = ImGui::GetWindowSize();
 
+		// Drag and drop asset feature
+		if (ImGui::BeginDragDropTarget())
+		{
+			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
+			{
+				const wchar_t* path = (const wchar_t*)payload->Data;
+				OpenScene(std::filesystem::path(g_AssetPath) / path);
+			}
+			ImGui::EndDragDropTarget();
+		}
+
 		// Gizmos
 
 		// Get selected entity
@@ -519,14 +533,17 @@ namespace PixelBrahma
 			("PixelBrahma Scene (*.PixelBrahma)\0*.PixelBrahma\0");
 
 		if (!filepath.empty())
-		{
-			m_ActiveScene = CreateRef<Scene>();
-			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-			m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+			OpenScene(filepath);
+	}
 
-			SceneSerializer serializer(m_ActiveScene);
-			serializer.Deserialize(filepath);
-		}
+	void EditorLayer::OpenScene(const std::filesystem::path& path)
+	{
+		m_ActiveScene = CreateRef<Scene>();
+		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+
+		SceneSerializer serializer(m_ActiveScene);
+		serializer.Deserialize(path.string());
 	}
 
 	// Save scene as specified

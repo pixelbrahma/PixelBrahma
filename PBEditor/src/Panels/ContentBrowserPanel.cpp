@@ -8,10 +8,10 @@
 namespace PixelBrahma
 {
 	// Assets directory path
-	static const std::filesystem::path s_AssetPath = "Assets";
+	extern const std::filesystem::path g_AssetPath = "Assets";
 
 	ContentBrowserPanel::ContentBrowserPanel()
-		: m_CurrentDirectory(s_AssetPath) 
+		: m_CurrentDirectory(g_AssetPath) 
 	{
 		// Create Icon 2d textures
 		m_DirectoryIcon = Texture2D::Create("Resources/Icons/FolderIcon.png");
@@ -23,7 +23,7 @@ namespace PixelBrahma
 	{
 		ImGui::Begin("Content Browser");
 
-		if (m_CurrentDirectory != std::filesystem::path(s_AssetPath))
+		if (m_CurrentDirectory != std::filesystem::path(g_AssetPath))
 		{
 			if (ImGui::Button("<-"))
 			{
@@ -44,15 +44,30 @@ namespace PixelBrahma
 
 		for (auto& directoryEntry : std::filesystem::directory_iterator(m_CurrentDirectory))
 		{
+			// Push path to UI
 			const auto& path = directoryEntry.path();
-			auto relativePath = std::filesystem::relative(path, s_AssetPath);
+			auto relativePath = std::filesystem::relative(path, g_AssetPath);
 			std::string filenameString = relativePath.filename().string();
+			ImGui::PushID(filenameString.c_str());
 
 			// Icon to show
 			Ref<Texture2D> icon = directoryEntry.is_directory() ? m_DirectoryIcon : m_FileIcon;
+
 			// ImGui image button
+			ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
 			ImGui::ImageButton((ImTextureID)icon->GetRendererID(), 
 				{ thumbnailSize, thumbnailSize }, { 0, 1 }, { 1, 0 });
+
+			// Drag and drop assets feature
+			if (ImGui::BeginDragDropSource())
+			{
+				const wchar_t* itemPath = relativePath.c_str();
+				ImGui::SetDragDropPayload("CONTENT_BROWSER_ITEM", itemPath, 
+					(wcslen(itemPath) + 1) * sizeof(wchar_t));
+				ImGui::EndDragDropSource();
+			}
+
+			ImGui::PopStyleColor();
 
 			if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
 			{
@@ -63,6 +78,8 @@ namespace PixelBrahma
 			ImGui::TextWrapped(filenameString.c_str());
 
 			ImGui::NextColumn();
+
+			ImGui::PopID();
 		}
 
 		ImGui::Columns(1);

@@ -8,7 +8,7 @@
 class Sandbox : public PixelBrahma::Application
 {
 public:
-	Sandbox() 
+	Sandbox(PixelBrahma::ApplicationCommandLineArgs args) 
 	{ 
 		//PushLayer(new ExampleLayer()); 
 		PushLayer(new Sandbox2D());
@@ -17,7 +17,7 @@ public:
 };
 
 // Create application function that passes an application instance to the engine
-PixelBrahma::Application* PixelBrahma::CreateApplication(ApplicationCommandLineArgs args)
+PixelBrahma::Application* PixelBrahma::CreateApplication(PixelBrahma::ApplicationCommandLineArgs args)
 {
-	return new Sandbox();
+	return new Sandbox(args);
 }
