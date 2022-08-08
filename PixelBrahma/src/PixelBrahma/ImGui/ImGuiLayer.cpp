@@ -44,10 +44,12 @@ namespace PixelBrahma
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
 
+		// Font size
+		float fontSize = 18.0f;
 		// Bold font
-		io.Fonts->AddFontFromFileTTF("Assets/Fonts/Rubik/Rubik-Bold.ttf", 18.0f);
+		io.Fonts->AddFontFromFileTTF("Assets/Fonts/Rubik/Rubik-Bold.ttf", fontSize);
 		// Default font
-		io.FontDefault = io.Fonts->AddFontFromFileTTF("Assets/Fonts/Rubik/Rubik-Regular.ttf", 18.0f);
+		io.FontDefault = io.Fonts->AddFontFromFileTTF("Assets/Fonts/Rubik/Rubik-Regular.ttf", fontSize);
 
 		// Set ImGui style
 		ImGui::StyleColorsDark();

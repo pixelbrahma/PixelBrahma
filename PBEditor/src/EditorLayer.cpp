@@ -292,8 +292,10 @@ namespace PixelBrahma
 			ImGui::EndMenuBar();
 		}
 
-		// Render the scene hierarchy panel
+		// Render the ImGui panels
+
 		m_SceneHierarchyPanel.OnImGuiRender();
+		m_ContentBrowserPanel.OnImGuiRender();
 
 		ImGui::Begin("Stats");
 
