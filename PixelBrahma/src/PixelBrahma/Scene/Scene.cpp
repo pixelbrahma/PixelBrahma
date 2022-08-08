@@ -89,6 +89,7 @@ namespace PixelBrahma
 		// Copy components (except IDComponent and TagComponent)
 		CopyComponent<TransformComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 		CopyComponent<SpriteRendererComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
+		CopyComponent<CircleRendererComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 		CopyComponent<CameraComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 		CopyComponent<NativeScriptComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 		CopyComponent<Rigidbody2DComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
@@ -262,16 +263,35 @@ namespace PixelBrahma
 			// Begin rendering
 			Renderer2D::BeginScene(*mainCamera, cameraTransform);
 			
-			// Get entities with sprite renderer component
-			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-
-			for (auto entity : group)
+			// Draw sprites
 			{
-				// Get the transform and sprite renderer components
-				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+				// Get entities with sprite renderer component
+				auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
 
-				// Draw the sprite
-				Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+				for (auto entity : group)
+				{
+					// Get the transform and sprite renderer components
+					auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+
+					// Draw the sprite
+					Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+				}
+			}
+
+			// Draw circles
+			{
+				// Get entities with circle renderer component
+				auto view = m_Registry.view<TransformComponent, CircleRendererComponent>();
+
+				for (auto entity : view)
+				{
+					// Get the transform and circle renderer components
+					auto [transform, circle] = view.get<TransformComponent, CircleRendererComponent>(entity);
+
+					// Draw the circle
+					Renderer2D::DrawCircle(transform.GetTransform(), circle.Color, 
+						circle.Thickness, circle.Fade, (int)entity);
+				}
 			}
 
 			// End rendering
@@ -285,16 +305,35 @@ namespace PixelBrahma
 		// Begin rendering
 		Renderer2D::BeginScene(camera);
 
-		// Get entities with sprite renderer component
-		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-
-		for (auto entity : group)
+		// Draw sprites
 		{
-			// Get the transform and sprite renderer components
-			auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+			// Get entities with sprite renderer component
+			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
 
-			// Draw the sprite
-			Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+			for (auto entity : group)
+			{
+				// Get the transform and sprite renderer components
+				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+
+				// Draw the sprite
+				Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+			}
+		}
+
+		// Draw cirles
+		{
+			// Get entities with circle renderer component
+			auto view = m_Registry.view<TransformComponent, CircleRendererComponent>();
+
+			for (auto entity : view)
+			{
+				// Get the transform and circle renderer components
+				auto [transform, circle] = view.get<TransformComponent, CircleRendererComponent>(entity);
+
+				// Draw the circle
+				Renderer2D::DrawCircle(transform.GetTransform(), circle.Color, 
+					circle.Thickness, circle.Fade, (int)entity);
+			}
 		}
 
 		// End rendering
@@ -332,6 +371,7 @@ namespace PixelBrahma
 
 		CopyComponentIfExists<TransformComponent>(newEntity, entity);
 		CopyComponentIfExists<SpriteRendererComponent>(newEntity, entity);
+		CopyComponentIfExists<CircleRendererComponent>(newEntity, entity);
 		CopyComponentIfExists<CameraComponent>(newEntity, entity);
 		CopyComponentIfExists<NativeScriptComponent>(newEntity, entity);
 		CopyComponentIfExists<Rigidbody2DComponent>(newEntity, entity);
@@ -382,6 +422,10 @@ namespace PixelBrahma
 	// Sprite renderer component added 
 	template<>
 	void Scene::OnComponentAdded<SpriteRendererComponent>(Entity entity, SpriteRendererComponent& component) {}
+
+	// Circle renderer component added
+	template<>
+	void Scene::OnComponentAdded<CircleRendererComponent>(Entity entity, CircleRendererComponent& component) {}
 
 	// Tag component added 
 	template<>

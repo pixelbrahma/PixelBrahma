@@ -1,4 +1,7 @@
-// Basic texture shader
+//--------------------------
+// PixelBrahma Engine
+// Renderer2D Circle Shader
+// --------------------------
 
 #type vertex
 

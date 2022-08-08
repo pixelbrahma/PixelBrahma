@@ -221,6 +221,20 @@ namespace PixelBrahma
 			out << YAML::EndMap; // SpriteRendererComponent
 		}
 
+		// Circle renderer component
+		if (entity.HasComponent<CircleRendererComponent>())
+		{
+			out << YAML::Key << "CircleRendererComponent";
+			out << YAML::BeginMap; // CircleRendererComponent
+
+			auto& circleRendererComponent = entity.GetComponent<CircleRendererComponent>();
+			out << YAML::Key << "Color" << YAML::Value << circleRendererComponent.Color;
+			out << YAML::Key << "Thickness" << YAML::Value << circleRendererComponent.Thickness;
+			out << YAML::Key << "Fade" << YAML::Value << circleRendererComponent.Fade;
+
+			out << YAML::EndMap; // CircleRendererComponent
+		}
+
 		// Rigid body component
 		if (entity.HasComponent<Rigidbody2DComponent>())
 		{
@@ -315,6 +329,7 @@ namespace PixelBrahma
 				// Tag component
 				std::string name;
 				auto tagComponent = entity["TagComponent"];
+
 				if (tagComponent)
 					name = tagComponent["Tag"].as<std::string>();
 
@@ -324,6 +339,7 @@ namespace PixelBrahma
 
 				// Transform component
 				auto transformComponent = entity["TransformComponent"];
+
 				if (transformComponent)
 				{
 					// Entities always have transforms
@@ -335,6 +351,7 @@ namespace PixelBrahma
 
 				// Camera component
 				auto cameraComponent = entity["CameraComponent"];
+
 				if (cameraComponent)
 				{
 					auto& cc = deserializedEntity.AddComponent<CameraComponent>();
@@ -356,14 +373,27 @@ namespace PixelBrahma
 
 				// Sprite renderer component
 				auto spriteRendererComponent = entity["SpriteRendererComponent"];
+
 				if (spriteRendererComponent)
 				{
 					auto& src = deserializedEntity.AddComponent<SpriteRendererComponent>();
 					src.Color = spriteRendererComponent["Color"].as<glm::vec4>();
 				}
+
+				// Circle renderer component
+				auto circleRendererComponent = entity["CircleRendererComponent"];
+
+				if (circleRendererComponent)
+				{
+					auto& crc = deserializedEntity.AddComponent<CircleRendererComponent>();
+					crc.Color = circleRendererComponent["Color"].as<glm::vec4>();
+					crc.Thickness = circleRendererComponent["Thickness"].as<float>();
+					crc.Fade = circleRendererComponent["Fade"].as<float>();
+				}
 				
 				// Rigid body component
 				auto rigidbody2DComponent = entity["Rigidbody2DComponent"];
+
 				if (rigidbody2DComponent)
 				{
 					auto& rb2d = deserializedEntity.AddComponent<Rigidbody2DComponent>();
@@ -373,6 +403,7 @@ namespace PixelBrahma
 
 				// Box collider component
 				auto boxCollider2DComponent = entity["BoxCollider2DComponent"];
+
 				if (boxCollider2DComponent)
 				{
 					auto& bc2d = deserializedEntity.AddComponent<BoxCollider2DComponent>();

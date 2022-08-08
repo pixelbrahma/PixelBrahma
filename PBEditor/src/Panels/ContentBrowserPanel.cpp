@@ -3,7 +3,10 @@
 
 #include <ImGui/imgui.h>
 
-// Opened Folder icon by Icons8
+// Folder icon by Icons8
+// File icon by Icons8
+// Play icon by Icons8
+// Stop icon by Icons8
 
 namespace PixelBrahma
 {
