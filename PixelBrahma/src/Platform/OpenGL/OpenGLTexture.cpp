@@ -20,7 +20,7 @@ namespace PixelBrahma
 
 		// Texture filtering and wrapping
 		glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -44,48 +44,50 @@ namespace PixelBrahma
 			data = stbi_load(path.c_str(), &width, &height, &channels, 0);
 		}
 
-		PB_CORE_ASSERT(data, "Failed to load Image!");
-
-		m_Width = width;
-		m_Height = height;
-
-		// Check number of texture channels for setting correct texture formats to support blending
-		GLenum internalFormat = 0, dataFormat = 0;
-
-		// RGBA format
-		if (channels == 4)
+		if (data)
 		{
-			internalFormat = GL_RGBA8;
-			dataFormat = GL_RGBA;
+			m_IsLoaded = true;
+			m_Width = width;
+			m_Height = height;
+
+			// Check number of texture channels for setting correct texture formats to support blending
+			GLenum internalFormat = 0, dataFormat = 0;
+
+			// RGBA format
+			if (channels == 4)
+			{
+				internalFormat = GL_RGBA8;
+				dataFormat = GL_RGBA;
+			}
+			// RGB format
+			else if (channels == 3)
+			{
+				internalFormat = GL_RGB8;
+				dataFormat = GL_RGB;
+			}
+
+			m_InternalFormat = internalFormat;
+			m_DataFormat = dataFormat;
+
+			PB_CORE_ASSERT(internalFormat & dataFormat, "Format not supported!");
+
+			// Create OpenGL texture
+			glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
+			glTextureStorage2D(m_RendererID, 1, internalFormat, m_Width, m_Height);
+
+			// Texture filtering and wrapping
+			glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+			glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+			// Create texture sub image
+			glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, dataFormat, GL_UNSIGNED_BYTE, data);
+
+			// Free image
+			stbi_image_free(data);
 		}
-		// RGB format
-		else if (channels == 3)
-		{
-			internalFormat = GL_RGB8;
-			dataFormat = GL_RGB;
-		}
-
-		m_InternalFormat = internalFormat;
-		m_DataFormat = dataFormat;
-
-		PB_CORE_ASSERT(internalFormat & dataFormat, "Format not supported!");
-
-		// Create OpenGL texture
-		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
-		glTextureStorage2D(m_RendererID, 1, internalFormat, m_Width, m_Height);
-
-		// Texture filtering and wrapping
-		glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-		// Create texture sub image
-		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, dataFormat, GL_UNSIGNED_BYTE, data);
-
-		// Free image
-		stbi_image_free(data);
 	}
 
 	OpenGLTexture2D::~OpenGLTexture2D()

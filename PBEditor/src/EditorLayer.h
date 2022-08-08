@@ -45,6 +45,14 @@ namespace PixelBrahma
 		//void ExitScene();
 		//void SaveScene();
 
+		// Scene play and stop functions
+
+		void OnScenePlay();
+		void OnSceneStop();
+
+		// UI Panel functions
+		void UI_Toolbar();
+
 	private:
 		OrthographicCameraController m_CameraController;
 		EditorCamera m_EditorCamera;
@@ -72,5 +80,17 @@ namespace PixelBrahma
 		glm::vec2 m_ViewportBounds[2];
 
 		int m_GizmoType = -1;
+
+		// Scene state enumeration class
+		enum class SceneState
+		{
+			Edit = 0, Play = 1
+		};
+
+		SceneState m_SceneState = SceneState::Edit;
+
+		// Editor resources
+		Ref<Texture2D> m_IconPlay;
+		Ref<Texture2D> m_IconStop;
 	};
 }

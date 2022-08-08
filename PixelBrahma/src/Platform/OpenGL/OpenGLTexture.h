@@ -23,9 +23,11 @@ namespace PixelBrahma
 		// Set texture data function override
 		virtual void SetData(void* data, uint32_t size) override;
 
-		// Texture bind override function
-
+		// Texture bind function override
 		virtual	void Bind(uint32_t slot = 0) const override;
+
+		// Is texture loaded function override
+		virtual bool IsLoaded() const override { return m_IsLoaded; }
 
 		// Operator overloading for texture equality check - Right now checks using the renderer ID
 		virtual bool operator==(const Texture& other) const override
@@ -35,8 +37,12 @@ namespace PixelBrahma
 
 	private:
 		std::string m_Path;
+
 		uint32_t m_Width, m_Height;
 		uint32_t m_RendererID;
+
 		GLenum m_InternalFormat, m_DataFormat;
+
+		bool m_IsLoaded = false;
 	};
 }
