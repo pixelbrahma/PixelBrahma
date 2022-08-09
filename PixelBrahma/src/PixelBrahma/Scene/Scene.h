@@ -48,6 +48,13 @@ namespace PixelBrahma
 		// Get the primary camera in the scene function
 		Entity GetPrimaryCameraEntity();
 
+		// Get all entities in the scene with a component template function
+		template<typename... Components>
+		auto GetAllEntitiesWith()
+		{
+			return m_Registry.view<Components...>();
+		}
+
 	private:
 
 		// On component added template function

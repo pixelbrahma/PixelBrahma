@@ -189,7 +189,7 @@ namespace PixelBrahma
 				// Set collider shape
 				b2CircleShape circleShape;
 				circleShape.m_p.Set(cc2d.Offset.x, cc2d.Offset.y);
-				circleShape.m_radius = cc2d.Radius;
+				circleShape.m_radius = transform.Scale.x * cc2d.Radius;
 
 				// Define fixture properties
 				b2FixtureDef fixtureDef;

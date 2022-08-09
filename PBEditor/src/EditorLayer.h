@@ -36,6 +36,9 @@ namespace PixelBrahma
 		bool OnKeyPressed(KeyPressedEvent& event);
 		bool OnMouseButtonPressed(MouseButtonPressedEvent& event);
 
+		// Overlay render function
+		void OnOverlayRender();
+
 		// Scene saving, loading and creating file menu option functions
 		
 		void NewScene();
@@ -74,19 +77,22 @@ namespace PixelBrahma
 		Ref<VertexArray> m_SquareVA;
 		Ref<Shader> m_FlatColorShader;
 		Ref<Framebuffer> m_Framebuffer;
-		Ref<Texture2D> m_CheckerboardTexture;
 		Ref<Scene> m_ActiveScene;
 		Ref<Scene> m_EditorScene;
+		Ref<Texture2D> m_CheckerboardTexture;
+		Ref<Texture2D> m_IconPlay;
+		Ref<Texture2D> m_IconStop;
 
 		std::filesystem::path m_EditorScenePath;
 
 		bool m_PrimaryCamera = true;
 		bool m_ViewportFocused = false;
 		bool m_ViewportHovered = false;
+		bool m_ShowPhysicsColliders = false;
 
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
-		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 		glm::vec2 m_ViewportBounds[2];
+		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 
 		int m_GizmoType = -1;
 
@@ -97,9 +103,5 @@ namespace PixelBrahma
 		};
 
 		SceneState m_SceneState = SceneState::Edit;
-
-		// Editor resources
-		Ref<Texture2D> m_IconPlay;
-		Ref<Texture2D> m_IconStop;
 	};
 }
