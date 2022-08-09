@@ -30,8 +30,13 @@ namespace PixelBrahma
 		virtual void SetClearColor(const glm::vec4& color) = 0;
 		virtual void Clear() = 0;
 
-		// Draw function
+		// Draw functions
+
 		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t count = 0) = 0;
+		virtual void DrawLines(const Ref<VertexArray>& vertexArray, uint32_t vertexCount) = 0;
+
+		// Set line width function
+		virtual void SetLineWidth(float width) = 0;
 
 		// Static API getter function
 		static API GetAPI() { return s_API; }

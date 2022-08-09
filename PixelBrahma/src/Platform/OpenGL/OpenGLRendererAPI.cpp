@@ -45,6 +45,7 @@ namespace PixelBrahma
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_LINE_SMOOTH);
 	}
 
 	// Set viewport size and position function
@@ -78,5 +79,21 @@ namespace PixelBrahma
 
 		// Unbind texture after drawing
 		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	// Draw lines
+	void OpenGLRendererAPI::DrawLines(const Ref<VertexArray>& vertexArray, uint32_t vertexCount)
+	{
+		// Bind the vertex array
+		vertexArray->Bind();
+
+		// OpenGL draw call
+		glDrawArrays(GL_LINES, 0, vertexCount);
+	}
+
+	// Set the line thickness
+	void OpenGLRendererAPI::SetLineWidth(float width)
+	{
+		glLineWidth(width);
 	}
 }

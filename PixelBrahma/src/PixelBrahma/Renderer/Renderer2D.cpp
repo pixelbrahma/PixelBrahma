@@ -37,6 +37,15 @@ namespace PixelBrahma
 		int EntityID;
 	};
 
+	// Line vertex data structure
+	struct LineVertex
+	{
+		glm::vec3 Position;
+		glm::vec4 Color;
+
+		// Editor-only
+		int EntityID;
+	};
 
 	// Structure with renderer object data
 	struct Renderer2DData
@@ -60,6 +69,12 @@ namespace PixelBrahma
 		Ref<VertexArray> CircleVertexArray;
 		Ref<VertexBuffer> CircleVertexBuffer;
 		Ref<Shader> CircleShader;
+
+		// Line objects
+
+		Ref<VertexArray> LineVertexArray;
+		Ref<VertexBuffer> LineVertexBuffer;
+		Ref<Shader> LineShader;
 		
 		// Vertex buffer batching variables
 
@@ -74,6 +89,14 @@ namespace PixelBrahma
 		uint32_t CircleIndexCount = 0;
 		CircleVertex* CircleVertexBufferBase = nullptr;
 		CircleVertex* CircleVertexBufferPtr = nullptr;
+
+		// Lines
+
+		uint32_t LineVertexCount = 0;
+		LineVertex* LineVertexBufferBase = nullptr;
+		LineVertex* LineVertexBufferPtr = nullptr;
+
+		float LineWidth = 2.0f;
 
 		// Textures batching variables
 
@@ -152,8 +175,6 @@ namespace PixelBrahma
 
 		//// Circles ////
 
-		// Circles
-
 		// Set storage vertex array
 		s_Data.CircleVertexArray = VertexArray::Create();
 
@@ -175,6 +196,25 @@ namespace PixelBrahma
 		// Array of vertex buffer vertices
 		s_Data.CircleVertexBufferBase = new CircleVertex[s_Data.MaxVertices];
 
+		//// Lines ////
+
+		// Set storage vertex array
+		s_Data.LineVertexArray = VertexArray::Create();
+
+		// Create vertex buffer, set layout and add it to the vertex array
+		s_Data.LineVertexBuffer = VertexBuffer::Create(s_Data.MaxVertices * sizeof(LineVertex));
+
+		s_Data.LineVertexBuffer->SetLayout({
+			{ ShaderDataType::Float3, "a_Position" },
+			{ ShaderDataType::Float4, "a_Color"    },
+			{ ShaderDataType::Int,    "a_EntityID" }
+			});
+
+		s_Data.LineVertexArray->AddVertexBuffer(s_Data.LineVertexBuffer);
+
+		// Array of vertex buffer vertices
+		s_Data.LineVertexBufferBase = new LineVertex[s_Data.MaxVertices];
+
 		// Create default texture
 		s_Data.WhiteTexture = Texture2D::Create(1, 1);
 		uint32_t whiteTextureData = 0xffffffff;
@@ -187,8 +227,9 @@ namespace PixelBrahma
 			samplers[i] = i;
 
 		// Create and bind shaders from file path
-		s_Data.QuadShader = Shader::Create("assets/shaders/Renderer2D_Quad.glsl");
-		s_Data.CircleShader = Shader::Create("assets/shaders/Renderer2D_Circle.glsl");
+		s_Data.QuadShader = Shader::Create("Assets/Shaders/Renderer2D_Quad.glsl");
+		s_Data.CircleShader = Shader::Create("Assets/Shaders/Renderer2D_Circle.glsl");
+		s_Data.LineShader = Shader::Create("Assets/Shaders/Renderer2D_Line.glsl");
 
 		// Set dummy texture to the first texture slot
 		s_Data.TextureSlots[0] = s_Data.WhiteTexture;
@@ -273,6 +314,10 @@ namespace PixelBrahma
 		s_Data.CircleIndexCount = 0;
 		s_Data.CircleVertexBufferPtr = s_Data.CircleVertexBufferBase;
 
+		// Lines
+		s_Data.LineVertexCount = 0;
+		s_Data.LineVertexBufferPtr = s_Data.LineVertexBufferBase;
+
 		s_Data.TextureSlotIndex = 1;
 	}
 
@@ -313,6 +358,24 @@ namespace PixelBrahma
 
 			// Draw call for batched circles
 			RenderCommand::DrawIndexed(s_Data.CircleVertexArray, s_Data.CircleIndexCount);
+			s_Data.Stats.DrawCalls++;
+		}
+
+		// If its a line
+		if (s_Data.LineVertexCount)
+		{
+			// Set the pointer to the end of the batch and flush the buffer 
+
+			uint32_t dataSize = (uint32_t)((uint8_t*)s_Data.LineVertexBufferPtr - (uint8_t*)s_Data.LineVertexBufferBase);
+			s_Data.LineVertexBuffer->SetData(s_Data.LineVertexBufferBase, dataSize);
+
+			// Bind the texture
+			s_Data.LineShader->Bind();
+			// Set line wicth
+			RenderCommand::SetLineWidth(s_Data.LineWidth);
+
+			// Draw call for batched circles
+			RenderCommand::DrawLines(s_Data.LineVertexArray, s_Data.LineVertexCount);
 			s_Data.Stats.DrawCalls++;
 		}
 	}
@@ -513,6 +576,58 @@ namespace PixelBrahma
 		s_Data.Stats.QuadCount++;
 	}
 
+	// Draw line
+	void Renderer2D::DrawLine(const glm::vec3& p0, glm::vec3& p1, const glm::vec4& color, int entityID)
+	{
+		s_Data.LineVertexBufferPtr->Position               = p0;
+		s_Data.LineVertexBufferPtr->Color                  = color;
+		s_Data.LineVertexBufferPtr->EntityID               = entityID;
+		s_Data.LineVertexBufferPtr++;		               
+											               
+		s_Data.LineVertexBufferPtr->Position               = p1;
+		s_Data.LineVertexBufferPtr->Color                  = color;
+		s_Data.LineVertexBufferPtr->EntityID               = entityID;
+		s_Data.LineVertexBufferPtr++;
+
+		s_Data.LineVertexCount += 2;
+	}
+
+	// Draw rect functions
+
+	void Renderer2D::DrawRect(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color, int entityID)
+	{
+		// Points of the rectangle 
+
+		glm::vec3 p0 = glm::vec3(position.x - size.x * 0.5f, position.y - size.y * 0.5f, position.z);
+		glm::vec3 p1 = glm::vec3(position.x + size.x * 0.5f, position.y - size.y * 0.5f, position.z);
+		glm::vec3 p2 = glm::vec3(position.x + size.x * 0.5f, position.y + size.y * 0.5f, position.z);
+		glm::vec3 p3 = glm::vec3(position.x - size.x * 0.5f, position.y + size.y * 0.5f, position.z);
+
+		// Draw the lines
+
+		DrawLine(p0, p1, color);
+		DrawLine(p1, p2, color);
+		DrawLine(p2, p3, color);
+		DrawLine(p3, p0, color);
+	}
+
+	void Renderer2D::DrawRect(const glm::mat4& transform, const glm::vec4& color, int entityID)
+	{
+		// Points of the rectangle 
+
+		glm::vec3 lineVertices[4];
+
+		for (size_t i = 0; i < 4; i++)
+			lineVertices[i] = transform * s_Data.QuadVertexPositions[i];
+
+		// Draw the lines
+
+		DrawLine(lineVertices[0], lineVertices[1], color);
+		DrawLine(lineVertices[1], lineVertices[2], color);
+		DrawLine(lineVertices[2], lineVertices[3], color);
+		DrawLine(lineVertices[3], lineVertices[0], color);
+	}
+
 	// Draw sprite function for drawing a sprite
 	void Renderer2D::DrawSprite(const glm::mat4& transform, SpriteRendererComponent& src, int entityID)
 	{
@@ -520,6 +635,18 @@ namespace PixelBrahma
 			DrawQuad(transform, src.Texture, src.TilingFactor, src.Color, entityID);
 		else
 			DrawQuad(transform, src.Color, entityID);
+	}
+
+	// Get the line width
+	float Renderer2D::GetLineWidth()
+	{
+		return s_Data.LineWidth;
+	}
+
+	// Set line width
+	void Renderer2D::SetLineWidth(float width)
+	{
+		s_Data.LineWidth = width;
 	}
 
 	// Reset stats

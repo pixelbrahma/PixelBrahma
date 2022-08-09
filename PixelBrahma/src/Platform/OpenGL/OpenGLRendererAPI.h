@@ -19,7 +19,12 @@ namespace PixelBrahma
 		virtual void SetClearColor(const glm::vec4& color) override;
 		virtual void Clear() override;
 
-		// Draw function override
+		// Draw functions override
+
 		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t count = 0) override;
+		virtual void DrawLines(const Ref<VertexArray>& vertexArray, uint32_t vertexCount) override;
+		
+		// Set line width function override
+		virtual void SetLineWidth(float width) override;
 	};
 }
