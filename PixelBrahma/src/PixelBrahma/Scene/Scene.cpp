@@ -13,6 +13,7 @@
 #include <box2d/b2_body.h>
 #include <box2d/b2_fixture.h>
 #include <box2d/b2_polygon_shape.h>
+#include <box2d/b2_circle_shape.h>
 
 namespace PixelBrahma
 {
@@ -94,6 +95,7 @@ namespace PixelBrahma
 		CopyComponent<NativeScriptComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 		CopyComponent<Rigidbody2DComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 		CopyComponent<BoxCollider2DComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
+		CopyComponent<CircleCollider2DComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 
 		return newScene;
 	}
@@ -129,6 +131,8 @@ namespace PixelBrahma
 	// Start of runtime
 	void Scene::OnRuntimeStart()
 	{
+		//// Physics ////
+
 		// Create new physics world
 		m_PhysicsWorld = new b2World({ 0.0f, -9.8f });
 
@@ -154,9 +158,10 @@ namespace PixelBrahma
 			body->SetFixedRotation(rb2d.FixedRotation);
 			rb2d.RuntimeBody = body;
 
+			// Box collider component
 			if (entity.HasComponent<BoxCollider2DComponent>())
 			{
-				// Get collider component
+				// Get box collider component
 				auto& bc2d = entity.GetComponent<BoxCollider2DComponent>();
 
 				// Set collider shape
@@ -170,6 +175,29 @@ namespace PixelBrahma
 				fixtureDef.friction = bc2d.Friction;
 				fixtureDef.restitution = bc2d.Restitution;
 				fixtureDef.restitutionThreshold = bc2d.RestitutionThreshold;
+
+				// Create fixture
+				body->CreateFixture(&fixtureDef);
+			}
+
+			// Circle collider component
+			if (entity.HasComponent<CircleCollider2DComponent>())
+			{
+				// Get circle collider component
+				auto& cc2d = entity.GetComponent<CircleCollider2DComponent>();
+
+				// Set collider shape
+				b2CircleShape circleShape;
+				circleShape.m_p.Set(cc2d.Offset.x, cc2d.Offset.y);
+				circleShape.m_radius = cc2d.Radius;
+
+				// Define fixture properties
+				b2FixtureDef fixtureDef;
+				fixtureDef.shape = &circleShape;
+				fixtureDef.density = cc2d.Density;
+				fixtureDef.friction = cc2d.Friction;
+				fixtureDef.restitution = cc2d.Restitution;
+				fixtureDef.restitutionThreshold = cc2d.RestitutionThreshold;
 
 				// Create fixture
 				body->CreateFixture(&fixtureDef);
@@ -376,6 +404,7 @@ namespace PixelBrahma
 		CopyComponentIfExists<NativeScriptComponent>(newEntity, entity);
 		CopyComponentIfExists<Rigidbody2DComponent>(newEntity, entity);
 		CopyComponentIfExists<BoxCollider2DComponent>(newEntity, entity);
+		CopyComponentIfExists<CircleCollider2DComponent>(newEntity, entity);
 	}
 
 	// Get the entity with camera component set as primary camera
@@ -442,4 +471,8 @@ namespace PixelBrahma
 	// Box collider component added
 	template<>
 	void Scene::OnComponentAdded<BoxCollider2DComponent>(Entity entity, BoxCollider2DComponent& component) {}
+
+	// Circle collider component added
+	template<>
+	void Scene::OnComponentAdded<CircleCollider2DComponent>(Entity entity, CircleCollider2DComponent& component) {}
 }
