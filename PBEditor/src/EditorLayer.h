@@ -51,9 +51,10 @@ namespace PixelBrahma
 		// Scene serialize function
 		void SerializeScene(Ref<Scene> scene, const std::filesystem::path& path);
 
-		// Scene play and stop functions
+		// Scene play, stop and simulate functions
 
 		void OnScenePlay();
+		void OnSceneSimulate();
 		void OnSceneStop();
 
 		// Duplicate entity handler function
@@ -82,6 +83,7 @@ namespace PixelBrahma
 		Ref<Texture2D> m_CheckerboardTexture;
 		Ref<Texture2D> m_IconPlay;
 		Ref<Texture2D> m_IconStop;
+		Ref<Texture2D> m_IconSimulate;
 
 		std::filesystem::path m_EditorScenePath;
 
@@ -99,7 +101,7 @@ namespace PixelBrahma
 		// Scene state enumeration class
 		enum class SceneState
 		{
-			Edit = 0, Play = 1
+			Edit = 0, Play = 1, Simulate = 2
 		};
 
 		SceneState m_SceneState = SceneState::Edit;

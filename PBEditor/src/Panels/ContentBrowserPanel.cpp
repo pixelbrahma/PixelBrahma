@@ -7,6 +7,7 @@
 // File icon by Icons8
 // Play icon by Icons8
 // Stop icon by Icons8
+// Fast forward icon by Icons8
 
 namespace PixelBrahma
 {

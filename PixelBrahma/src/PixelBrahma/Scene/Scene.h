@@ -34,9 +34,15 @@ namespace PixelBrahma
 		void OnRuntimeStart();
 		void OnRuntimeStop();
 
+		// Physics simulation start and stop functions
+
+		void OnSimulationStart();
+		void OnSimulationStop();
+
 		// Scene update functions
 
 		void OnUpdateRuntime(Timestep timestep);
+		void OnUpdateSimulation(Timestep timestep, EditorCamera& camera);
 		void OnUpdateEditor(Timestep timestep, EditorCamera& camera);
 
 		// Viewport resize function
@@ -60,6 +66,14 @@ namespace PixelBrahma
 		// On component added template function
 		template<typename T>
 		void OnComponentAdded(Entity entity, T& component);
+
+		// Physics start and stop functions
+
+		void OnPhysics2DStart();
+		void OnPhysics2DStop();
+
+		// Scene render function
+		void RenderScene(EditorCamera& camera);
 
 	private:
 		entt::registry m_Registry;
