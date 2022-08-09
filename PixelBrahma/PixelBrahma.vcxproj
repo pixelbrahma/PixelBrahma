@@ -26,19 +26,19 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -144,7 +144,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\PixelBrahma\Core\UUID.h" />
     <ClInclude Include="ThirdParty\ImGuizmo\ImGuizmo.h" />
     <ClInclude Include="ThirdParty\glm\glm\common.hpp" />
     <ClInclude Include="ThirdParty\glm\glm\detail\_features.hpp" />
@@ -570,6 +569,7 @@
     <ClInclude Include="src\PixelBrahma\Core\PlatformDetection.h" />
     <ClInclude Include="src\PixelBrahma\Core\Timer.h" />
     <ClInclude Include="src\PixelBrahma\Core\Timestep.h" />
+    <ClInclude Include="src\PixelBrahma\Core\UUID.h" />
     <ClInclude Include="src\PixelBrahma\Core\Window.h" />
     <ClInclude Include="src\PixelBrahma\Debug\Instrumentor.h" />
     <ClInclude Include="src\PixelBrahma\Events\ApplicationEvent.h" />
@@ -618,12 +618,12 @@
     <ClInclude Include="src\pbpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\PixelBrahma\Core\UUID.cpp" />
     <ClCompile Include="ThirdParty\ImGuizmo\ImGuizmo.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="ThirdParty\stb_image\stbi_image.cpp" />
     <ClCompile Include="src\PixelBrahma\Application\Application.cpp" />
+    <ClCompile Include="src\PixelBrahma\Core\UUID.cpp" />
     <ClCompile Include="src\PixelBrahma\Core\Window.cpp" />
     <ClCompile Include="src\PixelBrahma\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\PixelBrahma\ImGui\ImGuiLayer.cpp" />

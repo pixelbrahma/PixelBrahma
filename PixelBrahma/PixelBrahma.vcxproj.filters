@@ -1362,6 +1362,9 @@
     <ClInclude Include="src\PixelBrahma\Core\Timestep.h">
       <Filter>src\PixelBrahma\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Core\UUID.h">
+      <Filter>src\PixelBrahma\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\PixelBrahma\Core\Window.h">
       <Filter>src\PixelBrahma\Core</Filter>
     </ClInclude>
@@ -1500,7 +1503,6 @@
     <ClInclude Include="src\pbpch.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\PixelBrahma\Core\UUID.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ThirdParty\ImGuizmo\ImGuizmo.cpp">
@@ -1511,6 +1513,9 @@
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Application\Application.cpp">
       <Filter>src\PixelBrahma\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Core\UUID.cpp">
+      <Filter>src\PixelBrahma\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Core\Window.cpp">
       <Filter>src\PixelBrahma\Core</Filter>
@@ -1623,6 +1628,5 @@
     <ClCompile Include="src\pbpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\PixelBrahma\Core\UUID.cpp" />
   </ItemGroup>
 </Project>
