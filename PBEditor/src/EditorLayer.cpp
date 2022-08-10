@@ -1,14 +1,15 @@
 #include "EditorLayer.h"
 
+#include "PixelBrahma/Utils/Math.h"
+#include "PixelBrahma/Utils/PlatformUtils.h"
+
+#include "PixelBrahma/Scene/SceneSerializer.h"
+
 #include <ImGui/imgui.h>
+#include <ImGuizmo.h>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <ImGuizmo.h>
-
-#include "PixelBrahma/Utils/Math.h"
-#include "PixelBrahma/Scene/SceneSerializer.h"
-#include "PixelBrahma/Utils/PlatformUtils.h"
 
 namespace PixelBrahma
 {
@@ -528,7 +529,7 @@ namespace PixelBrahma
 	bool EditorLayer::OnKeyPressed(KeyPressedEvent& event)
 	{
 		// Shortcuts
-		if (event.GetRepeatCount() > 0)
+		if (event.IsRepeat())
 			return false;
 
 		// Get the state of control, shift and alt keys

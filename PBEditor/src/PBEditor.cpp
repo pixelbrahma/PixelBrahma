@@ -1,7 +1,7 @@
+#include "EditorLayer.h"
+
 #include <PixelBrahma.h>
 #include <PixelBrahma/Application/EntryPoint.h>
-
-#include "EditorLayer.h"
 
 namespace PixelBrahma
 {

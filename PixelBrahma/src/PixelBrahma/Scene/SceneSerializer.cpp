@@ -325,6 +325,8 @@ namespace PixelBrahma
 		}
 		catch (YAML::ParserException e)
 		{
+			PB_CORE_ERROR("Failed to load .PixelBrahma file '{0}'\n     {1}", filepath, e.what());
+
 			return false;
 		}
 

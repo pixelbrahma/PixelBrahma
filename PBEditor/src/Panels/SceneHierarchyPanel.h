@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PixelBrahma/Core/Core.h"
+
 #include "PixelBrahma/Scene/Scene.h"
 #include "PixelBrahma/Scene/Entity.h"
 
@@ -25,6 +26,10 @@ namespace PixelBrahma
 		void SetSelectedEntity(Entity entity);
 
 	private:
+
+		// Add component menu display function
+		template<typename T>
+		void DisplayAddComponentEntry(const std::string& entryName);
 
 		// Draw the entity hierarchy tree function
 		void DrawEntityHierarchy(Entity entity);

@@ -3,7 +3,7 @@
 #include "PixelBrahma/Core/Window.h"
 #include "PixelBrahma/Renderer/GraphicsContext.h"
 
-#include "GLFW/glfw3.h"
+#include <GLFW/glfw3.h>
 
 namespace PixelBrahma
 {

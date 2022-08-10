@@ -1,8 +1,8 @@
 #pragma once
 
-#include <string>
-
 #include "PixelBrahma/Core/Core.h"
+
+#include <string>
 
 namespace PixelBrahma
 {

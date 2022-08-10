@@ -1,9 +1,9 @@
 #pragma once
 
-#include <sstream>
-
 #include "PixelBrahma/Core/Core.h"
 #include "PixelBrahma/Events/Event.h"
+
+#include <sstream>
 
 namespace PixelBrahma
 {

@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Camera.h"
+
 #include "PixelBrahma/Core/Timestep.h"
+
 #include "PixelBrahma/Events/Event.h"
 #include "PixelBrahma/Events/MouseEvent.h"
 

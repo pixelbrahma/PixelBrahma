@@ -1,8 +1,8 @@
 #pragma once
 
-#include <glm/glm.hpp>
-
 #include "PixelBrahma/Renderer/Geometry/VertexArray.h"
+
+#include <glm/glm.hpp>
 
 namespace PixelBrahma
 {

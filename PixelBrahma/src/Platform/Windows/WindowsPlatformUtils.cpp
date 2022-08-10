@@ -1,13 +1,14 @@
 #include "pbpch.h"
 #include "PixelBrahma/Utils/PlatformUtils.h"
 
-#include <commdlg.h>
+#include "PixelBrahma/Application/Application.h"
+
 #include <GLFW/glfw3.h>
 
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include <GLFW/glfw3native.h>
 
-#include "PixelBrahma/Application/Application.h"
+#include <commdlg.h>
 
 namespace PixelBrahma
 {

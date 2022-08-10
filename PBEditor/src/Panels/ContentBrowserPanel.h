@@ -1,8 +1,8 @@
 #pragma once
 
-#include <filesystem>
-
 #include "PixelBrahma/Renderer/Shading/Texture.h"
+
+#include <filesystem>
 
 namespace PixelBrahma
 {

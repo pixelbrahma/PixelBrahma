@@ -4,6 +4,7 @@
 #include "PixelBrahma/Events/ApplicationEvent.h"
 #include "PixelBrahma/Events/KeyEvent.h"
 #include "PixelBrahma/Events/MouseEvent.h"
+
 #include "PixelBrahma/Renderer/Renderer.h"
 #include "PixelBrahma/Input/Input.h"
 
@@ -137,7 +138,7 @@ namespace PixelBrahma
 					{
 						// Create a key pressed event and dispatch it
 						// GLFW doesnt provide repeat count but win32 api does
-						KeyPressedEvent event(key, 1);
+						KeyPressedEvent event(key, true);
 						data.EventCallback(event);
 
 						break;

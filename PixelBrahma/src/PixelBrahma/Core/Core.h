@@ -1,8 +1,8 @@
 #pragma once
 
-#include <memory>
-
 #include "PixelBrahma/Core/PlatformDetection.h"
+
+#include <memory>
 
 /*
 // Dll import or export macros

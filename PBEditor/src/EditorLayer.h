@@ -1,10 +1,10 @@
 #pragma once
 
-#include <PixelBrahma.h>
-#include <PixelBrahma/Renderer/Camera/EditorCamera.h>
-
 #include "Panels/SceneHierarchyPanel.h"
 #include "Panels/ContentBrowserPanel.h"
+
+#include <PixelBrahma.h>
+#include <PixelBrahma/Renderer/Camera/EditorCamera.h>
 
 namespace PixelBrahma
 {

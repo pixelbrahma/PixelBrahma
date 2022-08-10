@@ -1,9 +1,9 @@
 #pragma once
 
+#include "PixelBrahma/Renderer/Geometry/Buffer.h"
+
 #include <memory>
 #include <vector>
-
-#include "PixelBrahma/Renderer/Geometry/Buffer.h"
 
 namespace PixelBrahma
 {

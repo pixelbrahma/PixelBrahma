@@ -2,6 +2,7 @@
 
 #include "PixelBrahma/Core/Core.h"
 #include "PixelBrahma/Core/Window.h"
+#include "PixelBrahma/Core/Timestep.h"
 
 #include "PixelBrahma/Layers/LayerStack.h"
 
@@ -10,7 +11,6 @@
 
 #include "PixelBrahma/ImGui/ImGuiLayer.h"
 
-#include "PixelBrahma/Core/Timestep.h"
 
 // Run loop main function forward declaration to make it accessible only on the engine side
 int main(int argc, char** argv);

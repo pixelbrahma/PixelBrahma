@@ -2,6 +2,7 @@
 #include "GraphicsContext.h"
 
 #include "Renderer.h"
+
 #include "Platform/OpenGL/OpenGLContext.h"
 
 namespace PixelBrahma

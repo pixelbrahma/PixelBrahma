@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Event.h"
+
 #include "PixelBrahma/Input/KeyCodes.h"
 
 namespace PixelBrahma
@@ -26,17 +27,17 @@ namespace PixelBrahma
 	class KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressedEvent(const KeyCode keycode, const uint16_t repeatcount) : KeyEvent(keycode), 
-			m_RepeatCount(repeatcount) {}
+		KeyPressedEvent(const KeyCode keycode, bool isRepeat = false) : KeyEvent(keycode), 
+			m_IsRepeat(isRepeat) {}
 
 		// Repeat count getter function
-		uint16_t GetRepeatCount() { return m_RepeatCount; }
+		bool IsRepeat() { return m_IsRepeat; }
 
 		// Override to string function for logging
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyPressedEvent: " << m_KeyCode << " (" << m_RepeatCount << " repeats)";
+			ss << "KeyPressedEvent: " << m_KeyCode << " (repeat = " << m_IsRepeat << ")";
 			return ss.str();
 		}
 
@@ -44,7 +45,7 @@ namespace PixelBrahma
 		EVENT_CLASS_TYPE(KeyPressed)
 
 	private:
-		uint16_t m_RepeatCount;
+		bool m_IsRepeat;
 	};
 
 	// Key released event class

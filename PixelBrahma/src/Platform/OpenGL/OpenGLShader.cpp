@@ -1,7 +1,7 @@
 #include "pbpch.h"
 #include "OpenGLShader.h"
 
-#include <fstream>
+#include "PixelBrahma/Core/Timer.h"
 
 #include <glad/glad.h>
 
@@ -11,7 +11,7 @@
 #include <spirv_cross/spirv_cross.hpp>
 #include <spirv_cross/spirv_glsl.hpp>
 
-#include "PixelBrahma/Core/Timer.h"
+#include <fstream>
 
 namespace PixelBrahma
 {

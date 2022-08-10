@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Event.h"
+
 #include "PixelBrahma/Input/MouseCodes.h"
 
 namespace PixelBrahma

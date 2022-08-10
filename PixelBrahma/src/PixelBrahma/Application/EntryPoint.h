@@ -1,7 +1,8 @@
 #pragma once
 
-#include "PixelBrahma/Core/Core.h"
 #include "Application.h"
+
+#include "PixelBrahma/Core/Core.h"
 
 #ifdef PB_PLATFORM_WINDOWS
 

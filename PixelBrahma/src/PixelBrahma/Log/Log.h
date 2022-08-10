@@ -3,7 +3,7 @@
 #include "PixelBrahma/Core/Core.h"
 
 #define GLM_ENABLE_EXPERIMENTAL
-#include "glm/gtx/string_cast.hpp"
+#include <glm/gtx/string_cast.hpp>
 
 // Ignore warnings raised inside external headers
 #pragma warning(push, 0)

@@ -1,7 +1,8 @@
 #pragma once
 
-#include "PixelBrahma/Core/Core.h"
 #include "Layer.h"
+
+#include "PixelBrahma/Core/Core.h"
 
 #include <vector>
 

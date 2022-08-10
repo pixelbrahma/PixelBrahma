@@ -1,9 +1,9 @@
 #pragma once
 
-#include <functional>
-
 #include "PixelBrahma/Debug/Instrumentor.h"
 #include "PixelBrahma/Core/Core.h"
+
+#include <functional>
 
 // Events are blocking events
 // Immediately dispatched and must be dealt with immediately

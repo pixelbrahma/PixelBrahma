@@ -1,9 +1,10 @@
 #pragma once
 
 #include "Camera/OrthographicCamera.h"
-#include "Shading/Texture.h"
 #include "Camera/Camera.h"
 #include "Camera/EditorCamera.h"
+
+#include "Shading/Texture.h"
 #include "PixelBrahma/Scene/Components.h"
 
 namespace PixelBrahma

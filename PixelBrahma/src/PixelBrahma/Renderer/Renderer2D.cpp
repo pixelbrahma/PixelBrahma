@@ -1,10 +1,12 @@
 #include "pbpch.h"
 #include "Renderer2D.h"
 
+#include "RenderCommand.h"
+
 #include "Geometry/VertexArray.h"
+
 #include "Shading/Shader.h"
 #include "Shading/UniformBuffer.h"
-#include "RenderCommand.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>

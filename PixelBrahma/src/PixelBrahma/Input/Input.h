@@ -1,9 +1,9 @@
 #pragma once
 
-#include <glm/glm.hpp>
-
-#include "PixelBrahma/Input/KeyCodes.h"
 #include "PixelBrahma/Input/MouseCodes.h"
+#include "PixelBrahma/Input/KeyCodes.h"
+
+#include <glm/glm.hpp>
 
 namespace PixelBrahma
 {

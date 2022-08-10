@@ -1,14 +1,15 @@
 #pragma once
 
+#include "SceneCamera.h"
+
+#include "PixelBrahma/Core/UUID.h"
+#include "PixelBrahma/Renderer/Shading/Texture.h"
+
 #include <glm/glm.hpp>
 #include<glm/gtc/matrix_transform.hpp>
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
-
-#include "PixelBrahma/Core/UUID.h"
-#include "SceneCamera.h"
-#include "PixelBrahma/Renderer/Shading/Texture.h"
 
 namespace PixelBrahma
 {

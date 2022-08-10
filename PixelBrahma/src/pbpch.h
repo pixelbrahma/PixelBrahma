@@ -1,5 +1,6 @@
 #pragma once
 
+// Platform detection
 #include "PixelBrahma/Core/PlatformDetection.h"
 
 #ifdef PB_PLATFORM_WINDOWS

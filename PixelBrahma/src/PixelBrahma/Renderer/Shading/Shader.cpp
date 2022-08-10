@@ -2,7 +2,6 @@
 #include "Shader.h"
 
 #include "PixelBrahma/Renderer/Renderer.h"
-
 #include "Platform/OpenGL/OpenGLShader.h"
 
 namespace PixelBrahma

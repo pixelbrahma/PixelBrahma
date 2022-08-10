@@ -1,5 +1,7 @@
 #pragma once
 
+#include "PixelBrahma/Log/Log.h"
+
 #include <string>
 #include <chrono>
 #include <algorithm>
@@ -8,8 +10,6 @@
 #include <iomanip>
 #include <mutex>
 #include <sstream>
-
-#include "PixelBrahma/Log/Log.h"
 
 namespace PixelBrahma
 {
