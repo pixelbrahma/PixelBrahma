@@ -9,17 +9,19 @@ namespace PixelBrahma
 	class PBEditor : public Application
 	{
 	public:
-		PBEditor(ApplicationCommandLineArgs args) : Application("PBEditor", args)
+		PBEditor(const ApplicationSpecification& spec) : Application(spec)
 		{ 
 			PushLayer(new EditorLayer()); 
 		}
-
-		~PBEditor() {}
 	};
 
 	// Create Editor
 	Application* CreateApplication(ApplicationCommandLineArgs args)
 	{
-		return new PBEditor(args);
+		ApplicationSpecification spec;
+		spec.Name = "PBEditor";
+		spec.CommandLineArgs = args;
+
+		return new PBEditor(spec);
 	}
 }

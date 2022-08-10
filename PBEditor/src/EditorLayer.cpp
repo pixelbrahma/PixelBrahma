@@ -52,7 +52,7 @@ namespace PixelBrahma
 		m_EditorScene = CreateRef<Scene>();
 		m_ActiveScene = m_EditorScene;
 
-		auto commandLineArgs = Application::Get().GetCommandLineArgs();
+		auto commandLineArgs = Application::Get().GetSpecification().CommandLineArgs;
 
 		// Load file in command line arguments
 		if (commandLineArgs.Count > 1)
@@ -65,72 +65,8 @@ namespace PixelBrahma
 		// Create editor camera
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
 
-#if 0
-		// Green square
-
-		// Create square entity
-		auto greenSquare = m_ActiveScene->CreateEntity("Green Square");
-		// Add a sprite renderer component to the square
-		greenSquare.AddComponent<SpriteRendererComponent>(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
-
-		m_SquareEntity = greenSquare;
-
-		// Red square
-
-		// Create square entity
-		auto redSquare = m_ActiveScene->CreateEntity("Red Square");
-		// Add a sprite renderer component to the square and move it to the right
-		redSquare.AddComponent<SpriteRendererComponent>(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-		redSquare.GetComponent<TransformComponent>().Translation.x = 2.0f;
-
-		// Create a camera entity and add a camera component
-		m_CameraEntity = m_ActiveScene->CreateEntity("Main Camera");
-		m_CameraEntity.AddComponent<CameraComponent>();
-
-		// Create the secondary camera entity and add camera component
-		m_SecondCamera = m_ActiveScene->CreateEntity("Alternate Camera");
-		auto& cc = m_SecondCamera.AddComponent<CameraComponent>();
-		cc.Primary = false;
-
-		// Camera controller class which is scriptable
-		class CameraController : public ScriptableEntity
-		{
-		public:
-			// Create function
-			virtual void OnCreate() override
-			{
-				// Get the transform component
-				auto& translation = GetComponent<TransformComponent>().Translation;
-				translation.x = rand() % 10 - 5.0f;
-			}
-
-			// Destroy function
-			virtual void OnDestroy() override {}
-
-			// Update function
-			virtual void OnUpdate(Timestep timestep) override
-			{
-				// Get the transform component
-				auto& translation = GetComponent<TransformComponent>().Translation;
-				float speed = 5.0f;
-
-				// Key bindings
-
-				if (Input::IsKeyPressed(Key::A))
-					translation.x -= speed * timestep;
-				if (Input::IsKeyPressed(Key::D))
-					translation.x += speed * timestep;
-				if (Input::IsKeyPressed(Key::W))
-					translation.y += speed * timestep;
-				if (Input::IsKeyPressed(Key::S))
-					translation.y -= speed * timestep;
-			}
-		};
-
-		// Add camera controller script component to the camera entities
-		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
-		m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
-#endif
+		// Set the line width
+		Renderer2D::SetLineWidth(4.0f);
 	}
 
 	// Layer on detach function
@@ -304,6 +240,10 @@ namespace PixelBrahma
 				// Open scene menu item with shortcut set
 				if (ImGui::MenuItem("Open...", "Ctrl+O"))
 					OpenScene();
+
+				// Save scene menu item with shortcut set
+				if (ImGui::MenuItem("Save", "Ctrl+S"))
+					SaveScene();
 
 				// Save scene as menu item with shortcut set
 				if (ImGui::MenuItem("Save As...", "Ctrl+Shift+S"))
@@ -516,8 +456,12 @@ namespace PixelBrahma
 	{
 		// Camera event handler
 		m_CameraController.OnEvent(event);
+
 		// Editor event handler
-		m_EditorCamera.OnEvent(event);
+		if (m_SceneState == SceneState::Edit)
+		{
+			m_EditorCamera.OnEvent(event);
+		}
 
 		// Dispatch events
 		EventDispatcher dispatcher(event);
@@ -679,6 +623,23 @@ namespace PixelBrahma
 					Renderer2D::DrawCircle(transform, glm::vec4(0, 1, 0, 1), 0.01f);
 				}
 			}
+		}
+
+		// Draw selected entity outline 
+		if (Entity selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity())
+		{
+			// Get transform
+			const TransformComponent& transform = selectedEntity.GetComponent<TransformComponent>();
+
+			// Red outline
+
+			float lineWidth = Renderer2D::GetLineWidth();
+			// Box
+			if(selectedEntity.HasComponent<SpriteRendererComponent>())		
+				Renderer2D::DrawRect(transform.GetTransform(), glm::vec4(1.0f, 0.5f, 0.0f, 1.0f));
+			// Circle
+			else if (selectedEntity.HasComponent<CircleRendererComponent>())			
+				Renderer2D::DrawCircle(transform.GetTransform(), glm::vec4(1.0f, 0.5f, 0.0f, 0.1f));
 		}
 
 		// End physics visualization rendering

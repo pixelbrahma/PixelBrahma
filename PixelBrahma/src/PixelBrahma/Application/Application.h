@@ -30,12 +30,20 @@ namespace PixelBrahma
 		}
 	};
 
+	// Application specification structure
+	struct ApplicationSpecification
+	{
+		std::string Name = "PixelBrahma Application";
+		std::string WorkingDirectory;
+		ApplicationCommandLineArgs CommandLineArgs;
+	};
+
+
 	// Application class to act as base class to create application from the client
 	class Application
 	{
 	public:
-		Application(const std::string& name = "PB Application", 
-			ApplicationCommandLineArgs args = ApplicationCommandLineArgs());
+		Application(const ApplicationSpecification& specification);
 		virtual ~Application();
 
 		// Event handling and dispatching function
@@ -56,8 +64,8 @@ namespace PixelBrahma
 		Window& GetWindow() { return *m_Window; }
 		static Application& Get() { return *s_Instance; }
 
-		// Application command line arguments getter function
-		ApplicationCommandLineArgs GetCommandLineArgs() const { return m_CommandLineArgs; }
+		// Application specification getter function
+		const ApplicationSpecification& GetSpecification() const { return m_Specification; }
 
 	private:
 		// Run function
@@ -69,7 +77,7 @@ namespace PixelBrahma
 		bool OnWindowResize(WindowResizeEvent& event);
 
 	private:
-		ApplicationCommandLineArgs m_CommandLineArgs;
+		ApplicationSpecification m_Specification;
 		
 		ImGuiLayer* m_ImGuiLayer;
 		LayerStack m_LayerStack;

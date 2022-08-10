@@ -1,7 +1,5 @@
 #pragma once
 
-#include <xhash>
-
 namespace PixelBrahma
 {
 	// Universally unique identifier class
@@ -23,13 +21,15 @@ namespace PixelBrahma
 namespace std
 {
 	// Template specialization of hash structure
+	template <typename T> struct hash;
+
 	template<>
 	struct hash<PixelBrahma::UUID>
 	{
 		// Operator overload to hash UUID to uint64_t
 		std::size_t operator()(const PixelBrahma::UUID& uuid) const
 		{
-			return hash<uint64_t>()((uint64_t)uuid);
+			return (uint64_t)uuid;
 		}
 	};
 }

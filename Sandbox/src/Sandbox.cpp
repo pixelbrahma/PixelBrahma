@@ -8,7 +8,8 @@
 class Sandbox : public PixelBrahma::Application
 {
 public:
-	Sandbox(PixelBrahma::ApplicationCommandLineArgs args) 
+	Sandbox(const PixelBrahma::ApplicationSpecification& specification)
+		: PixelBrahma::Application(specification)
 	{ 
 		//PushLayer(new ExampleLayer()); 
 		PushLayer(new Sandbox2D());
@@ -19,5 +20,10 @@ public:
 // Create application function that passes an application instance to the engine
 PixelBrahma::Application* PixelBrahma::CreateApplication(PixelBrahma::ApplicationCommandLineArgs args)
 {
-	return new Sandbox(args);
+	ApplicationSpecification spec;
+	spec.Name = "Sandbox";
+	spec.WorkingDirectory = "../PBEditor";
+	spec.CommandLineArgs = args;
+
+	return new Sandbox(spec);
 }

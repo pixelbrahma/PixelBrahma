@@ -4,11 +4,11 @@ Entities:
     TagComponent:
       Tag: Circle
     TransformComponent:
-      Translation: [2.87749505, 1.08752966, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
+      Translation: [2.48013091, 0.55198288, 0]
+      Rotation: [0, 0, -2.83638668]
+      Scale: [1.00000072, 1.00000072, 1]
     CircleRendererComponent:
-      Color: [0.934362948, 0.362345755, 0.057721246, 1]
+      Color: [0.934362948, 0.057721246, 0.057721246, 1]
       Thickness: 0.100000001
       Fade: 0.00499999989
     Rigidbody2DComponent:
@@ -29,7 +29,9 @@ Entities:
       Rotation: [0, 0, 0.603692532]
       Scale: [6.74196959, 0.46067816, 1]
     SpriteRendererComponent:
-      Color: [0.949806929, 0.455301404, 0.0660097376, 1]
+      Color: [0.584685624, 0.0660097376, 0.949806929, 1]
+      TexturePath: Assets\Textures\CheckerBoard.png
+      TilingFactor: 1
     Rigidbody2DComponent:
       BodyType: Static
       FixedRotation: false
@@ -44,11 +46,12 @@ Entities:
     TagComponent:
       Tag: Sprite
     TransformComponent:
-      Translation: [0.0495706201, 0.271503896, 0.0225147791]
-      Rotation: [0, 0, -0.235084534]
+      Translation: [-0.432785511, 0.557349324, 0.0225147791]
+      Rotation: [0, 0, 0.93312937]
       Scale: [0.361159712, 0.375572056, 0.848135769]
     SpriteRendererComponent:
-      Color: [1, 1, 1, 1]
+      Color: [0.0191559177, 0.99227798, 0.84574604, 1]
+      TilingFactor: 1
     Rigidbody2DComponent:
       BodyType: Dynamic
       FixedRotation: false
@@ -85,7 +88,9 @@ Entities:
       Rotation: [0, 0, -0.638996005]
       Scale: [6.74196768, 0.46067813, 1]
     SpriteRendererComponent:
-      Color: [0.949806929, 0.455301404, 0.0660097376, 1]
+      Color: [0.0660097376, 0.202503517, 0.949806929, 1]
+      TexturePath: Assets\Textures\CheckerBoard.png
+      TilingFactor: 1
     Rigidbody2DComponent:
       BodyType: Static
       FixedRotation: false

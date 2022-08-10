@@ -12,6 +12,12 @@
 
 namespace PixelBrahma
 {
+	// Get the time
+	float Time::GetTime()
+	{
+		return glfwGetTime();
+	}
+
 	// Open file for loading and set owner window handle
 	std::string FileDialogues::OpenFile(const char* filter)
 	{

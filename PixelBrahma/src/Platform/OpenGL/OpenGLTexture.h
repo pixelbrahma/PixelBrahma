@@ -20,6 +20,9 @@ namespace PixelBrahma
 		virtual uint32_t GetHeight() const override { return m_Height; }
 		virtual uint32_t GetRendererID() const override { return m_RendererID; }
 
+		// Get texture path override function
+		virtual const std::string& GetPath() const override { return m_Path; }
+
 		// Set texture data function override
 		virtual void SetData(void* data, uint32_t size) override;
 
@@ -32,7 +35,7 @@ namespace PixelBrahma
 		// Operator overloading for texture equality check - Right now checks using the renderer ID
 		virtual bool operator==(const Texture& other) const override
 		{
-			return m_RendererID == ((OpenGLTexture2D&)other).m_RendererID;
+			return m_RendererID == other.GetRendererID();
 		}
 
 	private:

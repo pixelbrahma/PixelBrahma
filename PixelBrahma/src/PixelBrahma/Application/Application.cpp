@@ -4,16 +4,15 @@
 #include "PixelBrahma/Log/Log.h"
 #include "PixelBrahma/Input/Input.h"
 #include "PixelBrahma/Renderer/Renderer.h"
-
-#include <GLFW/glfw3.h>
+#include "PixelBrahma/Utils/PlatformUtils.h"
 
 namespace PixelBrahma
 {
 	// Application should be a singleton
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application(const std::string& name, ApplicationCommandLineArgs args)
-		: m_CommandLineArgs(args)
+	Application::Application(const ApplicationSpecification& specification)
+		: m_Specification(specification)
 	{ 
 		// Profiling
 		PB_PROFILE_FUNCTION();
@@ -22,8 +21,11 @@ namespace PixelBrahma
 		PB_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
-		// Create window and set reference and event callback
-		m_Window = Window::Create(WindowProps(name));
+		// Create window and set reference, working directory and event callback
+		if (!m_Specification.WorkingDirectory.empty())
+			std::filesystem::current_path(m_Specification.WorkingDirectory);
+
+		m_Window = Window::Create(WindowProps(m_Specification.Name));
 		m_Window->SetEventCallback(PB_BIND_EVENT_FN(Application::OnEvent));
 
 		// Initialize the renderer
@@ -105,7 +107,7 @@ namespace PixelBrahma
 
 			// Timestep calculation
 
-			float time = (float)glfwGetTime();
+			float time = Time::GetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 

@@ -377,13 +377,6 @@ namespace PixelBrahma
 		CopyComponentIfExists(AllComponents{}, newEntity, entity);
 	}
 
-	// On component added template function to call the respective component on added type
-	template<typename T>
-	void Scene::OnComponentAdded(Entity entity, T& component)
-	{
-		//static_assert(false);
-	}
-
 	// Start physics
 	void Scene::OnPhysics2DStart()
 	{
@@ -508,6 +501,13 @@ namespace PixelBrahma
 
 		// End rendering
 		Renderer2D::EndScene();
+	}
+
+	// On component added template function to call the respective component on added type
+	template<typename T>
+	void Scene::OnComponentAdded(Entity entity, T& component)
+	{
+		static_assert(sizeof(T) == 0);
 	}
 
 	// UUID component added

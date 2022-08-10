@@ -14,4 +14,13 @@ namespace PixelBrahma
 		static std::string OpenFile(const char* filter);
 		static std::string SaveFile(const char* filter);
 	};
+
+	// Time class
+	class Time
+	{
+	public:
+
+		// Get time function
+		static float GetTime();
+	};
 }
