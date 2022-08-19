@@ -1,53 +1,14 @@
 Scene: Untitled
 Entities:
-  - Entity: 16672940118998907085
+  - Entity: 16857770377423193963
     TagComponent:
-      Tag: Floor
+      Tag: Box2
     TransformComponent:
-      Translation: [-0.883175671, -1.09447932, 0]
-      Rotation: [0, 0, -0.638995767]
-      Scale: [29.39258, 0.46067816, 1]
-    SpriteRendererComponent:
-      Color: [0.0660097376, 0.202503517, 0.949806929, 1]
-      TexturePath: Assets\Textures\CheckerBoard.png
-      TilingFactor: 1
-    Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: false
-    BoxCollider2DComponent:
-      Offset: [0, 0]
-      Size: [0.5, 0.5]
-      Density: 1
-      Friction: 0.5
-      Restitution: 0
-      RestitutionThreshold: 0.5
-  - Entity: 4793924497264767156
-    TagComponent:
-      Tag: Camera
-    TransformComponent:
-      Translation: [0, 0, 20]
+      Translation: [6.90184259, 4.73070002, 0]
       Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    CameraComponent:
-      Camera:
-        ProjectionType: 0
-        PerspectiveFOV: 0.785398185
-        PerspectiveNear: 0.00999999978
-        PerspectiveFar: 1000
-        OrthographicSize: 10
-        OrthographicNear: -1
-        OrthographicFar: 1
-      Primary: true
-      FixedAspectRatio: false
-  - Entity: 15045535320033348975
-    TagComponent:
-      Tag: Box
-    TransformComponent:
-      Translation: [-5.86695051, 4.57587624, 0.0225758143]
-      Rotation: [0, 0, 0.93312937]
-      Scale: [0.361159712, 0.375572056, 0.848135769]
+      Scale: [0.340000033, 0.340000033, 0.340000033]
     SpriteRendererComponent:
-      Color: [0.0191559177, 0.394878626, 0.99227798, 1]
+      Color: [1, 1, 1, 1]
       TilingFactor: 1
     Rigidbody2DComponent:
       BodyType: Dynamic
@@ -55,9 +16,9 @@ Entities:
     BoxCollider2DComponent:
       Offset: [0, 0]
       Size: [0.5, 0.5]
-      Density: 0.879999995
-      Friction: 0.100000001
-      Restitution: 0.819999993
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
       RestitutionThreshold: 0.5
   - Entity: 5134011587522944740
     TagComponent:
@@ -80,13 +41,62 @@ Entities:
       Friction: 0.5
       Restitution: 0
       RestitutionThreshold: 0.5
-  - Entity: 16857770377423193963
+  - Entity: 15045535320033348975
     TagComponent:
-      Tag: Box2
+      Tag: Box
     TransformComponent:
-      Translation: [6.90184259, 4.73070002, 0]
-      Rotation: [0, 0, 0]
-      Scale: [0.340000033, 0.340000033, 0.340000033]
+      Translation: [-5.86695051, 4.57587624, 0.0225758143]
+      Rotation: [0, 0, 0.93312937]
+      Scale: [0.361159712, 0.375572056, 0.848135769]
     SpriteRendererComponent:
-      Color: [1, 1, 1, 1]
+      Color: [0.0191559177, 0.394878626, 0.99227798, 1]
       TilingFactor: 1
+    Rigidbody2DComponent:
+      BodyType: Dynamic
+      FixedRotation: false
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 0.879999995
+      Friction: 0.100000001
+      Restitution: 0.819999993
+      RestitutionThreshold: 0.5
+  - Entity: 4793924497264767156
+    TagComponent:
+      Tag: Camera
+    TransformComponent:
+      Translation: [0, 0, 20]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    CameraComponent:
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 0.785398185
+        PerspectiveNear: 0.00999999978
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+      FixedAspectRatio: false
+  - Entity: 16672940118998907085
+    TagComponent:
+      Tag: Floor
+    TransformComponent:
+      Translation: [-0.883175671, -1.09447932, 0]
+      Rotation: [0, 0, -0.638995767]
+      Scale: [29.39258, 0.46067816, 1]
+    SpriteRendererComponent:
+      Color: [0.0660097376, 0.202503517, 0.949806929, 1]
+      TexturePath: Assets\Textures\CheckerBoard.png
+      TilingFactor: 1
+    Rigidbody2DComponent:
+      BodyType: Static
+      FixedRotation: false
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
