@@ -21,6 +21,7 @@ namespace PixelBrahma
 		virtual void OnCreate() {}
 		virtual void OnDestroy() {}
 		virtual void OnUpdate(Timestep timestep) {}
+		virtual void OnEvent(Event& event) {}
 
 	private:
 		Entity m_Entity;
