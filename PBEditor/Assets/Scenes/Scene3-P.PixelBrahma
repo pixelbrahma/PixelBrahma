@@ -5,8 +5,8 @@ Entities:
       Tag: Floor
     TransformComponent:
       Translation: [-0.883175671, -1.09447932, 0]
-      Rotation: [0, 0, -0.638996005]
-      Scale: [6.74196768, 0.46067813, 1]
+      Rotation: [0, 0, -0.638995767]
+      Scale: [29.39258, 0.46067816, 1]
     SpriteRendererComponent:
       Color: [0.0660097376, 0.202503517, 0.949806929, 1]
       TexturePath: Assets\Textures\CheckerBoard.png
@@ -25,7 +25,7 @@ Entities:
     TagComponent:
       Tag: Camera
     TransformComponent:
-      Translation: [0, 0, 9.78766251]
+      Translation: [0, 0, 20]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     CameraComponent:
@@ -41,9 +41,9 @@ Entities:
       FixedAspectRatio: false
   - Entity: 15045535320033348975
     TagComponent:
-      Tag: Sprite
+      Tag: Box
     TransformComponent:
-      Translation: [-0.432785511, 0.557349324, 0.0225147791]
+      Translation: [-5.86695051, 4.57587624, 0.0225758143]
       Rotation: [0, 0, 0.93312937]
       Scale: [0.361159712, 0.375572056, 0.848135769]
     SpriteRendererComponent:
@@ -64,8 +64,8 @@ Entities:
       Tag: Floor
     TransformComponent:
       Translation: [2.3506453, -1.84539962, 0]
-      Rotation: [0, 0, 0.603692532]
-      Scale: [6.74196959, 0.46067816, 1]
+      Rotation: [0, 0, 0.603692234]
+      Scale: [33.3295174, 0.46067816, 1]
     SpriteRendererComponent:
       Color: [0.584685624, 0.0660097376, 0.949806929, 1]
       TexturePath: Assets\Textures\CheckerBoard.png
@@ -80,24 +80,13 @@ Entities:
       Friction: 0.5
       Restitution: 0
       RestitutionThreshold: 0.5
-  - Entity: 8804479042241551551
+  - Entity: 16857770377423193963
     TagComponent:
-      Tag: Circle
+      Tag: Box2
     TransformComponent:
-      Translation: [2.48013091, 0.55198288, 0]
-      Rotation: [0, 0, -2.83638668]
-      Scale: [1.00000072, 1.00000072, 1]
-    CircleRendererComponent:
-      Color: [0.934362948, 0.057721246, 0.057721246, 1]
-      Thickness: 0.100000001
-      Fade: 0.00499999989
-    Rigidbody2DComponent:
-      BodyType: Dynamic
-      FixedRotation: false
-    CircleCollider2DComponent:
-      Offset: [0, 0]
-      Radius: 0.550000012
-      Density: 1
-      Friction: 0.5
-      Restitution: 0
-      RestitutionThreshold: 0.5
+      Translation: [6.90184259, 4.73070002, 0]
+      Rotation: [0, 0, 0]
+      Scale: [0.340000033, 0.340000033, 0.340000033]
+    SpriteRendererComponent:
+      Color: [1, 1, 1, 1]
+      TilingFactor: 1
