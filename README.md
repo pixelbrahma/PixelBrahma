@@ -5,7 +5,7 @@
 Setup Instructions:
 
 GitHub repository link
-https://github.com/pixelbrahma/PixelBrahma.git
+https://github.com/pixelbrahma/PixelBrahma
 
 The steps to setup the project are outlined below:
 
@@ -14,7 +14,7 @@ The engine only requires Windows platform, OpenGL 4.5 or 4.6 supported GPU, Vulk
 Downloading the repository
 
 clone the repository using 
-“git clone --recursive https://github.com/pixelbrahma/PixelBrahma.git”.
+“git clone --recursive https://github.com/pixelbrahma/PixelBrahma”.
 
 --recursive is used to clone all defined sub-modules in the directory.
 

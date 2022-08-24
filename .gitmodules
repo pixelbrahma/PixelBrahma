@@ -16,10 +16,10 @@
 	branch = master
 [submodule "PixelBrahma/ThirdParty/yaml-cpp"]
 	path = PixelBrahma/ThirdParty/yaml-cpp
-	url = https://github.com/pixelbrahma/yaml-cpp.git
+	url = https://github.com/pixelbrahma/yaml-cpp
 [submodule "PixelBrahma/ThirdParty/ImGuizmo"]
 	path = PixelBrahma/ThirdParty/ImGuizmo
-	url = https://github.com/pixelbrahma/ImGuizmo.git
+	url = https://github.com/pixelbrahma/ImGuizmo
 [submodule "PixelBrahma/ThirdParty/Box2D"]
 	path = PixelBrahma/ThirdParty/Box2D
-	url = https://github.com/pixelbrahma/box2d.git
+	url = https://github.com/pixelbrahma/box2d
