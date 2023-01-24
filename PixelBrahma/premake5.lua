@@ -42,7 +42,8 @@ project "PixelBrahma"
 		"%{IncludeDir.yaml_cpp}",
 		"%{IncludeDir.ImGuizmo}",
 		"%{IncludeDir.VulkanSDK}",
-		"%{IncludeDir.Box2D}"
+		"%{IncludeDir.Box2D}",
+		"%{IncludeDir.mono}"
 	}
 
 	links
@@ -52,7 +53,8 @@ project "PixelBrahma"
 		"ImGui",
 		"yaml-cpp",
 		"opengl32.lib",
-		"Box2D"
+		"Box2D",
+		"%{Library.mono}"
 	}
 
 	filter "files:ThirdParty/ImGuizmo/**.cpp"
@@ -60,6 +62,18 @@ project "PixelBrahma"
 
 	filter "system:windows"
 		systemversion "latest"
+
+		defines
+		{
+		}
+
+		links
+		{
+			"%{Library.WinSock}",
+			"%{Library.WinMM}",
+			"%{Library.WinVersion}",
+			"%{Library.BCrypt}",
+		}
 
 	filter "configurations:Debug"
 		defines "PB_DEBUG"

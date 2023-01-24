@@ -73,6 +73,9 @@
     <Filter Include="src\PixelBrahma\Scene">
       <UniqueIdentifier>{66C93D2B-D235-F925-9B29-918307551B8E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\PixelBrahma\Scripting">
+      <UniqueIdentifier>{CBCD439C-3790-7726-8040-06B3EC415004}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\PixelBrahma\Utils">
       <UniqueIdentifier>{A95D6B2B-15CA-2626-DEBD-BE834AE9488E}</UniqueIdentifier>
     </Filter>
@@ -1467,6 +1470,9 @@
     <ClInclude Include="src\PixelBrahma\Scene\ScriptableEntity.h">
       <Filter>src\PixelBrahma\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Scripting\ScriptEngine.h">
+      <Filter>src\PixelBrahma\Scripting</Filter>
+    </ClInclude>
     <ClInclude Include="src\PixelBrahma\Utils\Math.h">
       <Filter>src\PixelBrahma\Utils</Filter>
     </ClInclude>
@@ -1588,6 +1594,9 @@
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Scene\SceneSerializer.cpp">
       <Filter>src\PixelBrahma\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Scripting\ScriptEngine.cpp">
+      <Filter>src\PixelBrahma\Scripting</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Utils\Math.cpp">
       <Filter>src\PixelBrahma\Utils</Filter>

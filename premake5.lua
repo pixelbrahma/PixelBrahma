@@ -33,6 +33,15 @@ group "Dependencies"
 	include "PixelBrahma/ThirdParty/Box2D"
 group ""
 
-include "PixelBrahma"
-include "Sandbox"
-include "PBEditor"
+group "Core"
+	include "PixelBrahma"
+	include "PBScriptCore"
+group ""
+
+group "Tools"
+	include "PBEditor"
+group ""
+
+group "Misc"
+	include "Sandbox"
+group ""

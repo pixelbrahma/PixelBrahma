@@ -5,6 +5,7 @@
 #include "PixelBrahma/Input/Input.h"
 #include "PixelBrahma/Renderer/Renderer.h"
 #include "PixelBrahma/Utils/PlatformUtils.h"
+#include "PixelBrahma/Scripting/ScriptEngine.h"
 
 namespace PixelBrahma
 {
@@ -31,6 +32,9 @@ namespace PixelBrahma
 		// Initialize the renderer
 		Renderer::Init();
 
+		// Initialize the script engine
+		ScriptEngine::Init();
+
 		// Create ImGui layer push it to the layer stack
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
@@ -40,6 +44,9 @@ namespace PixelBrahma
 	{
 		// Profiling
 		PB_PROFILE_FUNCTION();
+
+		// Close the script engine
+		ScriptEngine::Shutdown();
 
 		// Close the renderer and release resources
 		Renderer::Shutdown();
