@@ -605,6 +605,7 @@
     <ClInclude Include="src\PixelBrahma\Scene\SceneSerializer.h" />
     <ClInclude Include="src\PixelBrahma\Scene\ScriptableEntity.h" />
     <ClInclude Include="src\PixelBrahma\Scripting\ScriptEngine.h" />
+    <ClInclude Include="src\PixelBrahma\Scripting\ScriptGlue.h" />
     <ClInclude Include="src\PixelBrahma\Utils\Math.h" />
     <ClInclude Include="src\PixelBrahma\Utils\PlatformUtils.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
@@ -650,6 +651,7 @@
     <ClCompile Include="src\PixelBrahma\Scene\SceneCamera.cpp" />
     <ClCompile Include="src\PixelBrahma\Scene\SceneSerializer.cpp" />
     <ClCompile Include="src\PixelBrahma\Scripting\ScriptEngine.cpp" />
+    <ClCompile Include="src\PixelBrahma\Scripting\ScriptGlue.cpp" />
     <ClCompile Include="src\PixelBrahma\Utils\Math.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />

@@ -1473,6 +1473,9 @@
     <ClInclude Include="src\PixelBrahma\Scripting\ScriptEngine.h">
       <Filter>src\PixelBrahma\Scripting</Filter>
     </ClInclude>
+    <ClInclude Include="src\PixelBrahma\Scripting\ScriptGlue.h">
+      <Filter>src\PixelBrahma\Scripting</Filter>
+    </ClInclude>
     <ClInclude Include="src\PixelBrahma\Utils\Math.h">
       <Filter>src\PixelBrahma\Utils</Filter>
     </ClInclude>
@@ -1596,6 +1599,9 @@
       <Filter>src\PixelBrahma\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Scripting\ScriptEngine.cpp">
+      <Filter>src\PixelBrahma\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PixelBrahma\Scripting\ScriptGlue.cpp">
       <Filter>src\PixelBrahma\Scripting</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelBrahma\Utils\Math.cpp">
