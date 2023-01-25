@@ -158,7 +158,7 @@ namespace PixelBrahma
 		void* stringParam = monoString;
 		s_Data->EntityClass.InvokeMethod(instance, printCustomMessageFunc, &stringParam);
 
-		PB_CORE_ASSERT(false);
+		//PB_CORE_ASSERT(false);
 	}
 
 	// Shutdown the scripting engine
