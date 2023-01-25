@@ -159,7 +159,7 @@ namespace PixelBrahma
 		void* stringParam = monoString;
 		mono_runtime_invoke(printCustomMessageFunc, instance, &stringParam, nullptr);
 
-		PB_CORE_ASSERT(false);
+		//PB_CORE_ASSERT(false);
 	}
 
 	// Shutdown monodevelop
