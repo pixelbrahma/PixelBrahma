@@ -110,6 +110,12 @@ namespace PixelBrahma
 		MonoImage* CoreAssemblyImage = nullptr;
 
 		ScriptClass EntityClass;
+
+		std::unordered_map<std::string, Ref<ScriptClass>> EntityClasses;
+		std::unordered_map<UUID, Ref<ScriptInstance>> EntityInstances;
+
+		// Runtime
+		Scene* SceneContext = nullptr;
 	};
 
 	// Scripting data pointer
@@ -121,12 +127,16 @@ namespace PixelBrahma
 		s_Data = new ScriptEngineData();
 
 		InitMono();
-		LoadAssembly("Resources/Scripts/PBScriptCore.dll");
 
+		LoadAssembly("Resources/Scripts/PBScriptCore.dll");
+		LoadAssemblyClasses(s_Data->CoreAssembly);
+
+		ScriptGlue::RegisterComponents();
 		ScriptGlue::RegisterFunctions();
 
 		// Retrieve and instantiate class (with constructor)
 		s_Data->EntityClass = ScriptClass("PixelBrahma", "Entity");
+#if 0
 
 		MonoObject* instance = s_Data->EntityClass.Instantiate();
 
@@ -158,7 +168,8 @@ namespace PixelBrahma
 		void* stringParam = monoString;
 		s_Data->EntityClass.InvokeMethod(instance, printCustomMessageFunc, &stringParam);
 
-		//PB_CORE_ASSERT(false);
+		PB_CORE_ASSERT(false);
+#endif
 	}
 
 	// Shutdown the scripting engine
@@ -219,6 +230,100 @@ namespace PixelBrahma
 		Utils::PrintAssemblyTypes(s_Data->CoreAssembly);
 	}
 
+	// Scipting handler on play mode enter
+	void ScriptEngine::OnRuntimeStart(Scene* scene)
+	{
+		s_Data->SceneContext = scene;
+	}
+
+	// Check if entity class exists
+	bool ScriptEngine::EntityClassExists(const std::string& fullClassName)
+	{
+		return s_Data->EntityClasses.find(fullClassName) != s_Data->EntityClasses.end();
+	}
+
+	// Entity create scripting callback
+	void ScriptEngine::OnCreateEntity(Entity entity)
+	{
+		const auto& sc = entity.GetComponent<ScriptComponent>();
+		if (ScriptEngine::EntityClassExists(sc.ClassName))
+		{
+			Ref<ScriptInstance> instance = CreateRef<ScriptInstance>(s_Data->EntityClasses[sc.ClassName], entity);
+			s_Data->EntityInstances[entity.GetUUID()] = instance;
+			instance->InvokeOnCreate();
+		}
+	}
+
+	// Entity update scripting callback
+	void ScriptEngine::OnUpdateEntity(Entity entity, Timestep timestep)
+	{
+		UUID entityUUID = entity.GetUUID();
+		PB_CORE_ASSERT(s_Data->EntityInstances.find(entityUUID) != s_Data->EntityInstances.end());
+
+		Ref<ScriptInstance> instance = s_Data->EntityInstances[entityUUID];
+		instance->InvokeOnUpdate((float)timestep);
+	}
+
+	// Scene context getter function
+	Scene* ScriptEngine::GetSceneContext()
+	{
+		return s_Data->SceneContext;
+	}
+
+	// Scripting handler on playmode exit
+	void ScriptEngine::OnRuntimeStop()
+	{
+		s_Data->SceneContext = nullptr;
+
+		s_Data->EntityInstances.clear();
+	}
+
+	// Get list of entities
+	std::unordered_map<std::string, Ref<ScriptClass>> ScriptEngine::GetEntityClasses()
+	{
+		return s_Data->EntityClasses;
+	}
+
+	// Load mono assembly classes
+	void ScriptEngine::LoadAssemblyClasses(MonoAssembly* assembly)
+	{
+		s_Data->EntityClasses.clear();
+
+		MonoImage* image = mono_assembly_get_image(assembly);
+		const MonoTableInfo* typeDefinitionsTable = mono_image_get_table_info(image, MONO_TABLE_TYPEDEF);
+		int32_t numTypes = mono_table_info_get_rows(typeDefinitionsTable);
+		MonoClass* entityClass = mono_class_from_name(image, "PixelBrahma", "Entity");
+
+		for (int32_t i = 0; i < numTypes; i++)
+		{
+			uint32_t cols[MONO_TYPEDEF_SIZE];
+			mono_metadata_decode_row(typeDefinitionsTable, i, cols, MONO_TYPEDEF_SIZE);
+
+			const char* nameSpace = mono_metadata_string_heap(image, cols[MONO_TYPEDEF_NAMESPACE]);
+			const char* name = mono_metadata_string_heap(image, cols[MONO_TYPEDEF_NAME]);
+			std::string fullName;
+			if (strlen(nameSpace) != 0)
+				fullName = fmt::format("{}.{}", nameSpace, name);
+			else
+				fullName = name;
+
+			MonoClass* monoClass = mono_class_from_name(image, nameSpace, name);
+
+			if (monoClass == entityClass)
+				continue;
+
+			bool isEntity = mono_class_is_subclass_of(monoClass, entityClass, false);
+			if (isEntity)
+				s_Data->EntityClasses[fullName] = CreateRef<ScriptClass>(nameSpace, name);
+		}
+	}
+
+	// Get mono core assembly image 
+	MonoImage* ScriptEngine::GetCoreAssemblyImage()
+	{
+		return s_Data->CoreAssemblyImage;
+	}
+
 	// Instatiate C# class
 	MonoObject* ScriptEngine::InstantiateClass(MonoClass* monoClass)
 	{
@@ -253,5 +358,39 @@ namespace PixelBrahma
 	MonoObject* ScriptClass::InvokeMethod(MonoObject* instance, MonoMethod* method, void** params)
 	{
 		return mono_runtime_invoke(method, instance, params, nullptr);
+	}
+
+	ScriptInstance::ScriptInstance(Ref<ScriptClass> scriptClass, Entity entity)
+		: m_ScriptClass(scriptClass)
+	{
+		m_Instance = scriptClass->Instantiate();
+
+		m_Constructor = s_Data->EntityClass.GetMethod(".ctor", 1);
+		m_OnCreateMethod = scriptClass->GetMethod("OnCreate", 0);
+		m_OnUpdateMethod = scriptClass->GetMethod("OnUpdate", 1);
+
+		// Call Entity constructor
+		{
+			UUID entityID = entity.GetUUID();
+			void* param = &entityID;
+			m_ScriptClass->InvokeMethod(m_Instance, m_Constructor, &param);
+		}
+	}
+
+	// Execute method on script create
+	void ScriptInstance::InvokeOnCreate()
+	{
+		if (m_OnCreateMethod)
+			m_ScriptClass->InvokeMethod(m_Instance, m_OnCreateMethod);
+	}
+
+	// Execute function on update
+	void ScriptInstance::InvokeOnUpdate(float timestep)
+	{
+		if (m_OnUpdateMethod)
+		{
+			void* param = &timestep;
+			m_ScriptClass->InvokeMethod(m_Instance, m_OnUpdateMethod, &param);
+		}
 	}
 }

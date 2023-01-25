@@ -4,6 +4,7 @@
 #include "Components.h"
 #include "Entity.h"
 #include "ScriptableEntity.h"
+#include "PixelBrahma/Scripting/ScriptEngine.h"
 
 #include "PixelBrahma/Renderer/Renderer2D.h"
 
@@ -136,6 +137,8 @@ namespace PixelBrahma
 		auto& tag = entity.AddComponent<TagComponent>();
 		tag.Tag = name.empty() ? "Entity" : name;
 
+		m_EntityMap[uuid] = entity;
+
 		return entity;
 	}
 
@@ -143,6 +146,7 @@ namespace PixelBrahma
 	void Scene::DestroyEntity(Entity entity)
 	{
 		m_Registry.destroy(entity);
+		m_EntityMap.erase(entity.GetUUID());
 	}
 
 	// Start of runtime
@@ -150,6 +154,19 @@ namespace PixelBrahma
 	{
 		// Start physics
 		OnPhysics2DStart();
+
+		// Scripting
+		{
+			ScriptEngine::OnRuntimeStart(this);
+			// Instantiate all script entities
+
+			auto view = m_Registry.view<ScriptComponent>();
+			for (auto e : view)
+			{
+				Entity entity = { e, this };
+				ScriptEngine::OnCreateEntity(entity);
+			}
+		}
 	}
 
 	// Stop of runtime
@@ -157,6 +174,9 @@ namespace PixelBrahma
 	{
 		// Stop physics
 		OnPhysics2DStop();
+
+		// Scripting
+		ScriptEngine::OnRuntimeStop();
 	}
 
 	// Start physics simulation
@@ -178,6 +198,14 @@ namespace PixelBrahma
 	{
 		// Update scripts
 		{
+			// C# Entity OnUpdate
+			auto view = m_Registry.view<ScriptComponent>();
+			for (auto e : view)
+			{
+				Entity entity = { e, this };
+				ScriptEngine::OnUpdateEntity(entity, timestep);
+			}
+
 			// Get and set scripting components
 			m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
 			{
@@ -377,6 +405,15 @@ namespace PixelBrahma
 		CopyComponentIfExists(AllComponents{}, newEntity, entity);
 	}
 
+	// Get entity unique identifier
+	Entity Scene::GetEntityByUUID(UUID uuid)
+	{
+		if (m_EntityMap.find(uuid) != m_EntityMap.end())
+			return { m_EntityMap.at(uuid), this };
+
+		return {};
+	}
+
 	// Start physics
 	void Scene::OnPhysics2DStart()
 	{
@@ -526,6 +563,10 @@ namespace PixelBrahma
 		if (m_ViewportWidth > 0 && m_ViewportHeight > 0)
 			component.Camera.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
 	}
+
+	// Mono script component added
+	template<>
+	void Scene::OnComponentAdded<ScriptComponent>(Entity entity, ScriptComponent& component) {}
 
 	// Sprite renderer component added 
 	template<>

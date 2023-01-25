@@ -7,6 +7,7 @@ namespace PixelBrahma
 	{
 	public:
 		// Register functions
+		static void RegisterComponents();
 		static void RegisterFunctions();
 	};
 }

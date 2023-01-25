@@ -52,6 +52,9 @@ namespace PixelBrahma
 		// Duplicate an entity function
 		void DuplicateEntity(Entity entity);
 
+		// Get entity by unique identifier
+		Entity GetEntityByUUID(UUID uuid);
+
 		// Get the primary camera in the scene function
 		Entity GetPrimaryCameraEntity();
 
@@ -83,6 +86,8 @@ namespace PixelBrahma
 		uint32_t m_ViewportHeight = 0;
 
 		b2World* m_PhysicsWorld = nullptr;
+
+		std::unordered_map<UUID, entt::entity> m_EntityMap;
 
 		friend class Entity;
 		friend class SceneHierarchyPanel;

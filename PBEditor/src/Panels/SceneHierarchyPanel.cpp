@@ -2,6 +2,8 @@
 
 #include "PixelBrahma/Scene/Components.h"
 
+#include "PixelBrahma/Scripting/ScriptEngine.h"
+
 #include <ImGui/imgui.h>
 #include <ImGui/imgui_internal.h>
 
@@ -299,6 +301,7 @@ namespace PixelBrahma
 		{
 			// Display component list to add component menu
 			DisplayAddComponentEntry<CameraComponent>("Camera");
+			DisplayAddComponentEntry<ScriptComponent>("Script");
 			DisplayAddComponentEntry<SpriteRendererComponent>("Sprite Renderer");
 			DisplayAddComponentEntry<CircleRendererComponent>("Circle Renderer");
 			DisplayAddComponentEntry<Rigidbody2DComponent>("Rigidbody 2D");
@@ -391,6 +394,24 @@ namespace PixelBrahma
 				ImGui::Checkbox("Fixed Aspect Ratio", &component.FixedAspectRatio);
 			}
 
+		});
+
+		// Mono script component UI
+		DrawComponent<ScriptComponent>("Script", entity, [](auto& component)
+		{
+			bool scriptClassExists = ScriptEngine::EntityClassExists(component.ClassName);
+
+			static char buffer[64];
+			strcpy(buffer, component.ClassName.c_str());
+
+			if (!scriptClassExists)
+				ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.9f, 0.2f, 0.3f, 1.0f));
+
+			if (ImGui::InputText("Class", buffer, sizeof(buffer)))
+				component.ClassName = buffer;
+
+			if (!scriptClassExists)
+				ImGui::PopStyleColor();
 		});
 
 		// Sprite renderer component UI
