@@ -36,40 +36,17 @@ namespace PixelBrahma
 			stream.read((char*)buffer, size);
 			stream.close();
 
+			PB_CORE_INFO(buffer);
+
 			*outSize = (uint32_t)size;
 			return buffer;
-		}
-
-		// Load mono assembly data from file
-		static MonoAssembly* LoadMonoAssembly(const std::filesystem::path& assemblyPath)
-		{
-			uint32_t fileSize = 0;
-			char* fileData = ReadBytes(assemblyPath, &fileSize);
-
-			// NOTE: We can't use this image for anything other than loading the assembly because this image doesn't have a reference to the assembly
-			MonoImageOpenStatus status;
-			MonoImage* image = mono_image_open_from_data_full(fileData, fileSize, 1, &status, 0);
-
-			if (status != MONO_IMAGE_OK)
-			{
-				const char* errorMessage = mono_image_strerror(status);
-				// Log some error message using the errorMessage data
-				return nullptr;
-			}
-
-			std::string pathString = assemblyPath.string();
-			MonoAssembly* assembly = mono_assembly_load_from_full(image, pathString.c_str(), &status, 0);
-			mono_image_close(image);
-
-			// Free the file data
-			delete[] fileData;
-
-			return assembly;
 		}
 
 		// Display mono assembly data
 		void PrintAssemblyTypes(MonoAssembly* assembly)
 		{
+			PB_CORE_WARN("Print assembly data");
+
 			MonoImage* image = mono_assembly_get_image(assembly);
 			const MonoTableInfo* typeDefinitionsTable = mono_image_get_table_info(image, MONO_TABLE_TYPEDEF);
 			int32_t numTypes = mono_table_info_get_rows(typeDefinitionsTable);
@@ -84,6 +61,42 @@ namespace PixelBrahma
 
 				PB_CORE_TRACE("{}.{}", nameSpace, name);
 			}
+		}
+
+		// Load mono assembly data from file
+		static MonoAssembly* LoadMonoAssembly(const std::filesystem::path& assemblyPath)
+		{
+			PB_CORE_INFO(assemblyPath);
+
+			uint32_t fileSize = 0;
+			char* fileData = ReadBytes(assemblyPath, &fileSize);
+
+			// NOTE: We can't use this image for anything other than loading the assembly because this image doesn't have a reference to the assembly
+			MonoImageOpenStatus status;
+			MonoImage* image = mono_image_open_from_data_full(fileData, fileSize, 1, &status, 0);
+
+			if (status != MONO_IMAGE_OK)
+			{
+				PB_CORE_CRITICAL("Script not OK");
+
+				const char* errorMessage = mono_image_strerror(status);
+				// Log some error message using the errorMessage data
+				return nullptr;
+			}
+
+			std::string pathString = assemblyPath.string();
+
+			PB_CORE_INFO(pathString);
+
+			MonoAssembly* assembly = mono_assembly_load_from_full(image, pathString.c_str(), &status, 0);
+			mono_image_close(image);
+
+			// Free the file data
+			delete[] fileData;
+
+			PrintAssemblyTypes(assembly);
+
+			return assembly;
 		}
 	}
 
@@ -161,6 +174,10 @@ namespace PixelBrahma
 		mono_set_assemblies_path("mono/Lib");
 
 		MonoDomain* rootDomain = mono_jit_init("PBJITRuntime");
+
+		if (!rootDomain)
+			PB_CORE_CRITICAL("Root domain null");
+
 		PB_CORE_ASSERT(rootDomain);
 
 		// Store the root domain pointer
@@ -182,12 +199,24 @@ namespace PixelBrahma
 	{
 		// Create an App Domain
 		s_Data->AppDomain = mono_domain_create_appdomain("PBScriptRuntime", nullptr);
-		mono_domain_set(s_Data->AppDomain, true);
+
+		if (!s_Data->AppDomain)
+			PB_CORE_CRITICAL("App domain null");
+
+		if (!mono_domain_set(s_Data->AppDomain, true))
+			PB_CORE_CRITICAL("Domain not set");
 
 		s_Data->CoreAssembly = Utils::LoadMonoAssembly(filepath);
+
+		if (!s_Data->CoreAssembly)
+			PB_CORE_CRITICAL("Core assembly null");
+
 		s_Data->CoreAssemblyImage = mono_assembly_get_image(s_Data->CoreAssembly);
 
-		//Utils::PrintAssemblyTypes(s_Data->CoreAssembly);
+		if (!s_Data->CoreAssemblyImage)
+			PB_CORE_CRITICAL("Core assembly image null");
+
+		Utils::PrintAssemblyTypes(s_Data->CoreAssembly);
 	}
 
 	// Instatiate C# class
@@ -203,6 +232,9 @@ namespace PixelBrahma
 		: m_ClassNamespace(classNamespace), m_ClassName(className)
 	{
 		m_MonoClass = mono_class_from_name(s_Data->CoreAssemblyImage, classNamespace.c_str(), className.c_str());
+
+		if (!m_MonoClass)
+			PB_CORE_CRITICAL("Mono class null");
 	}
 
 	// Instantiate script class
