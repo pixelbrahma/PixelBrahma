@@ -13,7 +13,7 @@ namespace Sandbox
 	{
 		private TransformComponent m_Transform;
 
-		float speed = 1f;
+		float speed = 2f;
 		Vector3 m_Velocity = Vector3.Zero;
 
 		// Create player callback
@@ -31,6 +31,7 @@ namespace Sandbox
 			// Console.WriteLine($"Player.OnUpdate: {timestep}");
 
 			m_Velocity.Y = 0f;
+			m_Velocity.X = 1f;
 
 			m_Velocity.X *= speed;
 

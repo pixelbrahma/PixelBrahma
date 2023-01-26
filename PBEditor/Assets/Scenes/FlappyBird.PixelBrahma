@@ -47,7 +47,7 @@ Entities:
     TagComponent:
       Tag: Obstacle
     TransformComponent:
-      Translation: [15.9679699, -13.1632652, 0]
+      Translation: [15.9679699, -11.077282, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 10, 1]
     SpriteRendererComponent:
@@ -107,7 +107,7 @@ Entities:
     TagComponent:
       Tag: Obstacle
     TransformComponent:
-      Translation: [23.1586151, -11.7796831, 0]
+      Translation: [23.1586151, -8.41525459, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 10, 1]
     SpriteRendererComponent:
@@ -187,7 +187,7 @@ Entities:
     TagComponent:
       Tag: Obstacle
     TransformComponent:
-      Translation: [31.7677536, 13.8096399, 1.86264515e-09]
+      Translation: [31.7677536, 10.5951319, 1.86264515e-09]
       Rotation: [0, 0, 0]
       Scale: [1, 10, 1]
     SpriteRendererComponent:
@@ -207,7 +207,7 @@ Entities:
     TagComponent:
       Tag: Obstacle
     TransformComponent:
-      Translation: [31.7677536, -7.04410839, 1.86264515e-09]
+      Translation: [31.7677536, -4.56506014, 1.86264515e-09]
       Rotation: [0, 0, 0]
       Scale: [1, 10, 1]
     SpriteRendererComponent:
@@ -227,7 +227,7 @@ Entities:
     TagComponent:
       Tag: Obstacle
     TransformComponent:
-      Translation: [40.8914757, -12.0103455, 1.86264515e-09]
+      Translation: [40.8914757, -4.9288311, 1.86264515e-09]
       Rotation: [0, 0, 0]
       Scale: [1, 10, 1]
     SpriteRendererComponent:
@@ -267,7 +267,7 @@ Entities:
     TagComponent:
       Tag: Obstacle
     TransformComponent:
-      Translation: [50.4382362, 13.2099247, 1.86264515e-09]
+      Translation: [50.4382362, 9.03865337, 1.86264515e-09]
       Rotation: [0, 0, 0]
       Scale: [1, 10, 1]
     SpriteRendererComponent:
@@ -287,7 +287,7 @@ Entities:
     TagComponent:
       Tag: Obstacle
     TransformComponent:
-      Translation: [50.4382362, -7.39478588, 1.86264515e-09]
+      Translation: [50.4382362, -3.67484713, 1.86264515e-09]
       Rotation: [0, 0, 0]
       Scale: [1, 10, 1]
     SpriteRendererComponent:
@@ -307,7 +307,7 @@ Entities:
     TagComponent:
       Tag: Obstacle
     TransformComponent:
-      Translation: [58.9501343, -10.8752565, 1.86264515e-09]
+      Translation: [58.9501343, -5.112782, 1.86264515e-09]
       Rotation: [0, 0, 0]
       Scale: [1, 10, 1]
     SpriteRendererComponent:
