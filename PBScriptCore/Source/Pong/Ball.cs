@@ -75,6 +75,9 @@ namespace Sandbox
 			if(!goalFLag)
 				if(m_Transform.Translation.X > 22 || m_Transform.Translation.X < -22)
 					m_Velocity.X *= -1;
+
+			if (m_Transform.Translation.X > 24 || m_Transform.Translation.X < -24)
+				m_Velocity = Vector3.Zero;
 		}
 
 	}
