@@ -8,7 +8,7 @@ Entities:
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     ScriptComponent:
-      ClassName: ""
+      ClassName: Sandbox.Camera
   - Entity: 12837192831273
     TagComponent:
       Tag: Green Square
@@ -72,6 +72,8 @@ Entities:
       Translation: [0, -0.400000006, 3.5]
       Rotation: [0, 0, 1.33517683]
       Scale: [1, 1, 1]
+    ScriptComponent:
+      ClassName: Sandbox.Player
     SpriteRendererComponent:
       Color: [0, 0.154440165, 1, 1]
       TilingFactor: 1

@@ -12,7 +12,7 @@ namespace Sandbox
 	public class Camera : Entity
 	{
 		// Update function
-		void OnUpdate(float ts)
+		void OnUpdate(float timestep)
 		{
 			float speed = 1.0f;
 			Vector3 velocity = Vector3.Zero;
@@ -30,7 +30,7 @@ namespace Sandbox
 			velocity *= speed;
 
 			Vector3 translation = Translation;
-			translation += velocity * ts;
+			translation += velocity * timestep;
 			Translation = translation;
 		}
 

@@ -117,6 +117,9 @@ namespace PixelBrahma
 				std::string_view structName = typeName.substr(pos + 1);
 				std::string managedTypename = fmt::format("PixelBrahma.{}", structName);
 
+				if (!ScriptEngine::GetCoreAssemblyImage())
+					PB_CORE_CRITICAL("Assenbly image is null");
+
 				MonoType* managedType = mono_reflection_type_from_name(managedTypename.data(), ScriptEngine::GetCoreAssemblyImage());
 				if (!managedType)
 				{
