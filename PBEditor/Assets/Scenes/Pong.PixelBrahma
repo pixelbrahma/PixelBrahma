@@ -127,13 +127,12 @@ Entities:
       Translation: [0, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
+    ScriptComponent:
+      ClassName: Sandbox.Ball
     CircleRendererComponent:
       Color: [0.980695009, 1, 0, 1]
       Thickness: 1
       Fade: 0.00499999989
-    Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: false
     CircleCollider2DComponent:
       Offset: [0, 0]
       Radius: 0.5
