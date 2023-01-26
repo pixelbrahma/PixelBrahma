@@ -1,230 +1,53 @@
 Scene: Untitled
 Entities:
-  - Entity: 10089484255058262606
+  - Entity: 532644879611421084
     TagComponent:
-      Tag: Obstacle
+      Tag: Bird
     TransformComponent:
-      Translation: [58.9501343, -10.8752565, 1.86264515e-09]
+      Translation: [0, 0, 0]
       Rotation: [0, 0, 0]
-      Scale: [1, 10, 1]
-    SpriteRendererComponent:
-      Color: [1, 0, 0, 1]
-      TilingFactor: 1
+      Scale: [1, 1, 1]
+    ScriptComponent:
+      ClassName: Sandbox.Bird
+    CircleRendererComponent:
+      Color: [0.146718264, 1, 0, 1]
+      Thickness: 1
+      Fade: 0.00499999989
     Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: true
-    BoxCollider2DComponent:
+      BodyType: Dynamic
+      FixedRotation: false
+    CircleCollider2DComponent:
       Offset: [0, 0]
-      Size: [0.5, 0.5]
+      Radius: 0.5
       Density: 1
       Friction: 1
       Restitution: 0
       RestitutionThreshold: 0.5
-  - Entity: 4451018365064186935
+  - Entity: 7400781833903563948
     TagComponent:
-      Tag: Obstacle
+      Tag: Main Camera
     TransformComponent:
-      Translation: [50.4382362, -7.39478588, 1.86264515e-09]
+      Translation: [0, 0, 25]
       Rotation: [0, 0, 0]
-      Scale: [1, 10, 1]
-    SpriteRendererComponent:
-      Color: [1, 0, 0, 1]
-      TilingFactor: 1
-    Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: true
-    BoxCollider2DComponent:
-      Offset: [0, 0]
-      Size: [0.5, 0.5]
-      Density: 1
-      Friction: 1
-      Restitution: 0
-      RestitutionThreshold: 0.5
-  - Entity: 11396984287384579456
+      Scale: [1, 1, 1]
+    CameraComponent:
+      Camera:
+        ProjectionType: 1
+        PerspectiveFOV: 0.785398185
+        PerspectiveNear: 0.00999999978
+        PerspectiveFar: 1000
+        OrthographicSize: 15
+        OrthographicNear: -1
+        OrthographicFar: 100
+      Primary: true
+      FixedAspectRatio: false
+    ScriptComponent:
+      ClassName: Sandbox.CameraController
+  - Entity: 2036860284500508369
     TagComponent:
       Tag: Obstacle
     TransformComponent:
-      Translation: [50.4382362, 13.2099247, 1.86264515e-09]
-      Rotation: [0, 0, 0]
-      Scale: [1, 10, 1]
-    SpriteRendererComponent:
-      Color: [1, 0, 0, 1]
-      TilingFactor: 1
-    Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: true
-    BoxCollider2DComponent:
-      Offset: [0, 0]
-      Size: [0.5, 0.5]
-      Density: 1
-      Friction: 1
-      Restitution: 0
-      RestitutionThreshold: 0.5
-  - Entity: 10118367812815089263
-    TagComponent:
-      Tag: Obstacle
-    TransformComponent:
-      Translation: [40.8914757, 9.90245533, 1.86264515e-09]
-      Rotation: [0, 0, 0]
-      Scale: [1, 10, 1]
-    SpriteRendererComponent:
-      Color: [1, 0, 0, 1]
-      TilingFactor: 1
-    Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: true
-    BoxCollider2DComponent:
-      Offset: [0, 0]
-      Size: [0.5, 0.5]
-      Density: 1
-      Friction: 1
-      Restitution: 0
-      RestitutionThreshold: 0.5
-  - Entity: 9351298536228662387
-    TagComponent:
-      Tag: Obstacle
-    TransformComponent:
-      Translation: [40.8914757, -12.0103455, 1.86264515e-09]
-      Rotation: [0, 0, 0]
-      Scale: [1, 10, 1]
-    SpriteRendererComponent:
-      Color: [1, 0, 0, 1]
-      TilingFactor: 1
-    Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: true
-    BoxCollider2DComponent:
-      Offset: [0, 0]
-      Size: [0.5, 0.5]
-      Density: 1
-      Friction: 1
-      Restitution: 0
-      RestitutionThreshold: 0.5
-  - Entity: 8564146494963555991
-    TagComponent:
-      Tag: Obstacle
-    TransformComponent:
-      Translation: [31.7677536, -7.04410839, 1.86264515e-09]
-      Rotation: [0, 0, 0]
-      Scale: [1, 10, 1]
-    SpriteRendererComponent:
-      Color: [1, 0, 0, 1]
-      TilingFactor: 1
-    Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: true
-    BoxCollider2DComponent:
-      Offset: [0, 0]
-      Size: [0.5, 0.5]
-      Density: 1
-      Friction: 1
-      Restitution: 0
-      RestitutionThreshold: 0.5
-  - Entity: 5815953870215942902
-    TagComponent:
-      Tag: Obstacle
-    TransformComponent:
-      Translation: [31.7677536, 13.8096399, 1.86264515e-09]
-      Rotation: [0, 0, 0]
-      Scale: [1, 10, 1]
-    SpriteRendererComponent:
-      Color: [1, 0, 0, 1]
-      TilingFactor: 1
-    Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: true
-    BoxCollider2DComponent:
-      Offset: [0, 0]
-      Size: [0.5, 0.5]
-      Density: 1
-      Friction: 1
-      Restitution: 0
-      RestitutionThreshold: 0.5
-  - Entity: 257207993221469550
-    TagComponent:
-      Tag: Obstacle
-    TransformComponent:
-      Translation: [23.1586151, 8.13760567, 1.86264515e-09]
-      Rotation: [0, 0, 0]
-      Scale: [1, 10, 1]
-    SpriteRendererComponent:
-      Color: [1, 0, 0, 1]
-      TilingFactor: 1
-    Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: true
-    BoxCollider2DComponent:
-      Offset: [0, 0]
-      Size: [0.5, 0.5]
-      Density: 1
-      Friction: 1
-      Restitution: 0
-      RestitutionThreshold: 0.5
-  - Entity: 17908061165267935575
-    TagComponent:
-      Tag: Obstacle
-    TransformComponent:
-      Translation: [58.9501343, 10.831151, 1.86264515e-09]
-      Rotation: [0, 0, 0]
-      Scale: [1, 10, 1]
-    SpriteRendererComponent:
-      Color: [1, 0, 0, 1]
-      TilingFactor: 1
-    Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: true
-    BoxCollider2DComponent:
-      Offset: [0, 0]
-      Size: [0.5, 0.5]
-      Density: 1
-      Friction: 1
-      Restitution: 0
-      RestitutionThreshold: 0.5
-  - Entity: 11092284024514006073
-    TagComponent:
-      Tag: Obstacle
-    TransformComponent:
-      Translation: [15.9679699, 5.76631546, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 10, 1]
-    SpriteRendererComponent:
-      Color: [1, 0, 0, 1]
-      TilingFactor: 1
-    Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: true
-    BoxCollider2DComponent:
-      Offset: [0, 0]
-      Size: [0.5, 0.5]
-      Density: 1
-      Friction: 1
-      Restitution: 0
-      RestitutionThreshold: 0.5
-  - Entity: 263451794886681955
-    TagComponent:
-      Tag: Obstacle
-    TransformComponent:
-      Translation: [23.1586151, -11.7796831, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 10, 1]
-    SpriteRendererComponent:
-      Color: [1, 0, 0, 1]
-      TilingFactor: 1
-    Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: true
-    BoxCollider2DComponent:
-      Offset: [0, 0]
-      Size: [0.5, 0.5]
-      Density: 1
-      Friction: 1
-      Restitution: 0
-      RestitutionThreshold: 0.5
-  - Entity: 3483760999912464992
-    TagComponent:
-      Tag: Obstacle
-    TransformComponent:
-      Translation: [8.46508598, 8.34833145, 0]
+      Translation: [15.9679699, -13.1632652, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 10, 1]
     SpriteRendererComponent:
@@ -260,11 +83,11 @@ Entities:
       Friction: 1
       Restitution: 0
       RestitutionThreshold: 0.5
-  - Entity: 2036860284500508369
+  - Entity: 3483760999912464992
     TagComponent:
       Tag: Obstacle
     TransformComponent:
-      Translation: [15.9679699, -13.1632652, 0]
+      Translation: [8.46508598, 8.34833145, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 10, 1]
     SpriteRendererComponent:
@@ -280,43 +103,222 @@ Entities:
       Friction: 1
       Restitution: 0
       RestitutionThreshold: 0.5
-  - Entity: 7400781833903563948
+  - Entity: 263451794886681955
     TagComponent:
-      Tag: Main Camera
+      Tag: Obstacle
     TransformComponent:
-      Translation: [0, 0, 25]
+      Translation: [23.1586151, -11.7796831, 0]
       Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    CameraComponent:
-      Camera:
-        ProjectionType: 1
-        PerspectiveFOV: 0.785398185
-        PerspectiveNear: 0.00999999978
-        PerspectiveFar: 1000
-        OrthographicSize: 15
-        OrthographicNear: -1
-        OrthographicFar: 100
-      Primary: true
-      FixedAspectRatio: false
-  - Entity: 532644879611421084
-    TagComponent:
-      Tag: Bird
-    TransformComponent:
-      Translation: [0, 0, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    ScriptComponent:
-      ClassName: Sandbox.Bird
-    CircleRendererComponent:
-      Color: [0.146718264, 1, 0, 1]
-      Thickness: 1
-      Fade: 0.00499999989
+      Scale: [1, 10, 1]
+    SpriteRendererComponent:
+      Color: [1, 0, 0, 1]
+      TilingFactor: 1
     Rigidbody2DComponent:
-      BodyType: Dynamic
-      FixedRotation: false
-    CircleCollider2DComponent:
+      BodyType: Static
+      FixedRotation: true
+    BoxCollider2DComponent:
       Offset: [0, 0]
-      Radius: 0.5
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 1
+      Restitution: 0
+      RestitutionThreshold: 0.5
+  - Entity: 11092284024514006073
+    TagComponent:
+      Tag: Obstacle
+    TransformComponent:
+      Translation: [15.9679699, 5.76631546, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 10, 1]
+    SpriteRendererComponent:
+      Color: [1, 0, 0, 1]
+      TilingFactor: 1
+    Rigidbody2DComponent:
+      BodyType: Static
+      FixedRotation: true
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 1
+      Restitution: 0
+      RestitutionThreshold: 0.5
+  - Entity: 17908061165267935575
+    TagComponent:
+      Tag: Obstacle
+    TransformComponent:
+      Translation: [58.9501343, 10.831151, 1.86264515e-09]
+      Rotation: [0, 0, 0]
+      Scale: [1, 10, 1]
+    SpriteRendererComponent:
+      Color: [1, 0, 0, 1]
+      TilingFactor: 1
+    Rigidbody2DComponent:
+      BodyType: Static
+      FixedRotation: true
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 1
+      Restitution: 0
+      RestitutionThreshold: 0.5
+  - Entity: 257207993221469550
+    TagComponent:
+      Tag: Obstacle
+    TransformComponent:
+      Translation: [23.1586151, 8.13760567, 1.86264515e-09]
+      Rotation: [0, 0, 0]
+      Scale: [1, 10, 1]
+    SpriteRendererComponent:
+      Color: [1, 0, 0, 1]
+      TilingFactor: 1
+    Rigidbody2DComponent:
+      BodyType: Static
+      FixedRotation: true
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 1
+      Restitution: 0
+      RestitutionThreshold: 0.5
+  - Entity: 5815953870215942902
+    TagComponent:
+      Tag: Obstacle
+    TransformComponent:
+      Translation: [31.7677536, 13.8096399, 1.86264515e-09]
+      Rotation: [0, 0, 0]
+      Scale: [1, 10, 1]
+    SpriteRendererComponent:
+      Color: [1, 0, 0, 1]
+      TilingFactor: 1
+    Rigidbody2DComponent:
+      BodyType: Static
+      FixedRotation: true
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 1
+      Restitution: 0
+      RestitutionThreshold: 0.5
+  - Entity: 8564146494963555991
+    TagComponent:
+      Tag: Obstacle
+    TransformComponent:
+      Translation: [31.7677536, -7.04410839, 1.86264515e-09]
+      Rotation: [0, 0, 0]
+      Scale: [1, 10, 1]
+    SpriteRendererComponent:
+      Color: [1, 0, 0, 1]
+      TilingFactor: 1
+    Rigidbody2DComponent:
+      BodyType: Static
+      FixedRotation: true
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 1
+      Restitution: 0
+      RestitutionThreshold: 0.5
+  - Entity: 9351298536228662387
+    TagComponent:
+      Tag: Obstacle
+    TransformComponent:
+      Translation: [40.8914757, -12.0103455, 1.86264515e-09]
+      Rotation: [0, 0, 0]
+      Scale: [1, 10, 1]
+    SpriteRendererComponent:
+      Color: [1, 0, 0, 1]
+      TilingFactor: 1
+    Rigidbody2DComponent:
+      BodyType: Static
+      FixedRotation: true
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 1
+      Restitution: 0
+      RestitutionThreshold: 0.5
+  - Entity: 10118367812815089263
+    TagComponent:
+      Tag: Obstacle
+    TransformComponent:
+      Translation: [40.8914757, 9.90245533, 1.86264515e-09]
+      Rotation: [0, 0, 0]
+      Scale: [1, 10, 1]
+    SpriteRendererComponent:
+      Color: [1, 0, 0, 1]
+      TilingFactor: 1
+    Rigidbody2DComponent:
+      BodyType: Static
+      FixedRotation: true
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 1
+      Restitution: 0
+      RestitutionThreshold: 0.5
+  - Entity: 11396984287384579456
+    TagComponent:
+      Tag: Obstacle
+    TransformComponent:
+      Translation: [50.4382362, 13.2099247, 1.86264515e-09]
+      Rotation: [0, 0, 0]
+      Scale: [1, 10, 1]
+    SpriteRendererComponent:
+      Color: [1, 0, 0, 1]
+      TilingFactor: 1
+    Rigidbody2DComponent:
+      BodyType: Static
+      FixedRotation: true
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 1
+      Restitution: 0
+      RestitutionThreshold: 0.5
+  - Entity: 4451018365064186935
+    TagComponent:
+      Tag: Obstacle
+    TransformComponent:
+      Translation: [50.4382362, -7.39478588, 1.86264515e-09]
+      Rotation: [0, 0, 0]
+      Scale: [1, 10, 1]
+    SpriteRendererComponent:
+      Color: [1, 0, 0, 1]
+      TilingFactor: 1
+    Rigidbody2DComponent:
+      BodyType: Static
+      FixedRotation: true
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 1
+      Restitution: 0
+      RestitutionThreshold: 0.5
+  - Entity: 10089484255058262606
+    TagComponent:
+      Tag: Obstacle
+    TransformComponent:
+      Translation: [58.9501343, -10.8752565, 1.86264515e-09]
+      Rotation: [0, 0, 0]
+      Scale: [1, 10, 1]
+    SpriteRendererComponent:
+      Color: [1, 0, 0, 1]
+      TilingFactor: 1
+    Rigidbody2DComponent:
+      BodyType: Static
+      FixedRotation: true
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
       Density: 1
       Friction: 1
       Restitution: 0
