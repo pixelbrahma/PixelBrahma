@@ -12,14 +12,15 @@ namespace Sandbox
 	public class Ball : Entity
 	{
 		private TransformComponent m_Transform;
-
+		
 		float speed = 15f;
-		Vector3 velocity = Vector3.Zero;
+		Vector3 m_Velocity = Vector3.Zero;
+		bool goalFLag = false;
 
 		// Create Ball callback
 		void OnCreate()
 		{
-			Console.WriteLine($"Player.OnCreate - {ID}");
+			Console.WriteLine($"Ball Script - {ID}");
 
 			m_Transform = GetComponent<TransformComponent>();
 		}
@@ -32,30 +33,48 @@ namespace Sandbox
 			if (Input.IsKeyDown(KeyCode.Space))
 				Start();
 
+			if (Input.IsKeyDown(KeyCode.G))
+				goalFLag = true;
+
 			Vector3 translation = m_Transform.Translation;
-			translation += velocity * timestep;
+			translation += m_Velocity * timestep;
 			m_Transform.Translation = translation;
+
+			CheckCollisions();
 		}
 
 		// Start the game
 		void Start()
 		{
+			goalFLag = false;
+
 			Random random = new Random();
 			int rand = random.Next();
 
 			if (rand % 2 == 0)
-				velocity.X = 1;
+				m_Velocity.X = 1;
 			else
-				velocity.X = -1;
+				m_Velocity.X = -1;
 
 			rand = random.Next();
 
 			if (rand % 2 == 0)
-				velocity.Y = 0.5f;
+				m_Velocity.Y = 0.5f;
 			else
-				velocity.Y = -0.5f;
+				m_Velocity.Y = -0.5f;
 
-			velocity *= speed;
+			m_Velocity *= speed;
+		}
+
+		// Function to check for interaction
+		void CheckCollisions()
+		{
+			if (m_Transform.Translation.Y > 14 || m_Transform.Translation.Y < -14)
+				m_Velocity.Y *= -1;
+
+			if(!goalFLag)
+				if(m_Transform.Translation.X > 22 || m_Transform.Translation.X < -22)
+					m_Velocity.X *= -1;
 		}
 
 	}

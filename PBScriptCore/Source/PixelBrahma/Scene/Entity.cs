@@ -42,7 +42,5 @@ namespace PixelBrahma
 			T component = new T() { Entity = this };
 			return component;
 		}
-
 	}
-
 }

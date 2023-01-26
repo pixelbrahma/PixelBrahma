@@ -42,6 +42,5 @@ namespace PixelBrahma
 		{
 			InternalCalls.Rigidbody2DComponent_ApplyLinearImpulseToCenter(Entity.ID, ref impulse, wake);
 		}
-
 	}
 }
