@@ -14,8 +14,8 @@ namespace Sandbox
 		private TransformComponent m_Transform;
 		private Rigidbody2DComponent m_Rigidbody;
 
-		float speedY = 50f;
-		float speedX = 20f;
+		float speedY = 150f;
+		float speedX = 50f;
 		Vector3 m_Velocity = Vector3.Zero;
 
 		float lastFrame = 0f;
@@ -40,7 +40,7 @@ namespace Sandbox
 		void OnUpdate(float timestep)
 		{
 			// Console.WriteLine($"Player.OnUpdate: {timestep}");
-			if (!gameOver)
+			//if (!gameOver)
 			{
 				currentFrame += timestep;
 
@@ -59,13 +59,13 @@ namespace Sandbox
 
 				m_Velocity.Y = 0f;
 
-				if (Input.IsKeyDown(KeyCode.Space))
+				if (Input.IsKeyDown(KeyCode.Space) && !gameOver)
 					m_Velocity.Y = 1f;
 
 				m_Velocity.Y *= speedY * timestep;
 				m_Velocity.X *= speedX * timestep;
 
-				if (gameOver) m_Velocity = Vector3.Zero;
+				//if (gameOver) m_Velocity = Vector3.Zero;
 
 				m_Rigidbody.ApplyLinearImpulse(m_Velocity.XY, true);
 

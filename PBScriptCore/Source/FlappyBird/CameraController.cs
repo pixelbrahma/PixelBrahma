@@ -13,7 +13,7 @@ namespace Sandbox
 	{
 		private TransformComponent m_Transform;
 
-		float speed = 2f;
+		float speed = 1.95f;
 		Vector3 m_Velocity = Vector3.Zero;
 
 		// Create player callback
