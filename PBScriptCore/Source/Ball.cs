@@ -13,7 +13,7 @@ namespace Sandbox
 	{
 		private TransformComponent m_Transform;
 
-		float speed = 5f;
+		float speed = 15f;
 		Vector3 velocity = Vector3.Zero;
 
 		// Create Ball callback
