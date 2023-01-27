@@ -15,7 +15,7 @@ namespace Sandbox
 		private Rigidbody2DComponent m_Rigidbody;
 
 		float speedY = 150f;
-		float speedX = 50f;
+		float speedX = 20f;
 		Vector3 m_Velocity = Vector3.Zero;
 
 		float lastFrame = 0f;
